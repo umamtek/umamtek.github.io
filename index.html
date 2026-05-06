@@ -1,96 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Umamtek - Electrical Services</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-    }
-    header {
-      background: #0a0a23;
-      color: white;
-      padding: 15px;
-      text-align: center;
-    }
-    section {
-      padding: 20px;
-      text-align: center;
-    }
-    .btn {
-      display: inline-block;
-      padding: 12px 20px;
-      margin: 10px;
-      background: #ff9800;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-    }
-    .services {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .card {
-      background: white;
-      margin: 10px;
-      padding: 15px;
-      width: 250px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    footer {
-      background: #0a0a23;
-      color: white;
-      text-align: center;
-      padding: 10px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Umamtek - Premium Electrical Services</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+}
+
+/* NAVBAR */
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 50px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+}
+
+nav h1 {
+  color: #00e5ff;
+}
+
+nav a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.hero h2 {
+  font-size: 42px;
+}
+
+.hero p {
+  margin: 15px 0;
+  color: #ccc;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 25px;
+  margin: 10px;
+  border-radius: 30px;
+  text-decoration: none;
+  color: white;
+  background: linear-gradient(45deg, #00e5ff, #00c853);
+  transition: 0.3s;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}
+
+/* SERVICES */
+.services {
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: rgba(255,255,255,0.1);
+  margin: 15px;
+  padding: 20px;
+  width: 250px;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+/* CONTACT */
+.contact {
+  text-align: center;
+  padding: 40px;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 15px;
+  background: rgba(0,0,0,0.3);
+}
+</style>
 </head>
+
 <body>
 
-<header>
-  <h1>Umamtek 🚀</h1>
-  <p>Electrical & Digital Services</p>
-</header>
+<nav>
+  <h1>Umamtek ⚡</h1>
+  <div>
+    <a href="#">Home</a>
+    <a href="#">Services</a>
+    <a href="#">Contact</a>
+  </div>
+</nav>
 
-<section>
-  <h2>Welcome to Umamtek</h2>
-  <p>Bhagalpur aur nearby areas me hum professional electrical services provide karte hain.</p>
+<section class="hero">
+  <h2>Professional Electrical Services</h2>
+  <p>Bhagalpur me expert wiring, repair aur meter services</p>
 
-  <a class="btn" href="tel:9065760751">📞 Call Now</a>
-  <a class="btn" href="https://wa.me/919065760751">💬 WhatsApp</a>
+  <a class="btn" href="tel:7033843233">📞 Call Now</a>
+  <a class="btn" href="https://wa.me/917033843233">💬 WhatsApp</a>
 </section>
 
-<section>
+<section class="services">
   <h2>Our Services</h2>
-  <div class="services">
+  <div class="cards">
     <div class="card">
       <h3>House Wiring</h3>
-      <p>Complete ghar ki wiring professional tareeke se.</p>
+      <p>Complete modern wiring solutions</p>
     </div>
+
     <div class="card">
       <h3>Fault Repair</h3>
-      <p>Short circuit aur electrical fault repair.</p>
+      <p>Fast and reliable electrical fixes</p>
     </div>
+
     <div class="card">
       <h3>Meter Work</h3>
-      <p>Meter installation aur connection issues solve.</p>
+      <p>Installation & connection solutions</p>
     </div>
   </div>
 </section>
 
-<section>
+<section class="contact">
   <h2>Contact Us</h2>
-  <p>📞 9065760751</p>
+  <p>📞 7033843233</p>
   <p>📍 Bhagalpur, Bihar</p>
 </section>
 
 <footer>
-  <p>© 2026 Umamtek | All Rights Reserved</p>
+  <p>© 2026 Umamtek | Premium Services</p>
 </footer>
 
 </body>
