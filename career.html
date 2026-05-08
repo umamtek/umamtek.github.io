@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+/<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -42,12 +42,20 @@
 
 <div class="card" style="margin-top:40px;">
 <h3>Apply Now</h3>
-<form>
-<input type="text" placeholder="Your Name">
-<input type="tel" placeholder="Phone Number">
-<input type="text" placeholder="Your Skill">
-<input type="text" placeholder="Experience">
-<button type="submit">Submit Application</button>
+<form onsubmit="sendCareerForm(event)">
+
+<input type="text" id="careerName" placeholder="Your Name">
+
+<input type="tel" id="careerPhone" placeholder="Phone Number">
+
+<input type="text" id="careerSkill" placeholder="Your Skill">
+
+<input type="text" id="careerExperience" placeholder="Experience">
+
+<button type="submit">
+Submit Application
+</button>
+
 </form>
 </div>
 </section>
