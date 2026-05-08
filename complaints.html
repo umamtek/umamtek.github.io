@@ -40,12 +40,18 @@
 
 <div class="card" style="margin-top:40px;">
 <h3>Submit Complaint</h3>
-<form>
-<input type="text" placeholder="Your Name">
-<input type="tel" placeholder="Phone Number">
-<input type="text" placeholder="Service Type">
-<textarea placeholder="Write your complaint"></textarea>
-<button type="submit">Submit Complaint</button>
+<form onsubmit="sendComplaintForm(event)">
+
+<input type="text" id="complaintName" placeholder="Your Name">
+
+<input type="tel" id="complaintPhone" placeholder="Phone Number">
+
+<textarea id="complaintMessage" placeholder="Describe your complaint"></textarea>
+
+<button type="submit">
+Submit Complaint
+</button>
+
 </form>
 </div>
 </section>
