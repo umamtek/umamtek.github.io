@@ -2,11 +2,21 @@ function updateLoginUI(){
 
   const navActions = document.querySelector(".nav-actions");
 
-  if(!navActions){
+  const navLinks = document.getElementById("navLinks");
+
+  if(!navActions || !navLinks){
     return;
   }
 
   if(localStorage.getItem("umamtekLoggedIn") === "true"){
+
+    const allLinks = navLinks.querySelectorAll("a");
+
+    allLinks.forEach(link => {
+      if(link.getAttribute("href") === "login.html" || link.getAttribute("href") === "signup.html"){
+        link.parentElement.style.display = "none";
+      }
+    });
 
     navActions.innerHTML = `
       <button class="dark-btn" onclick="toggleDarkMode()">🌙</button>
