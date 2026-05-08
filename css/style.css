@@ -1,3 +1,21 @@
+.login-user{
+font-weight:700;
+color:#111;
+}
+
+.logout-btn{
+background:#111;
+color:#fff;
+border:none;
+padding:12px 18px;
+border-radius:10px;
+cursor:pointer;
+font-weight:700;
+}
+
+body.dark-mode .login-user{
+color:#fff;
+}
 *{
 margin:0;
 padding:0;
