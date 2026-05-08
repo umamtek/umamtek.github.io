@@ -121,3 +121,32 @@ const whatsappURL =
 window.open(whatsappURL, "_blank");
 
 }
+
+function sendComplaintForm(event){
+
+event.preventDefault();
+
+const name =
+document.getElementById("complaintName").value;
+
+const phone =
+document.getElementById("complaintPhone").value;
+
+const complaint =
+document.getElementById("complaintMessage").value;
+
+const whatsappMessage =
+`New Customer Complaint
+
+Name: ${name}
+Phone: ${phone}
+
+Complaint:
+${complaint}`;
+
+const whatsappURL =
+`https://wa.me/919065760751?text=${encodeURIComponent(whatsappMessage)}`;
+
+window.open(whatsappURL, "_blank");
+
+}
