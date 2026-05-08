@@ -73,6 +73,7 @@ window.verifyLoginOTP = function(){
   window.confirmationResult.confirm(otp)
   .then((result) => {
     alert("Login successful");
+    localStorage.setItem("umamtekLoggedIn", "true");
     window.location.href = "index.html";
   })
   .catch((error) => {
@@ -122,7 +123,7 @@ window.verifySignupOTP = function(){
     localStorage.setItem("umamtekUser", document.getElementById("signupName").value);
     localStorage.setItem("umamtekPhone", document.getElementById("signupPhone").value);
     localStorage.setItem("umamtekRole", document.getElementById("signupRole").value);
-
+    localStorage.setItem("umamtekLoggedIn", "true");
     window.location.href = "index.html";
   })
   .catch((error) => {
