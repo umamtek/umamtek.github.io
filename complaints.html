@@ -1,164 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Complaints | UMAMTEK</title>
-
-<meta name="description" content="Customer complaint and support page of UMAMTEK.">
-
-<meta name="keywords" content="electrical complaint bhagalpur, contractor support">
-
-<meta name="author" content="UMAMTEK">
-
-<link rel="stylesheet" href="css/style.css">
-
+<link rel="stylesheet" href="./css/style.css?v=20">
 <link rel="icon" href="images/favicon.png">
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
 </head>
-
 <body>
 
 <nav class="navbar">
-
-<h2>UMAMTEK</h2>
-
-<ul class="nav-links">
-
+<h2 class="logo-text">UMAMTEK</h2>
+<button class="menu-btn" onclick="toggleMenu()">☰</button>
+<ul class="nav-links" id="navLinks">
 <li><a href="index.html">Home</a></li>
-
 <li><a href="about.html">About</a></li>
-
 <li><a href="services.html">Services</a></li>
-
 <li><a href="products.html">Products</a></li>
-
 <li><a href="projects.html">Projects</a></li>
-
 <li><a href="career.html">Career</a></li>
-
 <li><a href="complaints.html">Complaints</a></li>
-
 <li><a href="contact.html">Contact</a></li>
-
 </ul>
-
-<a href="https://wa.me/919065760751" class="primary-btn">
-Get Quote
-</a>
-
+<div class="nav-actions">
+<button class="dark-btn" onclick="toggleDarkMode()">🌙</button>
+<a href="https://wa.me/919065760751" class="primary-btn">Get Quote</a>
+</div>
 </nav>
 
 <section class="section">
-
-<h1 class="section-title">
-Customer Support & Complaints
-</h1>
+<h1 class="section-title">Customer Support & Complaints</h1>
 
 <div class="card-grid">
-
-<div class="card">
-
-<h3>Service Issue</h3>
-
-<p>
-Report electrical service issues and contractor related problems.
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>Delayed Work Reporting</h3>
-
-<p>
-Submit complaints regarding delayed projects or incomplete work.
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>Support Contact</h3>
-
-<p>
-Phone: 9065760751
-</p>
-
-<p>
-Email: shaheumam802@gmail.com
-</p>
-
-</div>
-
+<div class="card"><h3>Service Issue</h3><p>Report electrical service issues and contractor related problems.</p></div>
+<div class="card"><h3>Delayed Work Reporting</h3><p>Submit complaints regarding delayed projects or incomplete work.</p></div>
+<div class="card"><h3>Support Contact</h3><p>Phone: 9065760751</p><p>Email: shaheumam802@gmail.com</p></div>
 </div>
 
 <div class="card" style="margin-top:40px;">
-
 <h3>Submit Complaint</h3>
-
 <form>
-
 <input type="text" placeholder="Your Name">
-
 <input type="tel" placeholder="Phone Number">
-
 <input type="text" placeholder="Service Type">
-
 <textarea placeholder="Write your complaint"></textarea>
-
-<button type="submit">
-Submit Complaint
-</button>
-
+<button type="submit">Submit Complaint</button>
 </form>
-
 </div>
-
 </section>
 
 <footer class="premium-footer">
-
 <h2>UMAMTEK</h2>
-
 <p>Your Project Our Priority</p>
-
-<p>
-Professional Electrical & Contractor Services in Bhagalpur
-</p>
-
-<p>
-Phone: 9065760751
-</p>
-
-<p>
-Email: shaheumam802@gmail.com
-</p>
-
+<p>Phone: 9065760751</p>
+<p>Email: shaheumam802@gmail.com</p>
 <div class="footer-badges">
-
 <span>Make In India</span>
-
 <span>Vocal For Local</span>
-
 <span>Beti Bachao Beti Padhao</span>
-
 <span>Swadeshi</span>
-
 </div>
-
 </footer>
 
-<a href="https://wa.me/919065760751" class="floating-whatsapp">
-WhatsApp
-</a>
-
+<a href="https://wa.me/919065760751" class="floating-whatsapp">WhatsApp</a>
 <script src="js/script.js"></script>
-
 </body>
 </html>
