@@ -50,6 +50,12 @@ Location: ${location}`;
 
 window.onload = function(){
 
+  const loader = document.getElementById("loader");
+
+setTimeout(() => {
+  loader.classList.add("hide");
+}, 1200);
+  
   if(localStorage.getItem("theme") === "dark"){
     document.body.classList.add("dark-mode");
   }
