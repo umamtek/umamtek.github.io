@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Login | UMAMTEK</title>
+
 <link rel="stylesheet" href="./css/style.css?v=25">
 <link rel="icon" href="favicon.png">
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
 <nav class="navbar">
+
 <div class="logo-area">
 <img src="logo.png" class="site-logo">
 <h2 class="logo-text">UMAMTEK</h2>
@@ -29,32 +34,37 @@
 <div class="nav-actions">
 <button class="dark-btn" onclick="toggleDarkMode()">🌙</button>
 </div>
+
 </nav>
 
 <section class="section">
 
-<h1 class="section-title">Login to UMAMTEK</h1>
+<h1 class="section-title">
+Login to UMAMTEK
+</h1>
 
 <div class="card" style="max-width:480px;margin:auto;">
 
 <form>
 
-<select>
-<option>Select Login Type</option>
-<option>Customer Login</option>
-<option>Partner Login</option>
-<option>Official Login</option>
+<select id="loginRole">
+<option value="">Select Login Type</option>
+<option value="customer">Customer Login</option>
+<option value="partner">Partner Login</option>
+<option value="official">Official Login</option>
 </select>
 
-<input type="tel" placeholder="Enter Mobile Number">
+<input type="tel" id="loginPhone" placeholder="Enter Mobile Number">
 
-<button type="button">
+<div id="recaptcha-container"></div>
+
+<button type="button" onclick="sendLoginOTP()">
 Send OTP
 </button>
 
-<input type="text" placeholder="Enter OTP">
+<input type="text" id="loginOtp" placeholder="Enter OTP">
 
-<button type="button">
+<button type="button" onclick="verifyLoginOTP()">
 Verify & Login
 </button>
 
@@ -65,10 +75,6 @@ Verify & Login
 <p style="text-align:center;">
 Don’t have an account?
 <a href="signup.html">Create Account</a>
-</p>
-
-<p style="font-size:13px;text-align:center;margin-top:15px;">
-OTP login will be activated after Firebase Phone Authentication setup.
 </p>
 
 </div>
@@ -83,6 +89,7 @@ OTP login will be activated after Firebase Phone Authentication setup.
 </footer>
 
 <script src="js/script.js"></script>
+<script type="module" src="js/firebase.js"></script>
 
 </body>
 </html>
