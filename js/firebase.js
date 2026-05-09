@@ -455,11 +455,24 @@ window.loadBookings = async function(){
 
         <h3>${data.name || "No Name"}</h3>
 
+        <p><strong>Booking ID:</strong> ${data.bookingId || ""}</p>
+
+        <p><strong>Booked On:</strong> ${data.bookingCreatedDate || ""} ${data.bookingCreatedTime || ""}</p>
+
         <p><strong>Phone:</strong> ${data.phone || ""}</p>
 
         <p><strong>Service:</strong> ${data.service || ""}</p>
 
         <p><strong>Address:</strong> ${data.address || ""}</p>
+
+        <p><strong>PIN Code:</strong> ${data.pinCode || ""}</p>
+
+        <p>
+        <strong>Location:</strong>
+        <a href="${data.mapLink || "#"}" target="_blank">
+        Open Google Map
+       </a>
+       </p>
 
         <p><strong>Date:</strong> ${data.date || ""}</p>
 
