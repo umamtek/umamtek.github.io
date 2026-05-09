@@ -1,11 +1,21 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
-import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+
+import {
+  getAuth,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
 
 import {
   getFirestore,
   collection,
   addDoc,
-  getDocs
+  getDocs,
+  doc,
+  getDoc,
+  setDoc
 } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -22,32 +32,41 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-function formatPhoneNumber(phone){
-  phone = phone.trim();
+function cleanPhone(phone){
+  return String(phone || "").replace(/\D/g, "");
+}
 
-  if(phone.startsWith("+91")){
-    return phone;
+function formatPhoneNumber(phone){
+  const clean = cleanPhone(phone);
+
+  if(clean.length === 10){
+    return "+91" + clean;
   }
 
-  if(phone.length === 10){
-    return "+91" + phone;
+  if(clean.length === 12 && clean.startsWith("91")){
+    return "+" + clean;
   }
 
   return phone;
 }
 
+function phoneToEmail(phone){
+  const clean = cleanPhone(phone);
+  return clean + "@umamtek.com";
+}
+
 function cleanPhoneForWhatsApp(phone){
-  phone = String(phone || "").replace(/\D/g, "");
+  const clean = cleanPhone(phone);
 
-  if(phone.startsWith("91") && phone.length === 12){
-    return phone;
+  if(clean.startsWith("91") && clean.length === 12){
+    return clean;
   }
 
-  if(phone.length === 10){
-    return "91" + phone;
+  if(clean.length === 10){
+    return "91" + clean;
   }
 
-  return phone;
+  return clean;
 }
 
 function setupRecaptcha(){
@@ -58,21 +77,44 @@ function setupRecaptcha(){
   }
 }
 
-/* LOGIN OTP */
+/* SIGNUP — OTP FIRST TIME ONLY */
 
-window.sendLoginOTP = function(){
+window.sendSignupOTPForPasswordAccount = async function(){
 
-  const phoneInput = document.getElementById("loginPhone");
-  const phoneNumber = formatPhoneNumber(phoneInput.value);
+  const name = document.getElementById("signupName").value;
+  const phone = document.getElementById("signupPhone").value;
+  const role = document.getElementById("signupRole").value;
+  const password = document.getElementById("signupPassword").value;
 
-  if(!phoneNumber){
-    alert("Please enter your phone number");
+  const clean = cleanPhone(phone);
+
+  if(!name || !phone || !role || !password){
+    alert("Please fill all signup details");
+    return;
+  }
+
+  if(clean.length !== 10){
+    alert("Please enter valid 10 digit mobile number");
+    return;
+  }
+
+  if(password.length < 6){
+    alert("Password must be at least 6 characters");
+    return;
+  }
+
+  const userRef = doc(db, "users", clean);
+  const userSnap = await getDoc(userRef);
+
+  if(userSnap.exists()){
+    alert("Account already registered. Please login.");
+    window.location.href = "login.html";
     return;
   }
 
   setupRecaptcha();
 
-  signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
+  signInWithPhoneNumber(auth, formatPhoneNumber(phone), window.recaptchaVerifier)
   .then((confirmationResult) => {
     window.confirmationResult = confirmationResult;
     alert("OTP sent successfully");
@@ -83,81 +125,130 @@ window.sendLoginOTP = function(){
 
 };
 
-window.verifyLoginOTP = function(){
-
-  const otp = document.getElementById("loginOtp").value;
-  const phone = document.getElementById("loginPhone").value;
-  const role = document.getElementById("loginRole") ? document.getElementById("loginRole").value : "customer";
-
-  if(!otp){
-    alert("Please enter OTP");
-    return;
-  }
-
-  window.confirmationResult.confirm(otp)
-  .then((result) => {
-    alert("Login successful");
-
-    localStorage.setItem("umamtekLoggedIn", "true");
-    localStorage.setItem("umamtekPhone", phone);
-    localStorage.setItem("umamtekRole", role || "customer");
-
-    window.location.href = "index.html";
-  })
-  .catch((error) => {
-    alert("Invalid OTP");
-  });
-
-};
-
-/* SIGNUP OTP */
-
-window.sendSignupOTP = function(){
-
-  const phoneInput = document.getElementById("signupPhone");
-  const phoneNumber = formatPhoneNumber(phoneInput.value);
-
-  if(!phoneNumber){
-    alert("Please enter your phone number");
-    return;
-  }
-
-  setupRecaptcha();
-
-  signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
-  .then((confirmationResult) => {
-    window.confirmationResult = confirmationResult;
-    alert("OTP sent successfully");
-  })
-  .catch((error) => {
-    alert(error.message);
-  });
-
-};
-
-window.verifySignupOTP = function(){
+window.createPhonePasswordAccount = async function(){
 
   const otp = document.getElementById("signupOtp").value;
 
+  const name = document.getElementById("signupName").value;
+  const phone = document.getElementById("signupPhone").value;
+  const role = document.getElementById("signupRole").value;
+  const password = document.getElementById("signupPassword").value;
+
+  const clean = cleanPhone(phone);
+  const email = phoneToEmail(phone);
+
   if(!otp){
     alert("Please enter OTP");
     return;
   }
 
-  window.confirmationResult.confirm(otp)
-  .then((result) => {
-    alert("Account created successfully");
+  try{
 
-    localStorage.setItem("umamtekUser", document.getElementById("signupName").value);
-    localStorage.setItem("umamtekPhone", document.getElementById("signupPhone").value);
-    localStorage.setItem("umamtekRole", document.getElementById("signupRole").value);
+    await window.confirmationResult.confirm(otp);
+
+    await createUserWithEmailAndPassword(auth, email, password);
+
+    await setDoc(doc(db, "users", clean), {
+      name: name,
+      phone: clean,
+      role: role,
+      emailLogin: email,
+      createdAt: new Date().toISOString()
+    });
+
     localStorage.setItem("umamtekLoggedIn", "true");
+    localStorage.setItem("umamtekUser", name);
+    localStorage.setItem("umamtekPhone", clean);
+    localStorage.setItem("umamtekRole", role);
 
+    alert("Account created successfully");
     window.location.href = "index.html";
-  })
-  .catch((error) => {
-    alert("Invalid OTP");
-  });
+
+  }catch(error){
+
+    if(error.code === "auth/email-already-in-use"){
+      alert("Account already registered. Please login.");
+      window.location.href = "login.html";
+      return;
+    }
+
+    alert(error.message);
+
+  }
+
+};
+
+/* LOGIN — PHONE + PASSWORD */
+
+window.loginWithPhonePassword = async function(){
+
+  const phone = document.getElementById("loginPhone").value;
+  const password = document.getElementById("loginPassword").value;
+  const role = document.getElementById("loginRole").value;
+
+  const clean = cleanPhone(phone);
+  const email = phoneToEmail(phone);
+
+  if(!phone || !password){
+    alert("Please enter phone number and password");
+    return;
+  }
+
+  try{
+
+    const userRef = doc(db, "users", clean);
+    const userSnap = await getDoc(userRef);
+
+    if(!userSnap.exists()){
+      alert("Account not found. Please signup first.");
+      window.location.href = "signup.html";
+      return;
+    }
+
+    await signInWithEmailAndPassword(auth, email, password);
+
+    const userData = userSnap.data();
+
+    localStorage.setItem("umamtekLoggedIn", "true");
+    localStorage.setItem("umamtekUser", userData.name || "User");
+    localStorage.setItem("umamtekPhone", clean);
+    localStorage.setItem("umamtekRole", role || userData.role || "customer");
+
+    alert("Login successful");
+    window.location.href = "index.html";
+
+  }catch(error){
+
+    if(error.code === "auth/wrong-password" || error.code === "auth/invalid-credential"){
+      alert("Wrong phone number or password");
+      return;
+    }
+
+    alert(error.message);
+
+  }
+
+};
+
+window.forgotPasswordWithPhone = function(){
+
+  const phone = prompt("Enter your registered mobile number");
+
+  if(!phone){
+    return;
+  }
+
+  const message =
+`Password Reset Request
+
+Registered Mobile Number: ${phone}
+
+Please help me reset my UMAMTEK account password.`;
+
+  const url =
+`https://wa.me/919065760751?text=${encodeURIComponent(message)}`;
+
+  window.open(url, "_blank");
 
 };
 
@@ -182,6 +273,8 @@ window.submitBooking = async function(event){
     time: document.getElementById("bookingTime").value,
 
     details: document.getElementById("bookingDetails").value,
+
+    userPhone: localStorage.getItem("umamtekPhone") || "",
 
     status: "Pending",
 
@@ -226,9 +319,9 @@ window.loadBookings = async function(){
 
     bookingContainer.innerHTML = "";
 
-    querySnapshot.forEach((doc) => {
+    querySnapshot.forEach((docSnap) => {
 
-      const data = doc.data();
+      const data = docSnap.data();
 
       const whatsappPhone = cleanPhoneForWhatsApp(data.phone);
 
