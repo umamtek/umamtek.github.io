@@ -7,7 +7,7 @@
 
 <title>Login | UMAMTEK</title>
 
-<link rel="stylesheet" href="./css/style.css?v=25">
+<link rel="stylesheet" href="./css/style.css?v=30">
 <link rel="icon" href="favicon.png">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -56,16 +56,10 @@ Login to UMAMTEK
 
 <input type="tel" id="loginPhone" placeholder="Enter Mobile Number">
 
-<div id="recaptcha-container"></div>
+<input type="password" id="loginPassword" placeholder="Enter Password">
 
-<button type="button" onclick="sendLoginOTP()">
-Send OTP
-</button>
-
-<input type="text" id="loginOtp" placeholder="Enter OTP">
-
-<button type="button" onclick="verifyLoginOTP()">
-Verify & Login
+<button type="button" onclick="loginWithPhonePassword()">
+Login
 </button>
 
 </form>
@@ -75,6 +69,10 @@ Verify & Login
 <p style="text-align:center;">
 Don’t have an account?
 <a href="signup.html">Create Account</a>
+</p>
+
+<p style="text-align:center;margin-top:10px;">
+<a href="#" onclick="forgotPasswordWithPhone()">Forgot Password?</a>
 </p>
 
 </div>
