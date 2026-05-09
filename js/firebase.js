@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCU-5U3KL85H7LRsHg9ck-KXo9RuTKqd68",
@@ -13,6 +14,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
 function formatPhoneNumber(phone){
   phone = phone.trim();
@@ -129,5 +131,45 @@ window.verifySignupOTP = function(){
   .catch((error) => {
     alert("Invalid OTP");
   });
+
+};
+
+window.submitBooking = async function(event){
+
+  event.preventDefault();
+
+  const bookingData = {
+
+    name: document.getElementById("bookingName").value,
+
+    phone: document.getElementById("bookingPhone").value,
+
+    service: document.getElementById("bookingService").value,
+
+    address: document.getElementById("bookingAddress").value,
+
+    date: document.getElementById("bookingDate").value,
+
+    time: document.getElementById("bookingTime").value,
+
+    details: document.getElementById("bookingDetails").value,
+
+    createdAt: new Date().toISOString()
+
+  };
+
+  try{
+
+    await addDoc(collection(db, "bookings"), bookingData);
+
+    alert("Booking request submitted successfully");
+
+    window.location.reload();
+
+  }catch(error){
+
+    alert(error.message);
+
+  }
 
 };
