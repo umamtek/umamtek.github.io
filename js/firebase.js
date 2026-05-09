@@ -448,6 +448,8 @@ window.loadBookings = async function(){
 
     querySnapshot.forEach((docSnap) => {
 
+      const bookingDocId = docSnap.id;
+
       const data = docSnap.data();
 
       const whatsappPhone = cleanPhoneForWhatsApp(data.phone);
@@ -500,16 +502,42 @@ window.loadBookings = async function(){
           Call
           </a>
 
-          <span
-          style="
-          background:#f5b301;
-          color:#111;
-          padding:10px 16px;
-          border-radius:10px;
-          font-weight:700;
-          font-size:14px;">
-          ${data.status || "Pending"}
-          </span>
+          <select
+onchange="updateBookingStatus('${bookingDocId}', this.value)"
+style="
+padding:10px;
+border-radius:10px;
+font-weight:700;
+border:2px solid #f5b301;
+background:#fff8d6;
+">
+
+<option value="Pending"
+${data.status === "Pending" ? "selected" : ""}>
+Pending
+</option>
+
+<option value="Accepted"
+${data.status === "Accepted" ? "selected" : ""}>
+Accepted
+</option>
+
+<option value="On The Way"
+${data.status === "On The Way" ? "selected" : ""}>
+On The Way
+</option>
+
+<option value="Completed"
+${data.status === "Completed" ? "selected" : ""}>
+Completed
+</option>
+
+<option value="Cancelled"
+${data.status === "Cancelled" ? "selected" : ""}>
+Cancelled
+</option>
+
+</select>
 
         </div>
 
