@@ -663,3 +663,25 @@ window.loadMyBookings = async function(){
   }
 
 };
+
+window.updateBookingStatus = async function(bookingDocId, newStatus){
+
+  try{
+
+    const bookingRef = doc(db, "bookings", bookingDocId);
+
+    await updateDoc(bookingRef, {
+      status: newStatus
+    });
+
+    alert("Booking status updated to " + newStatus);
+
+    window.location.reload();
+
+  }catch(error){
+
+    alert(error.message);
+
+  }
+
+};
