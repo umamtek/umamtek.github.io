@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
-import { 
+
+import {
   getFirestore,
   collection,
   addDoc,
@@ -30,6 +31,20 @@ function formatPhoneNumber(phone){
 
   if(phone.length === 10){
     return "+91" + phone;
+  }
+
+  return phone;
+}
+
+function cleanPhoneForWhatsApp(phone){
+  phone = String(phone || "").replace(/\D/g, "");
+
+  if(phone.startsWith("91") && phone.length === 12){
+    return phone;
+  }
+
+  if(phone.length === 10){
+    return "91" + phone;
   }
 
   return phone;
@@ -71,6 +86,8 @@ window.sendLoginOTP = function(){
 window.verifyLoginOTP = function(){
 
   const otp = document.getElementById("loginOtp").value;
+  const phone = document.getElementById("loginPhone").value;
+  const role = document.getElementById("loginRole") ? document.getElementById("loginRole").value : "customer";
 
   if(!otp){
     alert("Please enter OTP");
@@ -80,7 +97,11 @@ window.verifyLoginOTP = function(){
   window.confirmationResult.confirm(otp)
   .then((result) => {
     alert("Login successful");
+
     localStorage.setItem("umamtekLoggedIn", "true");
+    localStorage.setItem("umamtekPhone", phone);
+    localStorage.setItem("umamtekRole", role || "customer");
+
     window.location.href = "index.html";
   })
   .catch((error) => {
@@ -131,6 +152,7 @@ window.verifySignupOTP = function(){
     localStorage.setItem("umamtekPhone", document.getElementById("signupPhone").value);
     localStorage.setItem("umamtekRole", document.getElementById("signupRole").value);
     localStorage.setItem("umamtekLoggedIn", "true");
+
     window.location.href = "index.html";
   })
   .catch((error) => {
@@ -138,6 +160,8 @@ window.verifySignupOTP = function(){
   });
 
 };
+
+/* BOOKING FORM */
 
 window.submitBooking = async function(event){
 
@@ -159,6 +183,8 @@ window.submitBooking = async function(event){
 
     details: document.getElementById("bookingDetails").value,
 
+    status: "Pending",
+
     createdAt: new Date().toISOString()
 
   };
@@ -178,6 +204,8 @@ window.submitBooking = async function(event){
   }
 
 };
+
+/* ADMIN BOOKING LOAD */
 
 window.loadBookings = async function(){
 
@@ -202,23 +230,55 @@ window.loadBookings = async function(){
 
       const data = doc.data();
 
+      const whatsappPhone = cleanPhoneForWhatsApp(data.phone);
+
       bookingContainer.innerHTML += `
 
       <div class="card">
 
-        <h3>${data.name}</h3>
+        <h3>${data.name || "No Name"}</h3>
 
-        <p><strong>Phone:</strong> ${data.phone}</p>
+        <p><strong>Phone:</strong> ${data.phone || ""}</p>
 
-        <p><strong>Service:</strong> ${data.service}</p>
+        <p><strong>Service:</strong> ${data.service || ""}</p>
 
-        <p><strong>Address:</strong> ${data.address}</p>
+        <p><strong>Address:</strong> ${data.address || ""}</p>
 
-        <p><strong>Date:</strong> ${data.date}</p>
+        <p><strong>Date:</strong> ${data.date || ""}</p>
 
-        <p><strong>Time:</strong> ${data.time}</p>
+        <p><strong>Time:</strong> ${data.time || ""}</p>
 
-        <p><strong>Details:</strong> ${data.details}</p>
+        <p><strong>Details:</strong> ${data.details || ""}</p>
+
+        <div style="display:flex;gap:10px;margin-top:15px;flex-wrap:wrap;">
+
+          <a
+          href="https://wa.me/${whatsappPhone}"
+          target="_blank"
+          class="primary-btn"
+          style="padding:10px 16px;font-size:14px;">
+          WhatsApp
+          </a>
+
+          <a
+          href="tel:${data.phone || ""}"
+          class="secondary-btn"
+          style="padding:10px 16px;font-size:14px;color:#111;border-color:#111;">
+          Call
+          </a>
+
+          <span
+          style="
+          background:#f5b301;
+          color:#111;
+          padding:10px 16px;
+          border-radius:10px;
+          font-weight:700;
+          font-size:14px;">
+          ${data.status || "Pending"}
+          </span>
+
+        </div>
 
       </div>
 
