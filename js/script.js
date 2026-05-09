@@ -142,8 +142,8 @@ function updateLoginUI(){
 
         <div class="profile-menu" id="profileMenu">
           <a href="#">My Profile</a>
-          <a href="#">My Bookings</a>
-          <a href="#">Service History</a>
+          <a href="booking.html">My Bookings</a>
+          <a href="booking.html">Service History</a>
           <button onclick="logoutUser()">Logout</button>
         </div>
       </div>
