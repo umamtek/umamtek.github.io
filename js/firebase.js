@@ -355,9 +355,27 @@ if(!mapLink){
 
   return;
 }
+  const bookingId =
+  "AEA" + Math.floor(1000 + Math.random() * 9000);
 
-  const bookingData = {
+  const now = new Date();
 
+  const bookingDate =
+  now.toLocaleDateString("en-GB");
+
+  const bookingTime =
+  now.toLocaleTimeString([], {
+  hour: '2-digit',
+  minute: '2-digit'
+});
+ const bookingData = {
+
+    bookingId: bookingId,
+
+    bookingCreatedDate: bookingDate,
+
+    bookingCreatedTime: bookingTime,
+   
     name: document.getElementById("bookingName").value,
 
     phone: document.getElementById("bookingPhone").value,
