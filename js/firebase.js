@@ -77,7 +77,7 @@ window.sendSignupOTPForPasswordAccount = async function(){
 
     const name = document.getElementById("signupName").value;
     const phone = document.getElementById("signupPhone").value;
-    const role = document.getElementById("signupRole").value;
+    const role = "customer";
     const password = document.getElementById("signupPassword").value;
 
     const clean = cleanPhone(phone);
@@ -150,7 +150,7 @@ window.createPhonePasswordAccount = async function(){
 
   const name = document.getElementById("signupName").value;
   const phone = document.getElementById("signupPhone").value;
-  const role = document.getElementById("signupRole").value;
+  const role = "customer";
   const password = document.getElementById("signupPassword").value;
 
   const clean = cleanPhone(phone);
