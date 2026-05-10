@@ -835,3 +835,49 @@ setTimeout(function(){
     window.loadProfilePage();
   }
 }, 1200);
+
+window.assignTechnician = async function(bookingDocId){
+
+  const technicianName =
+  prompt("Enter technician name");
+
+  if(!technicianName){
+    return;
+  }
+
+  const technicianPhone =
+  prompt("Enter technician phone number");
+
+  if(!technicianPhone){
+    return;
+  }
+
+  try{
+
+    const bookingRef =
+    doc(db, "bookings", bookingDocId);
+
+    await updateDoc(bookingRef, {
+
+      assignedTechnicianName:
+      technicianName,
+
+      assignedTechnicianPhone:
+      technicianPhone,
+
+      assignedAt:
+      new Date().toISOString()
+
+    });
+
+    alert("Technician assigned successfully");
+
+    window.location.reload();
+
+  }catch(error){
+
+    alert(error.message);
+
+  }
+
+};
