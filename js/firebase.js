@@ -996,17 +996,24 @@ window.setTechnicianETA = async function(bookingDocId){
 
 window.loadStaffBookings = async function(){
 
-  const container = document.getElementById("staffBookingContainer");
-  if(!container) return;
+  const activeBox = document.getElementById("staffBookingContainer");
+  const historyBox = document.getElementById("staffHistoryContainer");
 
-  container.innerHTML = `<div class="card">Loading assigned jobs...</div>`;
+  if(!activeBox || !historyBox) return;
+
+  activeBox.innerHTML = `<div class="card">Loading active jobs...</div>`;
+  historyBox.innerHTML = `<div class="card">Loading history...</div>`;
 
   try{
 
     const querySnapshot = await getDocs(collection(db, "bookings"));
 
-    container.innerHTML = "";
-    let found = false;
+    activeBox.innerHTML = "";
+    historyBox.innerHTML = "";
+
+    let total = 0;
+    let active = 0;
+    let completed = 0;
 
     querySnapshot.forEach((docSnap) => {
 
@@ -1015,14 +1022,28 @@ window.loadStaffBookings = async function(){
 
       if(data.assignedTechnicianName || data.assignedTechnicianPhone){
 
-        found = true;
+        total++;
 
-        container.innerHTML += `
+        const isDone = data.status === "Completed" || data.status === "Cancelled";
+
+        if(isDone){
+          completed++;
+        }else{
+          active++;
+        }
+
+        const whatsappPhone = cleanPhoneForWhatsApp(data.phone);
+
+        const card = `
         <div class="card">
 
           <h3>${data.bookingId || "Job"}</h3>
 
           <span class="staff-badge">${data.status || "Pending"}</span>
+
+          ${data.technicianETA ? `
+          <p><strong>ETA:</strong> ${data.technicianETA} mins</p>
+          ` : ""}
 
           <p><strong>Customer:</strong> ${data.name || ""}</p>
           <p><strong>Phone:</strong> ${data.phone || ""}</p>
@@ -1032,35 +1053,76 @@ window.loadStaffBookings = async function(){
           <p><strong>Visit:</strong> ${data.date || ""} ${data.time || ""}</p>
           <p><strong>Details:</strong> ${data.details || ""}</p>
 
-          <a href="${data.mapLink || "#"}" target="_blank" class="primary-btn">
+          <div class="action-row">
+
+            <a href="${data.mapLink || "#"}" target="_blank" class="primary-btn">
             Navigate
-          </a>
+            </a>
 
-          <button onclick="updateTechnicianLocation('${bookingDocId}')">
-            Update My Location
-          </button>
+            <a href="tel:${data.phone || ""}" class="primary-btn">
+            Call
+            </a>
 
-          <button onclick="updateBookingStatus('${bookingDocId}', 'On The Way')">
+            <a href="https://wa.me/${whatsappPhone}" target="_blank" class="primary-btn">
+            WhatsApp
+            </a>
+
+            <button onclick="updateBookingStatus('${bookingDocId}', 'Accepted')">
+            Accept
+            </button>
+
+            <button onclick="updateBookingStatus('${bookingDocId}', 'Rejected by Technician')">
+            Reject
+            </button>
+
+            <button onclick="updateTechnicianLocation('${bookingDocId}')">
+            Update Location
+            </button>
+
+            <button onclick="updateBookingStatus('${bookingDocId}', 'On The Way')">
             On The Way
-          </button>
+            </button>
 
-          <button onclick="updateBookingStatus('${bookingDocId}', 'Completed')">
-            Completed
-          </button>
+            <button onclick="updateBookingStatus('${bookingDocId}', 'Work Started')">
+            Start Work
+            </button>
+
+            <button onclick="updateBookingStatus('${bookingDocId}', 'Completed')">
+            Complete
+            </button>
+
+          </div>
 
         </div>
         `;
+
+        if(isDone){
+          historyBox.innerHTML += card;
+        }else{
+          activeBox.innerHTML += card;
+        }
 
       }
 
     });
 
-    if(!found){
-      container.innerHTML = `<div class="card">No assigned jobs found</div>`;
+    document.getElementById("totalJobs").innerText = total;
+    document.getElementById("activeJobs").innerText = active;
+    document.getElementById("completedJobs").innerText = completed;
+
+    if(active === 0){
+      activeBox.innerHTML = `<div class="card">No active jobs</div>`;
+    }
+
+    if(completed === 0){
+      historyBox.innerHTML = `<div class="card">No completed history</div>`;
     }
 
   }catch(error){
-    container.innerHTML = `<div class="card">${error.message}</div>`;
+
+    activeBox.innerHTML = `<div class="card">${error.message}</div>`;
+    historyBox.innerHTML = `<div class="card">${error.message}</div>`;
+
   }
 
 };
