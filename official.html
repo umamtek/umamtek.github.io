@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Official Panel | UMAMTEK</title>
+
+<link rel="stylesheet" href="./css/style.css?v=120">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+.official-stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:15px;
+margin-bottom:30px;
+}
+
+.official-stat{
+background:#111;
+color:#fff;
+padding:20px;
+border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.official-stat h2{
+color:#f5b301;
+margin-top:8px;
+}
+
+.official-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:20px;
+}
+
+.official-badge{
+display:inline-block;
+padding:8px 14px;
+border-radius:30px;
+background:#f5b301;
+color:#111;
+font-weight:800;
+margin:8px 0;
+}
+
+.official-actions{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-top:15px;
+}
+
+.official-actions button,
+.official-actions a{
+padding:10px 13px;
+border-radius:10px;
+text-decoration:none;
+font-weight:700;
+}
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar">
+<div class="logo-area">
+<img src="logo.png" class="site-logo">
+<h2 class="logo-text">UMAMTEK OFFICIAL</h2>
+</div>
+
+<div class="nav-actions">
+<button class="dark-btn" onclick="toggleDarkMode()">🌙</button>
+</div>
+</nav>
+
+<section class="section">
+
+<h1 class="section-title">Official Panel</h1>
+<p class="section-subtitle">
+Verify bookings, assign technicians, manage priority jobs and monitor customer requests.
+</p>
+
+<div class="official-stats">
+<div class="official-stat"><p>Total Bookings</p><h2 id="officialTotal">0</h2></div>
+<div class="official-stat"><p>Pending</p><h2 id="officialPending">0</h2></div>
+<div class="official-stat"><p>Active</p><h2 id="officialActive">0</h2></div>
+<div class="official-stat"><p>Completed</p><h2 id="officialCompleted">0</h2></div>
+</div>
+
+<h2>New / Active Bookings</h2>
+
+<div id="officialBookingContainer" class="official-grid">
+<div class="card">Loading bookings...</div>
+</div>
+
+<br><br>
+
+<h2>Completed / Cancelled History</h2>
+
+<div id="officialHistoryContainer" class="official-grid">
+<div class="card">Loading history...</div>
+</div>
+
+</section>
+
+<footer class="premium-footer">
+<h2>UMAMTEK</h2>
+<p>Your Project Our Priority</p>
+</footer>
+
+<script src="js/script.js"></script>
+<script type="module" src="js/firebase.js"></script>
+
+<script>
+setTimeout(() => {
+  if(window.loadOfficialPanel){
+    window.loadOfficialPanel();
+  }
+}, 1200);
+</script>
+
+</body>
+</html>
