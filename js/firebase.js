@@ -796,3 +796,55 @@ setTimeout(function(){
   }
 
 }, 1500);
+
+window.updateTechnicianLocation = async function(bookingDocId){
+
+  if(!navigator.geolocation){
+    alert("Geolocation not supported");
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+
+    async function(position){
+
+      try{
+
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+
+        const liveMapLink =
+        `https://maps.google.com/?q=${lat},${lng}`;
+
+        const bookingRef =
+        doc(db, "bookings", bookingDocId);
+
+        await updateDoc(bookingRef, {
+
+          technicianLatitude: lat,
+          technicianLongitude: lng,
+          technicianMapLink: liveMapLink,
+          technicianTrackingUpdatedAt:
+          new Date().toISOString()
+
+        });
+
+        alert("Technician live location updated");
+
+      }catch(error){
+
+        alert(error.message);
+
+      }
+
+    },
+
+    function(error){
+
+      alert("Location permission denied");
+
+    }
+
+  );
+
+};
