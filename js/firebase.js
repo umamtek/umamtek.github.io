@@ -186,6 +186,7 @@ window.createPhonePasswordAccount = async function(){
       phone: clean,
       role: role,
       emailLogin: email,
+      editableUntil: new Date(Date.now() + 180000).toISOString(),
       createdAt: new Date().toISOString()
     });
 
