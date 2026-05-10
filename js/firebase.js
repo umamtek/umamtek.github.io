@@ -1020,8 +1020,12 @@ window.loadStaffBookings = async function(){
       const bookingDocId = docSnap.id;
       const data = docSnap.data();
 
-      if(data.assignedTechnicianName || data.assignedTechnicianPhone){
+      const staffPhone = localStorage.getItem("umamtekStaffPhone");
 
+if(
+  data.assignedTechnicianPhone &&
+  data.assignedTechnicianPhone.replace(/\D/g, "") === staffPhone
+){
         total++;
 
         const isDone = data.status === "Completed" || data.status === "Cancelled";
