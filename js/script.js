@@ -214,3 +214,48 @@ function toggleNotifications(){
   document.body.appendChild(box);
 
 }
+
+function toggleAIChat(){
+
+  const box = document.getElementById("aiChatBox");
+
+  if(box){
+    box.classList.toggle("active");
+  }
+
+}
+
+function aiReply(type){
+
+  const chatBody = document.getElementById("aiChatBody");
+
+  let reply = "";
+
+  if(type === "electrician"){
+    reply = "Electrician service ke liye aap house wiring, fault repair, switch board, meter related work ya emergency repair book kar sakte hain.";
+  }
+
+  if(type === "cctv"){
+    reply = "CCTV installation ke liye UMAMTEK camera setup, DVR/NVR, wiring aur maintenance support provide karega.";
+  }
+
+  if(type === "wiring"){
+    reply = "House wiring, commercial wiring, renovation wiring aur new construction electrical work ke liye booking kar sakte hain.";
+  }
+
+  if(type === "booking"){
+    reply = "Service book karne ke liye Book Service page open karein. Login ke baad booking submit kar sakte hain.";
+  }
+
+  if(type === "contact"){
+    reply = "UMAMTEK se contact karne ke liye WhatsApp ya Contact page use karein. Phone: 9065760751";
+  }
+
+  chatBody.innerHTML += `
+    <p class="user-msg">${type}</p>
+    <p class="bot-msg">${reply}</p>
+  `;
+
+  chatBody.scrollTop = chatBody.scrollHeight;
+
+}
