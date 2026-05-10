@@ -546,6 +546,12 @@ style="padding:10px 16px;font-size:14px;">
 Assign Technician
 </button>
 
+<button
+onclick="setTechnicianETA('${bookingDocId}')"
+style="padding:10px 16px;font-size:14px;">
+Set ETA
+</button>
+
           <select
             onchange="updateBookingStatus('${bookingDocId}', this.value)"
             style="
