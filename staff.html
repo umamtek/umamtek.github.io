@@ -20,6 +20,12 @@
 
 <body>
 
+  <script>
+if(localStorage.getItem("umamtekStaffLoggedIn") !== "true"){
+  window.location.href = "staff-login.html";
+}
+</script>
+
 <nav class="navbar">
 <div class="logo-area">
 <img src="logo.png" class="site-logo">
