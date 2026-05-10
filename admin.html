@@ -47,7 +47,17 @@ if(adminPhone !== "9065760751"){
 
 <div class="nav-actions">
 <button class="dark-btn" onclick="toggleDarkMode()">🌙</button>
+<button onclick="adminLogout()">Logout</button>
 </div>
+
+<script>
+function adminLogout(){
+  localStorage.removeItem("umamtekAdminLoggedIn");
+  localStorage.removeItem("umamtekAdminName");
+  localStorage.removeItem("umamtekAdminPhone");
+  window.location.href = "admin-login.html";
+}
+</script>
 
 </nav>
 
