@@ -1325,3 +1325,135 @@ window.markPriorityBooking = async function(bookingDocId){
   }
 
 };
+
+window.generateInvoice = async function(bookingDocId){
+
+  try{
+
+    const bookingRef = doc(db, "bookings", bookingDocId);
+    const bookingSnap = await getDoc(bookingRef);
+
+    if(!bookingSnap.exists()){
+      alert("Booking not found");
+      return;
+    }
+
+    const data = bookingSnap.data();
+
+    const invoiceWindow = window.open("", "_blank");
+
+    invoiceWindow.document.write(`
+      <html>
+      <head>
+        <title>UMAMTEK Invoice</title>
+        <style>
+          body{
+            font-family:Arial, sans-serif;
+            padding:30px;
+            color:#111;
+          }
+          .invoice-box{
+            max-width:800px;
+            margin:auto;
+            border:2px solid #111;
+            padding:30px;
+          }
+          .header{
+            display:flex;
+            justify-content:space-between;
+            border-bottom:2px solid #f5b301;
+            padding-bottom:15px;
+            margin-bottom:25px;
+          }
+          h1{
+            color:#f5b301;
+            margin:0;
+          }
+          table{
+            width:100%;
+            border-collapse:collapse;
+            margin-top:20px;
+          }
+          td,th{
+            border:1px solid #ddd;
+            padding:12px;
+            text-align:left;
+          }
+          .total{
+            font-size:20px;
+            font-weight:bold;
+            text-align:right;
+            margin-top:25px;
+          }
+          .btn{
+            margin-top:25px;
+            padding:12px 18px;
+            background:#f5b301;
+            border:none;
+            font-weight:bold;
+            cursor:pointer;
+          }
+        </style>
+      </head>
+
+      <body>
+
+      <div class="invoice-box">
+
+        <div class="header">
+          <div>
+            <h1>UMAMTEK</h1>
+            <p>Your Project Our Priority</p>
+          </div>
+          <div>
+            <strong>Invoice</strong><br>
+            Booking ID: ${data.bookingId || ""}<br>
+            Date: ${new Date().toLocaleDateString("en-GB")}
+          </div>
+        </div>
+
+        <h3>Customer Details</h3>
+        <p><strong>Name:</strong> ${data.name || ""}</p>
+        <p><strong>Phone:</strong> ${data.phone || ""}</p>
+        <p><strong>Address:</strong> ${data.address || ""}</p>
+        <p><strong>PIN:</strong> ${data.pinCode || ""}</p>
+
+        <h3>Service Details</h3>
+
+        <table>
+          <tr>
+            <th>Service</th>
+            <th>Status</th>
+            <th>Technician</th>
+            <th>Amount</th>
+          </tr>
+
+          <tr>
+            <td>${data.service || ""}</td>
+            <td>${data.status || "Pending"}</td>
+            <td>${data.assignedTechnicianName || "Not assigned"}</td>
+            <td>₹0</td>
+          </tr>
+        </table>
+
+        <p class="total">Total Amount: ₹0</p>
+
+        <p style="margin-top:30px;">
+        Note: Final pricing will be updated after UMAMTEK rate card launch.
+        </p>
+
+        <button class="btn" onclick="window.print()">Print / Download PDF</button>
+
+      </div>
+
+      </body>
+      </html>
+    `);
+
+    invoiceWindow.document.close();
+
+  }catch(error){
+    alert(error.message);
+  }
+
+};
