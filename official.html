@@ -81,7 +81,17 @@ if(localStorage.getItem("umamtekOfficialLoggedIn") !== "true"){
 
 <div class="nav-actions">
 <button class="dark-btn" onclick="toggleDarkMode()">🌙</button>
+<button onclick="officialLogout()">Logout</button>
 </div>
+
+<script>
+function officialLogout(){
+  localStorage.removeItem("umamtekOfficialLoggedIn");
+  localStorage.removeItem("umamtekOfficialName");
+  localStorage.removeItem("umamtekOfficialPhone");
+  window.location.href = "official-login.html";
+}
+</script>
 </nav>
 
 <section class="section">
