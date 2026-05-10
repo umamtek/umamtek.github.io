@@ -1,108 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Staff Panel | UMAMTEK</title>
-
-<link rel="stylesheet" href="./css/style.css?v=70">
-
+<link rel="stylesheet" href="./css/style.css?v=90">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-
-.staff-header{
-margin-bottom:30px;
-}
-
-.staff-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:20px;
-}
-
-.staff-badge{
-display:inline-block;
-padding:8px 14px;
-border-radius:30px;
-background:#f5b301;
-color:#111;
-font-weight:700;
-margin-top:10px;
-}
-
+.staff-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.staff-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;margin-bottom:30px}
+.stat-box{background:#111;color:#fff;padding:20px;border-radius:18px;box-shadow:0 10px 25px rgba(0,0,0,.15)}
+.stat-box h2{color:#f5b301}
+.staff-badge{display:inline-block;padding:8px 14px;border-radius:30px;background:#f5b301;color:#111;font-weight:800;margin:10px 0}
+.action-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
+.action-row button,.action-row a{padding:10px 13px;border-radius:10px;text-decoration:none;font-weight:700}
 </style>
-
 </head>
 
 <body>
 
 <nav class="navbar">
-
 <div class="logo-area">
 <img src="logo.png" class="site-logo">
 <h2 class="logo-text">UMAMTEK STAFF</h2>
 </div>
-
 <div class="nav-actions">
 <button class="dark-btn" onclick="toggleDarkMode()">🌙</button>
 </div>
-
 </nav>
 
 <section class="section">
 
-<div class="staff-header">
+<h1 class="section-title">Staff Panel</h1>
+<p class="section-subtitle">Assigned jobs, live tracking, status update and work history.</p>
 
-<h1 class="section-title">
-Assigned Jobs
-</h1>
-
-<p class="section-subtitle">
-Manage customer visits, tracking and work updates.
-</p>
-
+<div class="staff-stats">
+<div class="stat-box"><p>Total Jobs</p><h2 id="totalJobs">0</h2></div>
+<div class="stat-box"><p>Active Jobs</p><h2 id="activeJobs">0</h2></div>
+<div class="stat-box"><p>Completed</p><h2 id="completedJobs">0</h2></div>
+<div class="stat-box"><p>Earnings</p><h2>₹0</h2></div>
 </div>
 
+<h2>Active Jobs</h2>
 <div id="staffBookingContainer" class="staff-grid">
-
-<div class="card">
-Loading assigned jobs...
+<div class="card">Loading assigned jobs...</div>
 </div>
 
+<br><br>
+
+<h2>Service History</h2>
+<div id="staffHistoryContainer" class="staff-grid">
+<div class="card">Loading history...</div>
 </div>
 
 </section>
 
 <footer class="premium-footer">
-
 <h2>UMAMTEK</h2>
-
 <p>Your Project Our Priority</p>
-
 </footer>
 
 <script src="js/script.js"></script>
-
 <script type="module" src="js/firebase.js"></script>
 
 <script>
-
 setTimeout(() => {
-
 if(window.loadStaffBookings){
-
 window.loadStaffBookings();
-
 }
-
 }, 1200);
-
 </script>
 
 </body>
-
 </html>
