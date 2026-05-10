@@ -1,6 +1,14 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
 
 import {
+  getAuth,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+
+import {
   getFirestore,
   collection,
   addDoc,
@@ -10,17 +18,6 @@ import {
   setDoc,
   updateDoc
 } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
-
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  doc,
-  getDoc,
-  setDoc
-} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
-
 const firebaseConfig = {
   apiKey: "AIzaSyCU-5U3KL85H7LRsHg9ck-KXo9RuTKqd68",
   authDomain: "umamtek-2cc57.firebaseapp.com",
