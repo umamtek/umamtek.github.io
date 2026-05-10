@@ -688,6 +688,23 @@ Technician not assigned yet
 
 `}
 
+${data.technicianETA ? `
+
+<div style="
+margin-top:15px;
+padding:14px 18px;
+border-radius:14px;
+background:#111;
+color:#fff;
+font-weight:800;
+display:inline-block;
+box-shadow:0 10px 25px rgba(0,0,0,0.25);
+">
+🚗 Technician arriving in ${data.technicianETA} mins
+</div>
+
+` : ``}
+
           <p>
             <strong>Status:</strong>
             <span style="background:#f5b301;color:#111;padding:6px 12px;border-radius:10px;font-weight:700;">
