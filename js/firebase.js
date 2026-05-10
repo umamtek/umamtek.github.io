@@ -663,6 +663,25 @@ ${data.assignedTechnicianPhone || ""}
 
 ` : `
 
+${data.technicianETA ? `
+
+<div style="
+margin-top:15px;
+padding:14px;
+border-radius:14px;
+background:#111;
+color:#fff;
+font-weight:700;
+display:inline-block;
+">
+
+🚗 Technician arriving in
+${data.technicianETA} mins
+
+</div>
+
+` : ``}
+
 <p style="margin-top:15px;font-weight:700;">
 Technician not assigned yet
 </p>
