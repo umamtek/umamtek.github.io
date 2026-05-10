@@ -54,11 +54,18 @@ Loading profile...
 </footer>
 
 <script src="js/script.js"></script>
+
 <script type="module" src="js/firebase.js"></script>
-  <script>
-setTimeout(function(){
-  loadProfilePage();
-}, 1000);
+
+<script>
+const profileCheck = setInterval(function(){
+
+  if(typeof loadProfilePage === "function"){
+    clearInterval(profileCheck);
+    loadProfilePage();
+  }
+
+}, 300);
 </script>
 
 </body>
