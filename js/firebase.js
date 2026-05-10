@@ -629,6 +629,40 @@ window.loadMyBookings = async function(){
             <div class="timeline-step ${data.status === "Completed" ? "active" : ""}">Completed</div>
           </div>
 
+          ${data.assignedTechnicianName ? `
+
+<div style="
+margin-top:15px;
+padding:15px;
+border-radius:14px;
+background:#fff8d6;
+border:2px solid #f5b301;
+">
+
+<h3 style="margin-bottom:10px;">
+Assigned Technician
+</h3>
+
+<p>
+<strong>Name:</strong>
+${data.assignedTechnicianName}
+</p>
+
+<p>
+<strong>Phone:</strong>
+${data.assignedTechnicianPhone || ""}
+</p>
+
+</div>
+
+` : `
+
+<p style="margin-top:15px;font-weight:700;">
+Technician not assigned yet
+</p>
+
+`}
+
           <p>
             <strong>Status:</strong>
             <span style="background:#f5b301;color:#111;padding:6px 12px;border-radius:10px;font-weight:700;">
