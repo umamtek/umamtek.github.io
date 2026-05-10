@@ -134,6 +134,10 @@ function updateLoginUI(){
 
     navActions.innerHTML = `
       <button class="dark-btn" onclick="toggleDarkMode()">🌙</button>
+      <button class="notification-btn" onclick="toggleNotifications()">
+🔔
+<span id="notificationCount">0</span>
+</button>
 
       <div class="profile-dropdown">
         <button class="profile-btn" onclick="toggleProfileDropdown()">
