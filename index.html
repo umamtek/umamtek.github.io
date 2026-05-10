@@ -194,7 +194,41 @@ box-shadow:0 0 0 0 rgba(37,211,102,0);
 
 </style>
 </head>
+<div class="ai-chatbot">
 
+<button class="ai-chat-btn" onclick="toggleAIChat()">
+🤖
+</button>
+
+<div class="ai-chat-box" id="aiChatBox">
+
+<div class="ai-chat-header">
+UMAMTEK Assistant
+<span onclick="toggleAIChat()">×</span>
+</div>
+
+<div class="ai-chat-body" id="aiChatBody">
+
+<p class="bot-msg">
+Hi 😄 मैं UMAMTEK Assistant हूँ। आप किस service के लिए help चाहते हैं?
+</p>
+
+</div>
+
+<div class="ai-chat-options">
+
+<button onclick="aiReply('electrician')">Electrician</button>
+<button onclick="aiReply('cctv')">CCTV</button>
+<button onclick="aiReply('wiring')">Wiring</button>
+<button onclick="aiReply('booking')">Book Service</button>
+<button onclick="aiReply('contact')">Contact</button>
+
+</div>
+
+</div>
+
+</div>
+  
 <body>
 
   <div class="loader-wrapper" id="loader">
