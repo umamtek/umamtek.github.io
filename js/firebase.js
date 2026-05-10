@@ -499,6 +499,12 @@ window.loadBookings = async function(){
           Call
           </a>
 
+          <button
+onclick="updateTechnicianLocation('${bookingDocId}')"
+style="padding:10px 16px;font-size:14px;">
+Update My Location
+</button>
+
           <select
 onchange="updateBookingStatus('${bookingDocId}', this.value)"
 style="
