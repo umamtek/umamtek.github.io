@@ -141,10 +141,10 @@ function updateLoginUI(){
         </button>
 
         <div class="profile-menu" id="profileMenu">
-          <a href="#">My Profile</a>
-          <a href="booking.html">My Bookings</a>
-          <a href="booking.html">Service History</a>
-          <button onclick="logoutUser()">Logout</button>
+        <a href="profile.html">My Profile</a>
+        <a href="my-bookings.html">My Bookings</a>
+        <a href="my-bookings.html">Service History</a>
+        <button onclick="logoutUser()">Logout</button>
         </div>
       </div>
     `;
