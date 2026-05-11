@@ -932,21 +932,57 @@ setTimeout(function(){
 
 window.assignTechnician = async function(bookingDocId){
 
-  const technicianName =
-  prompt("Enter technician name");
-
-  if(!technicianName){
-    return;
-  }
-
-  const technicianPhone =
-  prompt("Enter technician phone number");
-
-  if(!technicianPhone){
-    return;
-  }
-
   try{
+
+    const staffSnapshot =
+    await getDocs(collection(db, "staff"));
+
+    if(staffSnapshot.empty){
+      alert("No staff registered. Please add staff first.");
+      window.location.href = "staff-registry.html";
+      return;
+    }
+
+    let staffList = [];
+    let message = "Select technician number:\n\n";
+
+    let index = 1;
+
+    staffSnapshot.forEach((docSnap) => {
+
+      const staff = docSnap.data();
+
+      if(staff.status === "Active" || staff.status === "Busy" || staff.status === "Offline"){
+
+        staffList.push(staff);
+
+        message +=
+        index + ". " +
+        staff.name + " - " +
+        staff.skill + " - " +
+        staff.area + " - " +
+        staff.phone + "\n";
+
+        index++;
+
+      }
+
+    });
+
+    const selectedNumber =
+    prompt(message);
+
+    if(!selectedNumber){
+      return;
+    }
+
+    const selectedStaff =
+    staffList[Number(selectedNumber) - 1];
+
+    if(!selectedStaff){
+      alert("Invalid technician selected");
+      return;
+    }
 
     const bookingRef =
     doc(db, "bookings", bookingDocId);
@@ -954,13 +990,22 @@ window.assignTechnician = async function(bookingDocId){
     await updateDoc(bookingRef, {
 
       assignedTechnicianName:
-      technicianName,
+      selectedStaff.name,
 
       assignedTechnicianPhone:
-      technicianPhone,
+      selectedStaff.phone,
+
+      assignedTechnicianSkill:
+      selectedStaff.skill,
+
+      assignedTechnicianArea:
+      selectedStaff.area,
 
       assignedAt:
-      new Date().toISOString()
+      new Date().toISOString(),
+
+      status:
+      "Accepted"
 
     });
 
@@ -975,7 +1020,6 @@ window.assignTechnician = async function(bookingDocId){
   }
 
 };
-
 window.setTechnicianETA = async function(bookingDocId){
 
   const etaMinutes =
