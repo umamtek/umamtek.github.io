@@ -53,16 +53,47 @@ Book UMAMTEK Service
 
 <input type="tel" id="bookingPhone" placeholder="Phone Number">
 
-<select id="bookingService">
-<option value="">Select Service</option>
-<option>House Wiring</option>
-<option>Commercial Wiring</option>
-<option>CCTV Installation</option>
-<option>Fault Repair</option>
-<option>Inverter Installation</option>
-<option>New Meter Connection</option>
-<option>Electrical Contractor Work</option>
+<select id="bookingWorker" onchange="loadWorkOptions()" required>
+<option value="">Select Your Worker</option>
+<option value="electrician">Electrician</option>
+<option value="plumber">Plumber</option>
+<option value="mason">Mason</option>
+<option value="labour">Labour</option>
+<option value="painter">Painter</option>
+<option value="carpenter">Carpenter</option>
+<option value="foreman">Foreman</option>
+<option value="supervisor">Supervisor</option>
+<option value="engineer">Engineer</option>
+<option value="welder">Welder</option>
+<option value="iti">ITI / Technician</option>
+<option value="installer">General Installer</option>
+<option value="not_sure">Need Another Worker / Not Sure</option>
 </select>
+
+<input
+type="text"
+id="workSearch"
+placeholder="Search your work..."
+onkeyup="filterWorkOptions()"
+style="display:none;"
+>
+
+<select id="bookingService" onchange="showWorkPrice()" required>
+<option value="">Select Your Work</option>
+</select>
+
+<textarea
+id="otherWorkDetails"
+placeholder="Please specify your work"
+style="display:none;"
+></textarea>
+
+<div id="pricePreview" class="card" style="display:none;margin-top:15px;">
+<h3>Price Details</h3>
+<p><strong>Real Rate:</strong> <del>₹450</del></p>
+<p><strong>UMAMTEK Offer Rate:</strong> ₹200</p>
+<p style="font-size:14px;">Final price may vary after inspection/material requirement.</p>
+</div>
 
 <input type="text" id="bookingAddress" placeholder="Full Address with House No / Area / Landmark" required>
 
