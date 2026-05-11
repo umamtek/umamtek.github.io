@@ -1195,6 +1195,7 @@ if(
           <p><strong>PIN:</strong> ${data.pinCode || ""}</p>
           <p><strong>Visit:</strong> ${data.date || ""} ${data.time || ""}</p>
           <p><strong>Details:</strong> ${data.details || ""}</p>
+          ${getBillBox(data)}
 
           <div class="action-row">
 
