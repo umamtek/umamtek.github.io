@@ -1182,9 +1182,9 @@ if(
             Start Work
             </button>
 
-            <button onclick="updateBookingStatus('${bookingDocId}', 'Completed')">
-            Complete
-            </button>
+            <button onclick="markPaymentReceivedAndComplete('${bookingDocId}')">
+Payment Received & Work Done
+</button>
 
           </div>
 
@@ -1670,6 +1670,37 @@ window.loadStaffRegistry = async function(){
 
   }catch(error){
     container.innerHTML = `<div class="card">${error.message}</div>`;
+  }
+
+};
+
+window.markPaymentReceivedAndComplete = async function(bookingDocId){
+
+  const confirmPayment =
+  confirm("Confirm: Payment received and work completed?");
+
+  if(!confirmPayment){
+    return;
+  }
+
+  try{
+
+    await updateDoc(doc(db, "bookings", bookingDocId), {
+      status: "Completed",
+      paymentStatus: "Paid",
+      invoiceStatus: "Available",
+      completedAt: new Date().toISOString(),
+      paymentReceivedAt: new Date().toISOString()
+    });
+
+    alert("Work completed and payment marked as received");
+
+    window.location.reload();
+
+  }catch(error){
+
+    alert(error.message);
+
   }
 
 };
