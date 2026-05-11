@@ -772,6 +772,7 @@ window.loadMyBookings = async function(){
           <p><strong>PIN Code:</strong> ${data.pinCode || ""}</p>
           <p><strong>Expected Visit:</strong> ${data.date || ""} ${data.time || ""}</p>
           <p><strong>Details:</strong> ${data.details || ""}</p>
+          ${getBillBox(data)}
 
           <div class="timeline">
             <div class="timeline-step ${data.status === "Pending" ? "active" : ""}">Pending</div>
