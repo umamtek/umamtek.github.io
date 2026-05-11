@@ -390,7 +390,12 @@ window.submitBooking = async function(event){
 
     name: document.getElementById("bookingName")?.value.trim() || "",
     phone: document.getElementById("bookingPhone")?.value.trim() || "",
+    workerType: document.getElementById("bookingWorker")?.value || "",
     service: document.getElementById("bookingService")?.value || "",
+    otherWorkDetails: document.getElementById("otherWorkDetails")?.value.trim() || "",
+realRate: 450,
+offerRate: 200,
+selectedPrice: 200,
     address: document.getElementById("bookingAddress")?.value.trim() || "",
     date: document.getElementById("bookingDate")?.value || "",
     time: document.getElementById("bookingTime")?.value || "",
