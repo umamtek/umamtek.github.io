@@ -406,6 +406,8 @@ selectedPrice: 200,
     travelCharge: document.getElementById("travelCharge")?.value || "0",
 totalPayable: document.getElementById("totalPayable")?.value || "200",
 paymentMode: document.getElementById("paymentMode")?.value || "Not Selected",
+    paymentStatus: "Unpaid",
+invoiceStatus: "Not Available",
     address: document.getElementById("bookingAddress")?.value.trim() || "",
     date: document.getElementById("bookingDate")?.value || "",
     time: document.getElementById("bookingTime")?.value || "",
@@ -703,6 +705,17 @@ window.loadMyBookings = async function(){
         </a>
       ` : "";
 
+      const invoiceButton =
+(data.status === "Completed" && data.paymentStatus === "Paid") ? `
+  <button onclick="generateInvoice('${bookingDocId}')" style="margin-top:15px;">
+  Download Invoice
+  </button>
+` : `
+  <p style="margin-top:15px;font-weight:700;">
+  Invoice will be available after service completion and payment confirmation.
+  </p>
+`;
+
       const card = `
         <div class="card">
 
@@ -745,6 +758,7 @@ window.loadMyBookings = async function(){
 
           ${actionBox}
           ${reviewButton}
+          ${invoiceButton}
 
         </div>
       `;
@@ -1503,11 +1517,11 @@ window.generateInvoice = async function(bookingDocId){
             <td>${data.service || ""}</td>
             <td>${data.status || "Pending"}</td>
             <td>${data.assignedTechnicianName || "Not assigned"}</td>
-            <td>₹0</td>
+            <td>₹${data.totalPayable || data.selectedPrice || 200}</td>
           </tr>
         </table>
 
-        <p class="total">Total Amount: ₹0</p>
+        <p class="total">Total Amount: ₹${data.totalPayable || data.selectedPrice || 200}</p>
 
         <p style="margin-top:30px;">
         Note: Final pricing will be updated after UMAMTEK rate card launch.
