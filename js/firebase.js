@@ -694,6 +694,7 @@ window.loadMyBookings = async function(){
     let activeFound = false;
     let completedFound = false;
     let cancelledFound = false;
+    let customerNotifications = [];
 
     querySnapshot.forEach((docSnap) => {
 
@@ -703,6 +704,14 @@ window.loadMyBookings = async function(){
       if(data.userPhone !== userPhone){
         return;
       }
+
+      customerNotifications.push({
+  bookingId: data.bookingId || "Booking",
+  status: data.status || "Pending",
+  technician: data.assignedTechnicianName || "",
+  eta: data.technicianETA || "",
+  paymentStatus: data.paymentStatus || "Unpaid"
+});
 
       const canEdit =
       data.editableUntil && new Date(data.editableUntil) > new Date();
@@ -902,6 +911,23 @@ ${etaBox}
       cancelledBox.innerHTML = `<div class="card">No cancelled bookings</div>`;
     }
 
+localStorage.setItem(
+  "umamtekNotifications",
+  JSON.stringify(customerNotifications)
+);
+
+localStorage.setItem(
+  "umamtekNotificationCount",
+  customerNotifications.length
+);
+
+const notificationCount =
+document.getElementById("notificationCount");
+
+if(notificationCount){
+  notificationCount.innerText = customerNotifications.length;
+}
+    
   }catch(error){
 
     activeBox.innerHTML = `<div class="card">${error.message}</div>`;
