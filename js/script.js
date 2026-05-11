@@ -688,3 +688,77 @@ function calculateTechnicianDistanceETA(customerLat, customerLng, technicianLat,
   };
 
 }
+window.toggleNotifications = function(){
+
+  const oldBox = document.getElementById("notificationBox");
+
+  if(oldBox){
+    oldBox.remove();
+    return;
+  }
+
+  const notifications =
+  JSON.parse(localStorage.getItem("umamtekNotifications") || "[]");
+
+  let notificationHTML = "";
+
+  if(notifications.length === 0){
+
+    notificationHTML = `
+      <p>🔔 No new booking updates yet.</p>
+      <p>Open My Bookings once to refresh updates.</p>
+    `;
+
+  }else{
+
+    notifications.forEach(item => {
+
+      notificationHTML += `
+        <div style="
+        padding:10px;
+        margin-bottom:10px;
+        border-radius:12px;
+        background:#fff8d6;
+        color:#111;
+        ">
+
+          <p><strong>${item.bookingId}</strong></p>
+          <p>Status: <strong>${item.status}</strong></p>
+
+          ${
+            item.technician
+            ? `<p>Technician: <strong>${item.technician}</strong></p>`
+            : `<p>Technician not assigned yet</p>`
+          }
+
+          ${
+            item.eta
+            ? `<p>ETA: <strong>${item.eta} mins</strong></p>`
+            : ``
+          }
+
+          <p>Payment: <strong>${item.paymentStatus}</strong></p>
+
+        </div>
+      `;
+
+    });
+
+  }
+
+  const box = document.createElement("div");
+  box.id = "notificationBox";
+
+  box.innerHTML = `
+    <div class="notification-panel">
+      <h3>Notifications</h3>
+      ${notificationHTML}
+      <a href="my-bookings.html" class="primary-btn" style="display:inline-block;margin-top:10px;text-decoration:none;">
+      View My Bookings
+      </a>
+    </div>
+  `;
+
+  document.body.appendChild(box);
+
+};
