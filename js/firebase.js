@@ -741,7 +741,21 @@ box-shadow:0 10px 25px rgba(0,0,0,0.25);
             </p>`
             : `<p style="margin-top:15px;font-size:13px;font-weight:700;">Edit window closed.</p>`
           }
+${data.status === "Completed" ? `
 
+<a
+href="review.html"
+class="primary-btn"
+style="
+display:inline-block;
+margin-top:15px;
+margin-left:10px;
+text-decoration:none;
+">
+Give Review ⭐
+</a>
+
+` : ``}
         </div>`;
       }
 
