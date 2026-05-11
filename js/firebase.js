@@ -367,6 +367,13 @@ window.submitBooking = async function(event){
 
   const mapLink = document.getElementById("bookingMapLink")?.value;
 
+  const paymentMode = document.getElementById("paymentMode")?.value;
+
+if(!paymentMode){
+  alert("Please select payment mode: Pay Now or Pay After Work");
+  return;
+}
+
   if(!mapLink){
     alert("Please add your live location");
     return;
