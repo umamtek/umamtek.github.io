@@ -541,6 +541,7 @@ window.loadBookings = async function(){
         <p><strong>Expected Date:</strong> ${data.date || ""}</p>
         <p><strong>Expected Time:</strong> ${data.time || ""}</p>
         <p><strong>Details:</strong> ${data.details || ""}</p>
+        ${getBillBox(data)}
 
         <p>
           <strong>Status:</strong>
