@@ -1457,3 +1457,47 @@ window.generateInvoice = async function(bookingDocId){
   }
 
 };
+
+window.submitReview = async function(event){
+
+  event.preventDefault();
+
+  const userPhone = localStorage.getItem("umamtekPhone");
+
+  if(!userPhone){
+    alert("Please login first");
+    window.location.href = "login.html";
+    return;
+  }
+
+  const reviewData = {
+    bookingId: document.getElementById("reviewBookingId").value.trim(),
+    userPhone: userPhone,
+    workQuality: document.getElementById("workQuality").value,
+    timingRating: document.getElementById("timingRating").value,
+    behaviourRating: document.getElementById("behaviourRating").value,
+    overallRating: document.getElementById("overallRating").value,
+    comment: document.getElementById("reviewComment").value.trim(),
+    createdAt: new Date().toISOString()
+  };
+
+  if(!reviewData.bookingId || !reviewData.comment){
+    alert("Please fill all review details");
+    return;
+  }
+
+  try{
+
+    await addDoc(collection(db, "reviews"), reviewData);
+
+    alert("Thank you for your review");
+
+    window.location.href = "my-bookings.html";
+
+  }catch(error){
+
+    alert(error.message);
+
+  }
+
+};
