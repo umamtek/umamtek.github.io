@@ -1164,3 +1164,84 @@ color:#111 !important;
 background:linear-gradient(145deg,#090909,#151515) !important;
 border:1px solid rgba(245,179,1,0.25) !important;
 }
+
+/* NAVBAR LOGO SIZE FIX */
+
+.navbar{
+  min-height: 92px;
+  padding: 14px 8%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-area{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.site-logo{
+  width: 82px;
+  height: 82px;
+  object-fit: contain;
+  display: block;
+}
+
+.logo-text{
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  line-height: 1;
+}
+
+/* Navbar links alignment */
+.nav-links{
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.nav-links li{
+  list-style: none;
+}
+
+.nav-links a{
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* Right buttons alignment */
+.nav-actions{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px){
+
+  .navbar{
+    min-height: 78px;
+    padding: 12px 5%;
+  }
+
+  .site-logo{
+    width: 60px;
+    height: 60px;
+  }
+
+  .logo-text{
+    font-size: 20px;
+  }
+
+  .logo-area{
+    gap: 10px;
+  }
+
+  .nav-links{
+    gap: 14px;
+  }
+
+}
