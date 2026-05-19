@@ -40,46 +40,56 @@
 
 </nav>
 
-<section class="section">
+<section class="section auth-section">
 
-<h1 class="section-title">
-Create UMAMTEK Account
-</h1>
+  <div class="auth-card">
 
-<div class="card" style="max-width:500px;margin:auto;">
+    <h1 class="section-title" style="margin-bottom:10px;">
+      Create Customer Account
+    </h1>
 
-<form>
+    <p class="section-subtitle" style="margin-bottom:25px;">
+      Signup once to book services, track technician location, manage bookings and download invoices.
+    </p>
 
-<input type="text" id="signupName" placeholder="Full Name">
+    <form style="display:grid;gap:18px;">
 
-<input type="tel" id="signupPhone" placeholder="Mobile Number">
+      <input type="text" id="signupName" placeholder="Full Name" required>
 
-<input type="password" id="signupPassword" placeholder="Create Password">
+      <input type="tel" id="signupPhone" placeholder="Mobile Number" required>
 
-<div
-id="recaptcha-container"
-style="margin:20px 0;display:flex;justify-content:center;">
-</div>
-<button type="button" onclick="sendSignupOTPForPasswordAccount()">
-Send OTP
-</button>
+      <input type="password" id="signupPassword" placeholder="Create Password" required>
 
-<input type="text" id="signupOtp" placeholder="Enter OTP">
+      <div id="recaptcha-container"></div>
 
-<button type="button" onclick="createPhonePasswordAccount()">
-Create Account
-</button>
+      <button type="button" onclick="sendSignupOTPForPasswordAccount()">
+        Send OTP
+      </button>
 
-</form>
+      <input type="text" id="signupOtp" placeholder="Enter OTP" required>
 
-<br>
+      <button type="button" onclick="createPhonePasswordAccount()">
+        Create Account
+      </button>
 
-<p style="text-align:center;">
-Already have an account?
-<a href="login.html">Login</a>
-</p>
+    </form>
 
-</div>
+    <div style="margin-top:22px;text-align:center;">
+
+      <p>
+        Already have an account?
+        <a href="login.html" style="color:#f5b301;font-weight:900;text-decoration:none;">
+          Login
+        </a>
+      </p>
+
+    </div>
+
+    <div class="um-quote" style="margin-top:25px;font-size:14px;">
+      Your UMAMTEK account helps you access service history, live tracking, review system and invoice records.
+    </div>
+
+  </div>
 
 </section>
 
