@@ -2860,3 +2860,68 @@ footer,
     width:auto;
   }
 }
+
+/* FINAL MOBILE NAVBAR FIX */
+
+@media(max-width:768px){
+
+  .navbar{
+    min-height:auto !important;
+    padding:10px 5% !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    flex-wrap:wrap !important;
+  }
+
+  .logo-area{
+    width:120px !important;
+    min-width:120px !important;
+    max-width:120px !important;
+    height:65px !important;
+  }
+
+  .site-logo{
+    width:115px !important;
+    height:62px !important;
+  }
+
+  .menu-btn{
+    display:block !important;
+  }
+
+  .nav-links{
+    width:100% !important;
+    display:none !important;
+    flex-direction:column !important;
+    align-items:flex-start !important;
+    gap:12px !important;
+    background:#fff !important;
+    padding:18px !important;
+    border:1px solid rgba(245,179,1,0.35) !important;
+    border-radius:18px !important;
+    margin-top:12px !important;
+    box-shadow:0 15px 35px rgba(0,0,0,0.08) !important;
+  }
+
+  .nav-links.active{
+    display:flex !important;
+  }
+
+  .nav-links a{
+    color:#111 !important;
+    font-size:16px !important;
+  }
+
+  .nav-actions{
+    gap:8px !important;
+  }
+
+  .hero h1{
+    font-size:34px !important;
+  }
+
+  .hero p{
+    font-size:16px !important;
+  }
+
+}
