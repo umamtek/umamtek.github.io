@@ -1630,16 +1630,26 @@ window.generateInvoice = async function(bookingDocId){
       <div class="invoice-box">
 
         <div class="header">
-          <div>
-            <h1>UMAMTEK</h1>
-            <p>Your Project Our Priority</p>
-          </div>
-          <div>
-            <strong>Invoice</strong><br>
-            Booking ID: ${data.bookingId || ""}<br>
-            Date: ${new Date().toLocaleDateString("en-GB")}
-          </div>
-        </div>
+
+  <div style="display:flex;align-items:center;gap:15px;">
+    <img src="logo.png" style="width:110px;height:70px;object-fit:contain;">
+    <div>
+      <h1>UMAMTEK</h1>
+      <p>Your Project Our Priority</p>
+      <p style="font-size:13px;margin-top:5px;">
+        Bhagalpur, Bihar | Phone: 9065760751
+      </p>
+    </div>
+  </div>
+
+  <div style="text-align:right;">
+    <strong>Service Invoice</strong><br>
+    Booking ID: ${data.bookingId || ""}<br>
+    Invoice Date: ${new Date().toLocaleDateString("en-GB")}<br>
+    Payment Status: ${data.paymentStatus || "Unpaid"}
+  </div>
+
+</div>
 
         <h3>Customer Details</h3>
         <p><strong>Name:</strong> ${data.name || ""}</p>
@@ -1703,7 +1713,7 @@ window.generateInvoice = async function(bookingDocId){
 
 <p class="total">Total Amount: ₹${data.totalPayable || data.selectedPrice || 200}</p>
         <p style="margin-top:30px;">
-        Note: Final pricing will be updated after UMAMTEK rate card launch.
+        Note: Thank you for choosing UMAMTEK. This invoice includes service charge, offer rate, travel charge and payment status as per booking record.
         </p>
 
         <button class="btn" onclick="window.print()">Print / Download PDF</button>
