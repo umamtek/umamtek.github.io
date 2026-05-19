@@ -37,31 +37,107 @@
 </div>
 </nav>
 
-<section class="section">
-<h1 class="section-title">Customer Support & Complaints</h1>
+<section class="section complaints-page">
 
-<div class="card-grid">
-<div class="card"><h3>Service Issue</h3><p>Report electrical service issues and contractor related problems.</p></div>
-<div class="card"><h3>Delayed Work Reporting</h3><p>Submit complaints regarding delayed projects or incomplete work.</p></div>
-<div class="card"><h3>Support Contact</h3><p>Phone: 9065760751</p><p>Email: shaheumam802@gmail.com</p></div>
-</div>
+  <h1 class="section-title">Customer Support & Complaints</h1>
 
-<div class="card" style="margin-top:40px;">
-<h3>Submit Complaint</h3>
-<form onsubmit="sendComplaintForm(event)">
+  <p class="section-subtitle">
+    UMAMTEK believes that every customer issue should be heard, recorded and handled with responsibility. If you faced any service delay, incomplete work, behaviour issue or payment confusion, please submit your complaint here.
+  </p>
 
-<input type="text" id="complaintName" placeholder="Your Name">
+  <div class="um-quote" style="max-width:950px;margin:0 auto 45px;">
+    “A professional service platform is not only about booking workers — it is also about support, trust and accountability.”
+  </div>
 
-<input type="tel" id="complaintPhone" placeholder="Phone Number">
+  <div class="card-grid">
 
-<textarea id="complaintMessage" placeholder="Describe your complaint"></textarea>
+    <div class="card">
+      <h3>⚠️ Service Issue</h3>
+      <p>
+        Report if the worker did not arrive, work was delayed, service was incomplete or the assigned technician was not suitable for the work.
+      </p>
+    </div>
 
-<button type="submit">
-Submit Complaint
-</button>
+    <div class="card">
+      <h3>🛠️ Work Quality Complaint</h3>
+      <p>
+        Submit complaints related to poor work quality, repeated fault, unfinished repair, wrong installation or any technical service concern.
+      </p>
+    </div>
 
-</form>
-</div>
+    <div class="card">
+      <h3>💰 Payment / Bill Issue</h3>
+      <p>
+        Report billing confusion, payment confirmation issue, extra charge concern, invoice issue or wrong service amount.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>👷 Worker Behaviour</h3>
+      <p>
+        UMAMTEK values respectful service. You may report rude behaviour, unprofessional conduct or any safety concern.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>📞 Support Contact</h3>
+      <p>
+        Phone: <strong>9065760751</strong><br>
+        Email: <strong>owner@umamtek.com</strong><br>
+        Location: <strong>Bhagalpur, Bihar</strong>
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>✅ Resolution Process</h3>
+      <p>
+        After submitting a complaint, UMAMTEK will review the issue and contact you for verification, clarification and possible resolution.
+      </p>
+    </div>
+
+  </div>
+
+  <br><br>
+
+  <div class="card" style="max-width:1100px;margin:auto;">
+
+    <h2>Submit Complaint</h2>
+
+    <p>
+      Please provide correct details so our team can identify your booking or service issue quickly.
+    </p>
+
+    <form onsubmit="submitComplaint(event)" style="margin-top:25px;display:grid;gap:18px;">
+
+      <input type="text" id="complaintName" placeholder="Your Name" required>
+
+      <input type="tel" id="complaintPhone" placeholder="Phone Number" required>
+
+      <input type="text" id="complaintBookingId" placeholder="Booking ID, if available">
+
+      <select id="complaintType" required>
+        <option value="">Select Complaint Type</option>
+        <option>Service Delay</option>
+        <option>Worker Not Arrived</option>
+        <option>Work Quality Issue</option>
+        <option>Incomplete Work</option>
+        <option>Payment / Bill Issue</option>
+        <option>Worker Behaviour Issue</option>
+        <option>Other</option>
+      </select>
+
+      <textarea id="complaintMessage" placeholder="Describe your complaint in detail" required></textarea>
+
+      <button type="submit">Submit Complaint</button>
+
+    </form>
+
+    <p style="margin-top:18px;font-size:14px;color:#555;">
+      Note: Complaint system is currently under development. If online submission does not work, please contact UMAMTEK directly on WhatsApp or phone.
+    </p>
+
+  </div>
+
 </section>
 
 <footer class="premium-footer">
