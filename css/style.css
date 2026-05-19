@@ -2588,3 +2588,275 @@ footer p,
     padding:24px !important;
   }
 }
+
+/* =====================================================
+   UMAMTEK PREMIUM TEXTURED LIGHT THEME
+   White + Yellow + Black Text
+===================================================== */
+
+/* Soft textured background */
+body{
+  background:
+    radial-gradient(circle at 12% 18%, rgba(245,179,1,0.16), transparent 26%),
+    radial-gradient(circle at 88% 12%, rgba(255,207,51,0.20), transparent 25%),
+    radial-gradient(circle at 50% 100%, rgba(245,179,1,0.12), transparent 30%),
+    linear-gradient(135deg,#ffffff 0%,#fffdf6 45%,#fff7d8 100%) !important;
+  color:#111 !important;
+  position:relative;
+}
+
+/* Subtle dot/grid texture */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+  background-image:
+    linear-gradient(rgba(17,17,17,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17,17,17,0.035) 1px, transparent 1px);
+  background-size:38px 38px;
+  mask-image:linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.08));
+}
+
+/* Navbar premium glass white */
+.navbar{
+  background:rgba(255,255,255,0.84) !important;
+  backdrop-filter:blur(18px) !important;
+  -webkit-backdrop-filter:blur(18px) !important;
+  border:1px solid rgba(245,179,1,0.35) !important;
+  border-left:none !important;
+  border-right:none !important;
+  box-shadow:0 14px 42px rgba(0,0,0,0.08) !important;
+}
+
+/* Hero premium textured card feel */
+.hero{
+  background:
+    radial-gradient(circle at 15% 25%, rgba(245,179,1,0.22), transparent 28%),
+    radial-gradient(circle at 82% 25%, rgba(255,207,51,0.28), transparent 30%),
+    linear-gradient(135deg,#fff 0%,#fff8df 48%,#ffffff 100%) !important;
+  position:relative !important;
+  border-bottom:1px solid rgba(245,179,1,0.45) !important;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:28px;
+  border:1.5px solid rgba(245,179,1,0.30);
+  border-radius:34px;
+  background:
+    linear-gradient(135deg,rgba(255,255,255,0.50),rgba(255,255,255,0.08));
+  box-shadow:inset 0 0 45px rgba(245,179,1,0.10);
+  pointer-events:none;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  width:260px;
+  height:260px;
+  right:8%;
+  top:18%;
+  background:rgba(245,179,1,0.20);
+  border-radius:50%;
+  filter:blur(60px);
+  animation:umGlowMove 4s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+
+@keyframes umGlowMove{
+  from{transform:translateY(0) scale(1);}
+  to{transform:translateY(35px) scale(1.08);}
+}
+
+/* Hero text sharper */
+.hero h1,
+.hero-title{
+  color:#111 !important;
+  text-shadow:0 12px 35px rgba(245,179,1,0.14) !important;
+}
+
+.hero p,
+.hero-subtitle{
+  color:#333 !important;
+}
+
+/* Section premium divider */
+.section{
+  background:transparent !important;
+  position:relative;
+}
+
+.section::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:82%;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(245,179,1,0.45),transparent);
+}
+
+/* Premium section titles */
+.section-title{
+  position:relative;
+  display:block;
+  width:max-content;
+  max-width:100%;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  padding-bottom:14px;
+}
+
+.section-title::after{
+  content:"";
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:85px;
+  height:5px;
+  border-radius:20px;
+  background:linear-gradient(90deg,#f5b301,#ffcf33);
+  box-shadow:0 8px 22px rgba(245,179,1,0.28);
+}
+
+/* Premium cards with yellow outline */
+.card{
+  background:
+    linear-gradient(145deg,rgba(255,255,255,0.94),rgba(255,250,230,0.74)) !important;
+  backdrop-filter:blur(14px) !important;
+  -webkit-backdrop-filter:blur(14px) !important;
+  border:1.5px solid rgba(245,179,1,0.38) !important;
+  box-shadow:
+    0 18px 45px rgba(0,0,0,0.075),
+    inset 0 1px 0 rgba(255,255,255,0.85) !important;
+  position:relative;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:5px;
+  background:linear-gradient(90deg,#f5b301,#ffcf33,transparent);
+}
+
+.card:hover{
+  transform:translateY(-7px) !important;
+  border-color:#f5b301 !important;
+  box-shadow:
+    0 26px 70px rgba(245,179,1,0.18),
+    0 16px 42px rgba(0,0,0,0.08) !important;
+}
+
+/* Quote premium */
+.um-quote{
+  background:
+    linear-gradient(135deg,#fff8d6,#ffffff) !important;
+  border:1.5px solid rgba(245,179,1,0.55) !important;
+  border-left:7px solid #f5b301 !important;
+  box-shadow:0 16px 42px rgba(245,179,1,0.14) !important;
+  position:relative;
+}
+
+.um-quote::before{
+  content:"“";
+  position:absolute;
+  top:-18px;
+  left:18px;
+  font-size:68px;
+  color:rgba(245,179,1,0.25);
+  font-weight:900;
+}
+
+/* Inputs premium */
+input,
+textarea,
+select{
+  background:rgba(255,255,255,0.92) !important;
+  border:1.5px solid rgba(245,179,1,0.28) !important;
+  box-shadow:0 8px 22px rgba(0,0,0,0.035) !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:#f5b301 !important;
+  box-shadow:0 0 0 4px rgba(245,179,1,0.16), 0 12px 28px rgba(245,179,1,0.12) !important;
+}
+
+/* Buttons more premium */
+button,
+.primary-btn,
+.profile-btn,
+.notification-btn,
+.dark-btn{
+  background:linear-gradient(135deg,#f5b301 0%,#ffd84d 55%,#ffbf00 100%) !important;
+  color:#111 !important;
+  border:1px solid rgba(17,17,17,0.08) !important;
+  box-shadow:
+    0 12px 28px rgba(245,179,1,0.28),
+    inset 0 1px 0 rgba(255,255,255,0.35) !important;
+}
+
+button:hover,
+.primary-btn:hover{
+  transform:translateY(-3px) scale(1.02) !important;
+}
+
+/* Footer light but premium */
+footer,
+.premium-footer{
+  background:
+    linear-gradient(135deg,#ffffff,#fff8df) !important;
+  border-top:2px solid rgba(245,179,1,0.70) !important;
+  box-shadow:0 -12px 35px rgba(245,179,1,0.08) !important;
+}
+
+/* Login signup card centered premium */
+.auth-card,
+.login-card,
+.signup-card{
+  background:
+    linear-gradient(145deg,#ffffff,#fff8df) !important;
+  border:1.5px solid rgba(245,179,1,0.45) !important;
+  box-shadow:0 25px 75px rgba(245,179,1,0.14), 0 18px 48px rgba(0,0,0,0.08) !important;
+}
+
+/* Bill/assigned box */
+.bill-box,
+.assigned-box,
+[style*="background:#fff8d6"]{
+  background:linear-gradient(135deg,#fff8d6,#ffffff) !important;
+  border:1.5px solid #f5b301 !important;
+  box-shadow:0 14px 38px rgba(245,179,1,0.13) !important;
+}
+
+/* Mobile */
+@media(max-width:768px){
+  body::before{
+    background-size:28px 28px;
+  }
+
+  .hero::before{
+    inset:14px;
+    border-radius:24px;
+  }
+
+  .hero::after{
+    width:170px;
+    height:170px;
+    right:-30px;
+    top:60px;
+  }
+
+  .section-title{
+    width:auto;
+  }
+}
