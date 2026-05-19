@@ -37,35 +37,90 @@
 </div>
 </nav>
 
-<section class="section">
-<h1 class="section-title">Join Our Team</h1>
+<section class="section career-page">
 
-<div class="card-grid">
-<div class="card"><h3>Electricians</h3><p>Hiring experienced electricians for residential and commercial projects.</p></div>
-<div class="card"><h3>Lineman</h3><p>Looking for skilled linemen and maintenance workers.</p></div>
-<div class="card"><h3>Plumbers</h3><p>Professional plumbing workers required for upcoming projects.</p></div>
-<div class="card"><h3>Painters</h3><p>Hiring painters for residential and commercial work.</p></div>
-<div class="card"><h3>Helper Workers</h3><p>General helper workers and assistants required.</p></div>
-</div>
+  <h1 class="section-title">Join UMAMTEK as a Partner Worker</h1>
 
-<div class="card" style="margin-top:40px;">
-<h3>Apply Now</h3>
-<form onsubmit="sendCareerForm(event)">
+  <p class="section-subtitle">
+    UMAMTEK is building a trusted service network for electricians, plumbers, AC technicians, CCTV technicians, carpenters, painters, masons, labour workers and other skilled professionals.
+  </p>
 
-<input type="text" id="careerName" placeholder="Your Name">
+  <div class="um-quote" style="max-width:950px;margin:0 auto 45px;">
+    “Skilled workers are the backbone of every real project. UMAMTEK gives them identity, opportunity and digital growth.”
+  </div>
 
-<input type="tel" id="careerPhone" placeholder="Phone Number">
+  <div class="card-grid">
 
-<input type="text" id="careerSkill" placeholder="Your Skill">
+    <div class="card">
+      <h3>👷 Who Can Join?</h3>
+      <p>
+        Electricians, plumbers, AC technicians, CCTV technicians, carpenters, painters, masons, welders, labour workers, supervisors, engineers and general installers can join UMAMTEK.
+      </p>
+    </div>
 
-<input type="text" id="careerExperience" placeholder="Experience">
+    <div class="card">
+      <h3>💼 Why Join UMAMTEK?</h3>
+      <p>
+        Get digital work opportunities, customer leads, service history, professional identity and better local visibility through UMAMTEK platform.
+      </p>
+    </div>
 
-<button type="submit">
-Submit Application
-</button>
+    <div class="card">
+      <h3>📍 Work Area</h3>
+      <p>
+        UMAMTEK is currently focusing on Bhagalpur and nearby areas. Workers can register according to their skill and available service location.
+      </p>
+    </div>
 
-</form>
-</div>
+  </div>
+
+  <br><br>
+
+  <div class="card" style="max-width:900px;margin:auto;">
+
+    <h2>Apply as Worker / Partner</h2>
+
+    <p>
+      Fill your details below. UMAMTEK team will review and contact you for onboarding.
+    </p>
+
+    <form onsubmit="sendCareerForm(event)" style="margin-top:25px;display:grid;gap:18px;">
+
+      <input type="text" id="careerName" placeholder="Full Name" required>
+
+      <input type="tel" id="careerPhone" placeholder="Mobile Number" required>
+
+      <select id="careerSkill" required>
+        <option value="">Select Your Skill</option>
+        <option>Electrician</option>
+        <option>Plumber</option>
+        <option>AC Technician</option>
+        <option>CCTV Technician</option>
+        <option>Carpenter</option>
+        <option>Painter</option>
+        <option>Mason</option>
+        <option>Labour</option>
+        <option>Welder</option>
+        <option>Foreman</option>
+        <option>Supervisor</option>
+        <option>Engineer</option>
+        <option>ITI / Technician</option>
+        <option>General Installer</option>
+        <option>Other</option>
+      </select>
+
+      <input type="text" id="careerExperience" placeholder="Experience, e.g. 3 years / 5 years" required>
+
+      <input type="text" id="careerArea" placeholder="Working Area / Locality">
+
+      <button type="submit">
+        Apply Now
+      </button>
+
+    </form>
+
+  </div>
+
 </section>
 
 <footer class="premium-footer">
