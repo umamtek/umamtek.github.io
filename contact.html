@@ -37,36 +37,119 @@
 </div>
 </nav>
 
-<section class="section">
-<h1 class="section-title">Contact Us</h1>
+<section class="section contact-page">
 
-<div class="card-grid">
-<div class="card"><h3>Phone</h3><p>9065760751</p></div>
-<div class="card"><h3>Email</h3><p>shaheumam802@gmail.com</p></div>
-<div class="card"><h3>Address</h3><p>G.Lane, Hussainpur, Bhagalpur</p></div>
-</div>
+  <h1 class="section-title">Contact UMAMTEK</h1>
 
-<div class="card" style="margin-top:40px;">
-<h3>Send Enquiry</h3>
-<form onsubmit="sendContactForm(event)">
+  <p class="section-subtitle">
+    Need a worker, service support, business enquiry, partnership discussion or project consultation? Contact UMAMTEK and our team will help you with the right solution.
+  </p>
 
-<input type="text" id="contactName" placeholder="Your Name">
+  <div class="um-quote" style="max-width:950px;margin:0 auto 45px;">
+    “Your work deserves the right worker, clear communication and professional support.”
+  </div>
 
-<input type="tel" id="contactPhone" placeholder="Phone Number">
+  <div class="card-grid">
 
-<textarea id="contactMessage" placeholder="Write your enquiry"></textarea>
+    <div class="card">
+      <h3>📞 Call Us</h3>
+      <p>
+        For quick service booking, urgent support or business enquiry, call UMAMTEK directly.
+      </p>
+      <p><strong>Phone:</strong> 9065760751</p>
 
-<button type="submit">
-Send Enquiry
-</button>
+      <a href="tel:9065760751" class="primary-btn" style="display:inline-block;margin-top:15px;text-decoration:none;">
+        Call Now
+      </a>
+    </div>
 
-</form>
-</div>
+    <div class="card">
+      <h3>💬 WhatsApp</h3>
+      <p>
+        Send your work requirement, location and preferred time on WhatsApp. Our team will review and guide you.
+      </p>
+      <p><strong>WhatsApp:</strong> 9065760751</p>
 
-<div class="card" style="margin-top:40px;">
-<h3>Our Location</h3>
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d455.2284382266858!2d86.97232371804853!3d25.23916200307583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f04a107c6bec4f%3A0xe16fe9ae31d714fb!2sGousia%20Masjid%20Hussainpur!5e1!3m2!1sen!2sin!4v1778188885275!5m2!1sen!2sin" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-</div>
+      <a href="https://wa.me/919065760751" target="_blank" class="primary-btn" style="display:inline-block;margin-top:15px;text-decoration:none;">
+        Message on WhatsApp
+      </a>
+    </div>
+
+    <div class="card">
+      <h3>📧 Email</h3>
+      <p>
+        For business, partnership, support or official communication, you can email us.
+      </p>
+      <p><strong>Email:</strong> owner@umamtek.com</p>
+
+      <a href="mailto:owner@umamtek.com" class="primary-btn" style="display:inline-block;margin-top:15px;text-decoration:none;">
+        Send Email
+      </a>
+    </div>
+
+    <div class="card">
+      <h3>📍 Service Location</h3>
+      <p>
+        UMAMTEK is currently focused on Bhagalpur and nearby areas. Service availability depends on worker availability and customer location.
+      </p>
+      <p><strong>Base:</strong> Bhagalpur, Bihar</p>
+
+      <a href="https://maps.app.goo.gl/8pzbSMm62n2BabZZ9" target="_blank" class="primary-btn" style="display:inline-block;margin-top:15px;text-decoration:none;">
+        Open Location
+      </a>
+    </div>
+
+  </div>
+
+  <br><br>
+
+  <div class="card" style="max-width:1100px;margin:auto;">
+
+    <h2>Send Enquiry</h2>
+
+    <p>
+      Fill the form below and share your requirement. You can also use WhatsApp for faster response.
+    </p>
+
+    <form onsubmit="sendContactForm(event)" style="margin-top:25px;display:grid;gap:18px;">
+
+      <input type="text" id="contactName" placeholder="Your Name" required>
+
+      <input type="tel" id="contactPhone" placeholder="Phone Number" required>
+
+      <select id="contactPurpose" required>
+        <option value="">Select Purpose</option>
+        <option>Book a Service</option>
+        <option>Project Enquiry</option>
+        <option>Business Partnership</option>
+        <option>Worker / Partner Registration</option>
+        <option>Complaint / Support</option>
+        <option>Other</option>
+      </select>
+
+      <textarea id="contactMessage" placeholder="Write your message or work requirement..." required></textarea>
+
+      <button type="submit">Send Enquiry</button>
+
+    </form>
+
+  </div>
+
+  <br><br>
+
+  <div class="card" style="max-width:1100px;margin:auto;text-align:center;">
+
+    <h2>Want to book a worker directly?</h2>
+
+    <p>
+      Visit our booking page, select your worker category, choose your work, add live location and submit your request.
+    </p>
+
+    <a href="booking.html" class="primary-btn" style="display:inline-block;margin-top:18px;text-decoration:none;">
+      Book Service
+    </a>
+
+  </div>
 
 </section>
 
