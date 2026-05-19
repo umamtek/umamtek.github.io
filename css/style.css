@@ -1245,3 +1245,40 @@ border:1px solid rgba(245,179,1,0.25) !important;
   }
 
 }
+
+/* BIG VISIBLE LOGO FINAL FIX */
+
+.navbar{
+  min-height: 120px !important;
+  padding: 12px 8% !important;
+}
+
+.logo-area{
+  display:flex !important;
+  align-items:center !important;
+  gap:14px !important;
+  overflow:visible !important;
+}
+
+.site-logo{
+  width:140px !important;
+  height:95px !important;
+  object-fit:contain !important;
+  transform:scale(1.35) !important;
+  transform-origin:left center !important;
+  display:block !important;
+}
+
+/* Mobile */
+@media (max-width:768px){
+  .navbar{
+    min-height:90px !important;
+    padding:10px 5% !important;
+  }
+
+  .site-logo{
+    width:105px !important;
+    height:75px !important;
+    transform:scale(1.25) !important;
+  }
+}
