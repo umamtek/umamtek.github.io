@@ -15,7 +15,10 @@
 <body>
 
 <script>
-if(localStorage.getItem("umamtekAdminLoggedIn") !== "true"){
+const isAdminLoggedIn = localStorage.getItem("umamtekAdminLoggedIn") === "true";
+const isStaffLoggedIn = localStorage.getItem("umamtekStaffLoggedIn") === "true";
+
+if(!isAdminLoggedIn && !isStaffLoggedIn){
   window.location.href = "admin-login.html";
 }
 </script>
