@@ -15,7 +15,7 @@
 
 <body>
 
-  <script>
+<script>
 if(localStorage.getItem("umamtekAdminLoggedIn") !== "true"){
   window.location.href = "admin-login.html";
 }
@@ -44,10 +44,18 @@ if(adminPhone !== "9065760751"){
 <li><a href="index.html">Home</a></li>
 <li><a href="booking.html">Bookings</a></li>
 <li><a href="services.html">Services</a></li>
+<li><a href="staff-registry.html">Staff Registry</a></li>
+<li><a href="product-registry.html">Product Registry</a></li>
 </ul>
 
 <div class="nav-actions">
+
+<a href="product-registry.html" class="primary-btn" style="text-decoration:none;padding:12px 18px;">
+Products
+</a>
+
 <button onclick="adminLogout()">Logout</button>
+
 </div>
 
 <script>
@@ -67,6 +75,26 @@ function adminLogout(){
 Admin Dashboard
 </h1>
 
+<p class="section-subtitle">
+Manage customer bookings, technician assignment, products and billing from one place.
+</p>
+
+<div style="text-align:center;margin:25px 0 40px;display:flex;gap:15px;justify-content:center;flex-wrap:wrap;">
+
+<a href="product-registry.html" class="primary-btn" style="display:inline-block;text-decoration:none;padding:14px 26px;">
+Product Registry
+</a>
+
+<a href="staff-registry.html" class="primary-btn" style="display:inline-block;text-decoration:none;padding:14px 26px;">
+Staff Registry
+</a>
+
+<a href="official.html" class="primary-btn" style="display:inline-block;text-decoration:none;padding:14px 26px;">
+Official Panel
+</a>
+
+</div>
+
 <div id="bookingContainer" class="card-grid">
 
 </div>
@@ -80,14 +108,11 @@ Admin Dashboard
 
 <script src="js/script.js"></script>
 <script type="module" src="js/firebase.js"></script>
+
 <script>
-
 window.onload = function(){
-
   loadBookings();
-
 }
-
 </script>
   
 </body>
