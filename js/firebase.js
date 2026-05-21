@@ -1893,3 +1893,99 @@ window.markPaymentReceivedAndComplete = async function(bookingDocId){
   }
 
 };
+
+window.addProductItem = async function(event){
+
+  event.preventDefault();
+
+  const name = document.getElementById("productName").value.trim();
+  const category = document.getElementById("productCategory").value;
+  const unit = document.getElementById("productUnit").value.trim();
+  const price = Number(document.getElementById("productPrice").value);
+  const stock = Number(document.getElementById("productStock").value || 0);
+  const description = document.getElementById("productDescription").value.trim();
+  const status = document.getElementById("productStatus").value;
+
+  if(!name || !category || !unit || !price){
+    alert("Please fill all required product details");
+    return;
+  }
+
+  try{
+
+    const productId =
+    name.toLowerCase().replace(/[^a-z0-9]+/g, "-") + "-" + Date.now();
+
+    await setDoc(doc(db, "products", productId), {
+      productId: productId,
+      name: name,
+      category: category,
+      unit: unit,
+      price: price,
+      stock: stock,
+      description: description,
+      status: status,
+      createdAt: new Date().toISOString()
+    });
+
+    alert("Product added successfully");
+
+    window.location.reload();
+
+  }catch(error){
+    alert(error.message);
+  }
+
+};
+
+
+window.loadProductRegistry = async function(){
+
+  const container = document.getElementById("productRegistryContainer");
+
+  if(!container){
+    return;
+  }
+
+  container.innerHTML = `<div class="card">Loading products...</div>`;
+
+  try{
+
+    const querySnapshot = await getDocs(collection(db, "products"));
+
+    container.innerHTML = "";
+
+    if(querySnapshot.empty){
+      container.innerHTML = `<div class="card">No products added yet</div>`;
+      return;
+    }
+
+    querySnapshot.forEach((docSnap) => {
+
+      const data = docSnap.data();
+
+      container.innerHTML += `
+      <div class="card">
+
+        <h3>${data.name || ""}</h3>
+
+        <p><strong>Category:</strong> ${data.category || ""}</p>
+        <p><strong>Unit:</strong> ${data.unit || ""}</p>
+        <p><strong>Price:</strong> ₹${data.price || 0}</p>
+        <p><strong>Stock:</strong> ${data.stock || 0}</p>
+        <p><strong>Status:</strong> ${data.status || ""}</p>
+
+        ${data.description ? `
+        <p><strong>Details:</strong> ${data.description}</p>
+        ` : ""}
+
+      </div>
+      `;
+
+    });
+
+  }catch(error){
+    container.innerHTML = `<div class="card">${error.message}</div>`;
+  }
+
+};
