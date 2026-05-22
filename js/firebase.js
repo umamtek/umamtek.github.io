@@ -34,6 +34,12 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+console.log("UMAMTEK firebase.js v503 loaded successfully");
+
+/* =====================================================
+   HELPERS
+===================================================== */
+
 function cleanPhone(phone){
   return String(phone || "").replace(/\D/g, "");
 }
@@ -71,7 +77,79 @@ function cleanPhoneForWhatsApp(phone){
   return clean;
 }
 
+function safeText(value){
+  return String(value || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+}
+
+function calculateDistanceKmFallback(lat1, lng1, lat2, lng2){
+  const R = 6371;
+  const dLat = (Number(lat2) - Number(lat1)) * Math.PI / 180;
+  const dLng = (Number(lng2) - Number(lng1)) * Math.PI / 180;
+
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(Number(lat1) * Math.PI / 180) *
+    Math.cos(Number(lat2) * Math.PI / 180) *
+    Math.sin(dLng / 2) *
+    Math.sin(dLng / 2);
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+}
+
+function calculateTechnicianDistanceETAFallback(customerLat, customerLng, technicianLat, technicianLng){
+  const distance = calculateDistanceKmFallback(
+    customerLat,
+    customerLng,
+    technicianLat,
+    technicianLng
+  );
+
+  return {
+    distanceKm: distance.toFixed(2),
+    etaMinutes: Math.ceil((distance / 20) * 60)
+  };
+}
+
+function getTechnicianETAInfo(data){
+  if(
+    window.calculateTechnicianDistanceETA &&
+    data.latitude &&
+    data.longitude &&
+    data.technicianLatitude &&
+    data.technicianLongitude
+  ){
+    return window.calculateTechnicianDistanceETA(
+      data.latitude,
+      data.longitude,
+      data.technicianLatitude,
+      data.technicianLongitude
+    );
+  }
+
+  if(
+    data.latitude &&
+    data.longitude &&
+    data.technicianLatitude &&
+    data.technicianLongitude
+  ){
+    return calculateTechnicianDistanceETAFallback(
+      data.latitude,
+      data.longitude,
+      data.technicianLatitude,
+      data.technicianLongitude
+    );
+  }
+
+  return null;
+}
+
 function getBillBox(data){
+
+  const products = Array.isArray(data.productsUsed) ? data.productsUsed : [];
 
   return `
     <div style="
@@ -95,43 +173,36 @@ function getBillBox(data){
 
       <p style="color:#111;"><strong>Travel Charge:</strong> ₹${data.travelCharge || 0}</p>
 
-${data.productsUsed && data.productsUsed.length > 0 ? `
+      ${
+        products.length > 0
+        ? `
+          <div style="margin-top:12px;">
+            <p style="color:#111;font-weight:900;margin-bottom:6px;">Products Used:</p>
+            ${
+              products.map((item, index) => `
+                <p style="color:#111;margin:5px 0;">
+                  ${index + 1}. ${safeText(item.name)}
+                  — Qty: ${item.qty || 1} ${safeText(item.unit)}
+                  — Rate: ₹${item.rate || 60}
+                  — Total: ₹${item.price || 0}
+                  ${item.hsnSac ? `— HSN/SAC: ${safeText(item.hsnSac)}` : ""}
+                </p>
+              `).join("")
+            }
+          </div>
 
-  <div style="margin-top:12px;">
-    <p style="color:#111;font-weight:900;margin-bottom:6px;">
-    Products Used:
-    </p>
+          <p style="color:#111;">
+          <strong>Product Total:</strong> ₹${data.productTotal || 0}
+          </p>
+        `
+        : `
+          <p style="color:#111;">
+          <strong>Product Total:</strong> ₹0
+          </p>
+        `
+      }
 
-    ${
-      data.productsUsed.map((item, index) => `
-        <p style="color:#111;margin:5px 0;">
-          ${index + 1}. ${item.name || ""} 
-          — Qty: ${item.qty || 1} ${item.unit || ""}
-          — Rate: ₹${item.rate || 60}
-          — Total: ₹${item.price || 0}
-          ${item.hsnSac ? `— HSN/SAC: ${item.hsnSac}` : ""}
-        </p>
-      `).join("")
-    }
-  </div>
-
-  <p style="color:#111;">
-  <strong>Product Total:</strong> ₹${data.productTotal || 0}
-  </p>
-
-` : `
-
-  <p style="color:#111;">
-  <strong>Product Total:</strong> ₹0
-  </p>
-
-`}
-
-      <p style="
-      color:#111;
-      font-size:18px;
-      font-weight:900;
-      ">
+      <p style="color:#111;font-size:18px;font-weight:900;">
       Total Payable: ₹${data.totalPayable || data.selectedPrice || 200}
       </p>
 
@@ -144,7 +215,9 @@ ${data.productsUsed && data.productsUsed.length > 0 ? `
 
 }
 
-/* SIGNUP OTP */
+/* =====================================================
+   SIGNUP OTP
+===================================================== */
 
 window.sendSignupOTPForPasswordAccount = async function(){
 
@@ -214,7 +287,9 @@ window.sendSignupOTPForPasswordAccount = async function(){
 
 };
 
-/* CREATE ACCOUNT */
+/* =====================================================
+   CREATE ACCOUNT
+===================================================== */
 
 window.createPhonePasswordAccount = async function(){
 
@@ -282,7 +357,9 @@ window.createPhonePasswordAccount = async function(){
 
 };
 
-/* LOGIN */
+/* =====================================================
+   LOGIN
+===================================================== */
 
 window.loginWithPhonePassword = async function(){
 
@@ -338,7 +415,9 @@ window.loginWithPhonePassword = async function(){
 
 };
 
-/* FORGOT PASSWORD */
+/* =====================================================
+   FORGOT PASSWORD
+===================================================== */
 
 window.forgotPasswordWithPhone = function(){
 
@@ -362,7 +441,9 @@ Please help me reset my UMAMTEK account password.`;
 
 };
 
-/* LOGOUT */
+/* =====================================================
+   LOGOUT
+===================================================== */
 
 window.logoutUser = async function(){
 
@@ -382,7 +463,9 @@ window.logoutUser = async function(){
 
 };
 
-/* CUSTOMER LIVE LOCATION */
+/* =====================================================
+   CUSTOMER LIVE LOCATION
+===================================================== */
 
 window.getCustomerLocation = function(){
 
@@ -413,8 +496,14 @@ window.getCustomerLocation = function(){
       `https://maps.google.com/?q=${lat},${lng}`;
 
       status.innerHTML = "✅ Live location added successfully";
-      updateBillPreview();
-      updateTravelCharge();
+
+      if(window.updateBillPreview){
+        window.updateBillPreview();
+      }
+
+      if(window.updateTravelCharge){
+        window.updateTravelCharge();
+      }
 
     },
 
@@ -426,7 +515,9 @@ window.getCustomerLocation = function(){
 
 };
 
-/* SUBMIT BOOKING */
+/* =====================================================
+   SUBMIT BOOKING
+===================================================== */
 
 window.submitBooking = async function(event){
 
@@ -441,27 +532,21 @@ window.submitBooking = async function(event){
   }
 
   const mapLink = document.getElementById("bookingMapLink")?.value;
-
   const paymentMode = document.getElementById("paymentMode")?.value;
 
-if(!paymentMode){
-  alert("Please select payment mode: Pay Now or Pay After Work");
-  return;
-}
+  if(!paymentMode){
+    alert("Please select payment mode: Pay Now or Pay After Work");
+    return;
+  }
 
   if(!mapLink){
     alert("Please add your live location");
     return;
   }
 
-  const bookingSnapshot =
-await getDocs(collection(db, "bookings"));
-
-const nextBookingNumber =
-bookingSnapshot.size + 1;
-
-const bookingId =
-"AEA-" + String(nextBookingNumber).padStart(2, "0");
+  const bookingSnapshot = await getDocs(collection(db, "bookings"));
+  const nextBookingNumber = bookingSnapshot.size + 1;
+  const bookingId = "AEA-" + String(nextBookingNumber).padStart(2, "0");
 
   const now = new Date();
 
@@ -482,15 +567,17 @@ const bookingId =
     workerType: document.getElementById("bookingWorker")?.value || "",
     service: document.getElementById("bookingService")?.value || "",
     otherWorkDetails: document.getElementById("otherWorkDetails")?.value.trim() || "",
-realRate: 450,
-offerRate: 200,
-selectedPrice: 200,
+
+    realRate: 450,
+    offerRate: 200,
+    selectedPrice: 200,
     travelCharge: document.getElementById("travelCharge")?.value || "0",
     distanceKm: document.getElementById("distanceKm")?.value || "",
-totalPayable: document.getElementById("totalPayable")?.value || "200",
-paymentMode: document.getElementById("paymentMode")?.value || "Not Selected",
+    totalPayable: document.getElementById("totalPayable")?.value || "200",
+    paymentMode: paymentMode,
     paymentStatus: "Unpaid",
-invoiceStatus: "Not Available",
+    invoiceStatus: "Not Available",
+
     address: document.getElementById("bookingAddress")?.value.trim() || "",
     date: document.getElementById("bookingDate")?.value || "",
     time: document.getElementById("bookingTime")?.value || "",
@@ -518,7 +605,7 @@ invoiceStatus: "Not Available",
     await addDoc(collection(db, "bookings"), bookingData);
 
     alert("Booking request submitted successfully");
-    window.location.reload();
+    window.location.href = "my-bookings.html";
 
   }catch(error){
     alert(error.message);
@@ -526,7 +613,9 @@ invoiceStatus: "Not Available",
 
 };
 
-/* ADMIN LOAD BOOKINGS */
+/* =====================================================
+   ADMIN LOAD BOOKINGS
+===================================================== */
 
 window.loadBookings = async function(){
 
@@ -560,14 +649,20 @@ window.loadBookings = async function(){
 
       <div class="card">
 
-        <h3>${data.name || "No Name"}</h3>
+        <h3>${safeText(data.name) || "No Name"}</h3>
 
         <p><strong>Booking ID:</strong> ${data.bookingId || ""}</p>
         <p><strong>Booked On:</strong> ${data.bookingCreatedDate || ""} ${data.bookingCreatedTime || ""}</p>
         <p><strong>Customer Phone:</strong> ${data.phone || ""}</p>
         <p><strong>Login Phone:</strong> ${data.userPhone || ""}</p>
-        <p><strong>Service:</strong> ${data.service || ""}</p>
-        <p><strong>Address:</strong> ${data.address || ""}</p>
+        <p><strong>Worker:</strong> ${data.workerType || ""}</p>
+        <p><strong>Service:</strong> ${safeText(data.service)}</p>
+
+        ${data.otherWorkDetails ? `
+          <p><strong>Other Work:</strong> ${safeText(data.otherWorkDetails)}</p>
+        ` : ""}
+
+        <p><strong>Address:</strong> ${safeText(data.address)}</p>
         <p><strong>PIN Code:</strong> ${data.pinCode || ""}</p>
 
         <p>
@@ -579,7 +674,8 @@ window.loadBookings = async function(){
 
         <p><strong>Expected Date:</strong> ${data.date || ""}</p>
         <p><strong>Expected Time:</strong> ${data.time || ""}</p>
-        <p><strong>Details:</strong> ${data.details || ""}</p>
+        <p><strong>Details:</strong> ${safeText(data.details)}</p>
+
         ${getBillBox(data)}
 
         <p>
@@ -596,12 +692,19 @@ window.loadBookings = async function(){
           </span>
         </p>
 
+        ${data.assignedTechnicianName ? `
+          <p><strong>Technician:</strong> ${safeText(data.assignedTechnicianName)}</p>
+          <p><strong>Technician Phone:</strong> ${data.assignedTechnicianPhone || ""}</p>
+        ` : `
+          <p><strong>Technician:</strong> Not assigned</p>
+        `}
+
         ${data.customerAction ? `
-          <p><strong>Customer Action:</strong> ${data.customerAction}</p>
+          <p><strong>Customer Action:</strong> ${safeText(data.customerAction)}</p>
         ` : ""}
 
         ${data.customerChangeRequest ? `
-          <p><strong>Change Request:</strong> ${data.customerChangeRequest}</p>
+          <p><strong>Change Request:</strong> ${safeText(data.customerChangeRequest)}</p>
         ` : ""}
 
         ${data.customerActionAt ? `
@@ -636,28 +739,25 @@ window.loadBookings = async function(){
             Call
           </a>
 
-          <button
-onclick="generateInvoice('${bookingDocId}')"
-style="padding:10px 16px;font-size:14px;">
-Generate Invoice
-</button>
+          <button onclick="generateInvoice('${bookingDocId}')" style="padding:10px 16px;font-size:14px;">
+            Generate Invoice
+          </button>
 
-          <button
-            onclick="updateTechnicianLocation('${bookingDocId}')"
-            style="padding:10px 16px;font-size:14px;">
+          <button onclick="updateTechnicianLocation('${bookingDocId}')" style="padding:10px 16px;font-size:14px;">
             Update My Location
           </button>
-          <button
-onclick="assignTechnician('${bookingDocId}')"
-style="padding:10px 16px;font-size:14px;">
-Assign Technician
-</button>
 
-<button
-onclick="setTechnicianETA('${bookingDocId}')"
-style="padding:10px 16px;font-size:14px;">
-Set ETA
-</button>
+          <button onclick="assignTechnician('${bookingDocId}')" style="padding:10px 16px;font-size:14px;">
+            Assign Technician
+          </button>
+
+          <button onclick="setTechnicianETA('${bookingDocId}')" style="padding:10px 16px;font-size:14px;">
+            Set ETA
+          </button>
+
+          <button onclick="searchAndAddProductToBooking('${bookingDocId}')" style="padding:10px 16px;font-size:14px;">
+            Add Product
+          </button>
 
           <select
             onchange="updateBookingStatus('${bookingDocId}', this.value)"
@@ -669,8 +769,10 @@ Set ETA
               background:#fff8d6;">
 
             <option value="Pending" ${data.status === "Pending" ? "selected" : ""}>Pending</option>
+            <option value="Verified" ${data.status === "Verified" ? "selected" : ""}>Verified</option>
             <option value="Accepted" ${data.status === "Accepted" ? "selected" : ""}>Accepted</option>
             <option value="On The Way" ${data.status === "On The Way" ? "selected" : ""}>On The Way</option>
+            <option value="Work Started" ${data.status === "Work Started" ? "selected" : ""}>Work Started</option>
             <option value="Completed" ${data.status === "Completed" ? "selected" : ""}>Completed</option>
             <option value="Cancelled" ${data.status === "Cancelled" ? "selected" : ""}>Cancelled</option>
 
@@ -685,12 +787,15 @@ Set ETA
     });
 
   }catch(error){
+    console.error(error);
     bookingContainer.innerHTML = `<p>${error.message}</p>`;
   }
 
 };
 
-/* CUSTOMER MY BOOKINGS */
+/* =====================================================
+   CUSTOMER MY BOOKINGS
+===================================================== */
 
 window.loadMyBookings = async function(){
 
@@ -738,12 +843,12 @@ window.loadMyBookings = async function(){
       }
 
       customerNotifications.push({
-  bookingId: data.bookingId || "Booking",
-  status: data.status || "Pending",
-  technician: data.assignedTechnicianName || "",
-  eta: data.technicianETA || "",
-  paymentStatus: data.paymentStatus || "Unpaid"
-});
+        bookingId: data.bookingId || "Booking",
+        status: data.status || "Pending",
+        technician: data.assignedTechnicianName || "",
+        eta: data.technicianETA || "",
+        paymentStatus: data.paymentStatus || "Unpaid"
+      });
 
       const canEdit =
       data.editableUntil && new Date(data.editableUntil) > new Date();
@@ -758,73 +863,55 @@ window.loadMyBookings = async function(){
         color:#111;
         ">
           <h3 style="margin-bottom:8px;color:#111;">Assigned Technician</h3>
-          <p style="color:#111;"><strong>Name:</strong> ${data.assignedTechnicianName}</p>
+          <p style="color:#111;"><strong>Name:</strong> ${safeText(data.assignedTechnicianName)}</p>
           <p style="color:#111;"><strong>Phone:</strong> ${data.assignedTechnicianPhone || ""}</p>
+          <p style="color:#111;"><strong>Skill:</strong> ${safeText(data.assignedTechnicianSkill)}</p>
+          <p style="color:#111;"><strong>Area:</strong> ${safeText(data.assignedTechnicianArea)}</p>
         </div>
       ` : `
         <p style="margin-top:15px;font-weight:700;">Technician not assigned yet</p>
       `;
-      let liveDistanceBox = "";
 
-if(
-  data.latitude &&
-  data.longitude &&
-  data.technicianLatitude &&
-  data.technicianLongitude
-){
+      const liveInfo = getTechnicianETAInfo(data);
 
-  const liveInfo =
-  calculateTechnicianDistanceETA(
-    data.latitude,
-    data.longitude,
-    data.technicianLatitude,
-    data.technicianLongitude
-  );
+      const liveDistanceBox = liveInfo ? `
+        <div style="
+        margin-top:15px;
+        padding:16px;
+        border-radius:16px;
+        background:#111;
+        color:#fff;
+        border:2px solid #f5b301;
+        box-shadow:0 15px 35px rgba(0,0,0,0.25);
+        ">
 
-  liveDistanceBox = `
-    <div style="
-    margin-top:15px;
-    padding:16px;
-    border-radius:16px;
-    background:#111;
-    color:#fff;
-    border:2px solid #f5b301;
-    box-shadow:0 15px 35px rgba(0,0,0,0.25);
-    ">
+          <h3 style="color:#f5b301;margin-bottom:10px;">
+          🚗 Technician Live Tracking
+          </h3>
 
-      <h3 style="color:#f5b301;margin-bottom:10px;">
-      🚗 Technician Live Tracking
-      </h3>
+          <p style="color:#fff;">
+          Technician is approx <strong>${liveInfo.distanceKm} km</strong> away from your location.
+          </p>
 
-      <p style="color:#fff;">
-      Technician is approx <strong>${liveInfo.distanceKm} km</strong> away from your location.
-      </p>
+          <p style="color:#fff;">
+          Estimated Arrival: <strong>${liveInfo.etaMinutes} mins</strong>
+          </p>
 
-      <p style="color:#fff;">
-      Estimated Arrival: <strong>${liveInfo.etaMinutes} mins</strong>
-      </p>
+          <a
+          href="https://www.google.com/maps/dir/${data.technicianLatitude},${data.technicianLongitude}/${data.latitude},${data.longitude}"
+          target="_blank"
+          class="primary-btn"
+          style="display:inline-block;margin-top:12px;text-decoration:none;">
+          Open Live Route Map 🗺️
+          </a>
 
-      <a
-href="https://www.google.com/maps/dir/${data.technicianLatitude},${data.technicianLongitude}/${data.latitude},${data.longitude}"
-target="_blank"
-class="primary-btn"
-style="
-display:inline-block;
-margin-top:12px;
-text-decoration:none;
-">
-Open Live Route Map 🗺️
-</a>
+          <p style="color:#ccc;font-size:13px;">
+          ETA is estimated based on live location. Road traffic ETA will be added later.
+          </p>
 
-      <p style="color:#ccc;font-size:13px;">
-      ETA is estimated based on live location. Road traffic ETA will be added later.
-      </p>
+        </div>
+      ` : "";
 
-    </div>
-  `;
-
-}
-      
       const etaBox = data.technicianETA ? `
         <div style="
         margin-top:15px;
@@ -859,15 +946,15 @@ Open Live Route Map 🗺️
       ` : "";
 
       const invoiceButton =
-(data.status === "Completed" && data.paymentStatus === "Paid") ? `
-  <button onclick="generateInvoice('${bookingDocId}')" style="margin-top:15px;">
-  Download Invoice
-  </button>
-` : `
-  <p style="margin-top:15px;font-weight:700;">
-  Invoice will be available after service completion and payment confirmation.
-  </p>
-`;
+      (data.status === "Completed" && data.paymentStatus === "Paid") ? `
+        <button onclick="generateInvoice('${bookingDocId}')" style="margin-top:15px;">
+        Download Invoice
+        </button>
+      ` : `
+        <p style="margin-top:15px;font-weight:700;">
+        Invoice will be available after service completion and payment confirmation.
+        </p>
+      `;
 
       const card = `
         <div class="card">
@@ -875,11 +962,18 @@ Open Live Route Map 🗺️
           <h2 style="margin-bottom:15px;">${data.bookingId || "Booking"}</h2>
 
           <p><strong>Booked On:</strong> ${data.bookingCreatedDate || ""} ${data.bookingCreatedTime || ""}</p>
-          <p><strong>Service:</strong> ${data.service || ""}</p>
-          <p><strong>Address:</strong> ${data.address || ""}</p>
+          <p><strong>Worker:</strong> ${data.workerType || ""}</p>
+          <p><strong>Service:</strong> ${safeText(data.service)}</p>
+
+          ${data.otherWorkDetails ? `
+            <p><strong>Other Work:</strong> ${safeText(data.otherWorkDetails)}</p>
+          ` : ""}
+
+          <p><strong>Address:</strong> ${safeText(data.address)}</p>
           <p><strong>PIN Code:</strong> ${data.pinCode || ""}</p>
           <p><strong>Expected Visit:</strong> ${data.date || ""} ${data.time || ""}</p>
-          <p><strong>Details:</strong> ${data.details || ""}</p>
+          <p><strong>Details:</strong> ${safeText(data.details)}</p>
+
           ${getBillBox(data)}
 
           <div class="timeline">
@@ -897,9 +991,9 @@ Open Live Route Map 🗺️
             </span>
           </p>
 
-${technicianBox}
-${liveDistanceBox}
-${etaBox}
+          ${technicianBox}
+          ${liveDistanceBox}
+          ${etaBox}
 
           <a href="${data.mapLink || "#"}" target="_blank" class="primary-btn" style="display:inline-block;margin-top:15px;text-decoration:none;">
           Open Live Location
@@ -943,25 +1037,26 @@ ${etaBox}
       cancelledBox.innerHTML = `<div class="card">No cancelled bookings</div>`;
     }
 
-localStorage.setItem(
-  "umamtekNotifications",
-  JSON.stringify(customerNotifications)
-);
+    localStorage.setItem(
+      "umamtekNotifications",
+      JSON.stringify(customerNotifications)
+    );
 
-localStorage.setItem(
-  "umamtekNotificationCount",
-  customerNotifications.length
-);
+    localStorage.setItem(
+      "umamtekNotificationCount",
+      customerNotifications.length
+    );
 
-const notificationCount =
-document.getElementById("notificationCount");
+    const notificationCount =
+    document.getElementById("notificationCount");
 
-if(notificationCount){
-  notificationCount.innerText = customerNotifications.length;
-}
-    
+    if(notificationCount){
+      notificationCount.innerText = customerNotifications.length;
+    }
+
   }catch(error){
 
+    console.error(error);
     activeBox.innerHTML = `<div class="card">${error.message}</div>`;
     completedBox.innerHTML = "";
     cancelledBox.innerHTML = "";
@@ -969,6 +1064,10 @@ if(notificationCount){
   }
 
 };
+
+/* =====================================================
+   STATUS / LOCATION / CUSTOMER ACTIONS
+===================================================== */
 
 window.updateBookingStatus = async function(bookingDocId, newStatus){
 
@@ -1008,6 +1107,7 @@ window.updateTechnicianLocation = async function(bookingDocId){
       });
 
       alert("Technician live location updated");
+      window.location.reload();
 
     }catch(error){
       alert(error.message);
@@ -1083,6 +1183,10 @@ window.updateCustomerAddress = async function(bookingDocId){
 
 };
 
+/* =====================================================
+   PROFILE PAGE
+===================================================== */
+
 window.loadProfilePage = async function(){
 
   const profileContainer = document.getElementById("profileContainer");
@@ -1109,7 +1213,7 @@ window.loadProfilePage = async function(){
     });
 
     profileContainer.innerHTML = `
-      <h2>${userName || "User"}</h2>
+      <h2>${safeText(userName) || "User"}</h2>
       <p><strong>Mobile:</strong> ${userPhone}</p>
       <p><strong>Total Bookings:</strong> ${totalBookings}</p>
       <button onclick="logoutUser()" class="primary-btn" style="margin-top:25px;">Logout</button>
@@ -1121,17 +1225,9 @@ window.loadProfilePage = async function(){
 
 };
 
-setTimeout(function(){
-
-  if(document.getElementById("activeBookingContainer")){
-    window.loadMyBookings();
-  }
-
-  if(document.getElementById("profileContainer")){
-    window.loadProfilePage();
-  }
-
-}, 1200);
+/* =====================================================
+   ASSIGN TECHNICIAN
+===================================================== */
 
 window.assignTechnician = async function(bookingDocId){
 
@@ -1155,20 +1251,17 @@ window.assignTechnician = async function(bookingDocId){
 
       const staff = docSnap.data();
 
-      if(staff.status === "Active" || staff.status === "Busy" || staff.status === "Offline"){
+      staffList.push(staff);
 
-        staffList.push(staff);
+      message +=
+      index + ". " +
+      (staff.name || "") + " - " +
+      (staff.skill || "") + " - " +
+      (staff.area || "") + " - " +
+      (staff.status || "") + " - " +
+      (staff.phone || "") + "\n";
 
-        message +=
-        index + ". " +
-        staff.name + " - " +
-        staff.skill + " - " +
-        staff.area + " - " +
-        staff.phone + "\n";
-
-        index++;
-
-      }
+      index++;
 
     });
 
@@ -1193,16 +1286,16 @@ window.assignTechnician = async function(bookingDocId){
     await updateDoc(bookingRef, {
 
       assignedTechnicianName:
-      selectedStaff.name,
+      selectedStaff.name || "",
 
       assignedTechnicianPhone:
-      selectedStaff.phone,
+      selectedStaff.phone || "",
 
       assignedTechnicianSkill:
-      selectedStaff.skill,
+      selectedStaff.skill || "",
 
       assignedTechnicianArea:
-      selectedStaff.area,
+      selectedStaff.area || "",
 
       assignedAt:
       new Date().toISOString(),
@@ -1223,6 +1316,7 @@ window.assignTechnician = async function(bookingDocId){
   }
 
 };
+
 window.setTechnicianETA = async function(bookingDocId){
 
   const etaMinutes =
@@ -1259,6 +1353,10 @@ window.setTechnicianETA = async function(bookingDocId){
 
 };
 
+/* =====================================================
+   STAFF PANEL
+===================================================== */
+
 window.loadStaffBookings = async function(){
 
   const activeBox = document.getElementById("staffBookingContainer");
@@ -1280,20 +1378,23 @@ window.loadStaffBookings = async function(){
     let active = 0;
     let completed = 0;
 
+    const staffPhone = cleanPhone(localStorage.getItem("umamtekStaffPhone"));
+
     querySnapshot.forEach((docSnap) => {
 
       const bookingDocId = docSnap.id;
       const data = docSnap.data();
 
-      const staffPhone = localStorage.getItem("umamtekStaffPhone");
+      const assignedPhone = cleanPhone(data.assignedTechnicianPhone);
 
-if(
-  data.assignedTechnicianPhone &&
-  data.assignedTechnicianPhone.replace(/\D/g, "") === staffPhone
-){
+      if(assignedPhone && assignedPhone === staffPhone){
+
         total++;
 
-        const isDone = data.status === "Completed" || data.status === "Cancelled";
+        const isDone =
+        data.status === "Completed" ||
+        data.status === "Cancelled" ||
+        data.status === "Rejected by Technician";
 
         if(isDone){
           completed++;
@@ -1314,16 +1415,23 @@ if(
           <p><strong>ETA:</strong> ${data.technicianETA} mins</p>
           ` : ""}
 
-          <p><strong>Customer:</strong> ${data.name || ""}</p>
+          <p><strong>Customer:</strong> ${safeText(data.name)}</p>
           <p><strong>Phone:</strong> ${data.phone || ""}</p>
-          <p><strong>Service:</strong> ${data.service || ""}</p>
-          <p><strong>Address:</strong> ${data.address || ""}</p>
+          <p><strong>Worker:</strong> ${data.workerType || ""}</p>
+          <p><strong>Service:</strong> ${safeText(data.service)}</p>
+
+          ${data.otherWorkDetails ? `
+            <p><strong>Other Work:</strong> ${safeText(data.otherWorkDetails)}</p>
+          ` : ""}
+
+          <p><strong>Address:</strong> ${safeText(data.address)}</p>
           <p><strong>PIN:</strong> ${data.pinCode || ""}</p>
           <p><strong>Visit:</strong> ${data.date || ""} ${data.time || ""}</p>
-          <p><strong>Details:</strong> ${data.details || ""}</p>
+          <p><strong>Details:</strong> ${safeText(data.details)}</p>
+
           ${getBillBox(data)}
 
-          <div class="action-row">
+          <div class="action-row" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:15px;">
 
             <a href="${data.mapLink || "#"}" target="_blank" class="primary-btn">
             Navigate
@@ -1357,13 +1465,13 @@ if(
             Start Work
             </button>
 
-<button onclick="searchAndAddProductToBooking('${bookingDocId}')">
-Add Product
-</button>
+            <button onclick="searchAndAddProductToBooking('${bookingDocId}')">
+            Add Product
+            </button>
 
             <button onclick="markPaymentReceivedAndComplete('${bookingDocId}')">
-Payment Received & Work Done
-</button>
+            Payment Received & Work Done
+            </button>
 
           </div>
 
@@ -1380,9 +1488,13 @@ Payment Received & Work Done
 
     });
 
-    document.getElementById("totalJobs").innerText = total;
-    document.getElementById("activeJobs").innerText = active;
-    document.getElementById("completedJobs").innerText = completed;
+    const totalJobs = document.getElementById("totalJobs");
+    const activeJobs = document.getElementById("activeJobs");
+    const completedJobs = document.getElementById("completedJobs");
+
+    if(totalJobs) totalJobs.innerText = total;
+    if(activeJobs) activeJobs.innerText = active;
+    if(completedJobs) completedJobs.innerText = completed;
 
     if(active === 0){
       activeBox.innerHTML = `<div class="card">No active jobs</div>`;
@@ -1394,12 +1506,17 @@ Payment Received & Work Done
 
   }catch(error){
 
+    console.error(error);
     activeBox.innerHTML = `<div class="card">${error.message}</div>`;
     historyBox.innerHTML = `<div class="card">${error.message}</div>`;
 
   }
 
 };
+
+/* =====================================================
+   OFFICIAL PANEL
+===================================================== */
 
 window.loadOfficialPanel = async function(){
 
@@ -1436,6 +1553,7 @@ window.loadOfficialPanel = async function(){
 
       if(
         status === "Accepted" ||
+        status === "Verified" ||
         status === "On The Way" ||
         status === "Work Started"
       ){
@@ -1468,18 +1586,25 @@ window.loadOfficialPanel = async function(){
         </span>
         ` : ""}
 
-        <p><strong>Customer:</strong> ${data.name || ""}</p>
+        <p><strong>Customer:</strong> ${safeText(data.name)}</p>
         <p><strong>Phone:</strong> ${data.phone || ""}</p>
         <p><strong>Login Phone:</strong> ${data.userPhone || ""}</p>
-        <p><strong>Service:</strong> ${data.service || ""}</p>
-        <p><strong>Address:</strong> ${data.address || ""}</p>
+        <p><strong>Worker:</strong> ${data.workerType || ""}</p>
+        <p><strong>Service:</strong> ${safeText(data.service)}</p>
+
+        ${data.otherWorkDetails ? `
+          <p><strong>Other Work:</strong> ${safeText(data.otherWorkDetails)}</p>
+        ` : ""}
+
+        <p><strong>Address:</strong> ${safeText(data.address)}</p>
         <p><strong>PIN:</strong> ${data.pinCode || ""}</p>
         <p><strong>Expected Visit:</strong> ${data.date || ""} ${data.time || ""}</p>
-        <p><strong>Details:</strong> ${data.details || ""}</p>
+        <p><strong>Details:</strong> ${safeText(data.details)}</p>
+
         ${getBillBox(data)}
 
         ${data.assignedTechnicianName ? `
-        <p><strong>Technician:</strong> ${data.assignedTechnicianName}</p>
+        <p><strong>Technician:</strong> ${safeText(data.assignedTechnicianName)}</p>
         <p><strong>Technician Phone:</strong> ${data.assignedTechnicianPhone || ""}</p>
         ` : `
         <p><strong>Technician:</strong> Not assigned</p>
@@ -1490,14 +1615,14 @@ window.loadOfficialPanel = async function(){
         ` : ""}
 
         ${data.customerAction ? `
-        <p><strong>Customer Action:</strong> ${data.customerAction}</p>
+        <p><strong>Customer Action:</strong> ${safeText(data.customerAction)}</p>
         ` : ""}
 
         ${data.customerChangeRequest ? `
-        <p><strong>Change Request:</strong> ${data.customerChangeRequest}</p>
+        <p><strong>Change Request:</strong> ${safeText(data.customerChangeRequest)}</p>
         ` : ""}
 
-        <div class="official-actions">
+        <div class="official-actions" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:15px;">
 
           <a href="tel:${data.phone || ""}" class="primary-btn">
           Call
@@ -1521,6 +1646,10 @@ window.loadOfficialPanel = async function(){
 
           <button onclick="setTechnicianETA('${bookingDocId}')">
           ETA
+          </button>
+
+          <button onclick="searchAndAddProductToBooking('${bookingDocId}')">
+          Add Product
           </button>
 
           <button onclick="markPriorityBooking('${bookingDocId}')">
@@ -1549,10 +1678,15 @@ window.loadOfficialPanel = async function(){
 
     });
 
-    document.getElementById("officialTotal").innerText = total;
-    document.getElementById("officialPending").innerText = pending;
-    document.getElementById("officialActive").innerText = active;
-    document.getElementById("officialCompleted").innerText = completed;
+    const officialTotal = document.getElementById("officialTotal");
+    const officialPending = document.getElementById("officialPending");
+    const officialActive = document.getElementById("officialActive");
+    const officialCompleted = document.getElementById("officialCompleted");
+
+    if(officialTotal) officialTotal.innerText = total;
+    if(officialPending) officialPending.innerText = pending;
+    if(officialActive) officialActive.innerText = active;
+    if(officialCompleted) officialCompleted.innerText = completed;
 
     if(container.innerHTML.trim() === ""){
       container.innerHTML = `<div class="card">No active bookings</div>`;
@@ -1564,6 +1698,7 @@ window.loadOfficialPanel = async function(){
 
   }catch(error){
 
+    console.error(error);
     container.innerHTML = `<div class="card">${error.message}</div>`;
     history.innerHTML = `<div class="card">${error.message}</div>`;
 
@@ -1591,6 +1726,10 @@ window.markPriorityBooking = async function(bookingDocId){
 
 };
 
+/* =====================================================
+   INVOICE
+===================================================== */
+
 window.generateInvoice = async function(bookingDocId){
 
   try{
@@ -1604,6 +1743,7 @@ window.generateInvoice = async function(bookingDocId){
     }
 
     const data = bookingSnap.data();
+    const products = Array.isArray(data.productsUsed) ? data.productsUsed : [];
 
     const invoiceWindow = window.open("", "_blank");
 
@@ -1618,7 +1758,7 @@ window.generateInvoice = async function(bookingDocId){
             color:#111;
           }
           .invoice-box{
-            max-width:800px;
+            max-width:850px;
             margin:auto;
             border:2px solid #111;
             padding:30px;
@@ -1629,6 +1769,7 @@ window.generateInvoice = async function(bookingDocId){
             border-bottom:2px solid #f5b301;
             padding-bottom:15px;
             margin-bottom:25px;
+            gap:20px;
           }
           h1{
             color:#f5b301;
@@ -1643,6 +1784,10 @@ window.generateInvoice = async function(bookingDocId){
             border:1px solid #ddd;
             padding:12px;
             text-align:left;
+            vertical-align:top;
+          }
+          th{
+            background:#fff4c8;
           }
           .total{
             font-size:20px;
@@ -1658,6 +1803,11 @@ window.generateInvoice = async function(bookingDocId){
             font-weight:bold;
             cursor:pointer;
           }
+          @media print{
+            .btn{
+              display:none;
+            }
+          }
         </style>
       </head>
 
@@ -1667,120 +1817,121 @@ window.generateInvoice = async function(bookingDocId){
 
         <div class="header">
 
-  <div style="display:flex;align-items:center;gap:15px;">
-    <img src="logo.png" style="width:110px;height:70px;object-fit:contain;">
-    <div>
-      <h1>UMAMTEK</h1>
-      <p>Your Project Our Priority</p>
-      <p style="font-size:13px;margin-top:5px;">
-        Bhagalpur, Bihar | Phone: 9065760751
-      </p>
-    </div>
-  </div>
+          <div style="display:flex;align-items:center;gap:15px;">
+            <img src="logo.png" style="width:110px;height:70px;object-fit:contain;">
+            <div>
+              <h1>UMAMTEK</h1>
+              <p>Your Project Our Priority</p>
+              <p style="font-size:13px;margin-top:5px;">
+                Bhagalpur, Bihar | Phone: 9065760751
+              </p>
+            </div>
+          </div>
 
-  <div style="text-align:right;">
-    <strong>Service Invoice</strong><br>
-    Booking ID: ${data.bookingId || ""}<br>
-    Invoice Date: ${new Date().toLocaleDateString("en-GB")}<br>
-    Payment Status: ${data.paymentStatus || "Unpaid"}
-  </div>
+          <div style="text-align:right;">
+            <strong>Service Invoice</strong><br>
+            Booking ID: ${data.bookingId || ""}<br>
+            Invoice Date: ${new Date().toLocaleDateString("en-GB")}<br>
+            Payment Status: ${data.paymentStatus || "Unpaid"}
+          </div>
 
-</div>
+        </div>
 
         <h3>Customer Details</h3>
-        <p><strong>Name:</strong> ${data.name || ""}</p>
+        <p><strong>Name:</strong> ${safeText(data.name)}</p>
         <p><strong>Phone:</strong> ${data.phone || ""}</p>
-        <p><strong>Address:</strong> ${data.address || ""}</p>
+        <p><strong>Address:</strong> ${safeText(data.address)}</p>
         <p><strong>PIN:</strong> ${data.pinCode || ""}</p>
 
         <h3>Service Details</h3>
 
         <table>
-  <tr>
-    <th>Description</th>
-    <th>Amount</th>
-  </tr>
+          <tr>
+            <th>Description</th>
+            <th>Amount</th>
+          </tr>
 
-  <tr>
-    <td>Service: ${data.service || ""}</td>
-    <td>₹${data.selectedPrice || data.offerRate || 200}</td>
-  </tr>
+          <tr>
+            <td>Service: ${safeText(data.service)}</td>
+            <td>₹${data.selectedPrice || data.offerRate || 200}</td>
+          </tr>
 
-  <tr>
-    <td>Real / Market Rate</td>
-    <td><del>₹${data.realRate || 450}</del></td>
-  </tr>
+          <tr>
+            <td>Real / Market Rate</td>
+            <td><del>₹${data.realRate || 450}</del></td>
+          </tr>
 
-  <tr>
-    <td>UMAMTEK Offer Rate</td>
-    <td>₹${data.offerRate || 200}</td>
-  </tr>
+          <tr>
+            <td>UMAMTEK Offer Rate</td>
+            <td>₹${data.offerRate || 200}</td>
+          </tr>
 
-  <tr>
-    <td>Distance from UMAMTEK Base</td>
-    <td>${data.distanceKm || "0"} km approx</td>
-  </tr>
+          <tr>
+            <td>Distance from UMAMTEK Base</td>
+            <td>${data.distanceKm || "0"} km approx</td>
+          </tr>
 
-  <tr>
-    <td>Travel Charge</td>
-    <td>₹${data.travelCharge || 0}</td>
-  </tr>
+          <tr>
+            <td>Travel Charge</td>
+            <td>₹${data.travelCharge || 0}</td>
+          </tr>
 
-${
-  data.productsUsed && data.productsUsed.length > 0
-  ? data.productsUsed.map((item, index) => `
-    <tr>
-      <td>
-        Product ${index + 1}: ${item.name || ""}
-        <br>
-        Qty: ${item.qty || 1} ${item.unit || ""}
-        <br>
-        Rate: ₹${item.rate || 60}
-        <br>
-        HSN/SAC: ${item.hsnSac || ""}
-        <br>
-        GST: ${item.gstPercent || 18}% Included
-      </td>
-      <td>₹${item.price || 0}</td>
-    </tr>
-  `).join("")
-  : `
-    <tr>
-      <td>Products Used</td>
-      <td>₹0</td>
-    </tr>
-  `
-}
+          ${
+            products.length > 0
+            ? products.map((item, index) => `
+              <tr>
+                <td>
+                  Product ${index + 1}: ${safeText(item.name)}
+                  <br>
+                  Qty: ${item.qty || 1} ${safeText(item.unit)}
+                  <br>
+                  Rate: ₹${item.rate || 60}
+                  <br>
+                  HSN/SAC: ${safeText(item.hsnSac)}
+                  <br>
+                  GST: ${item.gstPercent || 18}% Included
+                </td>
+                <td>₹${item.price || 0}</td>
+              </tr>
+            `).join("")
+            : `
+              <tr>
+                <td>Products Used</td>
+                <td>₹0</td>
+              </tr>
+            `
+          }
 
-<tr>
-  <td>Product Total</td>
-  <td>₹${data.productTotal || 0}</td>
-</tr>
+          <tr>
+            <td>Product Total</td>
+            <td>₹${data.productTotal || 0}</td>
+          </tr>
 
-  <tr>
-    <td>Payment Mode</td>
-    <td>${data.paymentMode || "Not Selected"}</td>
-  </tr>
+          <tr>
+            <td>Payment Mode</td>
+            <td>${data.paymentMode || "Not Selected"}</td>
+          </tr>
 
-  <tr>
-    <td>Payment Status</td>
-    <td>${data.paymentStatus || "Unpaid"}</td>
-  </tr>
+          <tr>
+            <td>Payment Status</td>
+            <td>${data.paymentStatus || "Unpaid"}</td>
+          </tr>
 
-  <tr>
-    <td>Status</td>
-    <td>${data.status || "Pending"}</td>
-  </tr>
+          <tr>
+            <td>Status</td>
+            <td>${data.status || "Pending"}</td>
+          </tr>
 
-  <tr>
-    <td>Technician</td>
-    <td>${data.assignedTechnicianName || "Not assigned"}</td>
-  </tr>
-</table>
+          <tr>
+            <td>Technician</td>
+            <td>${safeText(data.assignedTechnicianName) || "Not assigned"}</td>
+          </tr>
+        </table>
 
-<p class="total">Total Amount: ₹${data.totalPayable || data.selectedPrice || 200}</p>
+        <p class="total">Total Amount: ₹${data.totalPayable || data.selectedPrice || 200}</p>
+
         <p style="margin-top:30px;">
-        Note: Thank you for choosing UMAMTEK. This invoice includes service charge, offer rate, travel charge and payment status as per booking record.
+        Note: Thank you for choosing UMAMTEK. This invoice includes service charge, product/material charges, travel charge and payment status as per booking record.
         </p>
 
         <button class="btn" onclick="window.print()">Print / Download PDF</button>
@@ -1798,6 +1949,10 @@ ${
   }
 
 };
+
+/* =====================================================
+   REVIEW
+===================================================== */
 
 window.submitReview = async function(event){
 
@@ -1842,6 +1997,10 @@ window.submitReview = async function(event){
   }
 
 };
+
+/* =====================================================
+   STAFF REGISTRY
+===================================================== */
 
 window.addStaffMember = async function(event){
 
@@ -1912,12 +2071,12 @@ window.loadStaffRegistry = async function(){
       container.innerHTML += `
       <div class="card">
 
-        <h3>${data.name || ""}</h3>
+        <h3>${safeText(data.name)}</h3>
 
         <p><strong>Phone:</strong> ${data.phone || ""}</p>
-        <p><strong>Skill:</strong> ${data.skill || ""}</p>
-        <p><strong>Area:</strong> ${data.area || ""}</p>
-        <p><strong>Status:</strong> ${data.status || ""}</p>
+        <p><strong>Skill:</strong> ${safeText(data.skill)}</p>
+        <p><strong>Area:</strong> ${safeText(data.area)}</p>
+        <p><strong>Status:</strong> ${safeText(data.status)}</p>
 
       </div>
       `;
@@ -1925,6 +2084,7 @@ window.loadStaffRegistry = async function(){
     });
 
   }catch(error){
+    console.error(error);
     container.innerHTML = `<div class="card">${error.message}</div>`;
   }
 
@@ -1961,17 +2121,23 @@ window.markPaymentReceivedAndComplete = async function(bookingDocId){
 
 };
 
+/* =====================================================
+   PRODUCT REGISTRY
+===================================================== */
+
 window.addProductItem = async function(event){
 
   event.preventDefault();
 
-  const name = document.getElementById("productName").value.trim();
-  const category = document.getElementById("productCategory").value;
-  const unit = document.getElementById("productUnit").value.trim();
-  const price = Number(document.getElementById("productPrice").value);
-  const stock = Number(document.getElementById("productStock").value || 0);
-  const description = document.getElementById("productDescription").value.trim();
-  const status = document.getElementById("productStatus").value;
+  const name = document.getElementById("productName")?.value.trim() || "";
+  const category = document.getElementById("productCategory")?.value || "";
+  const unit = document.getElementById("productUnit")?.value.trim() || "pcs";
+  const price = Number(document.getElementById("productPrice")?.value || 60);
+  const hsnSac = document.getElementById("productHsnSac")?.value.trim() || "";
+  const gst = document.getElementById("productGst")?.value || "18";
+  const stock = Number(document.getElementById("productStock")?.value || 0);
+  const description = document.getElementById("productDescription")?.value.trim() || "";
+  const status = document.getElementById("productStatus")?.value || "Available";
 
   if(!name || !category || !unit || !price){
     alert("Please fill all required product details");
@@ -1985,10 +2151,14 @@ window.addProductItem = async function(event){
 
     await setDoc(doc(db, "products", productId), {
       productId: productId,
+      brand: "Anchor Penta",
       name: name,
       category: category,
       unit: unit,
       price: price,
+      hsnSac: hsnSac,
+      gstIncluded: true,
+      gstPercent: gst,
       stock: stock,
       description: description,
       status: status,
@@ -2004,7 +2174,6 @@ window.addProductItem = async function(event){
   }
 
 };
-
 
 window.loadProductRegistry = async function(){
 
@@ -2034,16 +2203,19 @@ window.loadProductRegistry = async function(){
       container.innerHTML += `
       <div class="card">
 
-        <h3>${data.name || ""}</h3>
+        <h3>${safeText(data.name)}</h3>
 
-        <p><strong>Category:</strong> ${data.category || ""}</p>
-        <p><strong>Unit:</strong> ${data.unit || ""}</p>
+        <p><strong>Brand:</strong> ${safeText(data.brand) || "Anchor Penta"}</p>
+        <p><strong>Category:</strong> ${safeText(data.category)}</p>
+        <p><strong>Unit:</strong> ${safeText(data.unit)}</p>
         <p><strong>Price:</strong> ₹${data.price || 0}</p>
+        <p><strong>GST:</strong> ${data.gstPercent || 18}% Included</p>
+        <p><strong>HSN/SAC:</strong> ${safeText(data.hsnSac)}</p>
         <p><strong>Stock:</strong> ${data.stock || 0}</p>
-        <p><strong>Status:</strong> ${data.status || ""}</p>
+        <p><strong>Status:</strong> ${safeText(data.status)}</p>
 
         ${data.description ? `
-        <p><strong>Details:</strong> ${data.description}</p>
+        <p><strong>Details:</strong> ${safeText(data.description)}</p>
         ` : ""}
 
       </div>
@@ -2052,723 +2224,15 @@ window.loadProductRegistry = async function(){
     });
 
   }catch(error){
+    console.error(error);
     container.innerHTML = `<div class="card">${error.message}</div>`;
   }
 
 };
 
 /* =====================================================
-   UMAMTEK BULK PRODUCT IMPORT - ANCHOR PENTA
-   Source: Anchor Penta Non Modular Price List PDF
-   Note: P.Code intentionally not used.
-   Selling price set to Rs.60 with 18% GST included.
+   SEARCH PRODUCT AND ADD TO BOOKING
 ===================================================== */
-
-const anchorPentaProducts = [
-  {
-    "brand": "Anchor Penta",
-    "name": "6A 1 Way Switch Deluxe",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 20,
-    "hsnSac": "85361010",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 6A 1 Way Switch Deluxe | MRP ₹20 | GST 18% included",
-    "sourcePage": "1"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "6A 1 Way Switch Deluxe IP20",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 20,
-    "hsnSac": "85361010",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 6A 1 Way Switch Deluxe IP20 | MRP ₹20 | GST 18% included",
-    "sourcePage": "1"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "6A 2 Way Switch Deluxe",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 38,
-    "hsnSac": "85361010",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 6A 2 Way Switch Deluxe | MRP ₹38 | GST 18% included",
-    "sourcePage": "1"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "6A Bell Push Switch Deluxe",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 38,
-    "hsnSac": "85361010",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 6A Bell Push Switch Deluxe | MRP ₹38 | GST 18% included",
-    "sourcePage": "1"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "6A 1 Way Switch Piano",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 20,
-    "hsnSac": "85361010",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 6A 1 Way Switch Piano | MRP ₹20 | GST 18% included",
-    "sourcePage": "1"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "6A 2 Way Switch Piano",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 38,
-    "hsnSac": "85361010",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 6A 2 Way Switch Piano | MRP ₹38 | GST 18% included",
-    "sourcePage": "1"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "6A Bell Push SwitchPiano",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 38,
-    "hsnSac": "85361010",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 6A Bell Push SwitchPiano | MRP ₹38 | GST 18% included",
-    "sourcePage": "1"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "6A 1 Way Switch Cherry",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 21,
-    "hsnSac": "85361010",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 6A 1 Way Switch Cherry | MRP ₹21 | GST 18% included",
-    "sourcePage": "1"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "6A, 1Way Cherry Switch (IP20, Urea Backpiece), White",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 21,
-    "hsnSac": "85361010",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 6A, 1Way Cherry Switch (IP20, Urea Backpiece), White | MRP ₹21 | GST 18% included",
-    "sourcePage": "1"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "6A 2 Way Switch Cherry",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 39,
-    "hsnSac": "85361010",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 6A 2 Way Switch Cherry | MRP ₹39 | GST 18% included",
-    "sourcePage": "1"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "6A Bell Push Switch Cherry",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 39,
-    "hsnSac": "85361010",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 6A Bell Push Switch Cherry | MRP ₹39 | GST 18% included",
-    "sourcePage": "1"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "6A 2 Pin Socket",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 35,
-    "hsnSac": "85366910",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 6A 2 Pin Socket | MRP ₹35 | GST 18% included",
-    "sourcePage": "1"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "6A, 2 Pin Socket (IP20, Urea Backpiece), White",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 35,
-    "hsnSac": "85366910",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 6A, 2 Pin Socket (IP20, Urea Backpiece), White | MRP ₹35 | GST 18% included",
-    "sourcePage": "1"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "6A 3 Pin Socket ISI",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 46,
-    "hsnSac": "85366910",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 6A 3 Pin Socket ISI | MRP ₹46 | GST 18% included",
-    "sourcePage": "1"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "6A 2-In-1 Socket",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 39,
-    "hsnSac": "85366910",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 6A 2-In-1 Socket | MRP ₹39 | GST 18% included",
-    "sourcePage": "1"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "6A 2-In-1 (IP20) Socket White",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 39,
-    "hsnSac": "85366910",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 6A 2-In-1 (IP20) Socket White | MRP ₹39 | GST 18% included",
-    "sourcePage": "1"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "6A Multi Scoket For two 2 Pin & 3 Pin",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 49,
-    "hsnSac": "85366910",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 6A Multi Scoket For two 2 Pin & 3 Pin | MRP ₹49 | GST 18% included",
-    "sourcePage": "1"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "6A 3-In-1 Socket (2 Pin+3 Pin Soc.for cell phone Pin)",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 46,
-    "hsnSac": "85365090",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 6A 3-In-1 Socket (2 Pin+3 Pin Soc.for cell phone Pin) | MRP ₹46 | GST 18% included",
-    "sourcePage": "1"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "6A/13A Combi Socket  ( For all kind of Pins)",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 68,
-    "hsnSac": "85366910",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 6A/13A Combi Socket  ( For all kind of Pins) | MRP ₹68 | GST 18% included",
-    "sourcePage": "1"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "Mini Fan Regulator,100W",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 249,
-    "hsnSac": "84149030",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta Mini Fan Regulator,100W | MRP ₹249 | GST 18% included",
-    "sourcePage": "1"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "Deluxe Fan Regulator,100W",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 280,
-    "hsnSac": "84149030",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta Deluxe Fan Regulator,100W | MRP ₹280 | GST 18% included",
-    "sourcePage": "1"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "1 Way Bed Switch",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 51,
-    "hsnSac": "85365020",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 1 Way Bed Switch | MRP ₹51 | GST 18% included",
-    "sourcePage": "1"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "Cord Through",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 51,
-    "hsnSac": "85365020",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta Cord Through | MRP ₹51 | GST 18% included",
-    "sourcePage": "1"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "Hanging Bell Push Switch",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 51,
-    "hsnSac": "85361010",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta Hanging Bell Push Switch | MRP ₹51 | GST 18% included",
-    "sourcePage": "1"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "Opel Eme Fan Regulator 100W",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 320,
-    "hsnSac": "84149030",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta Opel Eme Fan Regulator 100W | MRP ₹320 | GST 18% included",
-    "sourcePage": "2"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "Surface 1 Way Switch  6A",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 41,
-    "hsnSac": "85361010",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta Surface 1 Way Switch  6A | MRP ₹41 | GST 18% included",
-    "sourcePage": "2"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "Surface Bell Push 6A",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 46,
-    "hsnSac": "85361010",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta Surface Bell Push 6A | MRP ₹46 | GST 18% included",
-    "sourcePage": "2"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "Sheet Metal Switch Pilot 16A 240V NeutrAl Link",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 680,
-    "hsnSac": "73269099",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta Sheet Metal Switch Pilot 16A 240V NeutrAl Link | MRP ₹680 | GST 18% included",
-    "sourcePage": "2"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "Sheet Metal Switch Pilot 16A 240V D.P.",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 680,
-    "hsnSac": "73269099",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta Sheet Metal Switch Pilot 16A 240V D.P. | MRP ₹680 | GST 18% included",
-    "sourcePage": "2"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "Sheet Metal Switch Pilot 32A 240V D.P.",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 1252,
-    "hsnSac": "73269099",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta Sheet Metal Switch Pilot 32A 240V D.P. | MRP ₹1252 | GST 18% included",
-    "sourcePage": "2"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "Sheet Metal Switch Pilot 63A 240V D.P.",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 1901,
-    "hsnSac": "73269099",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta Sheet Metal Switch Pilot 63A 240V D.P. | MRP ₹1901 | GST 18% included",
-    "sourcePage": "2"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "3 Pole T.P Sheet Metal Switch 16A 415 V T.P.",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 1361,
-    "hsnSac": "73269099",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 3 Pole T.P Sheet Metal Switch 16A 415 V T.P. | MRP ₹1361 | GST 18% included",
-    "sourcePage": "2"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "3 Pole T.P Sheet Metal Switch 32A 415 V T.P.",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 2363,
-    "hsnSac": "73269099",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 3 Pole T.P Sheet Metal Switch 32A 415 V T.P. | MRP ₹2363 | GST 18% included",
-    "sourcePage": "2"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "3 Pole T.P Sheet Metal Switch 63A 415 V T.P.",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 6099,
-    "hsnSac": "73269099",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 3 Pole T.P Sheet Metal Switch 63A 415 V T.P. | MRP ₹6099 | GST 18% included",
-    "sourcePage": "2"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "3 Pole T.P Sheet Metal Switch 100A 415 V T.P.",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 10145,
-    "hsnSac": "73269099",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 3 Pole T.P Sheet Metal Switch 100A 415 V T.P. | MRP ₹10145 | GST 18% included",
-    "sourcePage": "2"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "3 Pole T.P Sheet Metal Switch 200A 415 V T.P.",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 13556,
-    "hsnSac": "73269099",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 3 Pole T.P Sheet Metal Switch 200A 415 V T.P. | MRP ₹13556 | GST 18% included",
-    "sourcePage": "2"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "2 Pole Change Over Switch Pilot 16A 415 V",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 1435,
-    "hsnSac": "85365090",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 2 Pole Change Over Switch Pilot 16A 415 V | MRP ₹1435 | GST 18% included",
-    "sourcePage": "2"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "2 Pole Change Over Switch Pilot 32A 415 V",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 1998,
-    "hsnSac": "85365090",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 2 Pole Change Over Switch Pilot 32A 415 V | MRP ₹1998 | GST 18% included",
-    "sourcePage": "2"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "3 Pole Change Over Switch Pilot 16A 415 V",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 1786,
-    "hsnSac": "85365090",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 3 Pole Change Over Switch Pilot 16A 415 V | MRP ₹1786 | GST 18% included",
-    "sourcePage": "2"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "2 Pole Change Over Switch Pilot 32A 415 V",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 2262,
-    "hsnSac": "85365090",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 2 Pole Change Over Switch Pilot 32A 415 V | MRP ₹2262 | GST 18% included",
-    "sourcePage": "2"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "2 Pole Change Over Switch Pilot 63A 415 V",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 5762,
-    "hsnSac": "85365090",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 2 Pole Change Over Switch Pilot 63A 415 V | MRP ₹5762 | GST 18% included",
-    "sourcePage": "2"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "4 Pole Change Over Switch Pilot 16A 415 V",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 2079,
-    "hsnSac": "85365090",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 4 Pole Change Over Switch Pilot 16A 415 V | MRP ₹2079 | GST 18% included",
-    "sourcePage": "2"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "4 Pole Change Over Switch Pilot 32A 415 V",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 3035,
-    "hsnSac": "85365090",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 4 Pole Change Over Switch Pilot 32A 415 V | MRP ₹3035 | GST 18% included",
-    "sourcePage": "2"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "4 Pole Change Over Switch Pilot 63A 415 V",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 7115,
-    "hsnSac": "85365090",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 4 Pole Change Over Switch Pilot 63A 415 V | MRP ₹7115 | GST 18% included",
-    "sourcePage": "2"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "4 Pole Change Over Switch Pilot 100A 415 V",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 12927,
-    "hsnSac": "85365090",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta 4 Pole Change Over Switch Pilot 100A 415 V | MRP ₹12927 | GST 18% included",
-    "sourcePage": "2"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "Porcelain Fuse Unit Pilot 16A 240V Pilot",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 67,
-    "hsnSac": "85361060",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta Porcelain Fuse Unit Pilot 16A 240V Pilot | MRP ₹67 | GST 18% included",
-    "sourcePage": "2"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "Porcelain Fuse Unit Pilot 16A 415V (32A-240V)",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 119,
-    "hsnSac": "85361060",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta Porcelain Fuse Unit Pilot 16A 415V (32A-240V) | MRP ₹119 | GST 18% included",
-    "sourcePage": "2"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "Porcelain Fuse Unit Pilot 32A 415V Pilot (32A-240V)",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 218,
-    "hsnSac": "85361060",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta Porcelain Fuse Unit Pilot 32A 415V Pilot (32A-240V) | MRP ₹218 | GST 18% included",
-    "sourcePage": "2"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "Porcelain Fuse Unit Pilot 63A 415V Pilot",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 544,
-    "hsnSac": "85361060",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta Porcelain Fuse Unit Pilot 63A 415V Pilot | MRP ₹544 | GST 18% included",
-    "sourcePage": "2"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "Porcelain Fuse Unit Pilot 100A 415V Pilot",
-    "category": "Electrical",
-    "unit": "pcs",
-    "price": 60,
-    "mrp": 961,
-    "hsnSac": "85361060",
-    "gstIncluded": true,
-    "gstPercent": 18,
-    "status": "Available",
-    "description": "Anchor Penta Porcelain Fuse Unit Pilot 100A 415V Pilot | MRP ₹961 | GST 18% included",
-    "sourcePage": "2"
-  },
-  {
-    "brand": "Anchor Penta",
-    "name": "Porcelain Fuse Unit Pilot 200A 415V Pilot",
-    "category": "El
 
 window.searchAndAddProductToBooking = async function(bookingDocId){
 
@@ -2851,10 +2315,13 @@ window.searchAndAddProductToBooking = async function(bookingDocId){
 
     const bookingData = bookingSnap.data();
 
-    const oldProducts = bookingData.productsUsed || [];
+    const oldProducts = Array.isArray(bookingData.productsUsed)
+    ? bookingData.productsUsed
+    : [];
 
     const newProduct = {
       productId: selectedProduct.productId || "",
+      brand: selectedProduct.brand || "Anchor Penta",
       name: selectedProduct.name || "",
       category: selectedProduct.category || "",
       hsnSac: selectedProduct.hsnSac || "",
@@ -2899,3 +2366,47 @@ window.searchAndAddProductToBooking = async function(bookingDocId){
   }
 
 };
+
+/* =====================================================
+   AUTO PAGE LOADER
+===================================================== */
+
+window.umamtekAutoLoad = function(){
+
+  try{
+
+    if(document.getElementById("bookingContainer") && window.loadBookings){
+      window.loadBookings();
+    }
+
+    if(document.getElementById("activeBookingContainer") && window.loadMyBookings){
+      window.loadMyBookings();
+    }
+
+    if(document.getElementById("profileContainer") && window.loadProfilePage){
+      window.loadProfilePage();
+    }
+
+    if(document.getElementById("staffBookingContainer") && window.loadStaffBookings){
+      window.loadStaffBookings();
+    }
+
+    if(document.getElementById("officialBookingContainer") && window.loadOfficialPanel){
+      window.loadOfficialPanel();
+    }
+
+    if(document.getElementById("staffRegistryContainer") && window.loadStaffRegistry){
+      window.loadStaffRegistry();
+    }
+
+    if(document.getElementById("productRegistryContainer") && window.loadProductRegistry){
+      window.loadProductRegistry();
+    }
+
+  }catch(error){
+    console.error("UMAMTEK auto load error:", error);
+  }
+
+};
+
+setTimeout(window.umamtekAutoLoad, 1200);
