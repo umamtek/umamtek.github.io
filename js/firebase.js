@@ -2368,6 +2368,336 @@ window.searchAndAddProductToBooking = async function(bookingDocId){
 };
 
 /* =====================================================
+   INLINE PRODUCT ADD BOX - SEARCH / SELECT / QTY SYSTEM
+   No popup prompt system
+===================================================== */
+
+window.bookingProductCache = window.bookingProductCache || {};
+
+window.showProductAddBox = async function(bookingDocId){
+
+  let box = document.getElementById(`productAddBox-${bookingDocId}`);
+
+  if(!box){
+
+    box = document.createElement("div");
+    box.id = `productAddBox-${bookingDocId}`;
+    box.style.display = "none";
+    box.style.marginTop = "18px";
+
+    const activeButton = document.activeElement;
+
+    if(activeButton && activeButton.parentElement){
+      activeButton.parentElement.insertAdjacentElement("afterend", box);
+    }else{
+      document.body.appendChild(box);
+    }
+
+  }
+
+  if(box.style.display === "block"){
+    box.style.display = "none";
+    return;
+  }
+
+  box.style.display = "block";
+
+  box.innerHTML = `
+    <div style="
+      padding:18px;
+      border-radius:18px;
+      background:#fff8d6;
+      border:2px solid #f5b301;
+      color:#111;
+      margin-top:15px;
+    ">
+
+      <h3 style="margin:0 0 12px;color:#111;">
+      Add Product / Material
+      </h3>
+
+      <input
+        type="text"
+        id="productSearch-${bookingDocId}"
+        placeholder="Search product name..."
+        oninput="filterProductsForBooking('${bookingDocId}')"
+        style="margin-bottom:12px;"
+      >
+
+      <select
+        id="productSelect-${bookingDocId}"
+        onchange="fillSelectedProductRate('${bookingDocId}')"
+        style="margin-bottom:12px;"
+      >
+        <option value="">Loading products...</option>
+      </select>
+
+      <input
+        type="number"
+        id="productQty-${bookingDocId}"
+        placeholder="Quantity"
+        value="1"
+        min="1"
+        oninput="calculateProductLineTotal('${bookingDocId}')"
+        style="margin-bottom:12px;"
+      >
+
+      <div style="
+        padding:12px;
+        border-radius:12px;
+        background:#fff;
+        border:1px solid #f5b301;
+        margin-bottom:12px;
+      ">
+
+        <p style="margin:4px 0;color:#111;">
+          <strong>Rate:</strong> ₹<span id="productRate-${bookingDocId}">0</span>
+        </p>
+
+        <p style="margin:4px 0;color:#111;">
+          <strong>GST:</strong> <span id="productGst-${bookingDocId}">18</span>% Included
+        </p>
+
+        <p style="margin:4px 0;color:#111;">
+          <strong>HSN/SAC:</strong> <span id="productHsn-${bookingDocId}">-</span>
+        </p>
+
+        <p style="margin:4px 0;color:#111;font-size:18px;font-weight:900;">
+          Line Total: ₹<span id="productLineTotal-${bookingDocId}">0</span>
+        </p>
+
+      </div>
+
+      <button onclick="addSelectedProductToBooking('${bookingDocId}')">
+        Add to Bill
+      </button>
+
+    </div>
+  `;
+
+  await loadProductsForBookingBox(bookingDocId);
+
+};
+
+
+window.loadProductsForBookingBox = async function(bookingDocId){
+
+  try{
+
+    const productSnapshot = await getDocs(collection(db, "products"));
+
+    let products = [];
+
+    productSnapshot.forEach((docSnap) => {
+
+      const product = docSnap.data();
+
+      if(product.status !== "Hidden"){
+        products.push(product);
+      }
+
+    });
+
+    window.bookingProductCache[bookingDocId] = products;
+
+    renderProductOptionsForBooking(bookingDocId, products);
+
+  }catch(error){
+    alert(error.message);
+  }
+
+};
+
+
+window.filterProductsForBooking = function(bookingDocId){
+
+  const searchBox = document.getElementById(`productSearch-${bookingDocId}`);
+  const products = window.bookingProductCache[bookingDocId] || [];
+
+  const searchText = (searchBox?.value || "").toLowerCase();
+
+  const filtered = products.filter(product => {
+
+    return (
+      String(product.name || "").toLowerCase().includes(searchText) ||
+      String(product.category || "").toLowerCase().includes(searchText) ||
+      String(product.hsnSac || "").toLowerCase().includes(searchText)
+    );
+
+  });
+
+  renderProductOptionsForBooking(bookingDocId, filtered);
+
+};
+
+
+function renderProductOptionsForBooking(bookingDocId, products){
+
+  const select = document.getElementById(`productSelect-${bookingDocId}`);
+
+  if(!select){
+    return;
+  }
+
+  select.innerHTML = `<option value="">Select Product</option>`;
+
+  products.slice(0, 100).forEach((product, index) => {
+
+    const option = document.createElement("option");
+
+    option.value = index;
+
+    option.textContent =
+    `${product.name || ""} — ₹${product.price || 60} — HSN ${product.hsnSac || "-"}`;
+
+    option.dataset.product = JSON.stringify(product);
+
+    select.appendChild(option);
+
+  });
+
+}
+
+
+window.fillSelectedProductRate = function(bookingDocId){
+
+  const select = document.getElementById(`productSelect-${bookingDocId}`);
+  const selectedOption = select?.options[select.selectedIndex];
+
+  if(!selectedOption || !selectedOption.dataset.product){
+
+    document.getElementById(`productRate-${bookingDocId}`).innerText = "0";
+    document.getElementById(`productGst-${bookingDocId}`).innerText = "18";
+    document.getElementById(`productHsn-${bookingDocId}`).innerText = "-";
+    document.getElementById(`productLineTotal-${bookingDocId}`).innerText = "0";
+
+    return;
+  }
+
+  const product = JSON.parse(selectedOption.dataset.product);
+
+  document.getElementById(`productRate-${bookingDocId}`).innerText =
+  product.price || 60;
+
+  document.getElementById(`productGst-${bookingDocId}`).innerText =
+  product.gstPercent || 18;
+
+  document.getElementById(`productHsn-${bookingDocId}`).innerText =
+  product.hsnSac || "-";
+
+  calculateProductLineTotal(bookingDocId);
+
+};
+
+
+window.calculateProductLineTotal = function(bookingDocId){
+
+  const rate =
+  Number(document.getElementById(`productRate-${bookingDocId}`)?.innerText || 0);
+
+  const qty =
+  Number(document.getElementById(`productQty-${bookingDocId}`)?.value || 1);
+
+  const total = rate * qty;
+
+  const lineTotal =
+  document.getElementById(`productLineTotal-${bookingDocId}`);
+
+  if(lineTotal){
+    lineTotal.innerText = total;
+  }
+
+};
+
+
+window.addSelectedProductToBooking = async function(bookingDocId){
+
+  const select = document.getElementById(`productSelect-${bookingDocId}`);
+  const selectedOption = select?.options[select.selectedIndex];
+
+  if(!selectedOption || !selectedOption.dataset.product){
+    alert("Please select a product");
+    return;
+  }
+
+  const product = JSON.parse(selectedOption.dataset.product);
+
+  const qty =
+  Number(document.getElementById(`productQty-${bookingDocId}`)?.value || 1);
+
+  if(!qty || qty <= 0){
+    alert("Please enter valid quantity");
+    return;
+  }
+
+  try{
+
+    const rate = Number(product.price || 60);
+    const productTotalAmount = rate * qty;
+
+    const bookingRef = doc(db, "bookings", bookingDocId);
+    const bookingSnap = await getDoc(bookingRef);
+
+    if(!bookingSnap.exists()){
+      alert("Booking not found");
+      return;
+    }
+
+    const bookingData = bookingSnap.data();
+
+    const oldProducts = Array.isArray(bookingData.productsUsed)
+    ? bookingData.productsUsed
+    : [];
+
+    const newProduct = {
+      productId: product.productId || "",
+      brand: product.brand || "Anchor Penta",
+      name: product.name || "",
+      category: product.category || "",
+      hsnSac: product.hsnSac || "",
+      gstIncluded: true,
+      gstPercent: product.gstPercent || 18,
+      unit: product.unit || "pcs",
+      qty: qty,
+      rate: rate,
+      price: productTotalAmount,
+      addedAt: new Date().toISOString()
+    };
+
+    const updatedProducts = [...oldProducts, newProduct];
+
+    const productTotal = updatedProducts.reduce((sum, item) => {
+      return sum + Number(item.price || 0);
+    }, 0);
+
+    const serviceCharge =
+    Number(bookingData.selectedPrice || bookingData.offerRate || 200);
+
+    const travelCharge =
+    Number(bookingData.travelCharge || 0);
+
+    const finalTotal =
+    serviceCharge + travelCharge + productTotal;
+
+    await updateDoc(bookingRef, {
+      productsUsed: updatedProducts,
+      productTotal: productTotal,
+      totalPayable: finalTotal,
+      invoiceStatus: "Updated",
+      billUpdatedAt: new Date().toISOString()
+    });
+
+    alert("Product added to bill successfully");
+
+    window.location.reload();
+
+  }catch(error){
+    alert(error.message);
+  }
+
+};
+
+/* =====================================================
    AUTO PAGE LOADER
 ===================================================== */
 
