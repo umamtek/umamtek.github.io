@@ -1325,6 +1325,10 @@ if(
             Start Work
             </button>
 
+<button onclick="searchAndAddProductToBooking('${bookingDocId}')">
+Add Product
+</button>
+
             <button onclick="markPaymentReceivedAndComplete('${bookingDocId}')">
 Payment Received & Work Done
 </button>
@@ -2702,3 +2706,133 @@ const anchorPentaProducts = [
     "brand": "Anchor Penta",
     "name": "Porcelain Fuse Unit Pilot 200A 415V Pilot",
     "category": "El
+
+window.searchAndAddProductToBooking = async function(bookingDocId){
+
+  const searchText = prompt("Enter product name to search");
+
+  if(!searchText){
+    return;
+  }
+
+  try{
+
+    const productSnapshot = await getDocs(collection(db, "products"));
+
+    let matchedProducts = [];
+
+    productSnapshot.forEach((docSnap) => {
+
+      const product = docSnap.data();
+
+      if(
+        product.name &&
+        product.name.toLowerCase().includes(searchText.toLowerCase()) &&
+        product.status !== "Hidden"
+      ){
+        matchedProducts.push(product);
+      }
+
+    });
+
+    if(matchedProducts.length === 0){
+      alert("No product found. Please add product in Product Registry first.");
+      return;
+    }
+
+    let message = "Select product number:\n\n";
+
+    matchedProducts.slice(0, 20).forEach((item, index) => {
+      message +=
+      `${index + 1}. ${item.name} | ₹${item.price || 60} | HSN/SAC: ${item.hsnSac || ""}\n`;
+    });
+
+    const selectedNumber = prompt(message);
+
+    if(!selectedNumber){
+      return;
+    }
+
+    const selectedProduct = matchedProducts[Number(selectedNumber) - 1];
+
+    if(!selectedProduct){
+      alert("Invalid product selected");
+      return;
+    }
+
+    const qtyInput = prompt(
+      `Enter quantity for ${selectedProduct.name}\nUnit: ${selectedProduct.unit || "pcs"}`
+    );
+
+    if(!qtyInput){
+      return;
+    }
+
+    const qty = Number(qtyInput);
+
+    if(!qty || qty <= 0){
+      alert("Please enter valid quantity");
+      return;
+    }
+
+    const productRate = Number(selectedProduct.price || 60);
+    const productTotalAmount = productRate * qty;
+
+    const bookingRef = doc(db, "bookings", bookingDocId);
+    const bookingSnap = await getDoc(bookingRef);
+
+    if(!bookingSnap.exists()){
+      alert("Booking not found");
+      return;
+    }
+
+    const bookingData = bookingSnap.data();
+
+    const oldProducts = bookingData.productsUsed || [];
+
+    const newProduct = {
+      productId: selectedProduct.productId || "",
+      name: selectedProduct.name || "",
+      category: selectedProduct.category || "",
+      hsnSac: selectedProduct.hsnSac || "",
+      gstIncluded: true,
+      gstPercent: selectedProduct.gstPercent || 18,
+      unit: selectedProduct.unit || "pcs",
+      qty: qty,
+      rate: productRate,
+      price: productTotalAmount,
+      addedAt: new Date().toISOString()
+    };
+
+    const updatedProducts = [...oldProducts, newProduct];
+
+    const productTotal = updatedProducts.reduce((sum, item) => {
+      return sum + Number(item.price || 0);
+    }, 0);
+
+    const serviceCharge = Number(bookingData.selectedPrice || bookingData.offerRate || 200);
+    const travelCharge = Number(bookingData.travelCharge || 0);
+
+    const finalTotal = serviceCharge + travelCharge + productTotal;
+
+    await updateDoc(bookingRef, {
+      productsUsed: updatedProducts,
+      productTotal: productTotal,
+      totalPayable: finalTotal,
+      invoiceStatus: "Updated",
+      billUpdatedAt: new Date().toISOString()
+    });
+
+    alert(
+      `Product added successfully\n\n${selectedProduct.name}\nQty: ${qty}\nAmount: ₹${productTotalAmount}\n\nNew Total: ₹${finalTotal}`
+    );
+
+    window.location.reload();
+
+  }catch(error){
+
+    alert(error.message);
+
+  }
+
+};
