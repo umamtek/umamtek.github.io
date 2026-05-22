@@ -755,8 +755,8 @@ window.loadBookings = async function(){
             Set ETA
           </button>
 
-          <button onclick="searchAndAddProductToBooking('${bookingDocId}')" style="padding:10px 16px;font-size:14px;">
-            Add Product
+          <button onclick="showProductAddBox('${bookingDocId}')">
+          Add Product
           </button>
 
           <select
@@ -1465,7 +1465,7 @@ window.loadStaffBookings = async function(){
             Start Work
             </button>
 
-            <button onclick="searchAndAddProductToBooking('${bookingDocId}')">
+            <button onclick="showProductAddBox('${bookingDocId}')">
             Add Product
             </button>
 
@@ -1648,7 +1648,7 @@ window.loadOfficialPanel = async function(){
           ETA
           </button>
 
-          <button onclick="searchAndAddProductToBooking('${bookingDocId}')">
+          <button onclick="showProductAddBox('${bookingDocId}')">
           Add Product
           </button>
 
