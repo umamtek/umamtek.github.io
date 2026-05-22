@@ -95,6 +95,38 @@ function getBillBox(data){
 
       <p style="color:#111;"><strong>Travel Charge:</strong> ₹${data.travelCharge || 0}</p>
 
+${data.productsUsed && data.productsUsed.length > 0 ? `
+
+  <div style="margin-top:12px;">
+    <p style="color:#111;font-weight:900;margin-bottom:6px;">
+    Products Used:
+    </p>
+
+    ${
+      data.productsUsed.map((item, index) => `
+        <p style="color:#111;margin:5px 0;">
+          ${index + 1}. ${item.name || ""} 
+          — Qty: ${item.qty || 1} ${item.unit || ""}
+          — Rate: ₹${item.rate || 60}
+          — Total: ₹${item.price || 0}
+          ${item.hsnSac ? `— HSN/SAC: ${item.hsnSac}` : ""}
+        </p>
+      `).join("")
+    }
+  </div>
+
+  <p style="color:#111;">
+  <strong>Product Total:</strong> ₹${data.productTotal || 0}
+  </p>
+
+` : `
+
+  <p style="color:#111;">
+  <strong>Product Total:</strong> ₹0
+  </p>
+
+`}
+
       <p style="
       color:#111;
       font-size:18px;
@@ -1693,6 +1725,37 @@ window.generateInvoice = async function(bookingDocId){
     <td>Travel Charge</td>
     <td>₹${data.travelCharge || 0}</td>
   </tr>
+
+${
+  data.productsUsed && data.productsUsed.length > 0
+  ? data.productsUsed.map((item, index) => `
+    <tr>
+      <td>
+        Product ${index + 1}: ${item.name || ""}
+        <br>
+        Qty: ${item.qty || 1} ${item.unit || ""}
+        <br>
+        Rate: ₹${item.rate || 60}
+        <br>
+        HSN/SAC: ${item.hsnSac || ""}
+        <br>
+        GST: ${item.gstPercent || 18}% Included
+      </td>
+      <td>₹${item.price || 0}</td>
+    </tr>
+  `).join("")
+  : `
+    <tr>
+      <td>Products Used</td>
+      <td>₹0</td>
+    </tr>
+  `
+}
+
+<tr>
+  <td>Product Total</td>
+  <td>₹${data.productTotal || 0}</td>
+</tr>
 
   <tr>
     <td>Payment Mode</td>
