@@ -60,18 +60,37 @@
 
       <input type="password" id="signupPassword" placeholder="Create Password" required>
 
-      <div id="recaptcha-container"></div>
+<div style="display:flex;align-items:center;gap:10px;margin-top:-10px;">
+  <input type="checkbox" id="showPassword" onclick="toggleSignupPassword()">
+  <label for="showPassword" style="font-size:14px;">
+    Show Password
+  </label>
+</div>
 
-      <button type="button" onclick="sendSignupOTPForPasswordAccount()">
-        Send OTP
-      </button>
+<input type="password"
+id="signupConfirmPassword"
+placeholder="Confirm Password"
+required>
 
-      <input type="text" id="signupOtp" placeholder="Enter OTP" required>
+<div id="passwordStrength" style="font-size:13px;color:#ccc;line-height:1.8;">
 
-      <button type="button" onclick="createPhonePasswordAccount()">
-        Create Account
-      </button>
+<div id="len">❌ Minimum 8 Characters</div>
 
+<div id="cap">❌ One Capital Letter</div>
+
+<div id="small">❌ One Small Letter</div>
+
+<div id="num">❌ One Number</div>
+
+<div id="special">❌ One Special Character</div>
+
+</div>
+
+<button
+type="button"
+onclick="goToOtpPage()">
+Next →
+</button>
     </form>
 
     <div style="margin-top:22px;text-align:center;">
@@ -102,6 +121,117 @@
 
 <script src="js/script.js"></script>
 <script type="module" src="js/firebase.js?v=506"></script>
+
+<script>
+
+function toggleSignupPassword(){
+
+const p=document.getElementById("signupPassword");
+
+const c=document.getElementById("signupConfirmPassword");
+
+if(p.type==="password"){
+
+p.type="text";
+
+c.type="text";
+
+}else{
+
+p.type="password";
+
+c.type="password";
+
+}
+
+}
+
+document.getElementById("signupPassword").addEventListener("input",checkPassword);
+
+function checkPassword(){
+
+let pass=document.getElementById("signupPassword").value;
+
+document.getElementById("len").innerHTML=
+pass.length>=8?
+"✅ Minimum 8 Characters":
+"❌ Minimum 8 Characters";
+
+document.getElementById("cap").innerHTML=
+/[A-Z]/.test(pass)?
+"✅ One Capital Letter":
+"❌ One Capital Letter";
+
+document.getElementById("small").innerHTML=
+/[a-z]/.test(pass)?
+"✅ One Small Letter":
+"❌ One Small Letter";
+
+document.getElementById("num").innerHTML=
+/[0-9]/.test(pass)?
+"✅ One Number":
+"❌ One Number";
+
+document.getElementById("special").innerHTML=
+/[^A-Za-z0-9]/.test(pass)?
+"✅ One Special Character":
+"❌ One Special Character";
+
+}
+
+function goToOtpPage(){
+
+const name=document.getElementById("signupName").value.trim();
+
+const phone=document.getElementById("signupPhone").value.trim();
+
+const pass=document.getElementById("signupPassword").value;
+
+const confirm=document.getElementById("signupConfirmPassword").value;
+
+if(name==""){
+
+alert("Enter Full Name");
+
+return;
+
+}
+
+if(phone.length!=10){
+
+alert("Enter Valid Mobile Number");
+
+return;
+
+}
+
+if(pass!=confirm){
+
+alert("Passwords do not match");
+
+return;
+
+}
+
+if(pass.length<8){
+
+alert("Password is too weak");
+
+return;
+
+}
+
+localStorage.setItem("signupName",name);
+
+localStorage.setItem("signupPhone",phone);
+
+localStorage.setItem("signupPassword",pass);
+
+window.location.href="signup-otp.html";
+
+}
+
+</script>
 
 </body>
 </html>
