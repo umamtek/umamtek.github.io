@@ -1,373 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login | UMAMTEK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1220; --navy-2:#131C2E; --ivory:#F6F3EC; --ivory-2:#EEE9DC;
+    --copper:#B8763E; --copper-light:#D9944F; --brass:#D9B36C;
+    --steel:#5B6472; --ink:#14181F; --white:#FFFFFF; --danger:#B3372C;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{ font-family:'Inter', sans-serif; color:var(--ink); background:var(--ivory); min-height:100vh; display:flex; }
+  h1,h2{ font-family:'Space Grotesk', sans-serif; font-weight:600; letter-spacing:-0.01em; }
+  .mono{ font-family:'IBM Plex Mono', monospace; letter-spacing:0.02em; }
+  a{ text-decoration:none; }
 
-  <meta charset="UTF-8">
+  .side{ flex:1; background:var(--navy); color:var(--white); display:flex; flex-direction:column; justify-content:space-between; padding:48px; position:relative; overflow:hidden; }
+  .side-top .logo-text{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:20px; }
+  .side-top .logo-text span{ color:var(--copper-light); }
+  .side-mid{ position:relative; z-index:2; max-width:380px; }
+  .side-mid .eyebrow{ font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--copper-light); margin-bottom:16px; display:block; }
+  .side-mid h1{ font-size:32px; line-height:1.2; margin-bottom:14px; }
+  .side-mid p{ color:#B7BFCC; font-size:14.5px; }
+  .side-bottom{ font-size:12.5px; color:#8792A3; position:relative; z-index:2; }
+  .side-svg{ position:absolute; inset:0; opacity:0.5; }
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  .form-side{ flex:1; display:flex; align-items:center; justify-content:center; padding:48px; }
+  .form-card{ width:100%; max-width:380px; }
+  .form-card h2{ font-size:26px; margin-bottom:8px; }
+  .form-card .sub{ color:var(--steel); font-size:14px; margin-bottom:32px; }
 
-  <title>Login | UMAMTEK</title>
+  label{ display:block; font-size:13px; color:var(--steel); margin-bottom:8px; }
+  .input-row{ display:flex; margin-bottom:6px; }
+  .prefix{ display:flex; align-items:center; padding:0 14px; border:1px solid rgba(20,24,31,0.18); border-right:none; background:var(--ivory-2); font-family:'IBM Plex Mono',monospace; font-size:14px; color:var(--steel); }
+  input[type="tel"], input[type="password"]{
+    flex:1; padding:13px 14px; border:1px solid rgba(20,24,31,0.18); font-size:14.5px; font-family:'Inter',sans-serif; background:var(--white); outline:none; width:100%;
+  }
+  input:focus{ border-color:var(--copper); }
+  .field{ margin-bottom:20px; }
+  .pass-wrap{ position:relative; }
+  .pass-wrap input{ padding-right:44px; }
+  .pass-toggle{ position:absolute; right:12px; top:50%; transform:translateY(-50%); background:none; border:none; font-size:12px; color:var(--steel); cursor:pointer; font-family:'Inter',sans-serif; }
+  .row-between{ display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+  .row-between label{ margin-bottom:0; }
+  .row-between a{ font-size:12.5px; color:var(--copper); font-weight:600; }
+  .err{ font-size:12.5px; color:var(--danger); margin-top:6px; display:none; }
 
-  <meta
-    name="description"
-    content="Login to your UMAMTEK account to book services, track bookings and manage invoices."
-  >
+  .btn{ display:inline-flex; align-items:center; justify-content:center; width:100%; padding:13px 22px; border-radius:2px; font-size:14.5px; font-weight:600; cursor:pointer; border:1px solid transparent; transition:all .2s; font-family:'Inter',sans-serif; }
+  .btn-copper{ background:var(--copper); color:var(--white); }
+  .btn-copper:hover{ background:var(--copper-light); }
+  .btn-copper:disabled{ opacity:0.55; cursor:not-allowed; }
 
-  <link
-    rel="stylesheet"
-    href="./css/style.css?v=31"
-  >
+  .status{ font-size:13px; margin-top:14px; display:none; padding:10px 12px; border-radius:2px; }
+  .status.ok{ background:#E7F0E3; color:#2E5E22; }
+  .status.info{ background:#FBEAE8; color:var(--danger); }
 
-  <link
-    rel="icon"
-    href="favicon.png"
-  >
+  .foot-link{ text-align:center; margin-top:26px; font-size:13.5px; color:var(--steel); }
+  .foot-link a{ color:var(--copper); font-weight:600; }
 
-  <link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
-  >
-
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
-  >
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet"
-  >
-
+  @media (max-width: 860px){ .side{ display:none; } .form-side{ padding:32px 22px; } }
+</style>
 </head>
-
-
 <body>
 
-
-<!-- =====================================================
-     NAVBAR
-===================================================== -->
-
-<nav class="navbar">
-
-  <div class="logo-area">
-
-    <a href="index.html">
-
-      <img
-        src="logo.png"
-        class="site-logo"
-        alt="UMAMTEK Logo"
-      >
-
-    </a>
-
+<div class="side">
+  <svg class="side-svg" viewBox="0 0 500 700" preserveAspectRatio="xMidYMid slice">
+    <g stroke="rgba(217,148,79,0.28)" stroke-width="1.2" fill="none">
+      <path d="M50 80 H220 V260"/>
+      <path d="M220 260 H420"/>
+      <path d="M220 260 V460 H90"/>
+      <path d="M420 260 V520 H260 V620"/>
+    </g>
+    <g fill="#0B1220" stroke="#D9944F" stroke-width="1.4">
+      <circle cx="50" cy="80" r="6"/><circle cx="220" cy="260" r="6"/>
+      <circle cx="420" cy="260" r="6"/><circle cx="90" cy="460" r="6"/>
+      <circle cx="260" cy="620" r="6"/>
+    </g>
+  </svg>
+  <div class="side-top"><div class="logo-text">UMAM<span>TEK</span></div></div>
+  <div class="side-mid">
+    <span class="eyebrow">Customer account</span>
+    <h1>Track every job, from booking to invoice.</h1>
+    <p>Log in to view active bookings, technician status, service history and downloadable invoices — all in one place.</p>
   </div>
+  <div class="side-bottom mono">SECURED LOGIN</div>
+</div>
 
+<div class="form-side">
+  <div class="form-card">
+    <h2>Log in to UMAMTEK</h2>
+    <p class="sub">Use the mobile number and password you signed up with.</p>
 
-  <button
-    type="button"
-    class="menu-btn"
-    id="menuBtn"
-    aria-label="Open menu"
-    onclick="toggleMenu()"
-  >
-    ☰
-  </button>
-
-
-  <ul
-    class="nav-links"
-    id="navLinks"
-  >
-
-    <li>
-      <a href="index.html">
-        Home
-      </a>
-    </li>
-
-    <li>
-      <a href="services.html">
-        Services
-      </a>
-    </li>
-
-    <li>
-      <a href="contact.html">
-        Contact
-      </a>
-    </li>
-
-    <li>
-      <a href="signup.html">
-        Signup
-      </a>
-    </li>
-
-  </ul>
-
-
-  <div class="nav-actions">
-
-  </div>
-
-</nav>
-
-
-
-<!-- =====================================================
-     LOGIN SECTION
-===================================================== -->
-
-<main>
-
-  <section class="section auth-section">
-
-    <div class="auth-card">
-
-
-      <!-- LOGIN HEADER -->
-
-      <div class="auth-header">
-
-        <div class="auth-icon">
-          🔐
-        </div>
-
-        <h1>
-          Customer Login
-        </h1>
-
-        <p>
-          Login to your UMAMTEK account to book services,
-          track bookings and manage invoices.
-        </p>
-
+    <div class="field">
+      <label for="phone">Mobile number</label>
+      <div class="input-row">
+        <span class="prefix">+91</span>
+        <input type="tel" id="phone" placeholder="98765 43210" maxlength="10" inputmode="numeric">
       </div>
-
-
-
-      <!-- LOGIN FORM -->
-
-      <form
-        id="loginForm"
-        class="auth-form"
-      >
-
-
-        <!-- MOBILE -->
-
-        <div class="form-group">
-
-          <label for="loginPhone">
-            Mobile Number
-          </label>
-
-          <input
-            type="tel"
-            id="loginPhone"
-            name="phone"
-            placeholder="Enter 10 digit mobile number"
-            inputmode="numeric"
-            autocomplete="tel"
-            maxlength="10"
-            required
-          >
-
-          <small>
-            Use the mobile number registered with UMAMTEK.
-          </small>
-
-        </div>
-
-
-
-        <!-- PASSWORD -->
-
-        <div class="form-group">
-
-          <label for="loginPassword">
-            Password
-          </label>
-
-          <input
-            type="password"
-            id="loginPassword"
-            name="password"
-            placeholder="Enter your password"
-            autocomplete="current-password"
-            minlength="6"
-            required
-          >
-
-        </div>
-
-
-
-        <!-- LOGIN BUTTON -->
-
-        <button
-          type="submit"
-          class="auth-submit"
-          id="loginButton"
-        >
-
-          Login to UMAMTEK
-
-        </button>
-
-
-      </form>
-
-
-
-      <!-- FORGOT PASSWORD -->
-
-      <div class="auth-forgot">
-
-        <button
-          type="button"
-          onclick="forgotPasswordWithPhone()"
-        >
-          Forgot Password?
-        </button>
-
-      </div>
-
-
-
-      <!-- SIGNUP -->
-
-      <div class="auth-signup">
-
-        <p>
-          Don't have an account?
-        </p>
-
-        <a href="signup.html">
-          Create UMAMTEK Account
-        </a>
-
-      </div>
-
-
-
-      <!-- QUOTE -->
-
-      <div class="um-quote">
-
-        <strong>
-          UMAMTEK
-        </strong>
-
-        <span>
-          Your Project Our Priority
-        </span>
-
-      </div>
-
-
+      <div class="err" id="phone-err">Enter a valid 10-digit mobile number.</div>
     </div>
 
-  </section>
+    <div class="field">
+      <div class="row-between">
+        <label for="password">Password</label>
+        <a href="forgot-password.html">Forgot password?</a>
+      </div>
+      <div class="pass-wrap">
+        <input type="password" id="password" placeholder="Your password">
+        <button type="button" class="pass-toggle" id="toggle-pass">Show</button>
+      </div>
+      <div class="err" id="pass-err">Enter your password.</div>
+    </div>
 
-</main>
+    <button class="btn btn-copper" id="login-btn">Log in</button>
 
+    <div class="status" id="status-box"></div>
 
+    <p class="foot-link">Don't have an account? <a href="signup.html">Create one</a></p>
+  </div>
+</div>
 
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer class="premium-footer">
-
-  <h2>
-    UMAMTEK
-  </h2>
-
-  <p>
-    Your Project Our Priority
-  </p>
-
-  <p>
-    📞 9065760751
-  </p>
-
-  <p>
-    ✉️ shaheumam802@gmail.com
-  </p>
-
-  <p class="footer-copy">
-    © 2026 UMAMTEK. All Rights Reserved.
-  </p>
-
-</footer>
-
-
-
-<!-- =====================================================
-     SCRIPTS
-===================================================== -->
-
-<script src="js/script.js"></script>
-
-<script
-  type="module"
-  src="js/firebase.js?v=506"
-></script>
-
-
-
-<!-- =====================================================
-     LOGIN FORM HANDLER
-===================================================== -->
+<!-- Firebase SDK (compat) -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+<script src="firebase-config.js"></script>
 
 <script>
-
-document.addEventListener("DOMContentLoaded", function(){
-
-  const loginForm =
-    document.getElementById("loginForm");
-
-  if(!loginForm){
-    return;
+  // UMAMTEK logs in with mobile number + password. Firebase Auth itself
+  // only supports email+password or phone+OTP, not phone+password — so
+  // each account is stored under a hidden synthetic email built from the
+  // phone number. The customer never sees or types this; they only ever
+  // enter their mobile number.
+  function phoneToEmail(tenDigits){
+    return 'p' + tenDigits + '@umamtek-users.app';
   }
 
+  const phoneInput = document.getElementById('phone');
+  const phoneErr = document.getElementById('phone-err');
+  const passInput = document.getElementById('password');
+  const passErr = document.getElementById('pass-err');
+  const loginBtn = document.getElementById('login-btn');
+  const statusBox = document.getElementById('status-box');
+  const toggleBtn = document.getElementById('toggle-pass');
 
-  loginForm.addEventListener("submit", function(event){
-
-    event.preventDefault();
-
-
-    if(
-      typeof window.loginWithPhonePassword !==
-      "function"
-    ){
-
-      alert(
-        "Login system is still loading. Please try again."
-      );
-
-      return;
-
-    }
-
-
-    window.loginWithPhonePassword();
-
+  toggleBtn.addEventListener('click', () => {
+    const isPass = passInput.type === 'password';
+    passInput.type = isPass ? 'text' : 'password';
+    toggleBtn.textContent = isPass ? 'Hide' : 'Show';
   });
 
-});
+  function showStatus(msg, type){
+    statusBox.textContent = msg;
+    statusBox.className = 'status ' + type;
+    statusBox.style.display = 'block';
+  }
 
+  function validPhone(v){ return /^[6-9]\d{9}$/.test(v); }
+
+  loginBtn.addEventListener('click', () => {
+    const raw = phoneInput.value.trim();
+    const pass = passInput.value;
+    let ok = true;
+
+    if(!validPhone(raw)){ phoneErr.style.display = 'block'; ok = false; } else { phoneErr.style.display = 'none'; }
+    if(!pass){ passErr.style.display = 'block'; ok = false; } else { passErr.style.display = 'none'; }
+    if(!ok) return;
+
+    loginBtn.disabled = true;
+    loginBtn.textContent = 'Logging in...';
+    statusBox.style.display = 'none';
+
+    firebase.auth().signInWithEmailAndPassword(phoneToEmail(raw), pass)
+      .then((userCredential) => {
+        showStatus('Logged in successfully. Redirecting...', 'ok');
+        // window.location.href = 'dashboard.html';
+      })
+      .catch((error) => {
+        let msg = 'Login failed. Check your number and password.';
+        if(error.code === 'auth/user-not-found') msg = 'No account found for this number. Sign up first.';
+        if(error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') msg = 'Incorrect password. Try again or reset it.';
+        if(error.code === 'auth/too-many-requests') msg = 'Too many attempts. Try again in a few minutes.';
+        showStatus(msg, 'info');
+        loginBtn.disabled = false;
+        loginBtn.textContent = 'Log in';
+      });
+  });
+
+  passInput.addEventListener('keydown', (e) => { if(e.key === 'Enter') loginBtn.click(); });
 </script>
 
-
 </body>
-
 </html>
