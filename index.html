@@ -1,815 +1,356 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>UMAMTEK | Electrician in Bhagalpur</title>
-
-<meta name="description" content="Best electrician in Bhagalpur for house wiring, commercial wiring, CCTV installation and electrical contractor work.">
-
-<meta name="keywords" content="electrician in bhagalpur, electrician near me, best electrician in bhagalpur, house wiring bhagalpur, commercial wiring bhagalpur, cctv installation bhagalpur, inverter installation bhagalpur, electrical contractor bhagalpur, labour chowk bhagalpur, plumber near me, hardware shop near me, electrician hussainpur, electrician mirjanhat, electrician aliganj, electrician near railway station">
-
-<link rel="stylesheet" href="./css/style.css?v=25">
-
-<link rel="icon" href="favicon.png">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Electrician",
-  "name": "UMAMTEK",
-  "url": "https://umamtek.com",
-  "telephone": "+919065760751",
-  "email": "shaheumam802@gmail.com",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "G.Lane, Hussainpur",
-    "addressLocality": "Bhagalpur",
-    "addressRegion": "Bihar",
-    "addressCountry": "IN"
-  },
-  "areaServed": [
-    "Bhagalpur",
-    "Hussainpur",
-    "Tatarpur",
-    "Ishakchak",
-    "Mirjanhat",
-    "Sabour",
-    "Nathnagar",
-    "Goradih"
-  ],
-  "description": "UMAMTEK provides professional electrician and contractor services in Bhagalpur including house wiring, commercial wiring, CCTV installation, inverter setup, fault repair and electrical maintenance.",
-  "sameAs": [
-    "https://www.instagram.com/shaheumam_7_",
-    "https://www.facebook.com/umam.shahe.3/"
-  ]
-}
-</script>
+<title>UMAMTEK — Precision Electrical &amp; Contractor Services</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+  :root{
+    --navy:#0B1220;
+    --navy-2:#131C2E;
+    --navy-3:#1B2740;
+    --ivory:#F6F3EC;
+    --ivory-2:#EEE9DC;
+    --copper:#B8763E;
+    --copper-light:#D9944F;
+    --brass:#D9B36C;
+    --steel:#5B6472;
+    --ink:#14181F;
+    --white:#FFFFFF;
+    --line-navy: rgba(217,148,79,0.25);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Inter', sans-serif;
+    color:var(--ink);
+    background:var(--ivory);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{ font-family:'Space Grotesk', sans-serif; font-weight:600; letter-spacing:-0.01em; }
+  .mono{ font-family:'IBM Plex Mono', monospace; letter-spacing:0.02em; }
+  a{ text-decoration:none; color:inherit; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 32px; }
+  .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; }
 
-.hero{
-position:relative;
-overflow:hidden;
-background:linear-gradient(120deg,#050505,#111,#2b2100,#050505);
-background-size:300% 300%;
-animation:heroGradient 7s ease infinite;
-}
+  /* HEADER */
+  header{ position:sticky; top:0; z-index:50; background:rgba(11,18,32,0.96); backdrop-filter:blur(6px); border-bottom:1px solid rgba(217,148,79,0.18); }
+  .nav-row{ display:flex; align-items:center; justify-content:space-between; padding:18px 0; }
+  .logo{ display:flex; align-items:center; gap:10px; }
+  .logo-mark{ width:34px; height:34px; border:1.5px solid var(--copper-light); border-radius:2px; display:flex; align-items:center; justify-content:center; }
+  .logo-mark svg{ width:18px; height:18px; }
+  .logo-text{ color:var(--white); font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:18px; letter-spacing:0.02em; }
+  .logo-text span{ color:var(--copper-light); }
+  nav ul{ list-style:none; display:flex; gap:34px; }
+  nav a{ color:#CBD2DE; font-size:14px; font-weight:500; transition:color .2s; }
+  nav a:hover{ color:var(--copper-light); }
+  .nav-cta{ display:flex; align-items:center; gap:16px; }
+  .btn{ display:inline-flex; align-items:center; justify-content:center; padding:11px 22px; border-radius:2px; font-size:14px; font-weight:600; font-family:'Inter',sans-serif; cursor:pointer; transition:all .2s; border:1px solid transparent; }
+  .btn-copper{ background:var(--copper); color:var(--white); }
+  .btn-copper:hover{ background:var(--copper-light); }
+  .btn-outline-dark{ border-color:rgba(255,255,255,0.25); color:var(--white); }
+  .btn-outline-dark:hover{ border-color:var(--copper-light); color:var(--copper-light); }
+  .btn-outline-light{ border-color:rgba(20,24,31,0.2); color:var(--ink); }
+  .btn-outline-light:hover{ border-color:var(--copper); color:var(--copper); }
 
-.hero::before{
-content:"";
-position:absolute;
-inset:0;
-background:
-radial-gradient(circle at 20% 30%,rgba(245,179,1,0.35),transparent 25%),
-radial-gradient(circle at 80% 20%,rgba(255,204,34,0.25),transparent 22%),
-radial-gradient(circle at 50% 80%,rgba(245,179,1,0.22),transparent 25%);
-animation:sparkFloat 5s ease-in-out infinite alternate;
-z-index:0;
-}
+  /* HERO */
+  .hero{ position:relative; background:var(--navy); color:var(--white); overflow:hidden; padding:110px 0 90px; }
+  .hero-grid{ position:absolute; inset:0; opacity:0.5; }
+  .hero-inner{ position:relative; z-index:2; display:grid; grid-template-columns:1.1fr 0.9fr; gap:60px; align-items:center; }
+  .hero-eyebrow{ color:var(--copper-light); margin-bottom:20px; }
+  .hero h1{ font-size:48px; line-height:1.12; margin-bottom:22px; }
+  .hero h1 em{ font-style:normal; color:var(--brass); }
+  .hero p{ color:#B7BFCC; font-size:16.5px; max-width:480px; margin-bottom:34px; }
+  .hero-btns{ display:flex; gap:14px; margin-bottom:56px; }
+  .stat-row{ display:flex; gap:0; border-top:1px solid rgba(255,255,255,0.12); padding-top:26px; }
+  .stat{ flex:1; padding-right:20px; }
+  .stat-num{ font-family:'Space Grotesk',sans-serif; font-size:26px; color:var(--white); font-weight:600; }
+  .stat-label{ font-size:12px; color:#8792A3; margin-top:4px; }
+  .schematic{ position:relative; z-index:2; }
 
-.hero::after{
-content:"⚡";
-position:absolute;
-right:10%;
-top:20%;
-font-size:120px;
-opacity:0.18;
-animation:boltMove 2.5s infinite alternate;
-z-index:0;
-}
+  /* TRUST STRIP */
+  .trust{ background:var(--ivory-2); padding:26px 0; border-bottom:1px solid rgba(20,24,31,0.06); }
+  .trust-inner{ display:flex; align-items:center; gap:36px; flex-wrap:wrap; justify-content:space-between; }
+  .trust-label{ color:var(--steel); font-size:12px; white-space:nowrap; }
+  .trust-logos{ display:flex; gap:32px; flex-wrap:wrap; }
+  .trust-logos span{ font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:600; color:#3A3F49; opacity:0.65; }
 
-.hero-content{
-position:relative;
-z-index:2;
-}
+  /* SECTION HEADERS */
+  .section{ padding:96px 0; }
+  .section-head{ max-width:600px; margin-bottom:56px; }
+  .section-head .eyebrow{ color:var(--copper); margin-bottom:14px; display:block; }
+  .section-head h2{ font-size:32px; color:var(--ink); }
+  .section-head p{ color:var(--steel); margin-top:14px; font-size:15.5px; }
 
-.hero h1{
-animation:fadeUp 1s ease forwards, textGlow 2s ease-in-out infinite alternate;
-}
+  /* SERVICES */
+  .services{ background:var(--ivory); }
+  .service-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(20,24,31,0.1); border:1px solid rgba(20,24,31,0.1); }
+  .service-card{ background:var(--ivory); padding:32px 28px; transition:background .2s; }
+  .service-card:hover{ background:var(--white); }
+  .service-code{ color:var(--copper); font-size:11px; margin-bottom:18px; display:block; }
+  .service-card h3{ font-size:18px; color:var(--ink); margin-bottom:10px; }
+  .service-card p{ color:var(--steel); font-size:14px; }
 
-.hero p,
-.hero-tag,
-.hero-buttons,
-.hero-stats{
-animation:fadeUp 1.2s ease forwards;
-}
+  /* PROCESS */
+  .process{ background:var(--navy); color:var(--white); }
+  .process .section-head h2{ color:var(--white); }
+  .process .section-head p{ color:#A9B1BE; }
+  .process-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative; }
+  .process-row::before{ content:''; position:absolute; top:19px; left:0; right:0; height:1px; background:rgba(217,148,79,0.3); }
+  .step{ position:relative; padding-right:24px; }
+  .step-num{ width:38px; height:38px; border-radius:50%; background:var(--navy); border:1px solid var(--copper-light); color:var(--copper-light); display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace; font-size:13px; margin-bottom:22px; position:relative; z-index:2; }
+  .step h4{ font-size:16px; margin-bottom:8px; color:var(--white); }
+  .step p{ font-size:13.5px; color:#9AA3B2; }
 
-.hero-stats div{
-transition:0.35s;
-}
+  /* FEATURES */
+  .features{ background:var(--ivory); }
+  .feature-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:28px; }
+  .feature{ border-top:2px solid var(--copper); padding-top:18px; }
+  .feature h4{ font-size:15.5px; margin-bottom:8px; }
+  .feature p{ font-size:13.5px; color:var(--steel); }
 
-.hero-stats div:hover{
-transform:translateY(-8px) scale(1.05);
-}
+  /* TESTIMONIALS */
+  .testimonials{ background:var(--ivory-2); }
+  .test-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .test-card{ background:var(--white); border:1px solid rgba(20,24,31,0.08); padding:28px; border-radius:2px; }
+  .test-quote{ font-size:14.5px; color:#2C313B; margin-bottom:22px; }
+  .test-name{ font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:600; }
+  .test-role{ font-size:12px; color:var(--steel); margin-top:2px; }
 
-.card{
-transition:0.35s ease;
-}
+  /* CTA BANNER */
+  .cta-banner{ background:var(--copper); color:var(--white); padding:70px 0; }
+  .cta-inner{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:24px; }
+  .cta-inner h2{ font-size:28px; color:var(--white); max-width:520px; }
+  .cta-inner p{ color:rgba(255,255,255,0.85); margin-top:8px; font-size:14.5px; }
+  .cta-banner .btn-outline-dark{ border-color:rgba(255,255,255,0.5); }
+  .cta-banner .btn-copper{ background:var(--navy); }
+  .cta-banner .btn-copper:hover{ background:var(--navy-2); }
 
-.card:hover{
-transform:translateY(-10px);
-box-shadow:0 25px 60px rgba(245,179,1,0.22);
-}
+  /* FOOTER */
+  footer{ background:var(--navy); color:#9AA3B2; padding:64px 0 28px; }
+  .foot-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; margin-bottom:50px; }
+  .foot-brand .logo-text{ margin-bottom:14px; display:inline-block; }
+  .foot-brand p{ font-size:13.5px; max-width:280px; }
+  .foot-col h5{ color:var(--white); font-size:13px; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:16px; font-family:'IBM Plex Mono',monospace; font-weight:500; }
+  .foot-col ul{ list-style:none; }
+  .foot-col li{ margin-bottom:10px; font-size:13.5px; }
+  .foot-col a:hover{ color:var(--copper-light); }
+  .foot-bottom{ border-top:1px solid rgba(255,255,255,0.1); padding-top:22px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:12.5px; }
 
-.primary-btn,
-.secondary-btn,
-.floating-whatsapp{
-transition:0.3s ease;
-}
-
-.primary-btn:hover,
-.secondary-btn:hover{
-transform:translateY(-4px) scale(1.04);
-}
-
-.floating-whatsapp{
-animation:whatsappPulse 1.8s infinite;
-}
-
-.premium-glow{
-position:absolute;
-width:340px;
-height:340px;
-background:rgba(245,179,1,0.35);
-filter:blur(90px);
-border-radius:50%;
-top:120px;
-right:50px;
-z-index:0;
-animation:glowMove 4s infinite alternate;
-}
-
-@keyframes heroGradient{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
-}
-
-@keyframes sparkFloat{
-from{transform:translateY(0) scale(1);}
-to{transform:translateY(35px) scale(1.08);}
-}
-
-@keyframes boltMove{
-from{transform:translateY(0) rotate(-8deg);}
-to{transform:translateY(30px) rotate(8deg);}
-}
-
-@keyframes fadeUp{
-from{
-opacity:0;
-transform:translateY(35px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
-@keyframes textGlow{
-from{
-text-shadow:0 0 0 rgba(245,179,1,0);
-}
-to{
-text-shadow:0 0 25px rgba(245,179,1,0.45);
-}
-}
-
-@keyframes whatsappPulse{
-0%{
-box-shadow:0 0 0 0 rgba(37,211,102,0.6);
-}
-70%{
-box-shadow:0 0 0 18px rgba(37,211,102,0);
-}
-100%{
-box-shadow:0 0 0 0 rgba(37,211,102,0);
-}
-}
-
+  @media (max-width: 900px){
+    .hero-inner{ grid-template-columns:1fr; }
+    .schematic{ display:none; }
+    .service-grid, .process-row, .feature-grid, .test-grid{ grid-template-columns:1fr 1fr; }
+    .foot-grid{ grid-template-columns:1fr 1fr; }
+    .hero h1{ font-size:36px; }
+  }
 </style>
 </head>
-<div class="ai-chatbot">
-
-<button class="ai-chat-btn" onclick="toggleAIChat()">
-🤖
-</button>
-
-<div class="ai-chat-box" id="aiChatBox">
-
-<div class="ai-chat-header">
-UMAMTEK Assistant
-<span onclick="toggleAIChat()">×</span>
-</div>
-
-<div class="ai-chat-body" id="aiChatBody">
-
-<p class="bot-msg">
-Hi 😄 मैं UMAMTEK Assistant हूँ। आप किस service के लिए help चाहते हैं?
-</p>
-
-</div>
-
-<div class="ai-chat-options">
-
-<button onclick="aiReply('electrician')">Electrician</button>
-<button onclick="aiReply('cctv')">CCTV</button>
-<button onclick="aiReply('wiring')">Wiring</button>
-<button onclick="aiReply('booking')">Book Service</button>
-<button onclick="aiReply('contact')">Contact</button>
-
-</div>
-
-</div>
-
-</div>
-  
 <body>
 
-
-</div>
-
-<nav class="navbar">
-
-<div class="logo-area">
-
-<img src="logo.png" class="site-logo">
-
-</div>
-
-<button class="menu-btn" onclick="toggleMenu()">☰</button>
-
-<ul class="nav-links" id="navLinks">
-
-<li><a href="index.html">Home</a></li>
-<li><a href="about.html">About Us</a></li>
-<li><a href="services.html">Services</a></li>
-<li><a href="products.html">Products</a></li>
-<li><a href="projects.html">Projects</a></li>
-<li><a href="career.html">Career</a></li>
-<li><a href="complaints.html">Complaints</a></li>
-<li><a href="contact.html">Contact</a></li>
-<li><a href="login.html">Login</a></li>
-<li><a href="signup.html">Signup</a></li>  
-
-</ul>
-
-<div class="nav-actions">
-
-
-
-</div>
-
-</nav>
+<header>
+  <div class="wrap nav-row">
+    <div class="logo">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#D9944F" stroke-width="1.6"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg>
+      </div>
+      <div class="logo-text">UMAM<span>TEK</span></div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#process">How it works</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a href="#" class="btn btn-outline-dark">Login</a>
+      <a href="#" class="btn btn-copper">Book Service</a>
+    </div>
+  </div>
+</header>
 
 <section class="hero">
-  <div class="premium-glow"></div>
-
-<div class="hero-content">
-
-<p class="hero-tag">
-⚡ Trusted Electrical & Contractor Services
-</p>
-
-<h1>
-Powering Homes, Offices & Businesses Across Bhagalpur
-</h1>
-
-<p>
-Professional electrician, contractor, wiring, CCTV and maintenance solutions with trusted local support.
-</p>
-
-<div class="hero-buttons">
-
-<a href="tel:9065760751" class="secondary-btn">
-Call Now
-</a>
-
-</div>
-
-<div class="hero-stats">
-
-<div>
-<h3>250+</h3>
-<p>Projects</p>
-</div>
-
-<div>
-<h3>10000+</h3>
-<p>Clients</p>
-</div>
-
-<div>
-<h3>24x7</h3>
-<p>Support</p>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-  <!-- WHY CHOOSE UMAMTEK -->
-
-<section class="section">
-
-  <h2 class="section-title">Why Choose UMAMTEK?</h2>
-
-  <p class="section-subtitle">
-    UMAMTEK is designed to make local services simple, transparent and reliable — from booking to worker assignment, live tracking, billing and service history.
-  </p>
-
-  <div class="card-grid">
-
-    <div class="card">
-      <h3>✅ Verified Service Approach</h3>
-      <p>
-        We focus on assigning suitable workers based on customer requirements, worker skill and service category.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>📍 Live Location Based Booking</h3>
-      <p>
-        Customers can add live location so UMAMTEK can calculate distance, travel charge and assign the right technician.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>💰 Transparent Billing</h3>
-      <p>
-        Before booking, customers can see real market rate, UMAMTEK offer rate, travel charge and total payable amount.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>🚗 Technician Tracking</h3>
-      <p>
-        After assignment, customers can track technician location, distance and estimated arrival time.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>🧾 Invoice & Service History</h3>
-      <p>
-        Completed service records, payment status and invoice download help customers keep everything organized.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>👷 Worker Value</h3>
-      <p>
-        UMAMTEK gives skilled local workers better visibility, professional identity and digital work opportunities.
-      </p>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- HOW IT WORKS -->
-
-<section class="section">
-
-  <h2 class="section-title">How UMAMTEK Works</h2>
-
-  <p class="section-subtitle">
-    Book trusted local services in a few simple steps.
-  </p>
-
-  <div class="card-grid">
-
-    <div class="card">
-      <h3>1. Select Your Worker</h3>
-      <p>
-        Choose electrician, plumber, AC technician, carpenter, painter, mason, labour, installer or other worker category.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>2. Select Your Work</h3>
-      <p>
-        Search and select your exact work. If your work is not listed, choose “Other” and describe your requirement.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>3. View Estimated Bill</h3>
-      <p>
-        See real rate, UMAMTEK offer rate, travel charge and total payable before submitting your booking.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>4. Add Live Location</h3>
-      <p>
-        Add your live location so the service request can be processed with proper distance and tracking details.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>5. Technician Assigned</h3>
-      <p>
-        UMAMTEK admin or official team assigns a suitable worker based on skill, category and availability.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>6. Track & Complete</h3>
-      <p>
-        Track service status, technician ETA and get invoice after payment and work completion.
-      </p>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- WORKER CATEGORIES -->
-
-<section class="section">
-
-  <h2 class="section-title">Worker Categories</h2>
-
-  <p class="section-subtitle">
-    UMAMTEK is building a multi-category local service network for home, office, shop and commercial needs.
-  </p>
-
-  <div class="card-grid">
-
-    <div class="card"><h3>⚡ Electrician</h3><p>Wiring, fault repair, MCB, sockets, lights, fans, inverter, CCTV power and electrical installation.</p></div>
-
-    <div class="card"><h3>🚰 Plumber</h3><p>Leakage repair, tap fitting, pipe repair, drainage, bathroom fittings and water connection work.</p></div>
-
-    <div class="card"><h3>❄️ AC Technician</h3><p>AC servicing, installation support, cooling issue checking and AC electrical point setup.</p></div>
-
-    <div class="card"><h3>📹 CCTV Technician</h3><p>CCTV installation, DVR/NVR support, camera wiring, troubleshooting and security setup.</p></div>
-
-    <div class="card"><h3>🛠️ General Installer</h3><p>TV mount, wall rack, curtain rod, mirror, shelf, hooks and drill-based installation work.</p></div>
-
-    <div class="card"><h3>🧱 Mason / Labour</h3><p>Wall repair, plaster, tile repair, small construction support, shifting and site helper work.</p></div>
-
-    <div class="card"><h3>🪚 Carpenter</h3><p>Door repair, lock fitting, furniture repair, wooden shelf, cabinet, hinge and handle fitting.</p></div>
-
-    <div class="card"><h3>🎨 Painter</h3><p>Wall painting, touch-up, putty, primer, grill painting, waterproof coating and damp treatment.</p></div>
-
-    <div class="card"><h3>👷 Supervisor / Engineer</h3><p>Site visit, work inspection, project planning, estimate, safety check and quality monitoring.</p></div>
-
-  </div>
-
-</section>
-
-
-<!-- TRUST SECTION -->
-
-<section class="section">
-
-  <h2 class="section-title">Built for Trust & Transparency</h2>
-
-  <p class="section-subtitle">
-    UMAMTEK is not only a worker-finding platform. It is a managed service system where customers get booking records, technician details, tracking, payment information and support.
-  </p>
-
-  <div class="card" style="max-width:1100px;margin:auto;">
-
-    <div class="card-grid">
-
-      <div>
-        <h3>💡 Clear Pricing</h3>
-        <p>
-          Each listed work currently shows a market rate and UMAMTEK offer rate. Travel charges are calculated based on location.
-        </p>
+  <div class="hero-grid" id="heroSvgHolder"></div>
+  <div class="wrap hero-inner">
+    <div>
+      <span class="eyebrow hero-eyebrow">Precision Electrical &amp; Contractor Services — Bhagalpur</span>
+      <h1>Engineered trust,<br>wired into <em>every visit.</em></h1>
+      <p>UMAMTEK connects homes, offices and institutions across Bhagalpur with verified electricians, technicians and contractors — backed by transparent pricing, live tracking and a documented service record.</p>
+      <div class="hero-btns">
+        <a href="#" class="btn btn-copper">Book a service</a>
+        <a href="#" class="btn btn-outline-dark">Call 90657 60751</a>
       </div>
-
-      <div>
-        <h3>📲 Digital Booking</h3>
-        <p>
-          Customers can login, book service, check active bookings, completed history and cancelled requests.
-        </p>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-num mono">250+</div><div class="stat-label mono">PROJECTS DELIVERED</div></div>
+        <div class="stat"><div class="stat-num mono">10,000+</div><div class="stat-label mono">CUSTOMERS SERVED</div></div>
+        <div class="stat"><div class="stat-num mono">24×7</div><div class="stat-label mono">SUPPORT LINE</div></div>
       </div>
-
-      <div>
-        <h3>🚗 Live ETA</h3>
-        <p>
-          Customer can see technician distance, estimated arrival and route map after technician location is updated.
-        </p>
-      </div>
-
-      <div>
-        <h3>⭐ Reviews</h3>
-        <p>
-          Customers can review completed services. Public review display will be added soon on the homepage.
-        </p>
-      </div>
-
     </div>
-
-  </div>
-
-</section>
-
-
-<!-- FINAL CTA -->
-
-<section class="section">
-
-  <div class="card" style="max-width:1050px;margin:auto;text-align:center;">
-
-    <h2>Ready to book a service?</h2>
-
-    <p>
-      Select your worker, choose your work, view bill, add live location and submit your booking request with UMAMTEK.
-    </p>
-
-    <div style="display:flex;justify-content:center;gap:15px;flex-wrap:wrap;margin-top:25px;">
-
-      <a href="booking.html" class="primary-btn" style="display:inline-block;text-decoration:none;padding:14px 24px;">
-        Book Service Now
-      </a>
-
-      <a href="career.html" class="secondary-btn" style="display:inline-block;text-decoration:none;padding:14px 24px;">
-        Join as Worker
-      </a>
-
-      <a href="contact.html" class="secondary-btn" style="display:inline-block;text-decoration:none;padding:14px 24px;">
-        Contact UMAMTEK
-      </a>
-
+    <div class="schematic">
+      <svg viewBox="0 0 420 380" width="100%" height="100%">
+        <g stroke="rgba(217,148,79,0.35)" stroke-width="1.2" fill="none">
+          <path d="M40 60 H180 V150"/>
+          <path d="M180 150 H340"/>
+          <path d="M180 150 V260 H60"/>
+          <path d="M340 150 V280 H220 V340"/>
+          <path d="M60 260 V330"/>
+        </g>
+        <g fill="#0B1220" stroke="#D9944F" stroke-width="1.4">
+          <circle cx="40" cy="60" r="6"/>
+          <circle cx="180" cy="150" r="6"/>
+          <circle cx="340" cy="150" r="6"/>
+          <circle cx="60" cy="260" r="6"/>
+          <circle cx="220" cy="340" r="6"/>
+          <circle cx="60" cy="330" r="6"/>
+        </g>
+        <g font-family="IBM Plex Mono" font-size="10" fill="#8792A3">
+          <text x="52" y="55">CUSTOMER</text>
+          <text x="192" y="145">BOOKING</text>
+          <text x="352" y="145">TECHNICIAN</text>
+          <text x="20" y="280">TRACKING</text>
+          <text x="184" y="358">INVOICE</text>
+          <text x="72" y="345">HISTORY</text>
+        </g>
+      </svg>
     </div>
-
   </div>
-
 </section>
 
-<section class="section">
-
-<h2 class="section-title">
-Meet The Founder
-</h2>
-
-<div class="card-grid">
-
-<div class="card">
-
-<h3>M.S. UMAM</h3>
-
-<p><strong>Founder & CEO, UMAMTEK</strong></p>
-
-<br>
-
-<p>
-A young entrepreneur focused on building trusted electrical and contractor services in Bhagalpur.
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>Vision</h3>
-
-<p>
-To connect customers with reliable electricians, workers and contractor solutions under one professional platform.
-</p>
-
-</div>
-
-</div>
-
+<section class="trust">
+  <div class="wrap trust-inner">
+    <span class="trust-label mono">TRUSTED BY LEADING INSTITUTIONS ACROSS BHAGALPUR</span>
+    <div class="trust-logos">
+      <span>Model Hospital</span>
+      <span>LNJPN Hospital</span>
+      <span>Bank of India</span>
+      <span>UCO Bank</span>
+      <span>Goradih Hospital</span>
+    </div>
+  </div>
 </section>
 
-  <section class="ai-banner">
-
-<div class="ai-banner-content">
-
-<p class="ai-tag">
-⚡ NEXT GENERATION ELECTRICAL SOLUTIONS
-</p>
-
-<h2>
-Smart Electrical Services With Professional Contractor Support
-</h2>
-
-<p>
-UMAMTEK combines trusted local workforce with modern electrical solutions for homes, hospitals, offices and commercial projects across Bhagalpur.
-</p>
-
-<a href="services.html" class="primary-btn">
-Explore Services
-</a>
-
-</div>
-
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Service Categories</span>
+      <h2>One platform, every trade you need on site</h2>
+      <p>Each category is staffed by verified, skill-matched workers — dispatched with a documented rate card and travel estimate before you confirm.</p>
+    </div>
+    <div class="service-grid">
+      <div class="service-card"><span class="service-code mono">WO / ELEC</span><h3>Electrical</h3><p>Wiring, fault repair, MCB and DB box work, fan, light and inverter installation.</p></div>
+      <div class="service-card"><span class="service-code mono">WO / CCTV</span><h3>CCTV &amp; Security</h3><p>Camera installation, DVR/NVR setup, wiring and troubleshooting support.</p></div>
+      <div class="service-card"><span class="service-code mono">WO / PLMB</span><h3>Plumbing</h3><p>Leakage repair, tap and sink fitting, drainage and water tank connection.</p></div>
+      <div class="service-card"><span class="service-code mono">WO / AC-T</span><h3>AC Technician</h3><p>Installation support, servicing, cooling checks and stabilizer connection.</p></div>
+      <div class="service-card"><span class="service-code mono">WO / CARP</span><h3>Carpenter</h3><p>Door and lock fitting, furniture repair, shelf and cabinet work.</p></div>
+      <div class="service-card"><span class="service-code mono">WO / MASN</span><h3>Mason &amp; Construction</h3><p>Wall and plaster repair, tile work, cement patching and site support.</p></div>
+    </div>
+  </div>
 </section>
 
-<section class="section">
-
-<h2 class="section-title">
-Why Choose UMAMTEK
-</h2>
-
-<div class="card-grid">
-
-<div class="card">
-
-<h3>Professional Team</h3>
-
-<p>
-Experienced electricians and contractor workers.
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>Fast Support</h3>
-
-<p>
-Quick response and reliable service.
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>Trusted Service</h3>
-
-<p>
-Focused on customer satisfaction and quality workmanship.
-</p>
-
-</div>
-
-</div>
-
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" style="color:var(--brass)">How it works</span>
+      <h2>From request to invoice, in four steps</h2>
+      <p>A structured booking flow built for accountability — every stage is logged against your service record.</p>
+    </div>
+    <div class="process-row">
+      <div class="step"><div class="step-num">01</div><h4>Select worker &amp; work</h4><p>Choose your trade and describe the exact job you need done.</p></div>
+      <div class="step"><div class="step-num">02</div><h4>Review the bill</h4><p>See the market rate, UMAMTEK rate and travel charge before you confirm.</p></div>
+      <div class="step"><div class="step-num">03</div><h4>Share your location</h4><p>Add your live location so the right technician is routed to you.</p></div>
+      <div class="step"><div class="step-num">04</div><h4>Track &amp; complete</h4><p>Follow technician ETA, then receive your invoice on completion.</p></div>
+    </div>
+  </div>
 </section>
 
-<section class="section testimonials">
-
-<h2 class="section-title">
-Customer Testimonials
-</h2>
-
-<div class="card-grid">
-
-<div class="card">
-
-<h3>Rahbar Anwar</h3>
-
-<p>
-UMAMTEK provided excellent house wiring service with professional behaviour and timely completion.
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>Tauqueer Akram</h3>
-
-<p>
-Very reliable team for factory wiring and commercial electrical work.
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>Shrikant Tiwari</h3>
-
-<p>
-Professional electrical work with proper safety and quality standards.
-</p>
-
-</div>
-
-</div>
-
+<section class="features">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Why UMAMTEK</span>
+      <h2>Built for accountability, not just availability</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature"><h4>Verified dispatch</h4><p>Workers are matched by skill category and job history, not guesswork.</p></div>
+      <div class="feature"><h4>Transparent billing</h4><p>Market rate, offer rate and travel charge shown before you book.</p></div>
+      <div class="feature"><h4>Live tracking</h4><p>See technician distance and estimated arrival in real time.</p></div>
+      <div class="feature"><h4>Service record</h4><p>Every booking, invoice and payment status kept in your history.</p></div>
+    </div>
+  </div>
 </section>
 
-<section class="section customers">
-
-<h2 class="section-title">
-Our Valuable Customers
-</h2>
-
-<div class="card-grid">
-
-<div class="card"><h3>MODEL HOSPITAL BHAGALPUR</h3></div>
-
-<div class="card"><h3>LNJPN HOSPITAL</h3></div>
-
-<div class="card"><h3>BANK OF INDIA</h3></div>
-
-<div class="card"><h3>UCO BANK</h3></div>
-
-<div class="card"><h3>BGP RAILWAY STATION</h3></div>
-
-<div class="card"><h3>GORADIH HOSPITAL</h3></div>
-
-</div>
-
+<section class="testimonials">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Client record</span>
+      <h2>What customers say after the work is done</h2>
+    </div>
+    <div class="test-grid">
+      <div class="test-card"><p class="test-quote">"Professional house wiring service, completed on schedule with careful attention to safety."</p><div class="test-name">Rahbar Anwar</div><div class="test-role">House wiring, Bhagalpur</div></div>
+      <div class="test-card"><p class="test-quote">"Reliable team for our factory wiring and full commercial electrical fit-out."</p><div class="test-name">Tauqueer Akram</div><div class="test-role">Commercial wiring</div></div>
+      <div class="test-card"><p class="test-quote">"Work was carried out to proper safety and quality standards throughout."</p><div class="test-name">Shrikant Tiwari</div><div class="test-role">Electrical contracting</div></div>
+    </div>
+  </div>
 </section>
 
-<footer class="premium-footer">
+<section class="cta-banner">
+  <div class="wrap cta-inner">
+    <div>
+      <h2>Ready to get a verified technician on site?</h2>
+      <p>Select your worker, view the estimated bill and share your location — booking takes under two minutes.</p>
+    </div>
+    <div style="display:flex; gap:14px;">
+      <a href="#" class="btn btn-copper">Book a service</a>
+      <a href="#" class="btn btn-outline-dark">Talk to us</a>
+    </div>
+  </div>
+</section>
 
-<h2>UMAMTEK</h2>
-
-<p>Your Project Our Priority</p>
-
-<p>
-Professional Electrical & Contractor Services in Bhagalpur
-</p>
-
-<p>
-Phone: 9065760751
-</p>
-
-<p>
-Email: shaheumam802@gmail.com
-</p>
-
-  <div style="margin-top:25px;">
-
-<a href="privacy-policy.html" style="color:#fff; margin:0 10px;">
-Privacy Policy
-</a>
-
-<a href="terms.html" style="color:#fff; margin:0 10px;">
-Terms & Conditions
-</a>
-
-</div>
-
-<div class="footer-badges">
-
-<span>Make In India</span>
-
-<span>Vocal For Local</span>
-
-<span>Beti Bachao Beti Padhao</span>
-
-<span>Swadeshi</span>
-
-</div>
-
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo-text">UMAM<span style="color:var(--copper-light)">TEK</span></div>
+        <p>Precision electrical and contractor services for homes, offices and institutions across Bhagalpur.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Complaints</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#">Electrical</a></li>
+          <li><a href="#">CCTV &amp; security</a></li>
+          <li><a href="#">Plumbing</a></li>
+          <li><a href="#">AC technician</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Contact</h5>
+        <ul>
+          <li>90657 60751</li>
+          <li>owner@umamtek.com</li>
+          <li>Bhagalpur, Bihar</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 UMAMTEK. All rights reserved.</span>
+      <span>Privacy Policy · Terms &amp; Conditions</span>
+    </div>
+  </div>
 </footer>
-
-<button class="quote-popup-btn" onclick="openQuotePopup()">
-Get Quotation
-</button>
-
-<div class="quote-popup" id="quotePopup">
-
-<div class="quote-box">
-
-<span class="close-popup" onclick="closeQuotePopup()">×</span>
-
-<h2>Get Your Quotation</h2>
-
-<input type="text" id="qName" placeholder="Your Name">
-
-<input type="tel" id="qPhone" placeholder="Phone Number">
-
-<select id="qWork">
-
-<option value="">Select Work Type</option>
-
-<option>House Wiring</option>
-
-<option>Commercial Wiring</option>
-
-<option>CCTV Installation</option>
-
-<option>Fault Repair</option>
-
-<option>Inverter Installation</option>
-
-<option>New Meter Connection</option>
-
-</select>
-
-<input type="text" id="qLocation" placeholder="Your Location">
-
-<button onclick="sendQuoteWhatsApp()">
-Send on WhatsApp
-</button>
-
-</div>
-
-</div>
-
-<a href="https://wa.me/919065760751" class="floating-whatsapp">
-WhatsApp
-</a>
-
-<script src="js/script.js"></script>
 
 </body>
 </html>
