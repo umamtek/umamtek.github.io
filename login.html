@@ -2,99 +2,372 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Login | UMAMTEK</title>
+  <meta charset="UTF-8">
 
-<link rel="stylesheet" href="./css/style.css?v=30">
-<link rel="icon" href="favicon.png">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Login | UMAMTEK</title>
+
+  <meta
+    name="description"
+    content="Login to your UMAMTEK account to book services, track bookings and manage invoices."
+  >
+
+  <link
+    rel="stylesheet"
+    href="./css/style.css?v=31"
+  >
+
+  <link
+    rel="icon"
+    href="favicon.png"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+
 </head>
+
 
 <body>
 
-<nav class="navbar">
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
 
 <nav class="navbar">
 
-<div class="logo-area">
-  <a href="index.html">
-    <img src="logo.png" class="site-logo" alt="UMAMTEK Logo">
-  </a>
-</div>
+  <div class="logo-area">
 
-<button class="menu-btn" onclick="toggleMenu()">☰</button>
+    <a href="index.html">
 
-<ul class="nav-links" id="navLinks">
-<li><a href="index.html">Home</a></li>
-<li><a href="services.html">Services</a></li>
-<li><a href="contact.html">Contact</a></li>
-<li><a href="signup.html">Signup</a></li>
-</ul>
+      <img
+        src="logo.png"
+        class="site-logo"
+        alt="UMAMTEK Logo"
+      >
 
-<div class="nav-actions">
-</div>
-
-</nav>
-
-<section class="section auth-section">
-
-  <div class="auth-card">
-
-    <h1 class="section-title" style="margin-bottom:10px;">
-      Customer Login
-    </h1>
-
-    <p class="section-subtitle" style="margin-bottom:25px;">
-      Login to book services, track bookings, view technician details and download invoices.
-    </p>
-
-    <form onsubmit="event.preventDefault(); loginWithPhonePassword();" style="display:grid;gap:18px;">
-
-      <input type="tel" id="loginPhone" placeholder="Registered Mobile Number" required>
-
-      <input type="password" id="loginPassword" placeholder="Password" required>
-
-      <button type="submit">
-        Login
-      </button>
-
-    </form>
-
-    <div style="margin-top:22px;text-align:center;">
-
-      <p>
-        Don’t have an account?
-        <a href="signup.html" style="color:#f5b301;font-weight:900;text-decoration:none;">
-          Create Account
-        </a>
-      </p>
-
-      <button onclick="forgotPasswordWithPhone()" style="margin-top:10px;">
-        Forgot Password?
-      </button>
-
-    </div>
-
-    <div class="um-quote" style="margin-top:25px;font-size:14px;">
-      Login once and manage your UMAMTEK service history, live tracking and invoice records.
-    </div>
+    </a>
 
   </div>
 
-</section>
+
+  <button
+    type="button"
+    class="menu-btn"
+    id="menuBtn"
+    aria-label="Open menu"
+    onclick="toggleMenu()"
+  >
+    ☰
+  </button>
+
+
+  <ul
+    class="nav-links"
+    id="navLinks"
+  >
+
+    <li>
+      <a href="index.html">
+        Home
+      </a>
+    </li>
+
+    <li>
+      <a href="services.html">
+        Services
+      </a>
+    </li>
+
+    <li>
+      <a href="contact.html">
+        Contact
+      </a>
+    </li>
+
+    <li>
+      <a href="signup.html">
+        Signup
+      </a>
+    </li>
+
+  </ul>
+
+
+  <div class="nav-actions">
+
+  </div>
+
+</nav>
+
+
+
+<!-- =====================================================
+     LOGIN SECTION
+===================================================== -->
+
+<main>
+
+  <section class="section auth-section">
+
+    <div class="auth-card">
+
+
+      <!-- LOGIN HEADER -->
+
+      <div class="auth-header">
+
+        <div class="auth-icon">
+          🔐
+        </div>
+
+        <h1>
+          Customer Login
+        </h1>
+
+        <p>
+          Login to your UMAMTEK account to book services,
+          track bookings and manage invoices.
+        </p>
+
+      </div>
+
+
+
+      <!-- LOGIN FORM -->
+
+      <form
+        id="loginForm"
+        class="auth-form"
+      >
+
+
+        <!-- MOBILE -->
+
+        <div class="form-group">
+
+          <label for="loginPhone">
+            Mobile Number
+          </label>
+
+          <input
+            type="tel"
+            id="loginPhone"
+            name="phone"
+            placeholder="Enter 10 digit mobile number"
+            inputmode="numeric"
+            autocomplete="tel"
+            maxlength="10"
+            required
+          >
+
+          <small>
+            Use the mobile number registered with UMAMTEK.
+          </small>
+
+        </div>
+
+
+
+        <!-- PASSWORD -->
+
+        <div class="form-group">
+
+          <label for="loginPassword">
+            Password
+          </label>
+
+          <input
+            type="password"
+            id="loginPassword"
+            name="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+            minlength="6"
+            required
+          >
+
+        </div>
+
+
+
+        <!-- LOGIN BUTTON -->
+
+        <button
+          type="submit"
+          class="auth-submit"
+          id="loginButton"
+        >
+
+          Login to UMAMTEK
+
+        </button>
+
+
+      </form>
+
+
+
+      <!-- FORGOT PASSWORD -->
+
+      <div class="auth-forgot">
+
+        <button
+          type="button"
+          onclick="forgotPasswordWithPhone()"
+        >
+          Forgot Password?
+        </button>
+
+      </div>
+
+
+
+      <!-- SIGNUP -->
+
+      <div class="auth-signup">
+
+        <p>
+          Don't have an account?
+        </p>
+
+        <a href="signup.html">
+          Create UMAMTEK Account
+        </a>
+
+      </div>
+
+
+
+      <!-- QUOTE -->
+
+      <div class="um-quote">
+
+        <strong>
+          UMAMTEK
+        </strong>
+
+        <span>
+          Your Project Our Priority
+        </span>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
 <footer class="premium-footer">
-<h2>UMAMTEK</h2>
-<p>Your Project Our Priority</p>
-<p>Phone: 9065760751</p>
-<p>Email: shaheumam802@gmail.com</p>
+
+  <h2>
+    UMAMTEK
+  </h2>
+
+  <p>
+    Your Project Our Priority
+  </p>
+
+  <p>
+    📞 9065760751
+  </p>
+
+  <p>
+    ✉️ shaheumam802@gmail.com
+  </p>
+
+  <p class="footer-copy">
+    © 2026 UMAMTEK. All Rights Reserved.
+  </p>
+
 </footer>
 
+
+
+<!-- =====================================================
+     SCRIPTS
+===================================================== -->
+
 <script src="js/script.js"></script>
-<script type="module" src="js/firebase.js?v=506"></script>
+
+<script
+  type="module"
+  src="js/firebase.js?v=506"
+></script>
+
+
+
+<!-- =====================================================
+     LOGIN FORM HANDLER
+===================================================== -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+  const loginForm =
+    document.getElementById("loginForm");
+
+  if(!loginForm){
+    return;
+  }
+
+
+  loginForm.addEventListener("submit", function(event){
+
+    event.preventDefault();
+
+
+    if(
+      typeof window.loginWithPhonePassword !==
+      "function"
+    ){
+
+      alert(
+        "Login system is still loading. Please try again."
+      );
+
+      return;
+
+    }
+
+
+    window.loginWithPhonePassword();
+
+  });
+
+});
+
+</script>
+
 
 </body>
+
 </html>
