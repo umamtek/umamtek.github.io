@@ -4,118 +4,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Create Account | UMAMTEK</title>
+<link rel="icon" href="favicon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --navy:#0B1220; --navy-2:#131C2E; --ivory:#F6F3EC; --ivory-2:#EEE9DC;
-    --copper:#B8763E; --copper-light:#D9944F; --brass:#D9B36C;
-    --steel:#5B6472; --ink:#14181F; --white:#FFFFFF; --danger:#B3372C;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  body{ font-family:'Inter', sans-serif; color:var(--ink); background:var(--ivory); min-height:100vh; display:flex; }
-  h1,h2{ font-family:'Space Grotesk', sans-serif; font-weight:600; letter-spacing:-0.01em; }
-  .mono{ font-family:'IBM Plex Mono', monospace; letter-spacing:0.02em; }
-  a{ text-decoration:none; }
-
-  .side{ flex:1; background:var(--navy); color:var(--white); display:flex; flex-direction:column; justify-content:space-between; padding:48px; position:relative; overflow:hidden; }
-  .side-top .logo-text{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:20px; }
-  .side-top .logo-text span{ color:var(--copper-light); }
-  .side-mid{ position:relative; z-index:2; max-width:380px; }
-  .side-mid .eyebrow{ font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--copper-light); margin-bottom:16px; display:block; }
-  .side-mid h1{ font-size:32px; line-height:1.2; margin-bottom:14px; }
-  .side-mid p{ color:#B7BFCC; font-size:14.5px; }
-  .side-bottom{ font-size:12.5px; color:#8792A3; position:relative; z-index:2; }
-  .side-svg{ position:absolute; inset:0; opacity:0.5; }
-
-  .form-side{ flex:1; display:flex; align-items:center; justify-content:center; padding:48px; }
-  .form-card{ width:100%; max-width:380px; }
-  .form-card h2{ font-size:26px; margin-bottom:8px; }
-  .form-card .sub{ color:var(--steel); font-size:14px; margin-bottom:32px; }
-
-  label{ display:block; font-size:13px; color:var(--steel); margin-bottom:8px; }
-  .input-row{ display:flex; margin-bottom:6px; }
-  .prefix{ display:flex; align-items:center; padding:0 14px; border:1px solid rgba(20,24,31,0.18); border-right:none; background:var(--ivory-2); font-family:'IBM Plex Mono',monospace; font-size:14px; color:var(--steel); }
-  input[type="tel"], input[type="text"], input[type="password"]{
-    flex:1; padding:13px 14px; border:1px solid rgba(20,24,31,0.18); font-size:14.5px; font-family:'Inter',sans-serif; background:var(--white); outline:none; width:100%;
-  }
-  input:focus{ border-color:var(--copper); }
-  .field{ margin-bottom:20px; }
-  .pass-wrap{ position:relative; }
-  .pass-wrap input{ padding-right:44px; }
-  .pass-toggle{ position:absolute; right:12px; top:50%; transform:translateY(-50%); background:none; border:none; font-size:12px; color:var(--steel); cursor:pointer; font-family:'Inter',sans-serif; }
-  .hint{ font-size:12px; color:var(--steel); margin-top:6px; }
-  .err{ font-size:12.5px; color:var(--danger); margin-top:6px; display:none; }
-
-  .btn{ display:inline-flex; align-items:center; justify-content:center; width:100%; padding:13px 22px; border-radius:2px; font-size:14.5px; font-weight:600; cursor:pointer; border:1px solid transparent; transition:all .2s; font-family:'Inter',sans-serif; }
-  .btn-copper{ background:var(--copper); color:var(--white); }
-  .btn-copper:hover{ background:var(--copper-light); }
-  .btn-copper:disabled{ opacity:0.55; cursor:not-allowed; }
-  .btn-ghost{ background:transparent; border-color:rgba(20,24,31,0.18); color:var(--ink); margin-top:10px; }
-  .btn-ghost:hover{ border-color:var(--copper); color:var(--copper); }
-
-  .step-block{ display:none; }
-  .step-block.active{ display:block; }
-  .otp-inputs{ display:flex; gap:10px; margin-bottom:16px; }
-  .otp-inputs input{ width:48px; height:52px; text-align:center; font-size:20px; font-family:'IBM Plex Mono',monospace; padding:0; }
-
-  .progress{ display:flex; gap:6px; margin-bottom:28px; }
-  .progress span{ flex:1; height:3px; background:rgba(20,24,31,0.12); border-radius:2px; }
-  .progress span.done{ background:var(--copper); }
-
-  .strength{ display:flex; gap:4px; margin-top:8px; }
-  .strength div{ flex:1; height:3px; background:rgba(20,24,31,0.12); border-radius:2px; }
-
-  .status{ font-size:13px; margin-top:14px; display:none; padding:10px 12px; border-radius:2px; }
-  .status.ok{ background:#E7F0E3; color:#2E5E22; }
-  .status.info{ background:var(--ivory-2); color:var(--steel); }
-
-  .foot-link{ text-align:center; margin-top:26px; font-size:13.5px; color:var(--steel); }
-  .foot-link a{ color:var(--copper); font-weight:600; }
-
-  #recaptcha-container{ margin-top:4px; }
-
-  @media (max-width: 860px){ .side{ display:none; } .form-side{ padding:32px 22px; } }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="auth-body">
 
-<div class="side">
-  <svg class="side-svg" viewBox="0 0 500 700" preserveAspectRatio="xMidYMid slice">
-    <g stroke="rgba(217,148,79,0.28)" stroke-width="1.2" fill="none">
-      <path d="M50 80 H220 V260"/>
-      <path d="M220 260 H420"/>
-      <path d="M220 260 V460 H90"/>
-      <path d="M420 260 V520 H260 V620"/>
-    </g>
-    <g fill="#0B1220" stroke="#D9944F" stroke-width="1.4">
-      <circle cx="50" cy="80" r="6"/><circle cx="220" cy="260" r="6"/>
-      <circle cx="420" cy="260" r="6"/><circle cx="90" cy="460" r="6"/>
-      <circle cx="260" cy="620" r="6"/>
-    </g>
-  </svg>
-  <div class="side-top"><div class="logo-text">UMAM<span>TEK</span></div></div>
-  <div class="side-mid">
-    <span class="eyebrow">New customer</span>
+<div class="auth-side">
+  <div class="auth-side-svg" id="heroSvg"></div>
+  <div style="position:relative; z-index:2;">
+    <a href="index.html" class="logo-text" style="color:#fff;">UMAM<span>TEK</span></a>
+  </div>
+  <div class="auth-side-mid">
+    <span class="eyebrow" style="color:var(--copper-light); margin-bottom:16px; display:block;">New customer</span>
     <h1>Get a verified technician on record, every time.</h1>
     <p>Create your account to book services, see transparent pricing and keep a running history of every job at your address.</p>
   </div>
-  <div class="side-bottom mono">SECURED · OTP VERIFIED SIGNUP</div>
+  <div class="auth-side-bottom mono">SECURED · OTP VERIFIED SIGNUP</div>
 </div>
 
-<div class="form-side">
-  <div class="form-card">
+<div class="auth-form-side">
+  <div class="auth-form-card">
     <h2>Create your UMAMTEK account</h2>
     <p class="sub" id="step-sub">Enter your details to get started.</p>
 
-    <div class="progress">
-      <span class="done" id="p1"></span>
-      <span id="p2"></span>
-      <span id="p3"></span>
-    </div>
+    <div class="progress"><span class="done" id="p1"></span><span id="p2"></span><span id="p3"></span></div>
 
-    <!-- STEP 1: name + phone -->
     <div class="step-block active" id="step-1">
       <div class="field">
         <label for="fullname">Full name</label>
@@ -130,11 +46,10 @@
         </div>
         <div class="err" id="phone-err">Enter a valid 10-digit mobile number.</div>
       </div>
-      <button class="btn btn-copper" id="send-otp-btn">Send OTP</button>
+      <button class="btn btn-copper btn-block" id="send-otp-btn">Send OTP</button>
       <div id="recaptcha-container"></div>
     </div>
 
-    <!-- STEP 2: otp -->
     <div class="step-block" id="step-2">
       <label>Enter the 6-digit code sent to +91 <span id="otp-phone-display" class="mono"></span></label>
       <div class="otp-inputs" id="otp-inputs">
@@ -146,11 +61,10 @@
         <input type="text" maxlength="1" inputmode="numeric">
       </div>
       <div class="err" id="otp-err">That code didn't match. Try again.</div>
-      <button class="btn btn-copper" id="verify-otp-btn">Verify code</button>
-      <button class="btn btn-ghost" id="resend-btn">Resend code</button>
+      <button class="btn btn-copper btn-block" id="verify-otp-btn">Verify code</button>
+      <button class="btn btn-ghost btn-block" id="resend-btn" style="margin-top:10px;">Resend code</button>
     </div>
 
-    <!-- STEP 3: set password -->
     <div class="step-block" id="step-3">
       <div class="field">
         <label for="new-pass">Create password</label>
@@ -169,11 +83,10 @@
         </div>
         <div class="err" id="confirm-err">Passwords don't match.</div>
       </div>
-      <button class="btn btn-copper" id="finish-btn">Create account</button>
+      <button class="btn btn-copper btn-block" id="finish-btn">Create account</button>
     </div>
 
     <div class="status" id="status-box"></div>
-
     <p class="foot-link">Already have an account? <a href="login.html">Log in</a></p>
   </div>
 </div>
@@ -183,11 +96,10 @@
 <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
 <script src="firebase-config.js"></script>
+<script src="script.js"></script>
 
 <script>
-  function phoneToEmail(tenDigits){
-    return 'p' + tenDigits + '@umamtek-users.app';
-  }
+  document.getElementById('heroSvg').innerHTML = circuitSchematicSVG();
 
   const nameInput = document.getElementById('fullname');
   const nameErr = document.getElementById('name-err');
@@ -198,11 +110,11 @@
   const step1 = document.getElementById('step-1');
   const step2 = document.getElementById('step-2');
   const step3 = document.getElementById('step-3');
-  const p1 = document.getElementById('p1'), p2 = document.getElementById('p2'), p3 = document.getElementById('p3');
+  const p2 = document.getElementById('p2'), p3 = document.getElementById('p3');
   const stepSub = document.getElementById('step-sub');
 
   const otpDisplay = document.getElementById('otp-phone-display');
-  const otpInputs = [...document.querySelectorAll('#otp-inputs input')];
+  const otpInputs = attachOtpAutoAdvance(document.getElementById('otp-inputs'));
   const otpErr = document.getElementById('otp-err');
   const verifyBtn = document.getElementById('verify-otp-btn');
   const resendBtn = document.getElementById('resend-btn');
@@ -212,17 +124,10 @@
   const passErr = document.getElementById('pass-err');
   const confirmErr = document.getElementById('confirm-err');
   const finishBtn = document.getElementById('finish-btn');
-  const strengthBars = [...document.querySelectorAll('#strength-bar div')];
+  const strengthBar = document.getElementById('strength-bar');
 
   const statusBox = document.getElementById('status-box');
-
   let confirmationResult = null;
-
-  function showStatus(msg, type){
-    statusBox.textContent = msg;
-    statusBox.className = 'status ' + type;
-    statusBox.style.display = 'block';
-  }
 
   function goToStep(n){
     [step1, step2, step3].forEach(s => s.classList.remove('active'));
@@ -232,17 +137,12 @@
     if(n === 3){ step3.classList.add('active'); p2.classList.add('done'); p3.classList.add('done'); stepSub.textContent = 'Create a password to finish.'; }
   }
 
-  window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-    size: 'invisible'
-  });
-
-  function validPhone(v){ return /^[6-9]\d{9}$/.test(v); }
+  window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', { size: 'invisible' });
 
   sendBtn.addEventListener('click', () => {
     const name = nameInput.value.trim();
     const raw = phoneInput.value.trim();
     let ok = true;
-
     if(!name){ nameErr.style.display = 'block'; ok = false; } else { nameErr.style.display = 'none'; }
     if(!validPhone(raw)){ phoneErr.style.display = 'block'; ok = false; } else { phoneErr.style.display = 'none'; }
     if(!ok) return;
@@ -250,51 +150,30 @@
     sendBtn.disabled = true;
     sendBtn.textContent = 'Sending...';
 
-    const fullNumber = '+91' + raw;
-    firebase.auth().signInWithPhoneNumber(fullNumber, window.recaptchaVerifier)
+    firebase.auth().signInWithPhoneNumber('+91' + raw, window.recaptchaVerifier)
       .then((result) => {
         confirmationResult = result;
         otpDisplay.textContent = raw;
         goToStep(2);
-        showStatus('Code sent. It can take up to a minute to arrive.', 'info');
+        showStatus(statusBox, 'Code sent. It can take up to a minute to arrive.', 'neutral');
         otpInputs[0].focus();
       })
       .catch((error) => {
-        showStatus('Could not send code: ' + error.message, 'info');
+        showStatus(statusBox, 'Could not send code: ' + error.message, 'info');
         sendBtn.disabled = false;
         sendBtn.textContent = 'Send OTP';
         window.recaptchaVerifier.render().then(id => grecaptcha.reset(id));
       });
   });
 
-  otpInputs.forEach((box, i) => {
-    box.addEventListener('input', () => {
-      box.value = box.value.replace(/[^0-9]/g, '');
-      if(box.value && i < otpInputs.length - 1) otpInputs[i+1].focus();
-    });
-    box.addEventListener('keydown', (e) => {
-      if(e.key === 'Backspace' && !box.value && i > 0) otpInputs[i-1].focus();
-    });
-  });
-
   verifyBtn.addEventListener('click', () => {
     const code = otpInputs.map(i => i.value).join('');
-    if(code.length !== 6){
-      otpErr.textContent = 'Enter all 6 digits.';
-      otpErr.style.display = 'block';
-      return;
-    }
-    if(!confirmationResult){
-      otpErr.textContent = 'Session expired. Request a new code.';
-      otpErr.style.display = 'block';
-      return;
-    }
+    if(code.length !== 6){ otpErr.textContent = 'Enter all 6 digits.'; otpErr.style.display = 'block'; return; }
+    if(!confirmationResult){ otpErr.textContent = 'Session expired. Request a new code.'; otpErr.style.display = 'block'; return; }
+
     verifyBtn.disabled = true;
     verifyBtn.textContent = 'Verifying...';
 
-    // This signs the user in via phone credential — that same signed-in
-    // user then gets a password LINKED to their account in step 3, so
-    // going forward they log in with phone + password, no OTP needed.
     confirmationResult.confirm(code)
       .then(() => {
         otpErr.style.display = 'none';
@@ -317,32 +196,9 @@
     statusBox.style.display = 'none';
   });
 
-  function passwordScore(v){
-    let score = 0;
-    if(v.length >= 8) score++;
-    if(/[A-Z]/.test(v)) score++;
-    if(/[0-9]/.test(v)) score++;
-    if(/[^A-Za-z0-9]/.test(v)) score++;
-    return score;
-  }
-
-  newPass.addEventListener('input', () => {
-    const score = passwordScore(newPass.value);
-    strengthBars.forEach((bar, i) => {
-      bar.style.background = i < score ? 'var(--copper)' : 'rgba(20,24,31,0.12)';
-    });
-  });
-
-  document.getElementById('toggle-pass1').addEventListener('click', (e) => {
-    const isPass = newPass.type === 'password';
-    newPass.type = isPass ? 'text' : 'password';
-    e.target.textContent = isPass ? 'Hide' : 'Show';
-  });
-  document.getElementById('toggle-pass2').addEventListener('click', (e) => {
-    const isPass = confirmPass.type === 'password';
-    confirmPass.type = isPass ? 'text' : 'password';
-    e.target.textContent = isPass ? 'Hide' : 'Show';
-  });
+  newPass.addEventListener('input', () => paintStrength(strengthBar, newPass.value));
+  attachPasswordToggle(document.getElementById('toggle-pass1'), newPass);
+  attachPasswordToggle(document.getElementById('toggle-pass2'), confirmPass);
 
   finishBtn.addEventListener('click', () => {
     let ok = true;
@@ -357,8 +213,6 @@
     const currentUser = firebase.auth().currentUser;
     const credential = firebase.auth.EmailAuthProvider.credential(phoneToEmail(raw), newPass.value);
 
-    // Link the password credential to the phone-verified account so the
-    // same UID can log in later with phone + password, no OTP required.
     currentUser.linkWithCredential(credential)
       .then(() => {
         if(db){
@@ -368,11 +222,11 @@
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
           }, { merge: true }).catch((e) => console.warn('Profile save skipped:', e.message));
         }
-        showStatus('Account created. Redirecting...', 'ok');
+        showStatus(statusBox, 'Account created. Redirecting...', 'ok');
         // window.location.href = 'dashboard.html';
       })
       .catch((error) => {
-        showStatus('Could not set password: ' + error.message, 'info');
+        showStatus(statusBox, 'Could not set password: ' + error.message, 'info');
         finishBtn.disabled = false;
         finishBtn.textContent = 'Create account';
       });
