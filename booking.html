@@ -1,187 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Book Service | UMAMTEK</title>
-
-<link rel="stylesheet" href="./css/style.css?v=25">
-<link rel="icon" href="favicon.png">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<title>Book a Service | UMAMTEK</title>
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .booking-grid{ display:grid; grid-template-columns:1.2fr 0.8fr; gap:40px; align-items:start; }
+  .bill-box{ background:var(--navy); color:var(--white); padding:28px; border-radius:2px; position:sticky; top:96px; }
+  .bill-box h3{ font-size:16px; margin-bottom:20px; color:var(--white); }
+  .bill-row{ display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.1); font-size:14px; }
+  .bill-row span:first-child{ color:#A9B1BE; }
+  .bill-row.total{ border-bottom:none; padding-top:16px; font-size:16px; font-weight:600; }
+  .bill-note{ font-size:11.5px; color:#8792A3; margin-top:16px; line-height:1.5; }
+  select{ appearance:none; background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235B6472' stroke-width='2'%3e%3cpath d='M6 9l6 6 6-6'/%3e%3c/svg%3e"); background-repeat:no-repeat; background-position:right 12px center; background-size:16px; }
+  .loc-btn{ display:flex; align-items:center; gap:10px; }
+  .loc-status{ font-size:12.5px; margin-top:8px; color:var(--steel); }
+  .loc-status.ok{ color:var(--success); }
+  fieldset{ border:none; }
+</style>
 </head>
-
 <body>
 
-<nav class="navbar">
+<header class="site-header">
+  <div class="wrap nav-row">
+    <a href="index.html" class="logo">
+      <div class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#D9944F" stroke-width="1.6"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></div>
+      <div class="logo-text">UMAM<span>TEK</span></div>
+    </a>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="booking.html">Booking</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a href="login.html" class="btn btn-outline-dark">Login</a>
+      <a href="booking.html" class="btn btn-copper">Book Service</a>
+    </div>
+  </div>
+</header>
 
-<div class="logo-area">
-<a href="index.html">
-<img src="logo.png" class="site-logo" alt="UMAMTEK Logo">
-</a>
-</div>
-
-<button class="menu-btn" onclick="toggleMenu()">☰</button>
-
-<ul class="nav-links" id="navLinks">
-<li><a href="index.html">Home</a></li>
-<li><a href="services.html">Services</a></li>
-<li><a href="projects.html">Projects</a></li>
-<li><a href="contact.html">Contact</a></li>
-<li><a href="login.html">Login</a></li>
-<li><a href="signup.html">Signup</a></li>
-</ul>
-
-<div class="nav-actions">
-</div>
-
-</nav>
-
-<section class="section">
-
-<h1 class="section-title">Book a Service</h1>
-
-<p class="section-subtitle">
-Select your worker, choose your work, view estimated bill, add live location and submit your booking request.
-</p>
-
-<div class="um-quote" style="max-width:950px;margin:0 auto 35px;">
-  “UMAMTEK helps you get the right worker at your doorstep with transparent pricing, live tracking and service history.”
-</div>
-  
-<form onsubmit="submitBooking(event)">
-
-<input type="text" id="bookingName" placeholder="Your Name">
-
-<input type="tel" id="bookingPhone" placeholder="Phone Number">
-
-<select id="bookingWorker" onchange="loadWorkOptions()" required>
-<option value="">Select Your Worker</option>
-<option value="electrician">Electrician</option>
-<option value="plumber">Plumber</option>
-<option value="mason">Mason</option>
-<option value="labour">Labour</option>
-<option value="painter">Painter</option>
-<option value="carpenter">Carpenter</option>
-<option value="foreman">Foreman</option>
-<option value="supervisor">Supervisor</option>
-<option value="engineer">Engineer</option>
-<option value="welder">Welder</option>
-<option value="iti">ITI / Technician</option>
-<option value="installer">General Installer</option>
-<option value="not_sure">Need Another Worker / Not Sure</option>
-</select>
-
-<input
-type="text"
-id="workSearch"
-placeholder="Search your work..."
-onkeyup="filterWorkOptions()"
-style="display:none;"
->
-
-<select id="bookingService" onchange="showWorkPrice()" required>
-<option value="">Select Your Work</option>
-</select>
-
-<textarea
-id="otherWorkDetails"
-placeholder="Please specify your work"
-style="display:none;"
-></textarea>
-
-<div id="pricePreview" class="card" style="display:none;margin-top:15px;">
-
-<h3>Pending Payment Bill</h3>
-
-  <p style="font-size:14px;font-weight:700;color:#555;">
-This is an estimated service bill. Final amount may change if extra material or additional work is required.
-    Note "All disputes are subject to Bhagalpur jurisdiction only." 
-</p>
-
-<p><strong>Selected Work:</strong> <span id="billWorkName">-</span></p>
-
-<p><strong>Real / Market Rate:</strong> <del>₹450</del></p>
-
-<p><strong>UMAMTEK Offer Rate:</strong> ₹200</p>
-
-<p><strong>Travel Charge:</strong> <span id="billTravelCharge">₹0</span></p>
-
-<hr>
-
-<h3>Total Payable: <span id="billTotal">₹200</span></h3>
-
-<button type="button" onclick="payNowComingSoon()">
-Pay Now
-</button>
-
-<button type="button" onclick="selectPayAfterWork()">
-Pay After Work
-</button>
-
-<p id="paymentModeText" style="font-size:14px;font-weight:700;margin-top:10px;">
-Payment mode not selected
-</p>
-
-<p style="font-size:13px;">
-Note: Pay Now will start after Razorpay setup. You can choose Pay After Work for now.
-</p>
-
-</div>
-
-<input type="hidden" id="paymentMode" value="">
-<input type="hidden" id="travelCharge" value="0">
-<input type="hidden" id="totalPayable" value="200">
-<input type="hidden" id="distanceKm" value="">
-  
-<input type="text" id="bookingAddress" placeholder="Full Address with House No / Area / Landmark" required>
-
-<input type="text" id="bookingPin" placeholder="PIN Code" maxlength="6" required>
-
-<button type="button" onclick="getCustomerLocation()">
-Get My Live Location
-</button>
-
-<input type="hidden" id="bookingLatitude">
-
-<input type="hidden" id="bookingLongitude">
-
-<input type="hidden" id="bookingMapLink">
-
-<p id="locationStatus" style="font-size:14px;font-weight:600;">
-Live location not added yet
-</p>
-<input type="date" id="bookingDate">
-
-<input type="time" id="bookingTime">
-
-<textarea id="bookingDetails" placeholder="Describe your work / issue"></textarea>
-
-<button type="submit">
-Submit Booking Request
-</button>
-
-</form>
-
-<p style="text-align:center;margin-top:20px;font-size:14px;">
-Your booking request will be saved and UMAMTEK team will contact you soon.
-</p>
-
-</div>
-
+<section class="page-hero" style="padding:56px 0 44px;">
+  <div class="wrap">
+    <span class="eyebrow">Book a service</span>
+    <h1 style="font-size:30px;">Select your worker, review the bill, confirm.</h1>
+  </div>
 </section>
 
-<footer class="premium-footer">
-<h2>UMAMTEK</h2>
-<p>Your Project Our Priority</p>
-<p>Phone: 9065760751</p>
-<p>Email: shaheumam802@gmail.com</p>
+<section class="section-tight">
+  <div class="wrap">
+    <div class="booking-grid">
+      <form id="booking-form">
+        <div class="field">
+          <label for="category">Select worker category</label>
+          <select id="category">
+            <option value="">-- Choose category --</option>
+            <option value="ELEC" data-rate="450" data-offer="200">Electrician</option>
+            <option value="CCTV" data-rate="600" data-offer="350">CCTV &amp; Security</option>
+            <option value="PLMB" data-rate="400" data-offer="180">Plumber</option>
+            <option value="ACT" data-rate="500" data-offer="280">AC Technician</option>
+            <option value="CARP" data-rate="380" data-offer="170">Carpenter</option>
+            <option value="MASN" data-rate="420" data-offer="200">Mason</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="work">Describe the work</label>
+          <textarea id="work" placeholder="e.g. MCB tripping repeatedly, need fault diagnosis and fix"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="cust-name">Your name</label>
+          <input type="text" id="cust-name" placeholder="Full name">
+        </div>
+
+        <div class="field">
+          <label for="cust-phone">Mobile number</label>
+          <div class="input-row">
+            <span class="prefix">+91</span>
+            <input type="tel" id="cust-phone" placeholder="98765 43210" maxlength="10" inputmode="numeric">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="address">Service address</label>
+          <textarea id="address" placeholder="House/shop no., street, landmark, area"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Location</label>
+          <button type="button" class="btn btn-outline-light loc-btn" id="loc-btn">
+            📍 Share my current location
+          </button>
+          <div class="loc-status" id="loc-status">Helps us route the nearest available technician.</div>
+        </div>
+
+        <div class="field">
+          <label>Payment</label>
+          <div style="display:flex; gap:12px;">
+            <label style="display:flex; align-items:center; gap:8px; font-size:14px; color:var(--ink);">
+              <input type="radio" name="pay" value="after" checked style="width:auto;"> Pay after work
+            </label>
+            <label style="display:flex; align-items:center; gap:8px; font-size:14px; color:var(--steel);">
+              <input type="radio" name="pay" value="now" disabled style="width:auto;"> Pay now (coming soon)
+            </label>
+          </div>
+        </div>
+
+        <div class="err" id="form-err">Please fill in category, name, mobile number and address.</div>
+        <button type="button" class="btn btn-copper btn-block" id="submit-btn">Submit booking request</button>
+        <div class="status" id="status-box"></div>
+      </form>
+
+      <div class="bill-box">
+        <h3 class="mono">ESTIMATED BILL</h3>
+        <div class="bill-row"><span>Selected work</span><span id="bill-work">—</span></div>
+        <div class="bill-row"><span>Market rate</span><span id="bill-market">₹—</span></div>
+        <div class="bill-row"><span>UMAMTEK offer rate</span><span id="bill-offer">₹—</span></div>
+        <div class="bill-row"><span>Travel charge</span><span id="bill-travel">₹50</span></div>
+        <div class="bill-row total"><span>Estimated total</span><span id="bill-total">₹—</span></div>
+        <p class="bill-note">Final amount may vary based on actual work required on site. This is an estimate shown before you confirm — nothing is charged yet. All disputes are subject to Bhagalpur jurisdiction only, as per our <a href="privacy-policy.html" style="color:var(--copper-light)">Terms</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-bottom">
+      <span>© 2026 UMAMTEK. All rights reserved.</span>
+      <span><a href="privacy-policy.html">Privacy Policy</a> · Terms &amp; Conditions</span>
+    </div>
+  </div>
 </footer>
 
-<script src="js/script.js"></script>
-<script type="module" src="js/firebase.js?v=506"></script>
+<!-- Firebase SDK (compat) -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="script.js"></script>
+
+<script>
+  const categorySelect = document.getElementById('category');
+  const billWork = document.getElementById('bill-work');
+  const billMarket = document.getElementById('bill-market');
+  const billOffer = document.getElementById('bill-offer');
+  const billTravel = document.getElementById('bill-travel');
+  const billTotal = document.getElementById('bill-total');
+  const TRAVEL_CHARGE = 50;
+
+  categorySelect.addEventListener('change', () => {
+    const opt = categorySelect.options[categorySelect.selectedIndex];
+    if(!opt.value){
+      billWork.textContent = '—'; billMarket.textContent = '₹—';
+      billOffer.textContent = '₹—'; billTotal.textContent = '₹—';
+      return;
+    }
+    const market = Number(opt.dataset.rate);
+    const offer = Number(opt.dataset.offer);
+    billWork.textContent = opt.textContent;
+    billMarket.textContent = '₹' + market;
+    billOffer.textContent = '₹' + offer;
+    billTravel.textContent = '₹' + TRAVEL_CHARGE;
+    billTotal.textContent = '₹' + (offer + TRAVEL_CHARGE);
+  });
+
+  // ---- Location sharing ----
+  const locBtn = document.getElementById('loc-btn');
+  const locStatus = document.getElementById('loc-status');
+  let capturedLocation = null;
+
+  locBtn.addEventListener('click', () => {
+    if(!navigator.geolocation){
+      locStatus.textContent = 'Location is not supported on this browser.';
+      return;
+    }
+    locStatus.textContent = 'Getting your location...';
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        capturedLocation = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+        locStatus.textContent = 'Location captured ✓';
+        locStatus.classList.add('ok');
+      },
+      () => {
+        locStatus.textContent = 'Could not get location. You can still submit — we will call to confirm your address.';
+      }
+    );
+  });
+
+  // ---- Submit booking ----
+  const submitBtn = document.getElementById('submit-btn');
+  const formErr = document.getElementById('form-err');
+  const statusBox = document.getElementById('status-box');
+
+  submitBtn.addEventListener('click', () => {
+    const category = categorySelect.value;
+    const work = document.getElementById('work').value.trim();
+    const name = document.getElementById('cust-name').value.trim();
+    const phone = document.getElementById('cust-phone').value.trim();
+    const address = document.getElementById('address').value.trim();
+
+    if(!category || !name || !validPhone(phone) || !address){
+      formErr.style.display = 'block';
+      return;
+    }
+    formErr.style.display = 'none';
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+
+    const opt = categorySelect.options[categorySelect.selectedIndex];
+    const bookingData = {
+      category: category,
+      categoryLabel: opt.textContent,
+      work: work,
+      customerName: name,
+      customerPhone: '+91' + phone,
+      address: address,
+      location: capturedLocation,
+      marketRate: Number(opt.dataset.rate),
+      offerRate: Number(opt.dataset.offer),
+      travelCharge: TRAVEL_CHARGE,
+      estimatedTotal: Number(opt.dataset.offer) + TRAVEL_CHARGE,
+      paymentMode: document.querySelector('input[name="pay"]:checked').value,
+      status: 'requested',
+      userId: firebase.auth().currentUser ? firebase.auth().currentUser.uid : null,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    };
+
+    if(!db){
+      showStatus(statusBox, 'Firestore is not connected yet — see firebase-config.js.', 'info');
+      submitBtn.disabled = false; submitBtn.textContent = 'Submit booking request';
+      return;
+    }
+
+    db.collection('bookings').add(bookingData)
+      .then((docRef) => {
+        showStatus(statusBox, `Booking request received. Reference: ${docRef.id.slice(0,8).toUpperCase()}. We'll call you shortly to confirm.`, 'ok');
+        document.getElementById('booking-form').reset();
+        billWork.textContent = '—'; billMarket.textContent = '₹—';
+        billOffer.textContent = '₹—'; billTotal.textContent = '₹—';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit booking request';
+      })
+      .catch((error) => {
+        showStatus(statusBox, 'Could not submit booking: ' + error.message, 'info');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit booking request';
+      });
+  });
+</script>
 
 </body>
 </html>
