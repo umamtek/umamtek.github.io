@@ -3,169 +3,175 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact | UMAMTEK</title>
-<link rel="stylesheet" href="./css/style.css?v=20">
-<link rel="icon" href="images/favicon.png">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<title>Contact Us | UMAMTEK</title>
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .contact-grid{ display:grid; grid-template-columns:0.9fr 1.1fr; gap:48px; align-items:start; }
+  .contact-card{ display:flex; gap:16px; padding:20px 0; border-top:1px solid rgba(20,24,31,0.1); }
+  .contact-card:first-child{ border-top:none; padding-top:0; }
+  .contact-icon{ width:40px; height:40px; border-radius:2px; background:var(--ivory-2); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .contact-icon svg{ width:18px; height:18px; }
+  .contact-card h4{ font-size:14.5px; margin-bottom:4px; }
+  .contact-card p, .contact-card a{ font-size:13.5px; color:var(--steel); }
+</style>
 </head>
 <body>
 
-<nav class="navbar">
-
-<div class="logo-area">
-  <a href="index.html">
-    <img src="logo.png" class="site-logo" alt="UMAMTEK Logo">
-  </a>
-</div>
-  
-<button class="menu-btn" onclick="toggleMenu()">☰</button>
-<ul class="nav-links" id="navLinks">
-<li><a href="index.html">Home</a></li>
-<li><a href="about.html">About Us</a></li>
-<li><a href="services.html">Services</a></li>
-<li><a href="products.html">Products</a></li>
-<li><a href="projects.html">Projects</a></li>
-<li><a href="career.html">Career</a></li>
-<li><a href="complaints.html">Complaints</a></li>
-<li><a href="contact.html">Contact</a></li>
-<li><a href="login.html">Login</a></li>
-<li><a href="signup.html">Signup</a></li>
-</ul>
-<div class="nav-actions">
-<a href="https://wa.me/919065760751" class="primary-btn">Get Quote</a>
-</div>
-</nav>
-
-<section class="section contact-page">
-
-  <h1 class="section-title">Contact UMAMTEK</h1>
-
-  <p class="section-subtitle">
-    Need a worker, service support, business enquiry, partnership discussion or project consultation? Contact UMAMTEK and our team will help you with the right solution.
-  </p>
-
-  <div class="um-quote" style="max-width:950px;margin:0 auto 45px;">
-    “Your work deserves the right worker, clear communication and professional support.”
-  </div>
-
-  <div class="card-grid">
-
-    <div class="card">
-      <h3>📞 Call Us</h3>
-      <p>
-        For quick service booking, urgent support or business enquiry, call UMAMTEK directly.
-      </p>
-      <p><strong>Phone:</strong> 9065760751</p>
-
-      <a href="tel:9065760751" class="primary-btn" style="display:inline-block;margin-top:15px;text-decoration:none;">
-        Call Now
-      </a>
-    </div>
-
-    <div class="card">
-      <h3>💬 WhatsApp</h3>
-      <p>
-        Send your work requirement, location and preferred time on WhatsApp. Our team will review and guide you.
-      </p>
-      <p><strong>WhatsApp:</strong> 9065760751</p>
-
-      <a href="https://wa.me/919065760751" target="_blank" class="primary-btn" style="display:inline-block;margin-top:15px;text-decoration:none;">
-        Message on WhatsApp
-      </a>
-    </div>
-
-    <div class="card">
-      <h3>📧 Email</h3>
-      <p>
-        For business, partnership, support or official communication, you can email us.
-      </p>
-      <p><strong>Email:</strong> owner@umamtek.com</p>
-
-      <a href="mailto:owner@umamtek.com" class="primary-btn" style="display:inline-block;margin-top:15px;text-decoration:none;">
-        Send Email
-      </a>
-    </div>
-
-    <div class="card">
-      <h3>📍 Service Location</h3>
-      <p>
-        UMAMTEK is currently focused on Bhagalpur and nearby areas. Service availability depends on worker availability and customer location.
-      </p>
-      <p><strong>Base:</strong> Bhagalpur, Bihar</p>
-
-      <a href="https://maps.app.goo.gl/8pzbSMm62n2BabZZ9" target="_blank" class="primary-btn" style="display:inline-block;margin-top:15px;text-decoration:none;">
-        Open Location
-      </a>
-    </div>
-
-  </div>
-
-  <br><br>
-
-  <div class="card" style="max-width:1100px;margin:auto;">
-
-    <h2>Send Enquiry</h2>
-
-    <p>
-      Fill the form below and share your requirement. You can also use WhatsApp for faster response.
-    </p>
-
-    <form onsubmit="sendContactForm(event)" style="margin-top:25px;display:grid;gap:18px;">
-
-      <input type="text" id="contactName" placeholder="Your Name" required>
-
-      <input type="tel" id="contactPhone" placeholder="Phone Number" required>
-
-      <select id="contactPurpose" required>
-        <option value="">Select Purpose</option>
-        <option>Book a Service</option>
-        <option>Project Enquiry</option>
-        <option>Business Partnership</option>
-        <option>Worker / Partner Registration</option>
-        <option>Complaint / Support</option>
-        <option>Other</option>
-      </select>
-
-      <textarea id="contactMessage" placeholder="Write your message or work requirement..." required></textarea>
-
-      <button type="submit">Send Enquiry</button>
-
-    </form>
-
-  </div>
-
-  <br><br>
-
-  <div class="card" style="max-width:1100px;margin:auto;text-align:center;">
-
-    <h2>Want to book a worker directly?</h2>
-
-    <p>
-      Visit our booking page, select your worker category, choose your work, add live location and submit your request.
-    </p>
-
-    <a href="booking.html" class="primary-btn" style="display:inline-block;margin-top:18px;text-decoration:none;">
-      Book Service
+<header class="site-header">
+  <div class="wrap nav-row">
+    <a href="index.html" class="logo">
+      <div class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#D9944F" stroke-width="1.6"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></div>
+      <div class="logo-text">UMAM<span>TEK</span></div>
     </a>
-
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="booking.html">Booking</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a href="login.html" class="btn btn-outline-dark">Login</a>
+      <a href="booking.html" class="btn btn-copper">Book Service</a>
+    </div>
   </div>
+</header>
 
+<section class="page-hero" style="padding:56px 0 44px;">
+  <div class="wrap">
+    <span class="eyebrow">Get in touch</span>
+    <h1 style="font-size:30px;">We're one call or message away.</h1>
+  </div>
 </section>
 
-<footer class="premium-footer">
-<h2>UMAMTEK</h2>
-<p>Your Project Our Priority</p>
-<p>Phone: 9065760751</p>
-<p>Email: shaheumam802@gmail.com</p>
-<div class="footer-badges">
-<span>Make In India</span>
-<span>Vocal For Local</span>
-<span>Beti Bachao Beti Padhao</span>
-<span>Swadeshi</span>
-</div>
+<section class="section-tight">
+  <div class="wrap contact-grid">
+    <div>
+      <div class="contact-card">
+        <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#B8763E" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"/></svg></div>
+        <div><h4>Call us</h4><a href="tel:+919065760751">+91 90657 60751</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#B8763E" stroke-width="1.6"><path d="M4 4h16v16H4z"/><path d="m4 4 8 8 8-8"/></svg></div>
+        <div><h4>Email us</h4><a href="mailto:owner@umamtek.com">owner@umamtek.com</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="1.6"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.2.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.4.1-.6l.4-.5c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.3-.8.8-.8 1.9s.8 2.2 1 2.4c.1.1 1.6 2.5 4 3.5.6.2 1 .4 1.3.5.6.2 1.1.2 1.5.1.5-.1 1.7-.7 1.9-1.3.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg></div>
+        <div><h4>WhatsApp</h4><a href="https://wa.me/919065760751" target="_blank" rel="noopener">Chat with us</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#B8763E" stroke-width="1.6"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div><h4>Location</h4><p>Bhagalpur, Bihar, India</p></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#B8763E" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <div><h4>Support hours</h4><p>24×7 for active bookings</p></div>
+      </div>
+
+      <div style="display:flex; gap:14px; margin-top:22px;">
+        <a href="#" target="_blank" rel="noopener" aria-label="Instagram" class="contact-icon" style="border-radius:50%;"><svg viewBox="0 0 24 24" fill="none" stroke="#B8763E" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+        <a href="#" target="_blank" rel="noopener" aria-label="Facebook" class="contact-icon" style="border-radius:50%;"><svg viewBox="0 0 24 24" fill="none" stroke="#B8763E" stroke-width="1.6"><path d="M15 3h-2a5 5 0 0 0-5 5v2H6v4h2v7h4v-7h3l1-4h-4V8a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="#" target="_blank" rel="noopener" aria-label="YouTube" class="contact-icon" style="border-radius:50%;"><svg viewBox="0 0 24 24" fill="none" stroke="#B8763E" stroke-width="1.6"><rect x="2" y="6" width="20" height="12" rx="3"/><path d="M10 9.5 15 12l-5 2.5z" fill="#B8763E"/></svg></a>
+      </div>
+    </div>
+
+    <div>
+      <form id="contact-form">
+        <div class="field">
+          <label for="ct-name">Your name</label>
+          <input type="text" id="ct-name" placeholder="Full name">
+          <div class="err" id="name-err">Enter your name.</div>
+        </div>
+        <div class="field">
+          <label for="ct-phone">Mobile number</label>
+          <div class="input-row">
+            <span class="prefix">+91</span>
+            <input type="tel" id="ct-phone" placeholder="98765 43210" maxlength="10" inputmode="numeric">
+          </div>
+          <div class="err" id="phone-err">Enter a valid 10-digit mobile number.</div>
+        </div>
+        <div class="field">
+          <label for="ct-msg">Message</label>
+          <textarea id="ct-msg" placeholder="How can we help?"></textarea>
+          <div class="err" id="msg-err">Enter a message.</div>
+        </div>
+        <button type="button" class="btn btn-copper btn-block" id="ct-submit-btn">Send message</button>
+        <div class="status" id="status-box"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-bottom">
+      <span>© 2026 UMAMTEK. All rights reserved.</span>
+      <span><a href="privacy-policy.html">Privacy Policy</a> · Terms &amp; Conditions</span>
+    </div>
+  </div>
 </footer>
 
-<a href="https://wa.me/919065760751" class="floating-whatsapp">WhatsApp</a>
-<script src="js/script.js"></script>
+<!-- Firebase SDK (compat) -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="script.js"></script>
+
+<script>
+  const nameInput = document.getElementById('ct-name');
+  const nameErr = document.getElementById('name-err');
+  const phoneInput = document.getElementById('ct-phone');
+  const phoneErr = document.getElementById('phone-err');
+  const msgInput = document.getElementById('ct-msg');
+  const msgErr = document.getElementById('msg-err');
+  const submitBtn = document.getElementById('ct-submit-btn');
+  const statusBox = document.getElementById('status-box');
+
+  submitBtn.addEventListener('click', () => {
+    let ok = true;
+    if(!nameInput.value.trim()){ nameErr.style.display = 'block'; ok = false; } else { nameErr.style.display = 'none'; }
+    if(!validPhone(phoneInput.value.trim())){ phoneErr.style.display = 'block'; ok = false; } else { phoneErr.style.display = 'none'; }
+    if(!msgInput.value.trim()){ msgErr.style.display = 'block'; ok = false; } else { msgErr.style.display = 'none'; }
+    if(!ok) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+
+    const data = {
+      name: nameInput.value.trim(),
+      phone: '+91' + phoneInput.value.trim(),
+      message: msgInput.value.trim(),
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    };
+
+    if(!db){
+      showStatus(statusBox, 'Firestore is not connected yet — see firebase-config.js.', 'info');
+      submitBtn.disabled = false; submitBtn.textContent = 'Send message';
+      return;
+    }
+
+    db.collection('contact_messages').add(data)
+      .then(() => {
+        showStatus(statusBox, "Message sent. We'll get back to you shortly.", 'ok');
+        document.getElementById('contact-form').reset();
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send message';
+      })
+      .catch((error) => {
+        showStatus(statusBox, 'Could not send: ' + error.message, 'info');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send message';
+      });
+  });
+</script>
+
 </body>
 </html>
