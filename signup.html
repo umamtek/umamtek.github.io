@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | UMAMTEK</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        .auth-page {
+            min-height: calc(100vh - 78px);
+            background: #fafafa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px 20px;
+        }
+
+        .auth-card {
+            width: min(500px, 100%);
+            background: #ffffff;
+            border: 1px solid #eeeeee;
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 18px 50px rgba(0,0,0,0.08);
+        }
+
+        .auth-logo {
+            text-align: center;
+            font-size: 27px;
+            font-weight: 900;
+            margin-bottom: 25px;
+        }
+
+        .auth-logo span {
+            color: #f5c400;
+        }
+
+        .auth-card h1 {
+            text-align: center;
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .auth-subtitle {
+            text-align: center;
+            color: #777777;
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+
+        .auth-field {
+            margin-bottom: 17px;
+        }
+
+        .auth-field label {
+            display: block;
+            font-size: 13px;
+            font-weight: 800;
+            margin-bottom: 7px;
+        }
+
+        .auth-field input,
+        .auth-field select {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #dddddd;
+            border-radius: 8px;
+            outline: none;
+            background: #ffffff;
+        }
+
+        .auth-field input:focus,
+        .auth-field select:focus {
+            border-color: #f5c400;
+        }
+
+        .mobile-input {
+            display: grid;
+            grid-template-columns: 65px 1fr;
+            gap: 8px;
+        }
+
+        .country-code {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f5f5f5;
+            border: 1px solid #dddddd;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 13px;
+        }
+
+        .password-help {
+            color: #888888;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin: 18px 0;
+            font-size: 11px;
+            color: #666666;
+        }
+
+        .terms input {
+            margin-top: 3px;
+        }
+
+        .terms a {
+            color: #111111;
+            font-weight: 800;
+        }
+
+        .auth-btn {
+            width: 100%;
+        }
+
+        .login-link {
+            text-align: center;
+            font-size: 13px;
+            color: #666666;
+            margin-top: 22px;
+        }
+
+        .login-link a {
+            color: #111111;
+            font-weight: 900;
+        }
+
+        .back-home {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #777777;
+        }
+
+        .auth-message {
+            display: none;
+            margin-bottom: 18px;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 12px;
+        }
+
+        @media (max-width: 600px) {
+
+            .auth-card {
+                padding: 25px 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="navbar">
+
+    <div class="container nav-inner">
+
+        <a href="index.html" class="logo">
+            <span>UMA</span>MTEK
+        </a>
+
+        <nav class="nav-links">
+
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="index.html#how-it-works">
+                How It Works
+            </a>
+            <a href="index.html#about">
+                About
+            </a>
+            <a href="index.html#contact">
+                Contact
+            </a>
+
+        </nav>
+
+        <div class="nav-actions">
+
+            <a href="login.html"
+               class="login-btn">
+                Login
+            </a>
+
+        </div>
+
+        <button class="menu-btn" id="menuBtn">
+            ☰
+        </button>
+
+    </div>
+
+</header>
+
+
+<main class="auth-page">
+
+    <div class="auth-card">
+
+        <div class="auth-logo">
+            <span>UMA</span>MTEK
+        </div>
+
+        <h1>Create Account</h1>
+
+        <p class="auth-subtitle">
+            Create your UMAMTEK customer account.
+        </p>
+
+
+        <div id="authMessage"
+             class="auth-message">
+        </div>
+
+
+        <form id="signupForm">
+
+
+            <!-- NAME -->
+
+            <div class="auth-field">
+
+                <label for="name">
+                    Full Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your full name"
+                    required
+                >
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="auth-field">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="you@example.com"
+                    required
+                >
+
+            </div>
+
+
+            <!-- MOBILE -->
+
+            <div class="auth-field">
+
+                <label for="mobile">
+                    Mobile Number
+                </label>
+
+                <div class="mobile-input">
+
+                    <div class="country-code">
+                        +91
+                    </div>
+
+                    <input
+                        type="tel"
+                        id="mobile"
+                        placeholder="10-digit mobile number"
+                        maxlength="10"
+                        pattern="[0-9]{10}"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="auth-field">
+
+                <label for="password">
+                    Create Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Create a strong password"
+                    minlength="6"
+                    required
+                >
+
+                <div class="password-help">
+                    Use at least 6 characters.
+                </div>
+
+            </div>
+
+
+            <!-- CONFIRM PASSWORD -->
+
+            <div class="auth-field">
+
+                <label for="confirmPassword">
+                    Confirm Password
+                </label>
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Re-enter your password"
+                    minlength="6"
+                    required
+                >
+
+            </div>
+
+
+            <!-- TERMS -->
+
+            <label class="terms">
+
+                <input
+                    type="checkbox"
+                    id="terms"
+                    required
+                >
+
+                <span>
+                    I agree to UMAMTEK's
+                    <a href="#">
+                        Terms & Conditions
+                    </a>
+                    and
+                    <a href="#">
+                        Privacy Policy
+                    </a>.
+                </span>
+
+            </label>
+
+
+            <button
+                type="submit"
+                class="primary-btn auth-btn">
+
+                Create Account →
+
+            </button>
+
+        </form>
+
+
+        <p class="login-link">
+
+            Already have an account?
+
+            <a href="login.html">
+                Login
+            </a>
+
+        </p>
+
+
+        <a href="index.html"
+           class="back-home">
+
+            ← Back to UMAMTEK
+
+        </a>
+
+    </div>
+
+</main>
+
+
+<script>
+
+document.getElementById("signupForm")
+    .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+
+        const name =
+            document.getElementById("name").value.trim();
+
+        const email =
+            document.getElementById("email").value.trim();
+
+        const mobile =
+            document.getElementById("mobile").value.trim();
+
+        const password =
+            document.getElementById("password").value;
+
+        const confirmPassword =
+            document.getElementById("confirmPassword").value;
+
+
+        if (mobile.length !== 10) {
+
+            showMessage(
+                "Please enter a valid 10-digit mobile number."
+            );
+
+            return;
+
+        }
+
+
+        if (password !== confirmPassword) {
+
+            showMessage(
+                "Passwords do not match."
+            );
+
+            return;
+
+        }
+
+
+        /*
+           Firebase will be connected here.
+
+           Future flow:
+
+           Name
+              ↓
+           Email
+              ↓
+           Mobile
+              ↓
+           Verification
+              ↓
+           Password
+              ↓
+           Firebase Account
+              ↓
+           Customer User ID
+              ↓
+           Customer Profile
+        */
+
+
+        showMessage(
+            "Account system will be connected with Firebase in the next phase."
+        );
+
+    });
+
+
+function showMessage(message) {
+
+    const box =
+        document.getElementById("authMessage");
+
+    box.textContent = message;
+    box.style.display = "block";
+
+}
+
+</script>
+
+
+</body>
+</html>
