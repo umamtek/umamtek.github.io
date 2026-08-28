@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book a Service | UMAMTEK</title>
+
+    <meta name="description"
+          content="Book trusted professionals with UMAMTEK. Choose your service, work type, date, time and preferred worker.">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* =====================================================
+           SERVICES / BOOKING PAGE
+        ===================================================== */
+
+        .booking-page {
+            background: #fafafa;
+            min-height: 100vh;
+            padding: 60px 0 90px;
+        }
+
+        .booking-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 45px;
+        }
+
+        .booking-header span {
+            color: #b28b00;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+        }
+
+        .booking-header h1 {
+            font-size: clamp(34px, 5vw, 55px);
+            line-height: 1.08;
+            margin: 10px 0 15px;
+            letter-spacing: -2px;
+        }
+
+        .booking-header p {
+            color: #666;
+        }
+
+        .booking-layout {
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 25px;
+            align-items: start;
+        }
+
+        .booking-form-card,
+        .summary-card {
+            background: #ffffff;
+            border: 1px solid #eeeeee;
+            border-radius: 16px;
+            padding: 30px;
+        }
+
+        .booking-form-card h2 {
+            font-size: 22px;
+            margin-bottom: 25px;
+        }
+
+        .form-section {
+            padding-bottom: 30px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .form-section:last-child {
+            border-bottom: 0;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .form-section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .form-number {
+            width: 30px;
+            height: 30px;
+            display: grid;
+            place-items: center;
+            background: #f5c400;
+            color: #111111;
+            border-radius: 50%;
+            font-size: 13px;
+            font-weight: 900;
+        }
+
+        .form-section-title h3 {
+            font-size: 17px;
+        }
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+        .field:last-child {
+            margin-bottom: 0;
+        }
+
+        .field label {
+            display: block;
+            font-size: 13px;
+            font-weight: 800;
+            margin-bottom: 7px;
+        }
+
+        .field select,
+        .field input,
+        .field textarea {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #dddddd;
+            border-radius: 8px;
+            background: #ffffff;
+            color: #111111;
+            outline: none;
+        }
+
+        .field select:focus,
+        .field input:focus,
+        .field textarea:focus {
+            border-color: #f5c400;
+        }
+
+        .field textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .work-option {
+            padding: 15px;
+            border: 1px solid #dddddd;
+            border-radius: 9px;
+            background: #ffffff;
+            text-align: left;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .work-option strong {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+
+        .work-option small {
+            color: #777777;
+            font-size: 11px;
+        }
+
+        .work-option:hover,
+        .work-option.active {
+            border-color: #f5c400;
+            background: #fffbea;
+        }
+
+        .work-option.other {
+            border-style: dashed;
+        }
+
+        .date-time-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .worker-choice {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .worker-option {
+            padding: 18px;
+            border: 1px solid #dddddd;
+            border-radius: 10px;
+            background: #ffffff;
+            cursor: pointer;
+            text-align: left;
+            transition: 0.2s;
+        }
+
+        .worker-option:hover,
+        .worker-option.active {
+            border-color: #f5c400;
+            background: #fffbea;
+        }
+
+        .worker-option-icon {
+            font-size: 23px;
+            margin-bottom: 8px;
+        }
+
+        .worker-option strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .worker-option small {
+            color: #777777;
+            font-size: 11px;
+        }
+
+        .location-box {
+            background: #fffbea;
+            border: 1px solid #f5c400;
+            padding: 18px;
+            border-radius: 10px;
+        }
+
+        .location-box button {
+            margin-top: 10px;
+            border: 0;
+            background: #111111;
+            color: #ffffff;
+            padding: 10px 14px;
+            border-radius: 7px;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .summary-card {
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary-card h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 13px 0;
+            border-bottom: 1px solid #eeeeee;
+            font-size: 13px;
+        }
+
+        .summary-row span:first-child {
+            color: #777777;
+        }
+
+        .summary-row span:last-child {
+            text-align: right;
+            font-weight: 700;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 22px;
+            margin-top: 10px;
+        }
+
+        .summary-total strong:last-child {
+            font-size: 25px;
+        }
+
+        .rate-note {
+            background: #111111;
+            color: #ffffff;
+            padding: 15px;
+            border-radius: 9px;
+            margin-top: 20px;
+            font-size: 12px;
+        }
+
+        .rate-note strong {
+            color: #f5c400;
+        }
+
+        .continue-booking {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .login-note {
+            text-align: center;
+            font-size: 11px;
+            color: #777777;
+            margin-top: 12px;
+        }
+
+        .login-note a {
+            color: #111111;
+            font-weight: 800;
+            text-decoration: underline;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 850px) {
+
+            .booking-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-card {
+                position: static;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .booking-page {
+                padding: 40px 0 65px;
+            }
+
+            .booking-form-card,
+            .summary-card {
+                padding: 20px;
+            }
+
+            .work-grid,
+            .worker-choice,
+            .date-time-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+    </style>
+</head>
+
+
+<body>
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="navbar">
+
+    <div class="container nav-inner">
+
+        <a href="index.html" class="logo">
+            <span>UMA</span>MTEK
+        </a>
+
+        <nav class="nav-links">
+
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="index.html#how-it-works">How It Works</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#contact">Contact</a>
+
+        </nav>
+
+        <div class="nav-actions">
+
+            <a href="login.html" class="login-btn">
+                Login
+            </a>
+
+            <a href="signup.html" class="primary-btn small-btn">
+                Sign Up
+            </a>
+
+        </div>
+
+        <button class="menu-btn" id="menuBtn">
+            ☰
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     BOOKING PAGE
+===================================================== -->
+
+<main class="booking-page">
+
+    <div class="container">
+
+        <div class="booking-header">
+
+            <span>BOOK A SERVICE</span>
+
+            <h1>
+                Tell us what you need.
+            </h1>
+
+            <p>
+                Choose your service, work type, preferred time
+                and worker. We'll take care of the rest.
+            </p>
+
+        </div>
+
+
+        <div class="booking-layout">
+
+
+            <!-- =================================================
+                 LEFT — FORM
+            ================================================= -->
+
+            <div class="booking-form-card">
+
+                <h2>Booking Details</h2>
+
+
+                <!-- SERVICE -->
+
+                <div class="form-section">
+
+                    <div class="form-section-title">
+
+                        <div class="form-number">1</div>
+
+                        <h3>Select a Service</h3>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label for="service">
+                            Service
+                        </label>
+
+                        <select id="service">
+
+                            <option value="">
+                                Select a service
+                            </option>
+
+                            <option value="Electrician">
+                                ⚡ Electrician
+                            </option>
+
+                            <option value="Plumber">
+                                🔧 Plumber
+                            </option>
+
+                            <option value="General Installer">
+                                🛠️ General Installer
+                            </option>
+
+                            <option value="Teacher">
+                                📚 Teacher
+                            </option>
+
+                            <option value="Driver">
+                                🚗 Driver
+                            </option>
+
+                            <option value="Painter">
+                                🎨 Painter
+                            </option>
+
+                            <option value="AC Technician">
+                                ❄️ AC Technician
+                            </option>
+
+                            <option value="Fridge Repair">
+                                🧊 Fridge Repair
+                            </option>
+
+                            <option value="Washing Machine Repair">
+                                🧺 Washing Machine Repair
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- WORK TYPE -->
+
+                <div class="form-section">
+
+                    <div class="form-section-title">
+
+                        <div class="form-number">2</div>
+
+                        <h3>What work do you need?</h3>
+
+                    </div>
+
+
+                    <div class="work-grid">
+
+                        <button class="work-option"
+                                type="button">
+
+                            <strong>
+                                Installation
+                            </strong>
+
+                            <small>
+                                New installation
+                            </small>
+
+                        </button>
+
+
+                        <button class="work-option"
+                                type="button">
+
+                            <strong>
+                                Repair
+                            </strong>
+
+                            <small>
+                                Fix an existing problem
+                            </small>
+
+                        </button>
+
+
+                        <button class="work-option"
+                                type="button">
+
+                            <strong>
+                                Maintenance
+                            </strong>
+
+                            <small>
+                                Service & maintenance
+                            </small>
+
+                        </button>
+
+
+                        <button class="work-option"
+                                type="button">
+
+                            <strong>
+                                Inspection
+                            </strong>
+
+                            <small>
+                                Check & diagnose
+                            </small>
+
+                        </button>
+
+
+                        <button class="work-option"
+                                type="button">
+
+                            <strong>
+                                Other
+                            </strong>
+
+                            <small>
+                                Please specify
+                            </small>
+
+                        </button>
+
+
+                        <button class="work-option"
+                                type="button">
+
+                            <strong>
+                                Need another worker
+                            </strong>
+
+                            <small>
+                                Not sure what you need?
+                            </small>
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="field"
+                         id="otherWorkField"
+                         style="display:none; margin-top:15px;">
+
+                        <label for="otherWork">
+                            Please describe your work
+                        </label>
+
+                        <textarea id="otherWork"
+                                  placeholder="Tell us what you need..."></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DATE & TIME -->
+
+                <div class="form-section">
+
+                    <div class="form-section-title">
+
+                        <div class="form-number">3</div>
+
+                        <h3>Choose Date & Time</h3>
+
+                    </div>
+
+
+                    <div class="date-time-grid">
+
+                        <div class="field">
+
+                            <label for="bookingDate">
+                                Date
+                            </label>
+
+                            <input type="date"
+                                   id="bookingDate">
+
+                        </div>
+
+
+                        <div class="field">
+
+                            <label for="bookingTime">
+                                Time Slot
+                            </label>
+
+                            <select id="bookingTime">
+
+                                <option value="">
+                                    Select time
+                                </option>
+
+                                <option>08:00 AM - 09:00 AM</option>
+                                <option>09:00 AM - 10:00 AM</option>
+                                <option>10:00 AM - 11:00 AM</option>
+                                <option>11:00 AM - 12:00 PM</option>
+                                <option>12:00 PM - 01:00 PM</option>
+                                <option>01:00 PM - 02:00 PM</option>
+                                <option>02:00 PM - 03:00 PM</option>
+                                <option>03:00 PM - 04:00 PM</option>
+                                <option>04:00 PM - 05:00 PM</option>
+                                <option>05:00 PM - 06:00 PM</option>
+                                <option>06:00 PM - 07:00 PM</option>
+                                <option>07:00 PM - 08:00 PM</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LOCATION -->
+
+                <div class="form-section">
+
+                    <div class="form-section-title">
+
+                        <div class="form-number">4</div>
+
+                        <h3>Service Location</h3>
+
+                    </div>
+
+
+                    <div class="location-box">
+
+                        <strong>
+                            📍 Where should the professional come?
+                        </strong>
+
+                        <p style="font-size:12px;color:#666;margin-top:5px;">
+                            Your location must be within 30 KM
+                            of our service area.
+                        </p>
+
+                        <button type="button"
+                                id="locationBtn">
+
+                            Use My Location
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="field"
+                         style="margin-top:15px;">
+
+                        <label for="address">
+                            Address
+                        </label>
+
+                        <textarea id="address"
+                                  placeholder="Enter your complete address"></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <!-- WORKER -->
+
+                <div class="form-section">
+
+                    <div class="form-section-title">
+
+                        <div class="form-number">5</div>
+
+                        <h3>Choose Worker Preference</h3>
+
+                    </div>
+
+
+                    <div class="worker-choice">
+
+                        <button type="button"
+                                class="worker-option">
+
+                            <div class="worker-option-icon">
+                                📍
+                            </div>
+
+                            <strong>
+                                Nearest Available
+                            </strong>
+
+                            <small>
+                                Let UMAMTEK find the nearest
+                                available professional.
+                            </small>
+
+                        </button>
+
+
+                        <button type="button"
+                                class="worker-option">
+
+                            <div class="worker-option-icon">
+                                👷
+                            </div>
+
+                            <strong>
+                                Choose Worker
+                            </strong>
+
+                            <small>
+                                Select an available professional
+                                yourself.
+                            </small>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- NOTE -->
+
+                <div class="form-section">
+
+                    <div class="form-section-title">
+
+                        <div class="form-number">6</div>
+
+                        <h3>Additional Information</h3>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label for="notes">
+                            Anything else we should know?
+                     
