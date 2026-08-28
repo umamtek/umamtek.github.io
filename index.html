@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>UMAMTEK | Trusted Services at Your Doorstep</title>
+
+    <meta name="description"
+        content="Book trusted electricians, plumbers, installers, teachers, drivers, painters, AC technicians and appliance repair professionals with UMAMTEK.">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="container nav-inner">
+
+        <a href="index.html" class="logo">
+            <span>UMA</span>MTEK
+        </a>
+
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+            <a href="login.html" class="login-btn">Login</a>
+            <a href="signup.html" class="primary-btn small-btn">Sign Up</a>
+        </div>
+
+        <button class="menu-btn" id="menuBtn">
+            ☰
+        </button>
+
+    </div>
+
+</header>
+
+
+<main>
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="container hero-grid">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                ⚡ Trusted Local Service Platform
+            </div>
+
+            <h1>
+                Reliable Services.<br>
+                <span>Right at Your Door.</span>
+            </h1>
+
+            <p>
+                Book trusted professionals for electrical work,
+                plumbing, installation, repairs and everyday services —
+                quickly and conveniently.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="services.html" class="primary-btn">
+                    Book a Service
+                </a>
+
+                <a href="#how-it-works" class="secondary-btn">
+                    How It Works
+                </a>
+
+            </div>
+
+            <div class="hero-info">
+
+                <div>
+                    <strong>₹200</strong>
+                    <span>Starting hourly rate</span>
+                </div>
+
+                <div>
+                    <strong>30 KM</strong>
+                    <span>Service radius</span>
+                </div>
+
+                <div>
+                    <strong>24/7</strong>
+                    <span>Online booking</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="booking-card">
+
+            <div class="card-top">
+
+                <span class="card-icon">⚡</span>
+
+                <div>
+                    <small>Need a professional?</small>
+                    <h3>Book a Service</h3>
+                </div>
+
+            </div>
+
+            <label>Select Service</label>
+
+            <select id="serviceSelect">
+                <option value="">Choose a service</option>
+                <option>Electrician</option>
+                <option>Plumber</option>
+                <option>General Installer</option>
+                <option>Teacher</option>
+                <option>Driver</option>
+                <option>Painter</option>
+                <option>AC Technician</option>
+                <option>Fridge Repair</option>
+                <option>Washing Machine Repair</option>
+            </select>
+
+            <label>Choose your preference</label>
+
+            <div class="booking-options">
+
+                <button type="button" class="booking-option">
+                    📍 Nearest Worker
+                </button>
+
+                <button type="button" class="booking-option">
+                    👷 Choose Worker
+                </button>
+
+            </div>
+
+            <button class="primary-btn full-btn" onclick="startBooking()">
+                Continue Booking →
+            </button>
+
+            <p class="secure-text">
+                🔒 Secure booking • Easy payment • Trusted professionals
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SERVICES -->
+
+<section class="services-section" id="services">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span>OUR SERVICES</span>
+
+            <h2>
+                Whatever you need,<br>
+                <strong>we've got you covered.</strong>
+            </h2>
+
+            <p>
+                Find the right professional for your work.
+            </p>
+
+        </div>
+
+
+        <div class="services-grid">
+
+            <a href="services.html?service=electrician" class="service-card">
+                <div class="service-icon">⚡</div>
+                <h3>Electrician</h3>
+                <p>Electrical installation, repair & maintenance.</p>
+                <span>Book now →</span>
+            </a>
+
+            <a href="services.html?service=plumber" class="service-card">
+                <div class="service-icon">🔧</div>
+                <h3>Plumber</h3>
+                <p>Professional plumbing and repair services.</p>
+                <span>Book now →</span>
+            </a>
+
+            <a href="services.html?service=installer" class="service-card">
+                <div class="service-icon">🛠️</div>
+                <h3>General Installer</h3>
+                <p>Installation and household setup services.</p>
+                <span>Book now →</span>
+            </a>
+
+            <a href="services.html?service=teacher" class="service-card">
+                <div class="service-icon">📚</div>
+                <h3>Teacher</h3>
+                <p>Connect with teachers for learning support.</p>
+                <span>Book now →</span>
+            </a>
+
+            <a href="services.html?service=driver" class="service-card">
+                <div class="service-icon">🚗</div>
+                <h3>Driver</h3>
+                <p>Book reliable driving assistance.</p>
+                <span>Book now →</span>
+            </a>
+
+            <a href="services.html?service=painter" class="service-card">
+                <div class="service-icon">🎨</div>
+                <h3>Painter</h3>
+                <p>Professional painting for your space.</p>
+                <span>Book now →</span>
+            </a>
+
+            <a href="services.html?service=ac" class="service-card">
+                <div class="service-icon">❄️</div>
+                <h3>AC Technician</h3>
+                <p>AC installation, servicing and repair.</p>
+                <span>Book now →</span>
+            </a>
+
+            <a href="services.html?service=appliance" class="service-card">
+                <div class="service-icon">🏠</div>
+                <h3>Appliance Repair</h3>
+                <p>Fridge & washing machine repair services.</p>
+                <span>Book now →</span>
+            </a>
+
+        </div>
+
+        <div class="center-btn">
+            <a href="services.html" class="secondary-btn">
+                View All Services
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- HOW IT WORKS -->
+
+<section class="how-section" id="how-it-works">
+
+    <div class="container">
+
+        <div class="section-heading center">
+
+            <span>HOW IT WORKS</span>
+
+            <h2>
+                Get your work done in
+                <strong>four simple steps.</strong>
+            </h2>
+
+        </div>
+
+
+        <div class="steps">
+
+            <div class="step">
+                <div class="step-number">01</div>
+                <h3>Choose a Service</h3>
+                <p>Select the professional service you need.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">02</div>
+                <h3>Choose Time</h3>
+                <p>Select a convenient date and time slot.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">03</div>
+                <h3>Get a Worker</h3>
+                <p>Choose a worker or get the nearest available professional.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">04</div>
+                <h3>Get the Work Done</h3>
+                <p>Pay securely online or choose Pay After Work.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section class="about-section" id="about">
+
+    <div class="container about-grid">
+
+        <div>
+
+            <span class="section-label">ABOUT UMAMTEK</span>
+
+            <h2>
+                Local professionals,
+                <strong>made accessible.</strong>
+            </h2>
+
+        </div>
+
+        <div>
+
+            <p>
+                UMAMTEK is a service platform designed to connect
+                customers with trusted professionals for everyday
+                services at their doorstep.
+            </p>
+
+            <p>
+                From electrical work and plumbing to installation,
+                appliance repair and more — UMAMTEK makes booking
+                professional help simple.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CTA -->
+
+<section class="cta-section">
+
+    <div class="container cta-box">
+
+        <div>
+
+            <span>NEED HELP?</span>
+
+            <h2>
+                Let's get your work done.
+            </h2>
+
+            <p>
+                Book a professional today.
+            </p>
+
+        </div>
+
+        <a href="services.html" class="dark-btn">
+            Book Now →
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section class="contact-section" id="contact">
+
+    <div class="container">
+
+        <div class="section-heading center">
+
+            <span>CONTACT</span>
+
+            <h2>
+                We're here to help.
+            </h2>
+
+            <p>
+                Need assistance with your booking?
+                Contact UMAMTEK.
+            </p>
+
+        </div>
+
+        <div class="contact-buttons">
+
+            <a href="https://wa.me/917544813882"
+               target="_blank"
+               class="whatsapp-btn">
+                💬 WhatsApp Us
+            </a>
+
+            <a href="tel:+917544813882"
+               class="secondary-btn">
+                📞 Call UMAMTEK
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+    <div class="container footer-inner">
+
+        <div>
+
+            <div class="logo footer-logo">
+                <span>UMA</span>MTEK
+            </div>
+
+            <p>
+                Trusted services at your doorstep.
+            </p>
+
+        </div>
+
+        <div class="footer-links">
+
+            <a href="services.html">Services</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+
+        </div>
+
+    </div>
+
+    <div class="copyright">
+        © 2026 UMAMTEK. All rights reserved.
+    </div>
+
+</footer>
+
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
