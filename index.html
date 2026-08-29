@@ -7,36 +7,935 @@
     <title>UMAMTEK | Trusted Services at Your Doorstep</title>
 
     <meta name="description"
-        content="Book trusted electricians, plumbers, installers, teachers, drivers, painters, AC technicians and appliance repair professionals with UMAMTEK.">
+          content="Book trusted electricians, plumbers, installers, teachers, drivers, painters, AC technicians and appliance repair professionals with UMAMTEK.">
+
+    <meta name="theme-color" content="#f5c400">
 
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        /* =====================================================
+           UMAMTEK HOMEPAGE
+        ===================================================== */
+
+        :root {
+            --yellow: #f5c400;
+            --yellow-light: #fff7c7;
+            --black: #111111;
+            --white: #ffffff;
+            --grey: #666666;
+            --light: #f7f7f7;
+            --border: #e9e9e9;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        .home-navbar {
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(12px);
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 25px;
+            font-weight: 950;
+            letter-spacing: -1.5px;
+        }
+
+        .brand-logo-mark {
+            width: 35px;
+            height: 35px;
+            border-radius: 9px;
+            background: var(--yellow);
+            display: grid;
+            place-items: center;
+            color: var(--black);
+            font-size: 14px;
+            font-weight: 950;
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .premium-hero {
+            position: relative;
+            min-height: 720px;
+            display: flex;
+            align-items: center;
+            background:
+                radial-gradient(circle at 85% 20%,
+                    rgba(245,196,0,0.18),
+                    transparent 28%),
+                linear-gradient(
+                    135deg,
+                    #ffffff 0%,
+                    #ffffff 62%,
+                    #fffbea 100%
+                );
+            overflow: hidden;
+        }
+
+        .hero-decoration {
+            position: absolute;
+            width: 480px;
+            height: 480px;
+            border-radius: 50%;
+            border: 1px solid rgba(245,196,0,0.25);
+            right: -180px;
+            top: 80px;
+        }
+
+        .hero-decoration::before {
+            content: "";
+            position: absolute;
+            width: 330px;
+            height: 330px;
+            border-radius: 50%;
+            border: 1px solid rgba(245,196,0,0.22);
+            right: 74px;
+            top: 74px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 13px;
+            border-radius: 50px;
+            background: var(--yellow-light);
+            border: 1px solid #efd25b;
+            font-size: 12px;
+            font-weight: 900;
+            margin-bottom: 22px;
+        }
+
+        .hero-kicker-dot {
+            width: 7px;
+            height: 7px;
+            background: var(--yellow);
+            border-radius: 50%;
+        }
+
+        .premium-hero h1 {
+            max-width: 760px;
+            font-size: clamp(45px, 6.2vw, 78px);
+            line-height: 0.99;
+            letter-spacing: -4px;
+            margin-bottom: 25px;
+        }
+
+        .premium-hero h1 span {
+            position: relative;
+            display: inline-block;
+        }
+
+        .premium-hero h1 span::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -4px;
+            height: 8px;
+            background: var(--yellow);
+            z-index: -1;
+            transform: rotate(-1deg);
+        }
+
+        .hero-description {
+            max-width: 610px;
+            color: var(--grey);
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .hero-primary {
+            padding: 16px 28px;
+            border-radius: 9px;
+            background: var(--black);
+            color: var(--white);
+            font-weight: 900;
+            transition: .2s;
+        }
+
+        .hero-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0,0,0,.18);
+        }
+
+        .hero-secondary {
+            padding: 15px 27px;
+            border-radius: 9px;
+            border: 2px solid var(--black);
+            font-weight: 900;
+            transition: .2s;
+        }
+
+        .hero-secondary:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .hero-trust {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-top: 42px;
+        }
+
+        .trust-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .trust-item strong {
+            font-size: 19px;
+        }
+
+        .trust-item span {
+            color: #888;
+            font-size: 11px;
+        }
+
+        .trust-divider {
+            width: 1px;
+            height: 38px;
+            background: #ddd;
+        }
+
+
+        /* =====================================================
+           FLOATING BOOKING CARD
+        ===================================================== */
+
+        .hero-card-wrap {
+            position: relative;
+            z-index: 3;
+        }
+
+        .hero-booking-card {
+            background: var(--black);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow:
+                0 35px 80px rgba(0,0,0,.20);
+            max-width: 390px;
+            margin-left: auto;
+        }
+
+        .hero-card-label {
+            color: var(--yellow);
+            font-size: 11px;
+            font-weight: 950;
+            letter-spacing: 1.7px;
+        }
+
+        .hero-booking-card h2 {
+            font-size: 29px;
+            line-height: 1.1;
+            margin: 8px 0 24px;
+        }
+
+        .quick-field {
+            margin-bottom: 14px;
+        }
+
+        .quick-field label {
+            display: block;
+            color: #aaa;
+            font-size: 11px;
+            font-weight: 800;
+            margin-bottom: 7px;
+        }
+
+        .quick-field select {
+            width: 100%;
+            padding: 14px;
+            border: 0;
+            border-radius: 8px;
+            outline: none;
+            background: white;
+            color: #111;
+        }
+
+        .quick-book-btn {
+            width: 100%;
+            border: 0;
+            padding: 15px;
+            margin-top: 7px;
+            background: var(--yellow);
+            color: var(--black);
+            border-radius: 8px;
+            font-weight: 950;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .quick-book-btn:hover {
+            background: #ffd52e;
+            transform: translateY(-2px);
+        }
+
+        .price-highlight {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            margin-top: 8px;
+            border-top: 1px solid #333;
+        }
+
+        .price-highlight span {
+            color: #aaa;
+            font-size: 12px;
+        }
+
+        .price-highlight strong {
+            color: var(--yellow);
+            font-size: 21px;
+        }
+
+
+        /* =====================================================
+           SERVICE SECTION
+        ===================================================== */
+
+        .service-showcase {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .showcase-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 30px;
+            margin-bottom: 45px;
+        }
+
+        .showcase-heading h2 {
+            font-size: clamp(34px, 4vw, 52px);
+            letter-spacing: -2px;
+            line-height: 1.05;
+            margin-top: 9px;
+        }
+
+        .showcase-heading p {
+            max-width: 450px;
+            color: var(--grey);
+        }
+
+        .service-grid-new {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .new-service-card {
+            position: relative;
+            background: white;
+            border: 1px solid var(--border);
+            padding: 27px;
+            border-radius: 14px;
+            min-height: 205px;
+            overflow: hidden;
+            transition: .25s;
+        }
+
+        .new-service-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--yellow);
+            box-shadow: 0 18px 45px rgba(0,0,0,.07);
+        }
+
+        .service-number {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            color: #eeeeee;
+            font-size: 42px;
+            font-weight: 950;
+        }
+
+        .service-symbol {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            background: var(--yellow-light);
+            border-radius: 11px;
+            font-size: 22px;
+            margin-bottom: 19px;
+        }
+
+        .new-service-card h3 {
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+
+        .new-service-card p {
+            color: #777;
+            font-size: 13px;
+            max-width: 260px;
+        }
+
+        .service-arrow {
+            position: absolute;
+            right: 22px;
+            bottom: 20px;
+            font-size: 18px;
+            font-weight: 900;
+        }
+
+
+        /* =====================================================
+           STATS STRIP
+        ===================================================== */
+
+        .stats-strip {
+            background: var(--yellow);
+            padding: 34px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .stat strong {
+            font-size: 27px;
+        }
+
+        .stat span {
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+
+        /* =====================================================
+           HOW IT WORKS
+        ===================================================== */
+
+        .process-section {
+            padding: 105px 0;
+            background: #fafafa;
+        }
+
+        .process-header {
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto 55px;
+        }
+
+        .process-header small {
+            color: #b28b00;
+            font-weight: 950;
+            letter-spacing: 1.5px;
+        }
+
+        .process-header h2 {
+            font-size: clamp(34px, 4vw, 52px);
+            letter-spacing: -2px;
+            margin: 9px 0 13px;
+        }
+
+        .process-header p {
+            color: var(--grey);
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .process-card {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 28px;
+            border-radius: 14px;
+        }
+
+        .process-icon {
+            width: 50px;
+            height: 50px;
+            display: grid;
+            place-items: center;
+            background: var(--black);
+            color: var(--yellow);
+            border-radius: 10px;
+            font-weight: 950;
+            margin-bottom: 22px;
+        }
+
+        .process-card h3 {
+            margin-bottom: 8px;
+        }
+
+        .process-card p {
+            color: #777;
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           WHY UMAMTEK
+        ===================================================== */
+
+        .why-section {
+            padding: 105px 0;
+            background: var(--black);
+            color: white;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: .85fr 1.15fr;
+            gap: 90px;
+            align-items: center;
+        }
+
+        .why-content small {
+            color: var(--yellow);
+            font-size: 11px;
+            font-weight: 950;
+            letter-spacing: 1.5px;
+        }
+
+        .why-content h2 {
+            font-size: clamp(37px, 4.5vw, 58px);
+            line-height: 1;
+            letter-spacing: -2.5px;
+            margin: 12px 0 22px;
+        }
+
+        .why-content p {
+            color: #aaa;
+            line-height: 1.8;
+        }
+
+        .why-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .why-item {
+            border: 1px solid #292929;
+            border-radius: 12px;
+            padding: 23px;
+            background: #151515;
+        }
+
+        .why-item strong {
+            display: block;
+            margin-bottom: 7px;
+        }
+
+        .why-item p {
+            color: #999;
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           WORKER CTA
+        ===================================================== */
+
+        .worker-section {
+            padding: 95px 0;
+            background: var(--yellow);
+        }
+
+        .worker-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .worker-box small {
+            font-size: 11px;
+            font-weight: 950;
+            letter-spacing: 1.5px;
+        }
+
+        .worker-box h2 {
+            font-size: clamp(34px, 4vw, 52px);
+            line-height: 1;
+            letter-spacing: -2px;
+            margin: 9px 0 12px;
+        }
+
+        .worker-box p {
+            max-width: 600px;
+            font-size: 14px;
+        }
+
+        .worker-btn {
+            background: var(--black);
+            color: white;
+            padding: 16px 26px;
+            border-radius: 9px;
+            font-weight: 900;
+            white-space: nowrap;
+        }
+
+
+        /* =====================================================
+           REVIEWS
+        ===================================================== */
+
+        .reviews-section {
+            padding: 100px 0;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 17px;
+        }
+
+        .review-card {
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 26px;
+            background: white;
+        }
+
+        .stars {
+            color: #c49b00;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .review-card p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .review-user {
+            font-weight: 900;
+            font-size: 13px;
+        }
+
+        .review-user span {
+            display: block;
+            color: #999;
+            font-size: 10px;
+            font-weight: 500;
+            margin-top: 3px;
+        }
+
+
+        /* =====================================================
+           CONTACT CTA
+        ===================================================== */
+
+        .contact-cta {
+            padding: 85px 0;
+            background: #f7f7f7;
+        }
+
+        .contact-box {
+            text-align: center;
+        }
+
+        .contact-box small {
+            color: #b28b00;
+            font-weight: 950;
+            letter-spacing: 1.5px;
+        }
+
+        .contact-box h2 {
+            font-size: clamp(34px, 4vw, 52px);
+            letter-spacing: -2px;
+            margin: 10px 0;
+        }
+
+        .contact-box p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .whatsapp-large {
+            display: inline-flex;
+            padding: 15px 25px;
+            background: var(--black);
+            color: white;
+            border-radius: 9px;
+            font-weight: 900;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .premium-footer {
+            background: #090909;
+            color: white;
+            padding-top: 65px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr;
+            gap: 60px;
+            padding-bottom: 55px;
+        }
+
+        .footer-brand p {
+            color: #888;
+            font-size: 13px;
+            max-width: 300px;
+            margin-top: 13px;
+        }
+
+        .footer-column h4 {
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        .footer-column a {
+            display: block;
+            color: #888;
+            font-size: 12px;
+            margin-bottom: 11px;
+        }
+
+        .footer-column a:hover {
+            color: var(--yellow);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #222;
+            padding: 20px 0;
+            color: #666;
+            font-size: 11px;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 950px) {
+
+            .premium-hero {
+                min-height: auto;
+                padding: 75px 0;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .hero-booking-card {
+                margin: 20px 0 0;
+                max-width: 100%;
+            }
+
+            .service-grid-new {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr;
+                gap: 45px;
+            }
+
+            .worker-box {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .premium-hero {
+                padding: 55px 0;
+            }
+
+            .premium-hero h1 {
+                font-size: 45px;
+                letter-spacing: -2.5px;
+            }
+
+            .hero-description {
+                font-size: 15px;
+            }
+
+            .hero-trust {
+                gap: 13px;
+            }
+
+            .trust-divider {
+                height: 30px;
+            }
+
+            .service-showcase,
+            .process-section,
+            .why-section,
+            .reviews-section {
+                padding: 70px 0;
+            }
+
+            .showcase-heading {
+                display: block;
+            }
+
+            .showcase-heading p {
+                margin-top: 15px;
+            }
+
+            .service-grid-new {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .why-list {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-<header class="navbar">
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="navbar home-navbar">
 
     <div class="container nav-inner">
 
-        <a href="index.html" class="logo">
-            <span>UMA</span>MTEK
+        <a href="index.html" class="brand-logo">
+
+            <div class="brand-logo-mark">
+                U
+            </div>
+
+            UMAMTEK
+
         </a>
 
+
         <nav class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="services.html">Services</a>
-            <a href="#how-it-works">How It Works</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="services.html">
+                Services
+            </a>
+
+            <a href="#how-it-works">
+                How It Works
+            </a>
+
+            <a href="#about">
+                About
+            </a>
+
+            <a href="#contact">
+                Contact
+            </a>
+
         </nav>
 
+
         <div class="nav-actions">
-            <a href="login.html" class="login-btn">Login</a>
-            <a href="signup.html" class="primary-btn small-btn">Sign Up</a>
+
+            <a href="login.html"
+               class="login-btn">
+                Login
+            </a>
+
+            <a href="signup.html"
+               class="primary-btn small-btn">
+                Sign Up
+            </a>
+
         </div>
 
-        <button class="menu-btn" id="menuBtn">
+
+        <button class="menu-btn"
+                id="menuBtn"
+                aria-label="Open menu">
+
             ☰
+
         </button>
 
     </div>
@@ -44,114 +943,215 @@
 </header>
 
 
-<main>
 
-<!-- HERO -->
+<!-- =====================================================
+     HERO
+===================================================== -->
 
-<section class="hero">
+<section class="premium-hero">
 
-    <div class="container hero-grid">
+    <div class="hero-decoration"></div>
 
-        <div class="hero-content">
+    <div class="container">
 
-            <div class="badge">
-                ⚡ Trusted Local Service Platform
-            </div>
+        <div class="hero-grid"
+             style="display:grid;
+                    grid-template-columns:1.15fr .85fr;
+                    align-items:center;
+                    gap:70px;">
 
-            <h1>
-                Reliable Services.<br>
-                <span>Right at Your Door.</span>
-            </h1>
+            <div class="hero-content">
 
-            <p>
-                Book trusted professionals for electrical work,
-                plumbing, installation, repairs and everyday services —
-                quickly and conveniently.
-            </p>
+                <div class="hero-kicker">
 
-            <div class="hero-buttons">
+                    <span class="hero-kicker-dot"></span>
 
-                <a href="services.html" class="primary-btn">
-                    Book a Service
-                </a>
+                    SERVICES AT YOUR DOORSTEP
 
-                <a href="#how-it-works" class="secondary-btn">
-                    How It Works
-                </a>
-
-            </div>
-
-            <div class="hero-info">
-
-                <div>
-                    <strong>₹200</strong>
-                    <span>Starting hourly rate</span>
                 </div>
 
-                <div>
-                    <strong>30 KM</strong>
-                    <span>Service radius</span>
+
+                <h1>
+
+                    Skilled people.
+                    <br>
+
+                    <span>Simple booking.</span>
+
+                </h1>
+
+
+                <p class="hero-description">
+
+                    Book trusted professionals for everyday
+                    services — from electrical work and plumbing
+                    to appliance repair, painting and more.
+
+                    <br><br>
+
+                    <strong>
+                        One platform. One simple booking.
+                    </strong>
+
+                </p>
+
+
+                <div class="hero-actions">
+
+                    <a href="services.html"
+                       class="hero-primary">
+
+                        Book a Service →
+
+                    </a>
+
+                    <a href="#how-it-works"
+                       class="hero-secondary">
+
+                        How It Works
+
+                    </a>
+
                 </div>
 
-                <div>
-                    <strong>24/7</strong>
-                    <span>Online booking</span>
+
+                <div class="hero-trust">
+
+                    <div class="trust-item">
+
+                        <strong>₹200</strong>
+
+                        <span>
+                            Starting rate / hour
+                        </span>
+
+                    </div>
+
+
+                    <div class="trust-divider"></div>
+
+
+                    <div class="trust-item">
+
+                        <strong>30 KM</strong>
+
+                        <span>
+                            Service area
+                        </span>
+
+                    </div>
+
+
+                    <div class="trust-divider"></div>
+
+
+                    <div class="trust-item">
+
+                        <strong>9+</strong>
+
+                        <span>
+                            Service categories
+                        </span>
+
+                    </div>
+
                 </div>
 
             </div>
 
-        </div>
 
 
-        <div class="booking-card">
+            <!-- QUICK BOOKING -->
 
-            <div class="card-top">
+            <div class="hero-card-wrap">
 
-                <span class="card-icon">⚡</span>
+                <div class="hero-booking-card">
 
-                <div>
-                    <small>Need a professional?</small>
-                    <h3>Book a Service</h3>
+                    <div class="hero-card-label">
+                        QUICK BOOKING
+                    </div>
+
+                    <h2>
+                        What do you need help with?
+                    </h2>
+
+
+                    <div class="quick-field">
+
+                        <label>
+                            SELECT SERVICE
+                        </label>
+
+                        <select id="quickService">
+
+                            <option value="">
+                                Choose a service
+                            </option>
+
+                            <option value="Electrician">
+                                ⚡ Electrician
+                            </option>
+
+                            <option value="Plumber">
+                                🔧 Plumber
+                            </option>
+
+                            <option value="General Installer">
+                                🛠️ General Installer
+                            </option>
+
+                            <option value="Teacher">
+                                📚 Teacher
+                            </option>
+
+                            <option value="Driver">
+                                🚗 Driver
+                            </option>
+
+                            <option value="Painter">
+                                🎨 Painter
+                            </option>
+
+                            <option value="AC Technician">
+                                ❄️ AC Technician
+                            </option>
+
+                            <option value="Fridge Repair">
+                                🧊 Fridge Repair
+                            </option>
+
+                            <option value="Washing Machine Repair">
+                                🧺 Washing Machine Repair
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <button class="quick-book-btn"
+                            onclick="quickBooking()">
+
+                        Continue Booking →
+
+                    </button>
+
+
+                    <div class="price-highlight">
+
+                        <span>
+                            UMAMTEK rate
+                        </span>
+
+                        <strong>
+                            ₹200/hr
+                        </strong>
+
+                    </div>
+
                 </div>
 
             </div>
-
-            <label>Select Service</label>
-
-            <select id="serviceSelect">
-                <option value="">Choose a service</option>
-                <option>Electrician</option>
-                <option>Plumber</option>
-                <option>General Installer</option>
-                <option>Teacher</option>
-                <option>Driver</option>
-                <option>Painter</option>
-                <option>AC Technician</option>
-                <option>Fridge Repair</option>
-                <option>Washing Machine Repair</option>
-            </select>
-
-            <label>Choose your preference</label>
-
-            <div class="booking-options">
-
-                <button type="button" class="booking-option">
-                    📍 Nearest Worker
-                </button>
-
-                <button type="button" class="booking-option">
-                    👷 Choose Worker
-                </button>
-
-            </div>
-
-            <button class="primary-btn full-btn" onclick="startBooking()">
-                Continue Booking →
-            </button>
-
-            <p class="secure-text">
-                🔒 Secure booking • Easy payment • Trusted professionals
-            </p>
 
         </div>
 
@@ -160,92 +1160,285 @@
 </section>
 
 
-<!-- SERVICES -->
 
-<section class="services-section" id="services">
+<!-- =====================================================
+     STATS
+===================================================== -->
+
+<section class="stats-strip">
+
+    <div class="container stats-grid">
+
+        <div class="stat">
+
+            <strong>9+</strong>
+
+            <span>
+                SERVICE CATEGORIES
+            </span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <strong>₹200</strong>
+
+            <span>
+                STARTING HOURLY RATE
+            </span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <strong>30 KM</strong>
+
+            <span>
+                SERVICE RADIUS
+            </span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <strong>24/7</strong>
+
+            <span>
+                ONLINE BOOKING
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SERVICES
+===================================================== -->
+
+<section class="service-showcase"
+         id="services">
 
     <div class="container">
 
-        <div class="section-heading">
+        <div class="showcase-heading">
 
-            <span>OUR SERVICES</span>
+            <div>
 
-            <h2>
-                Whatever you need,<br>
-                <strong>we've got you covered.</strong>
-            </h2>
+                <div class="section-label">
+                    OUR SERVICES
+                </div>
+
+                <h2>
+                    Whatever you need,<br>
+                    we've got a professional.
+                </h2>
+
+            </div>
+
 
             <p>
-                Find the right professional for your work.
+
+                Choose a service, tell us what you need,
+                select your preferred time and let UMAMTEK
+                connect you with the right professional.
+
             </p>
 
         </div>
 
 
-        <div class="services-grid">
+        <div class="service-grid-new">
 
-            <a href="services.html?service=electrician" class="service-card">
-                <div class="service-icon">⚡</div>
+
+            <a href="services.html?service=Electrician"
+               class="new-service-card">
+
+                <span class="service-number">01</span>
+
+                <div class="service-symbol">⚡</div>
+
                 <h3>Electrician</h3>
-                <p>Electrical installation, repair & maintenance.</p>
-                <span>Book now →</span>
+
+                <p>
+                    Wiring, repair, installation,
+                    switches, fans and electrical work.
+                </p>
+
+                <span class="service-arrow">↗</span>
+
             </a>
 
-            <a href="services.html?service=plumber" class="service-card">
-                <div class="service-icon">🔧</div>
+
+            <a href="services.html?service=Plumber"
+               class="new-service-card">
+
+                <span class="service-number">02</span>
+
+                <div class="service-symbol">🔧</div>
+
                 <h3>Plumber</h3>
-                <p>Professional plumbing and repair services.</p>
-                <span>Book now →</span>
+
+                <p>
+                    Plumbing repairs, fittings,
+                    leakage and installation.
+                </p>
+
+                <span class="service-arrow">↗</span>
+
             </a>
 
-            <a href="services.html?service=installer" class="service-card">
-                <div class="service-icon">🛠️</div>
+
+            <a href="services.html?service=General%20Installer"
+               class="new-service-card">
+
+                <span class="service-number">03</span>
+
+                <div class="service-symbol">🛠️</div>
+
                 <h3>General Installer</h3>
-                <p>Installation and household setup services.</p>
-                <span>Book now →</span>
+
+                <p>
+                    Professional installation
+                    for everyday household needs.
+                </p>
+
+                <span class="service-arrow">↗</span>
+
             </a>
 
-            <a href="services.html?service=teacher" class="service-card">
-                <div class="service-icon">📚</div>
+
+            <a href="services.html?service=Teacher"
+               class="new-service-card">
+
+                <span class="service-number">04</span>
+
+                <div class="service-symbol">📚</div>
+
                 <h3>Teacher</h3>
-                <p>Connect with teachers for learning support.</p>
-                <span>Book now →</span>
+
+                <p>
+                    Find teachers and tutors
+                    for your learning needs.
+                </p>
+
+                <span class="service-arrow">↗</span>
+
             </a>
 
-            <a href="services.html?service=driver" class="service-card">
-                <div class="service-icon">🚗</div>
+
+            <a href="services.html?service=Driver"
+               class="new-service-card">
+
+                <span class="service-number">05</span>
+
+                <div class="service-symbol">🚗</div>
+
                 <h3>Driver</h3>
-                <p>Book reliable driving assistance.</p>
-                <span>Book now →</span>
+
+                <p>
+                    Hire a driver for your
+                    personal transportation needs.
+                </p>
+
+                <span class="service-arrow">↗</span>
+
             </a>
 
-            <a href="services.html?service=painter" class="service-card">
-                <div class="service-icon">🎨</div>
+
+            <a href="services.html?service=Painter"
+               class="new-service-card">
+
+                <span class="service-number">06</span>
+
+                <div class="service-symbol">🎨</div>
+
                 <h3>Painter</h3>
-                <p>Professional painting for your space.</p>
-                <span>Book now →</span>
+
+                <p>
+                    Home, office and commercial
+                    painting services.
+                </p>
+
+                <span class="service-arrow">↗</span>
+
             </a>
 
-            <a href="services.html?service=ac" class="service-card">
-                <div class="service-icon">❄️</div>
+
+            <a href="services.html?service=AC%20Technician"
+               class="new-service-card">
+
+                <span class="service-number">07</span>
+
+                <div class="service-symbol">❄️</div>
+
                 <h3>AC Technician</h3>
-                <p>AC installation, servicing and repair.</p>
-                <span>Book now →</span>
+
+                <p>
+                    AC installation, servicing,
+                    repair and maintenance.
+                </p>
+
+                <span class="service-arrow">↗</span>
+
             </a>
 
-            <a href="services.html?service=appliance" class="service-card">
-                <div class="service-icon">🏠</div>
-                <h3>Appliance Repair</h3>
-                <p>Fridge & washing machine repair services.</p>
-                <span>Book now →</span>
+
+            <a href="services.html?service=Fridge%20Repair"
+               class="new-service-card">
+
+                <span class="service-number">08</span>
+
+                <div class="service-symbol">🧊</div>
+
+                <h3>Fridge Repair</h3>
+
+                <p>
+                    Refrigerator diagnosis,
+                    repair and maintenance.
+                </p>
+
+                <span class="service-arrow">↗</span>
+
+            </a>
+
+
+            <a href="services.html?service=Washing%20Machine%20Repair"
+               class="new-service-card">
+
+                <span class="service-number">09</span>
+
+                <div class="service-symbol">🧺</div>
+
+                <h3>Washing Machine</h3>
+
+                <p>
+                    Washing machine repair,
+                    servicing and installation.
+                </p>
+
+                <span class="service-arrow">↗</span>
+
             </a>
 
         </div>
+
 
         <div class="center-btn">
-            <a href="services.html" class="secondary-btn">
-                View All Services
+
+            <a href="services.html"
+               class="secondary-btn">
+
+                View All Services →
+
             </a>
+
         </div>
 
     </div>
@@ -253,49 +1446,364 @@
 </section>
 
 
-<!-- HOW IT WORKS -->
 
-<section class="how-section" id="how-it-works">
+<!-- =====================================================
+     HOW IT WORKS
+===================================================== -->
+
+<section class="process-section"
+         id="how-it-works">
+
+    <div class="container">
+
+        <div class="process-header">
+
+            <small>
+                HOW UMAMTEK WORKS
+            </small>
+
+            <h2>
+                From problem to professional
+                in a few simple steps.
+            </h2>
+
+            <p>
+                No complicated process.
+                Just choose, book and get it done.
+            </p>
+
+        </div>
+
+
+        <div class="process-grid">
+
+            <div class="process-card">
+
+                <div class="process-icon">
+                    01
+                </div>
+
+                <h3>
+                    Choose a Service
+                </h3>
+
+                <p>
+                    Select the service you need
+                    from our available categories.
+                </p>
+
+            </div>
+
+
+            <div class="process-card">
+
+                <div class="process-icon">
+                    02
+                </div>
+
+                <h3>
+                    Choose Your Time
+                </h3>
+
+                <p>
+                    Select a convenient date
+                    and available time slot.
+                </p>
+
+            </div>
+
+
+            <div class="process-card">
+
+                <div class="process-icon">
+                    03
+                </div>
+
+                <h3>
+                    Choose Your Worker
+                </h3>
+
+                <p>
+                    Select an available professional
+                    or let UMAMTEK find the nearest one.
+                </p>
+
+            </div>
+
+
+            <div class="process-card">
+
+                <div class="process-icon">
+                    04
+                </div>
+
+                <h3>
+                    Get It Done
+                </h3>
+
+                <p>
+                    Your professional arrives
+                    and completes the work.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     WHY UMAMTEK
+===================================================== -->
+
+<section class="why-section"
+         id="about">
+
+    <div class="container">
+
+        <div class="why-grid">
+
+
+            <div class="why-content">
+
+                <small>
+                    WHY UMAMTEK
+                </small>
+
+                <h2>
+                    Local service,
+                    made smarter.
+                </h2>
+
+                <p>
+
+                    UMAMTEK is built to make finding
+                    reliable service professionals simpler.
+                    Instead of calling multiple people,
+                    compare your options and book through
+                    one platform.
+
+                </p>
+
+            </div>
+
+
+            <div class="why-list">
+
+                <div class="why-item">
+
+                    <strong>
+                        📍 Nearby Professionals
+                    </strong>
+
+                    <p>
+                        Find available workers near
+                        your service location.
+                    </p>
+
+                </div>
+
+
+                <div class="why-item">
+
+                    <strong>
+                        ⚡ Simple Booking
+                    </strong>
+
+                    <p>
+                        Choose service, date, time
+                        and worker preference.
+                    </p>
+
+                </div>
+
+
+                <div class="why-item">
+
+                    <strong>
+                        💰 Transparent Rate
+                    </strong>
+
+                    <p>
+                        Starting UMAMTEK rate of
+                        ₹200 per hour.
+                    </p>
+
+                </div>
+
+
+                <div class="why-item">
+
+                    <strong>
+                        📱 Easy Communication
+                    </strong>
+
+                    <p>
+                        Stay connected through your
+                        booking and registered contact.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     WORKER CTA
+===================================================== -->
+
+<section class="worker-section">
+
+    <div class="container">
+
+        <div class="worker-box">
+
+            <div>
+
+                <small>
+                    FOR SERVICE PROFESSIONALS
+                </small>
+
+                <h2>
+                    Want to work with UMAMTEK?
+                </h2>
+
+                <p>
+                    Create your professional account,
+                    add your field and contact details,
+                    and become available for customer bookings.
+                </p>
+
+            </div>
+
+
+            <a href="worker-signup.html"
+               class="worker-btn">
+
+                Join as a Professional →
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     REVIEWS
+===================================================== -->
+
+<section class="reviews-section">
 
     <div class="container">
 
         <div class="section-heading center">
 
-            <span>HOW IT WORKS</span>
+            <span>
+                CUSTOMER REVIEWS
+            </span>
 
             <h2>
-                Get your work done in
-                <strong>four simple steps.</strong>
+                What customers say
             </h2>
+
+            <p>
+                Real customer reviews will appear here
+                once UMAMTEK bookings go live.
+            </p>
 
         </div>
 
 
-        <div class="steps">
+        <div class="reviews-grid">
 
-            <div class="step">
-                <div class="step-number">01</div>
-                <h3>Choose a Service</h3>
-                <p>Select the professional service you need.</p>
+
+            <div class="review-card">
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <p>
+                    “UMAMTEK customer reviews will
+                    appear here after verified bookings.”
+                </p>
+
+                <div class="review-user">
+
+                    UMAMTEK Customer
+
+                    <span>
+                        Verified booking
+                    </span>
+
+                </div>
+
             </div>
 
-            <div class="step">
-                <div class="step-number">02</div>
-                <h3>Choose Time</h3>
-                <p>Select a convenient date and time slot.</p>
+
+            <div class="review-card">
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <p>
+                    “Customers will be able to share
+                    their experience after completing
+                    a service.”
+                </p>
+
+                <div class="review-user">
+
+                    Your Review
+
+                    <span>
+                        Coming soon
+                    </span>
+
+                </div>
+
             </div>
 
-            <div class="step">
-                <div class="step-number">03</div>
-                <h3>Get a Worker</h3>
-                <p>Choose a worker or get the nearest available professional.</p>
+
+            <div class="review-card">
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <p>
+                    “Public reviews will be automatically
+                    displayed here through the UMAMTEK system.”
+                </p>
+
+                <div class="review-user">
+
+                    UMAMTEK
+
+                    <span>
+                        Reviews system
+                    </span>
+
+                </div>
+
             </div>
 
-            <div class="step">
-                <div class="step-number">04</div>
-                <h3>Get the Work Done</h3>
-                <p>Pay securely online or choose Pay After Work.</p>
-            </div>
 
         </div>
 
@@ -304,105 +1812,37 @@
 </section>
 
 
-<!-- ABOUT -->
 
-<section class="about-section" id="about">
+<!-- =====================================================
+     CONTACT
+===================================================== -->
 
-    <div class="container about-grid">
-
-        <div>
-
-            <span class="section-label">ABOUT UMAMTEK</span>
-
-            <h2>
-                Local professionals,
-                <strong>made accessible.</strong>
-            </h2>
-
-        </div>
-
-        <div>
-
-            <p>
-                UMAMTEK is a service platform designed to connect
-                customers with trusted professionals for everyday
-                services at their doorstep.
-            </p>
-
-            <p>
-                From electrical work and plumbing to installation,
-                appliance repair and more — UMAMTEK makes booking
-                professional help simple.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- CTA -->
-
-<section class="cta-section">
-
-    <div class="container cta-box">
-
-        <div>
-
-            <span>NEED HELP?</span>
-
-            <h2>
-                Let's get your work done.
-            </h2>
-
-            <p>
-                Book a professional today.
-            </p>
-
-        </div>
-
-        <a href="services.html" class="dark-btn">
-            Book Now →
-        </a>
-
-    </div>
-
-</section>
-
-
-<!-- CONTACT -->
-
-<section class="contact-section" id="contact">
+<section class="contact-cta"
+         id="contact">
 
     <div class="container">
 
-        <div class="section-heading center">
+        <div class="contact-box">
 
-            <span>CONTACT</span>
+            <small>
+                NEED HELP?
+            </small>
 
             <h2>
-                We're here to help.
+                Talk to UMAMTEK.
             </h2>
 
             <p>
-                Need assistance with your booking?
-                Contact UMAMTEK.
+                Have a question about booking or our services?
+                We're available on WhatsApp.
             </p>
-
-        </div>
-
-        <div class="contact-buttons">
 
             <a href="https://wa.me/917544813882"
                target="_blank"
-               class="whatsapp-btn">
-                💬 WhatsApp Us
-            </a>
+               class="whatsapp-large">
 
-            <a href="tel:+917544813882"
-               class="secondary-btn">
-                📞 Call UMAMTEK
+                WhatsApp: 75448 13882 →
+
             </a>
 
         </div>
@@ -411,44 +1851,172 @@
 
 </section>
 
-</main>
 
 
-<footer>
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
-    <div class="container footer-inner">
+<footer class="premium-footer">
 
-        <div>
+    <div class="container">
 
-            <div class="logo footer-logo">
-                <span>UMA</span>MTEK
+        <div class="footer-grid">
+
+
+            <div class="footer-brand">
+
+                <div class="brand-logo">
+
+                    <div class="brand-logo-mark">
+                        U
+                    </div>
+
+                    UMAMTEK
+
+                </div>
+
+                <p>
+                    Trusted services at your doorstep.
+                    One platform for everyday service needs.
+                </p>
+
             </div>
 
-            <p>
-                Trusted services at your doorstep.
-            </p>
+
+            <div class="footer-column">
+
+                <h4>
+                    QUICK LINKS
+                </h4>
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="services.html">
+                    Services
+                </a>
+
+                <a href="login.html">
+                    Login
+                </a>
+
+                <a href="signup.html">
+                    Create Account
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    SERVICES
+                </h4>
+
+                <a href="services.html?service=Electrician">
+                    Electrician
+                </a>
+
+                <a href="services.html?service=Plumber">
+                    Plumber
+                </a>
+
+                <a href="services.html?service=Painter">
+                    Painter
+                </a>
+
+                <a href="services.html?service=AC%20Technician">
+                    AC Technician
+                </a>
+
+                <a href="services.html">
+                    View All
+                </a>
+
+            </div>
 
         </div>
 
-        <div class="footer-links">
 
-            <a href="services.html">Services</a>
-            <a href="#how-it-works">How It Works</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
+        <div class="footer-bottom">
+
+            <span>
+                © 2026 UMAMTEK. All rights reserved.
+            </span>
+
+            <span>
+                Built for simple, reliable service booking.
+            </span>
 
         </div>
 
-    </div>
-
-    <div class="copyright">
-        © 2026 UMAMTEK. All rights reserved.
     </div>
 
 </footer>
 
 
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
 <script src="js/script.js"></script>
+
+
+<script>
+
+function quickBooking() {
+
+    const service =
+        document.getElementById("quickService").value;
+
+
+    if (!service) {
+
+        alert("Please select a service first.");
+
+        return;
+
+    }
+
+
+    window.location.href =
+        "services.html?service=" +
+        encodeURIComponent(service);
+
+}
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const menuBtn =
+        document.getElementById("menuBtn");
+
+    const navLinks =
+        document.querySelector(".nav-links");
+
+    const navActions =
+        document.querySelector(".nav-actions");
+
+
+    if (menuBtn) {
+
+        menuBtn.addEventListener("click", function () {
+
+            navLinks.classList.toggle("mobile-open");
+
+            navActions.classList.toggle("mobile-open");
+
+        });
+
+    }
+
+});
+
+</script>
+
 
 </body>
 </html>
