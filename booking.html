@@ -1,0 +1,3593 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Book trusted home services with UMAMTEK.">
+
+    <meta name="theme-color"
+          content="#f5c400">
+
+    <title>Book a Service | UMAMTEK</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+
+    <style>
+
+        /* =====================================================
+           BOOKING PAGE
+        ===================================================== */
+
+        .booking-page {
+
+            min-height:
+                calc(100vh - 76px);
+
+            background:
+                #f7f7f7;
+
+            padding:
+                45px 0 80px;
+
+        }
+
+
+        .booking-layout {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                minmax(0, 1fr) 350px;
+
+            gap:
+                25px;
+
+            align-items:
+                start;
+
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .booking-heading {
+
+            margin-bottom:
+                28px;
+
+        }
+
+
+        .booking-heading small {
+
+            color:
+                var(--yellow-dark);
+
+            font-size:
+                10px;
+
+            font-weight:
+                950;
+
+            letter-spacing:
+                1.7px;
+
+        }
+
+
+        .booking-heading h1 {
+
+            font-size:
+                clamp(
+                    30px,
+                    5vw,
+                    45px
+                );
+
+            line-height:
+                1;
+
+            letter-spacing:
+                -2px;
+
+            margin:
+                8px 0;
+
+        }
+
+
+        .booking-heading p {
+
+            color:
+                #777;
+
+            font-size:
+                12px;
+
+        }
+
+
+        /* =====================================================
+           FORM CARD
+        ===================================================== */
+
+        .booking-form-card {
+
+            background:
+                white;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                15px;
+
+            padding:
+                28px;
+
+        }
+
+
+        .form-section {
+
+            padding:
+                0 0 28px;
+
+            margin-bottom:
+                28px;
+
+            border-bottom:
+                1px solid #eee;
+
+        }
+
+
+        .form-section:last-child {
+
+            margin-bottom:
+                0;
+
+            padding-bottom:
+                0;
+
+            border-bottom:
+                0;
+
+        }
+
+
+        .section-title {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+
+            margin-bottom:
+                18px;
+
+        }
+
+
+        .section-number {
+
+            width:
+                27px;
+
+            height:
+                27px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            background:
+                #111;
+
+            color:
+                var(--yellow);
+
+            border-radius:
+                7px;
+
+            font-size:
+                10px;
+
+            font-weight:
+                950;
+
+        }
+
+
+        .section-title h2 {
+
+            font-size:
+                15px;
+
+        }
+
+
+        /* =====================================================
+           FORM GRID
+        ===================================================== */
+
+        .form-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:
+                16px;
+
+        }
+
+
+        .form-group {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                7px;
+
+        }
+
+
+        .form-group.full {
+
+            grid-column:
+                1 / -1;
+
+        }
+
+
+        .form-group label {
+
+            font-size:
+                10px;
+
+            font-weight:
+                900;
+
+        }
+
+
+        .required {
+
+            color:
+                #d40000;
+
+        }
+
+
+        .form-control {
+
+            width:
+                100%;
+
+            border:
+                1px solid #ddd;
+
+            border-radius:
+                8px;
+
+            background:
+                white;
+
+            padding:
+                12px;
+
+            font-family:
+                inherit;
+
+            font-size:
+                11px;
+
+            outline:
+                none;
+
+            transition:
+                .2s;
+
+        }
+
+
+        .form-control:focus {
+
+            border-color:
+                var(--yellow-dark);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(245,196,0,.12);
+
+        }
+
+
+        textarea.form-control {
+
+            min-height:
+                85px;
+
+            resize:
+                vertical;
+
+        }
+
+
+        .form-help {
+
+            color:
+                #999;
+
+            font-size:
+                9px;
+
+            line-height:
+                1.5;
+
+        }
+
+
+        /* =====================================================
+           SERVICE CARDS
+        ===================================================== */
+
+        .service-options {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    3,
+                    1fr
+                );
+
+            gap:
+                10px;
+
+        }
+
+
+        .service-option {
+
+            position:
+                relative;
+
+        }
+
+
+        .service-option input {
+
+            position:
+                absolute;
+
+            opacity:
+                0;
+
+            pointer-events:
+                none;
+
+        }
+
+
+        .service-label {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            align-items:
+                flex-start;
+
+            justify-content:
+                center;
+
+            gap:
+                7px;
+
+            min-height:
+                80px;
+
+            padding:
+                13px;
+
+            border:
+                1px solid #ddd;
+
+            border-radius:
+                9px;
+
+            cursor:
+                pointer;
+
+            transition:
+                .2s;
+
+        }
+
+
+        .service-label:hover {
+
+            border-color:
+                #bbb;
+
+        }
+
+
+        .service-option input:checked +
+        .service-label {
+
+            border-color:
+                #111;
+
+            background:
+                #111;
+
+            color:
+                white;
+
+        }
+
+
+        .service-icon {
+
+            font-size:
+                21px;
+
+        }
+
+
+        .service-label strong {
+
+            font-size:
+                10px;
+
+        }
+
+
+        /* =====================================================
+           WORK OPTIONS
+        ===================================================== */
+
+        .work-options {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    2,
+                    1fr
+                );
+
+            gap:
+                9px;
+
+        }
+
+
+        .work-option {
+
+            position:
+                relative;
+
+        }
+
+
+        .work-option input {
+
+            position:
+                absolute;
+
+            opacity:
+                0;
+
+        }
+
+
+        .work-label {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                9px;
+
+            padding:
+                12px;
+
+            border:
+                1px solid #ddd;
+
+            border-radius:
+                8px;
+
+            cursor:
+                pointer;
+
+            font-size:
+                10px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .work-label:hover {
+
+            border-color:
+                #bbb;
+
+        }
+
+
+        .work-option input:checked +
+        .work-label {
+
+            border-color:
+                #111;
+
+            background:
+                #fff9db;
+
+        }
+
+
+        .work-check {
+
+            width:
+                15px;
+
+            height:
+                15px;
+
+            border:
+                1px solid #bbb;
+
+            border-radius:
+                4px;
+
+        }
+
+
+        /* =====================================================
+           WORKER SELECTION
+        ===================================================== */
+
+        .worker-choice-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:
+                12px;
+
+            margin-bottom:
+                15px;
+
+        }
+
+
+        .worker-choice {
+
+            position:
+                relative;
+
+        }
+
+
+        .worker-choice input {
+
+            position:
+                absolute;
+
+            opacity:
+                0;
+
+        }
+
+
+        .worker-choice label {
+
+            display:
+                block;
+
+            padding:
+                17px;
+
+            border:
+                1px solid #ddd;
+
+            border-radius:
+                10px;
+
+            cursor:
+                pointer;
+
+        }
+
+
+        .worker-choice input:checked +
+        label {
+
+            border-color:
+                #111;
+
+            background:
+                #fff9db;
+
+        }
+
+
+        .worker-choice-icon {
+
+            font-size:
+                22px;
+
+            margin-bottom:
+                8px;
+
+        }
+
+
+        .worker-choice strong {
+
+            display:
+                block;
+
+            font-size:
+                11px;
+
+            margin-bottom:
+                4px;
+
+        }
+
+
+        .worker-choice span {
+
+            display:
+                block;
+
+            color:
+                #888;
+
+            font-size:
+                9px;
+
+            line-height:
+                1.5;
+
+        }
+
+
+        .worker-list {
+
+            display:
+                none;
+
+            gap:
+                9px;
+
+            margin-top:
+                12px;
+
+        }
+
+
+        .worker-list.show {
+
+            display:
+                grid;
+
+        }
+
+
+        .worker-card {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                12px;
+
+            padding:
+                12px;
+
+            border:
+                1px solid #ddd;
+
+            border-radius:
+                9px;
+
+            cursor:
+                pointer;
+
+        }
+
+
+        .worker-card:hover {
+
+            border-color:
+                #aaa;
+
+        }
+
+
+        .worker-card.selected {
+
+            border-color:
+                #111;
+
+            background:
+                #fff9db;
+
+        }
+
+
+        .worker-avatar {
+
+            width:
+                40px;
+
+            height:
+                40px;
+
+            flex-shrink:
+                0;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            border-radius:
+                50%;
+
+            background:
+                #111;
+
+            color:
+                var(--yellow);
+
+            font-size:
+                11px;
+
+            font-weight:
+                950;
+
+        }
+
+
+        .worker-info {
+
+            flex:
+                1;
+
+        }
+
+
+        .worker-info strong {
+
+            display:
+                block;
+
+            font-size:
+                11px;
+
+            margin-bottom:
+                3px;
+
+        }
+
+
+        .worker-info span {
+
+            display:
+                block;
+
+            color:
+                #888;
+
+            font-size:
+                9px;
+
+        }
+
+
+        .worker-status {
+
+            font-size:
+                8px;
+
+            font-weight:
+                900;
+
+            color:
+                #18803c;
+
+        }
+
+
+        /* =====================================================
+           LOCATION
+        ===================================================== */
+
+        .location-box {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+            padding:
+                13px;
+
+            background:
+                #fff9db;
+
+            border:
+                1px solid #ead78a;
+
+            border-radius:
+                8px;
+
+            margin-bottom:
+                15px;
+
+        }
+
+
+        .location-info {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                9px;
+
+        }
+
+
+        .location-icon {
+
+            font-size:
+                18px;
+
+        }
+
+
+        .location-info strong {
+
+            display:
+                block;
+
+            font-size:
+                10px;
+
+        }
+
+
+        .location-info span {
+
+            display:
+                block;
+
+            color:
+                #777;
+
+            font-size:
+                8px;
+
+            margin-top:
+                2px;
+
+        }
+
+
+        .location-btn {
+
+            border:
+                0;
+
+            background:
+                #111;
+
+            color:
+                white;
+
+            padding:
+                8px 11px;
+
+            border-radius:
+                6px;
+
+            font-size:
+                9px;
+
+            font-weight:
+                900;
+
+            cursor:
+                pointer;
+
+            white-space:
+                nowrap;
+
+        }
+
+
+        /* =====================================================
+           DATE / SLOT
+        ===================================================== */
+
+        .slot-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(
+                    3,
+                    1fr
+                );
+
+            gap:
+                8px;
+
+            margin-top:
+                10px;
+
+        }
+
+
+        .slot {
+
+            position:
+                relative;
+
+        }
+
+
+        .slot input {
+
+            position:
+                absolute;
+
+            opacity:
+                0;
+
+        }
+
+
+        .slot label {
+
+            display:
+                block;
+
+            text-align:
+                center;
+
+            padding:
+                10px 5px;
+
+            border:
+                1px solid #ddd;
+
+            border-radius:
+                7px;
+
+            cursor:
+                pointer;
+
+            font-size:
+                9px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .slot input:checked +
+        label {
+
+            background:
+                #111;
+
+            color:
+                var(--yellow);
+
+            border-color:
+                #111;
+
+        }
+
+
+        .slot input:disabled +
+        label {
+
+            color:
+                #bbb;
+
+            background:
+                #f7f7f7;
+
+            cursor:
+                not-allowed;
+
+        }
+
+
+        /* =====================================================
+           PAYMENT
+        ===================================================== */
+
+        .payment-options {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:
+                10px;
+
+        }
+
+
+        .payment-option {
+
+            position:
+                relative;
+
+        }
+
+
+        .payment-option input {
+
+            position:
+                absolute;
+
+            opacity:
+                0;
+
+        }
+
+
+        .payment-label {
+
+            display:
+                block;
+
+            padding:
+                15px;
+
+            border:
+                1px solid #ddd;
+
+            border-radius:
+                9px;
+
+            cursor:
+                pointer;
+
+        }
+
+
+        .payment-option input:checked +
+        .payment-label {
+
+            border-color:
+                #111;
+
+            background:
+                #fff9db;
+
+        }
+
+
+        .payment-label strong {
+
+            display:
+                block;
+
+            font-size:
+                11px;
+
+            margin-bottom:
+                5px;
+
+        }
+
+
+        .payment-label span {
+
+            display:
+                block;
+
+            color:
+                #888;
+
+            font-size:
+                9px;
+
+            line-height:
+                1.5;
+
+        }
+
+
+        /* =====================================================
+           SUMMARY
+        ===================================================== */
+
+        .summary-card {
+
+            position:
+                sticky;
+
+            top:
+                95px;
+
+            background:
+                #111;
+
+            color:
+                white;
+
+            border-radius:
+                15px;
+
+            overflow:
+                hidden;
+
+        }
+
+
+        .summary-header {
+
+            padding:
+                21px;
+
+            background:
+                var(--yellow);
+
+            color:
+                #111;
+
+        }
+
+
+        .summary-header small {
+
+            font-size:
+                9px;
+
+            font-weight:
+                900;
+
+        }
+
+
+        .summary-header h2 {
+
+            font-size:
+                19px;
+
+            margin-top:
+                4px;
+
+        }
+
+
+        .summary-body {
+
+            padding:
+                22px;
+
+        }
+
+
+        .summary-service {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                11px;
+
+            padding-bottom:
+                18px;
+
+            margin-bottom:
+                18px;
+
+            border-bottom:
+                1px solid #333;
+
+        }
+
+
+        .summary-service-icon {
+
+            width:
+                43px;
+
+            height:
+                43px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            border-radius:
+                9px;
+
+            background:
+                #242424;
+
+            font-size:
+                20px;
+
+        }
+
+
+        .summary-service strong {
+
+            display:
+                block;
+
+            font-size:
+                12px;
+
+        }
+
+
+        .summary-service span {
+
+            color:
+                #aaa;
+
+            font-size:
+                9px;
+
+        }
+
+
+        .summary-row {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+            padding:
+                8px 0;
+
+            color:
+                #aaa;
+
+            font-size:
+                10px;
+
+        }
+
+
+        .summary-row strong {
+
+            color:
+                white;
+
+        }
+
+
+        .summary-row.total {
+
+            margin-top:
+                12px;
+
+            padding-top:
+                16px;
+
+            border-top:
+                1px solid #333;
+
+            color:
+                white;
+
+            font-size:
+                13px;
+
+        }
+
+
+        .summary-row.total strong {
+
+            color:
+                var(--yellow);
+
+            font-size:
+                20px;
+
+        }
+
+
+        .summary-note {
+
+            margin-top:
+                17px;
+
+            padding:
+                10px;
+
+            background:
+                #191919;
+
+            border-radius:
+                7px;
+
+            color:
+                #aaa;
+
+            font-size:
+                8px;
+
+            line-height:
+                1.5;
+
+        }
+
+
+        /* =====================================================
+           BOOK BUTTON
+        ===================================================== */
+
+        .book-submit {
+
+            width:
+                100%;
+
+            border:
+                0;
+
+            background:
+                var(--yellow);
+
+            color:
+                #111;
+
+            padding:
+                14px;
+
+            margin-top:
+                18px;
+
+            border-radius:
+                8px;
+
+            font-size:
+                11px;
+
+            font-weight:
+                950;
+
+            cursor:
+                pointer;
+
+            transition:
+                .2s;
+
+        }
+
+
+        .book-submit:hover {
+
+            transform:
+                translateY(-2px);
+
+        }
+
+
+        .secure-note {
+
+            text-align:
+                center;
+
+            color:
+                #777;
+
+            font-size:
+                8px;
+
+            margin-top:
+                10px;
+
+        }
+
+
+        /* =====================================================
+           SUCCESS
+        ===================================================== */
+
+        .booking-success {
+
+            display:
+                none;
+
+            padding:
+                50px 25px;
+
+            text-align:
+                center;
+
+        }
+
+
+        .booking-success.show {
+
+            display:
+                block;
+
+        }
+
+
+        .success-icon {
+
+            width:
+                65px;
+
+            height:
+                65px;
+
+            margin:
+                0 auto 18px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            background:
+                var(--yellow-light);
+
+            border-radius:
+                50%;
+
+            font-size:
+                27px;
+
+        }
+
+
+        .booking-success h2 {
+
+            font-size:
+                25px;
+
+            margin-bottom:
+                8px;
+
+        }
+
+
+        .booking-success p {
+
+            color:
+                #777;
+
+            font-size:
+                11px;
+
+            line-height:
+                1.6;
+
+        }
+
+
+        .success-booking-id {
+
+            display:
+                inline-block;
+
+            margin:
+                18px 0;
+
+            padding:
+                10px 15px;
+
+            background:
+                #111;
+
+            color:
+                var(--yellow);
+
+            border-radius:
+                7px;
+
+            font-size:
+                11px;
+
+            font-weight:
+                900;
+
+        }
+
+
+        .success-actions {
+
+            display:
+                flex;
+
+            justify-content:
+                center;
+
+            gap:
+                10px;
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 900px) {
+
+            .booking-layout {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .summary-card {
+
+                position:
+                    static;
+
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .booking-page {
+
+                padding:
+                    30px 0 60px;
+
+            }
+
+
+            .booking-form-card {
+
+                padding:
+                    20px;
+
+            }
+
+
+            .form-grid {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .form-group.full {
+
+                grid-column:
+                    auto;
+
+            }
+
+
+            .service-options {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+            }
+
+
+            .work-options {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .worker-choice-grid,
+            .payment-options {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .slot-grid {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+            }
+
+
+            .location-box {
+
+                align-items:
+                    flex-start;
+
+                flex-direction:
+                    column;
+
+            }
+
+
+            .location-btn {
+
+                width:
+                    100%;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="navbar">
+
+    <div class="container nav-inner">
+
+
+        <a href="index.html"
+           class="logo">
+
+            UMAM<span>TEK</span>
+
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="services.html">
+                Services
+            </a>
+
+            <a href="my-bookings.html">
+                My Bookings
+            </a>
+
+            <a href="profile.html">
+                Profile
+            </a>
+
+        </nav>
+
+
+        <button
+            class="menu-btn"
+            id="menuBtn">
+
+            ☰
+
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="booking-page">
+
+    <div class="container">
+
+
+        <div class="booking-heading">
+
+            <small>
+                UMAMTEK SERVICE BOOKING
+            </small>
+
+
+            <h1>
+                Book a Service
+            </h1>
+
+
+            <p>
+                Tell us what you need and we'll connect
+                you with the right service professional.
+            </p>
+
+        </div>
+
+
+
+        <div class="booking-layout">
+
+
+            <!-- =================================================
+                 FORM
+            ================================================= -->
+
+            <section class="booking-form-card">
+
+
+                <form id="bookingForm">
+
+
+                    <!-- =============================================
+                         01 SERVICE
+                    ============================================= -->
+
+                    <div class="form-section">
+
+
+                        <div class="section-title">
+
+                            <div class="section-number">
+                                01
+                            </div>
+
+                            <h2>
+                                Select Service
+                            </h2>
+
+                        </div>
+
+
+                        <div class="service-options">
+
+
+                            <div class="service-option">
+
+                                <input
+                                    type="radio"
+                                    name="service"
+                                    id="electrician"
+                                    value="Electrician">
+
+                                <label
+                                    for="electrician"
+                                    class="service-label">
+
+                                    <span class="service-icon">
+                                        ⚡
+                                    </span>
+
+                                    <strong>
+                                        Electrician
+                                    </strong>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="service-option">
+
+                                <input
+                                    type="radio"
+                                    name="service"
+                                    id="plumber"
+                                    value="Plumber">
+
+                                <label
+                                    for="plumber"
+                                    class="service-label">
+
+                                    <span class="service-icon">
+                                        🔧
+                                    </span>
+
+                                    <strong>
+                                        Plumber
+                                    </strong>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="service-option">
+
+                                <input
+                                    type="radio"
+                                    name="service"
+                                    id="installer"
+                                    value="General Installer">
+
+                                <label
+                                    for="installer"
+                                    class="service-label">
+
+                                    <span class="service-icon">
+                                        🛠️
+                                    </span>
+
+                                    <strong>
+                                        General Installer
+                                    </strong>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="service-option">
+
+                                <input
+                                    type="radio"
+                                    name="service"
+                                    id="teacher"
+                                    value="Teacher">
+
+                                <label
+                                    for="teacher"
+                                    class="service-label">
+
+                                    <span class="service-icon">
+                                        📚
+                                    </span>
+
+                                    <strong>
+                                        Teacher
+                                    </strong>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="service-option">
+
+                                <input
+                                    type="radio"
+                                    name="service"
+                                    id="driver"
+                                    value="Driver">
+
+                                <label
+                                    for="driver"
+                                    class="service-label">
+
+                                    <span class="service-icon">
+                                        🚗
+                                    </span>
+
+                                    <strong>
+                                        Driver
+                                    </strong>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="service-option">
+
+                                <input
+                                    type="radio"
+                                    name="service"
+                                    id="painter"
+                                    value="Painter">
+
+                                <label
+                                    for="painter"
+                                    class="service-label">
+
+                                    <span class="service-icon">
+                                        🎨
+                                    </span>
+
+                                    <strong>
+                                        Painter
+                                    </strong>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="service-option">
+
+                                <input
+                                    type="radio"
+                                    name="service"
+                                    id="ac"
+                                    value="AC Technician">
+
+                                <label
+                                    for="ac"
+                                    class="service-label">
+
+                                    <span class="service-icon">
+                                        ❄️
+                                    </span>
+
+                                    <strong>
+                                        AC Technician
+                                    </strong>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="service-option">
+
+                                <input
+                                    type="radio"
+                                    name="service"
+                                    id="fridge"
+                                    value="Fridge & Washing Machine Repair">
+
+                                <label
+                                    for="fridge"
+                                    class="service-label">
+
+                                    <span class="service-icon">
+                                        🔩
+                                    </span>
+
+                                    <strong>
+                                        Fridge / Washing Machine
+                                    </strong>
+
+                                </label>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =============================================
+                         02 WORK
+                    ============================================= -->
+
+                    <div class="form-section">
+
+
+                        <div class="section-title">
+
+                            <div class="section-number">
+                                02
+                            </div>
+
+                            <h2>
+                                What Work Do You Need?
+                            </h2>
+
+                        </div>
+
+
+                        <div class="work-options"
+                             id="workOptions">
+
+
+                            <div class="work-option">
+
+                                <input
+                                    type="radio"
+                                    name="work"
+                                    id="work1"
+                                    value="Installation">
+
+                                <label
+                                    for="work1"
+                                    class="work-label">
+
+                                    <span class="work-check">
+                                    </span>
+
+                                    Installation
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="work-option">
+
+                                <input
+                                    type="radio"
+                                    name="work"
+                                    id="work2"
+                                    value="Repair">
+
+                                <label
+                                    for="work2"
+                                    class="work-label">
+
+                                    <span class="work-check">
+                                    </span>
+
+                                    Repair
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="work-option">
+
+                                <input
+                                    type="radio"
+                                    name="work"
+                                    id="work3"
+                                    value="Maintenance">
+
+                                <label
+                                    for="work3"
+                                    class="work-label">
+
+                                    <span class="work-check">
+                                    </span>
+
+                                    Maintenance
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="work-option">
+
+                                <input
+                                    type="radio"
+                                    name="work"
+                                    id="work4"
+                                    value="Inspection">
+
+                                <label
+                                    for="work4"
+                                    class="work-label">
+
+                                    <span class="work-check">
+                                    </span>
+
+                                    Inspection
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="work-option">
+
+                                <input
+                                    type="radio"
+                                    name="work"
+                                    id="work5"
+                                    value="Other">
+
+                                <label
+                                    for="work5"
+                                    class="work-label">
+
+                                    <span class="work-check">
+                                    </span>
+
+                                    Other — Please Specify
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            id="otherWorkBox"
+                            style="display:none;margin-top:12px;">
+
+                            <textarea
+                                class="form-control"
+                                id="otherWork"
+                                placeholder="Please describe the work you need...">
+                            </textarea>
+
+                        </div>
+
+
+                        <div
+                            class="work-option"
+                            style="margin-top:10px;">
+
+                            <input
+                                type="radio"
+                                name="work"
+                                id="needWorker"
+                                value="Need another worker / Not sure">
+
+                            <label
+                                for="needWorker"
+                                class="work-label">
+
+                                <span class="work-check">
+                                </span>
+
+                                Need another worker / Not sure
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =============================================
+                         03 LOCATION
+                    ============================================= -->
+
+                    <div class="form-section">
+
+
+                        <div class="section-title">
+
+                            <div class="section-number">
+                                03
+                            </div>
+
+                            <h2>
+                                Service Location
+                            </h2>
+
+                        </div>
+
+
+                        <div class="location-box">
+
+
+                            <div class="location-info">
+
+                                <span class="location-icon">
+                                    📍
+                                </span>
+
+
+                                <div>
+
+                                    <strong>
+                                        Use my current location
+                                    </strong>
+
+                                    <span id="locationStatus">
+                                        Helps us find the nearest available worker.
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="location-btn"
+                                id="locationBtn">
+
+                                Detect Location
+
+                            </button>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+
+                            <div class="form-group full">
+
+                                <label for="address">
+
+                                    Service Address
+                                    <span class="required">*</span>
+
+                                </label>
+
+
+                                <textarea
+                                    class="form-control"
+                                    id="address"
+                                    placeholder="House/flat, street, locality, city, PIN code"
+                                    required>
+                                </textarea>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="landmark">
+
+                                    Landmark
+
+                                </label>
+
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="landmark"
+                                    placeholder="Nearby landmark">
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="pincode">
+
+                                    PIN Code
+                                    <span class="required">*</span>
+
+                                </label>
+
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="pincode"
+                                    maxlength="6"
+                                    placeholder="6-digit PIN"
+                                    required>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =============================================
+                         04 WORKER
+                    ============================================= -->
+
+                    <div class="form-section">
+
+
+                        <div class="section-title">
+
+                            <div class="section-number">
+                                04
+                            </div>
+
+                            <h2>
+                                Choose Worker
+                            </h2>
+
+                        </div>
+
+
+                        <div class="worker-choice-grid">
+
+
+                            <div class="worker-choice">
+
+                                <input
+                                    type="radio"
+                                    name="workerPreference"
+                                    id="nearestWorker"
+                                    value="nearest"
+                                    checked>
+
+                                <label for="nearestWorker">
+
+                                    <div class="worker-choice-icon">
+                                        📍
+                                    </div>
+
+                                    <strong>
+                                        Nearest Available Worker
+                                    </strong>
+
+                                    <span>
+                                        UMAMTEK will find the nearest
+                                        suitable available worker.
+                                    </span>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="worker-choice">
+
+                                <input
+                                    type="radio"
+                                    name="workerPreference"
+                                    id="chooseWorker"
+                                    value="choose">
+
+                                <label for="chooseWorker">
+
+                                    <div class="worker-choice-icon">
+                                        👨‍🔧
+                                    </div>
+
+                                    <strong>
+                                        Choose a Worker
+                                    </strong>
+
+                                    <span>
+                                        Select an available worker
+                                        yourself.
+                                    </span>
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="worker-list"
+                            id="workerList">
+
+
+                            <!--
+                                Firebase workers will appear here.
+                            -->
+
+
+                            <div
+                                class="worker-card"
+                                data-worker="auto">
+
+                                <div class="worker-avatar">
+                                    A
+                                </div>
+
+
+                                <div class="worker-info">
+
+                                    <strong>
+                                        Available Worker
+                                    </strong>
+
+                                    <span>
+                                        Suitable worker will be
+                                        shown from Firebase.
+                                    </span>
+
+                                </div>
+
+
+                                <div class="worker-status">
+                                    AVAILABLE
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =============================================
+                         05 DATE & TIME
+                    ============================================= -->
+
+                    <div class="form-section">
+
+
+                        <div class="section-title">
+
+                            <div class="section-number">
+                                05
+                            </div>
+
+                            <h2>
+                                Date & Time
+                            </h2>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+
+                            <div class="form-group">
+
+                                <label for="bookingDate">
+
+                                    Preferred Date
+                                    <span class="required">*</span>
+
+                                </label>
+
+
+                                <input
+                                    type="date"
+                                    class="form-control"
+                                    id="bookingDate"
+                                    required>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+
+                                    Choose Time Slot
+                                    <span class="required">*</span>
+
+                                </label>
+
+
+                                <div class="slot-grid">
+
+
+                                    <div class="slot">
+
+                                        <input
+                                            type="radio"
+                                            name="slot"
+                                            id="slot1"
+                                            value="08:00 AM - 10:00 AM">
+
+                                        <label for="slot1">
+                                            8–10 AM
+                                        </label>
+
+                                    </div>
+
+
+                                    <div class="slot">
+
+                                        <input
+                                            type="radio"
+                                            name="slot"
+                                            id="slot2"
+                                            value="10:00 AM - 12:00 PM">
+
+                                        <label for="slot2">
+                                            10–12 PM
+                                        </label>
+
+                                    </div>
+
+
+                                    <div class="slot">
+
+                                        <input
+                                            type="radio"
+                                            name="slot"
+                                            id="slot3"
+                                            value="12:00 PM - 02:00 PM">
+
+                                        <label for="slot3">
+                                            12–2 PM
+                                        </label>
+
+                                    </div>
+
+
+                                    <div class="slot">
+
+                                        <input
+                                            type="radio"
+                                            name="slot"
+                                            id="slot4"
+                                            value="02:00 PM - 04:00 PM">
+
+                                        <label for="slot4">
+                                            2–4 PM
+                                        </label>
+
+                                    </div>
+
+
+                                    <div class="slot">
+
+                                        <input
+                                            type="radio"
+                                            name="slot"
+                                            id="slot5"
+                                            value="04:00 PM - 06:00 PM">
+
+                                        <label for="slot5">
+                                            4–6 PM
+                                        </label>
+
+                                    </div>
+
+
+                                    <div class="slot">
+
+                                        <input
+                                            type="radio"
+                                            name="slot"
+                                            id="slot6"
+                                            value="06:00 PM - 08:00 PM">
+
+                                        <label for="slot6">
+                                            6–8 PM
+                                        </label>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =============================================
+                         06 PAYMENT
+                    ============================================= -->
+
+                    <div class="form-section">
+
+
+                        <div class="section-title">
+
+                            <div class="section-number">
+                                06
+                            </div>
+
+                            <h2>
+                                Payment
+                            </h2>
+
+                        </div>
+
+
+                        <div class="payment-options">
+
+
+                            <div class="payment-option">
+
+                                <input
+                                    type="radio"
+                                    name="payment"
+                                    id="payNow"
+                                    value="Pay Now">
+
+                                <label
+                                    for="payNow"
+                                    class="payment-label">
+
+                                    <strong>
+                                        💳 Pay Now
+                                    </strong>
+
+                                    <span>
+                                        Pay securely through
+                                        Razorpay.
+                                    </span>
+
+                                </label>
+
+                            </div>
+
+
+                            <div class="payment-option">
+
+                                <input
+                                    type="radio"
+                                    name="payment"
+                                    id="payAfter"
+                                    value="Pay After Work"
+                                    checked>
+
+                                <label
+                                    for="payAfter"
+                                    class="payment-label">
+
+                                    <strong>
+                                        💵 Pay After Work
+                                    </strong>
+
+                                    <span>
+                                        Complete payment after
+                                        the service is finished.
+                                    </span>
+
+                                </label>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =============================================
+                         07 NOTES
+                    ============================================= -->
+
+                    <div class="form-section">
+
+
+                        <div class="section-title">
+
+                            <div class="section-number">
+                                07
+                            </div>
+
+                            <h2>
+                                Additional Information
+                            </h2>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="notes">
+
+                                Anything else we should know?
+
+                            </label>
+
+
+                            <textarea
+                                class="form-control"
+                                id="notes"
+                                placeholder="Describe your issue, preferred worker, special instructions, etc.">
+                            </textarea>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <button
+                        type="submit"
+                        class="book-submit">
+
+                        Confirm Booking →
+
+                    </button>
+
+
+                </form>
+
+
+
+                <!-- =================================================
+                     SUCCESS
+                ================================================= -->
+
+                <div
+                    class="booking-success"
+                    id="bookingSuccess">
+
+
+                    <div class="success-icon">
+                        ✓
+                    </div>
+
+
+                    <h2>
+                        Booking Request Created
+                    </h2>
+
+
+                    <p>
+                        Your booking request has been prepared.
+                        Once Firebase is connected, this request
+                        will be securely saved to your account.
+                    </p>
+
+
+                    <div
+                        class="success-booking-id"
+                        id="successBookingId">
+
+                        AEA-01
+
+                    </div>
+
+
+                    <div class="success-actions">
+
+                        <a
+                            href="my-bookings.html"
+                            class="primary-btn">
+
+                            My Bookings
+
+                        </a>
+
+
+                        <a
+                            href="index.html"
+                            class="login-btn">
+
+                            Home
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 SUMMARY
+            ================================================= -->
+
+            <aside class="summary-card">
+
+
+                <div class="summary-header">
+
+                    <small>
+                        BOOKING SUMMARY
+                    </small>
+
+
+                    <h2>
+                        Your Service
+                    </h2>
+
+                </div>
+
+
+                <div class="summary-body">
+
+
+                    <div class="summary-service">
+
+
+                        <div
+                            class="summary-service-icon"
+                            id="summaryIcon">
+
+                            ⚡
+
+                        </div>
+
+
+                        <div>
+
+                            <strong id="summaryService">
+                                Select a service
+                            </strong>
+
+
+                            <span id="summaryWork">
+                                Work not selected
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Service rate
+                        </span>
+
+                        <strong>
+                            ₹200 / hour
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Estimated hours
+                        </span>
+
+                        <strong id="summaryHours">
+                            1 hour
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Service amount
+                        </span>
+
+                        <strong id="summaryAmount">
+                            ₹200
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Travel charge
+                        </span>
+
+                        <strong id="summaryTravel">
+                            Calculated
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            GST
+                        </span>
+
+                        <strong id="summaryGST">
+                            Calculated
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row total">
+
+                        <span>
+                            Estimated Total
+                        </span>
+
+                        <strong id="summaryTotal">
+                            ₹200+
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-note">
+
+                        Final amount may vary based on actual
+                        work duration, applicable travel charge,
+                        GST and any additional approved work.
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="book-submit"
+                        id="summaryBookButton">
+
+                        Continue Booking →
+
+                    </button>
+
+
+                    <div class="secure-note">
+
+                        🔒 Secure booking • No CAPTCHA
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+
+<!-- =====================================================
+     WHATSAPP
+===================================================== -->
+
+<a
+    href="https://wa.me/917544813882"
+    target="_blank"
+    class="whatsapp-float"
+    aria-label="WhatsApp UMAMTEK">
+
+    💬
+
+</a>
+
+
+
+<script src="js/script.js"></script>
+
+
+<script>
+
+/* =========================================================
+   UMAMTEK BOOKING ENGINE
+========================================================= */
+
+
+/* =========================================================
+   SERVICE ICONS
+========================================================= */
+
+const serviceIcons = {
+
+    "Electrician": "⚡",
+
+    "Plumber": "🔧",
+
+    "General Installer": "🛠️",
+
+    "Teacher": "📚",
+
+    "Driver": "🚗",
+
+    "Painter": "🎨",
+
+    "AC Technician": "❄️",
+
+    "Fridge & Washing Machine Repair": "🔩"
+
+};
+
+
+
+/* =========================================================
+   SERVICE SELECTION
+========================================================= */
+
+const serviceInputs =
+    document.querySelectorAll(
+        'input[name="service"]'
+    );
+
+
+serviceInputs.forEach(
+    function(input) {
+
+        input.addEventListener(
+            "change",
+            function() {
+
+                document
+                    .getElementById(
+                        "summaryService"
+                    )
+                    .textContent =
+                    this.value;
+
+
+                document
+                    .getElementById(
+                        "summaryIcon"
+                    )
+                    .textContent =
+                    serviceIcons[
+                        this.value
+                    ] || "🛠️";
+
+            }
+        );
+
+    }
+);
+
+
+
+/* =========================================================
+   WORK SELECTION
+========================================================= */
+
+const workInputs =
+    document.querySelectorAll(
+        'input[name="work"]'
+    );
+
+
+workInputs.forEach(
+    function(input) {
+
+        input.addEventListener(
+            "change",
+            function() {
+
+                document
+                    .getElementById(
+                        "summaryWork"
+                    )
+                    .textContent =
+                    this.value;
+
+
+                const otherBox =
+                    document.getElementById(
+                        "otherWorkBox"
+                    );
+
+
+                if (
+                    this.value ===
+                    "Other"
+                ) {
+
+                    otherBox.style.display =
+                        "block";
+
+                } else {
+
+                    otherBox.style.display =
+                        "none";
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+
+/* =========================================================
+   WORKER SELECTION
+========================================================= */
+
+const workerChoices =
+    document.querySelectorAll(
+        'input[name="workerPreference"]'
+    );
+
+
+const workerList =
+    document.getElementById(
+        "workerList"
+    );
+
+
+workerChoices.forEach(
+    function(input) {
+
+        input.addEventListener(
+            "change",
+            function() {
+
+                if (
+                    this.value ===
+                    "choose"
+                ) {
+
+                    workerList.classList.add(
+                        "show"
+                    );
+
+                } else {
+
+                    workerList.classList.remove(
+                        "show"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+const bookingDate =
+    document.getElementById(
+        "bookingDate"
+    );
+
+
+const today =
+    new Date();
+
+
+const yyyy =
+    today.getFullYear();
+
+
+const mm =
+    String(
+        today.getMonth() + 1
+    ).padStart(
+        2,
+        "0"
+    );
+
+
+const dd =
+    String(
+        today.getDate()
+    ).padStart(
+        2,
+        "0"
+    );
+
+
+bookingDate.min =
+    `${yyyy}-${mm}-${dd}`;
+
+
+
+/* =========================================================
+   PINCODE
+========================================================= */
+
+const pincode =
+    document.getElementById(
+        "pincode"
+    );
+
+
+pincode.addEventListener(
+    "input",
+    function() {
+
+        this.value =
+            this.value
+                .replace(
+                    /\D/g,
+                    ""
+                )
+                .slice(
+                    0,
+                    6
+                );
+
+    }
+);
+
+
+
+/* =========================================================
+   CURRENT LOCATION
+========================================================= */
+
+const locationBtn =
+    document.getElementById(
+        "locationBtn"
+    );
+
+
+locationBtn.addEventListener(
+    "click",
+    function() {
+
+
+        const status =
+            document.getElementById(
+                "locationStatus"
+            );
+
+
+        if (
+            !navigator.geolocation
+        ) {
+
+            status.textContent =
+                "Location is not supported by this browser.";
+
+            return;
+
+        }
+
+
+        locationBtn.textContent =
+            "Detecting...";
+
+
+        navigator.geolocation.getCurrentPosition(
+
+            function(position) {
+
+                const lat =
+                    position.coords.latitude;
+
+
+                const lng =
+                    position.coords.longitude;
+
+
+                /*
+                 * Firebase / Google Maps integration
+                 * will use these coordinates.
+                 */
+
+                status.textContent =
+                    "Location detected successfully.";
+
+
+                locationBtn.textContent =
+                    "Location Detected";
+
+
+                locationBtn.dataset.lat =
+                    lat;
+
+
+                locationBtn.dataset.lng =
+                    lng;
+
+            },
+
+
+            function() {
+
+                status.textContent =
+                    "Unable to access location. Please enter your address manually.";
+
+                locationBtn.textContent =
+                    "Try Again";
+
+            }
+
+        );
+
+    }
+);
+
+
+
+/* =========================================================
+   FORM SUBMISSION
+========================================================= */
+
+const bookingForm =
+    document.getElementById(
+        "bookingForm"
+    );
+
+
+bookingForm.addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+
+        const service =
+            document.querySelector(
+                'input[name="service"]:checked'
+            );
+
+
+        const work =
+            document.querySelector(
+                'input[name="work"]:checked'
+            );
+
+
+        const slot =
+            document.querySelector(
+                'input[name="slot"]:checked'
+            );
+
+
+        const payment =
+            document.querySelector(
+                'input[name="payment"]:checked'
+            );
+
+
+        if (!service) {
+
+            alert(
+                "Please select a service."
+            );
+
+            return;
+
+        }
+
+
+        if (!work) {
+
+            alert(
+                "Please select the type of work."
+            );
+
+            return;
+
+        }
+
+
+        if (
+            work.value ===
+            "Other" &&
+            !document
+                .getElementById(
+                    "otherWork"
+                )
+                .value
+                .trim()
+        ) {
+
+            alert(
+                "Please describe the work you need."
+            );
+
+            return;
+
+        }
+
+
+        if (!slot) {
+
+            alert(
+                "Please select a time slot."
+            );
+
+            return;
+
+        }
+
+
+        if (!payment) {
+
+            alert(
+                "Please select a payment option."
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * Future Firebase booking object.
+         */
+
+        const bookingData = {
+
+            service:
+                service.value,
+
+            work:
+                work.value,
+
+            otherWork:
+                document
+                    .getElementById(
+                        "otherWork"
+                    )
+                    .value
+                    .trim(),
+
+            address:
+                document
+                    .getElementById(
+                        "address"
+                    )
+                    .value
+                    .trim(),
+
+            landmark:
+                document
+                    .getElementById(
+                        "landmark"
+                    )
+                    .value
+                    .trim(),
+
+            pincode:
+                document
+                    .getElementById(
+                        "pincode"
+                    )
+                    .value
+                    .trim(),
+
+            date:
+                bookingDate.value,
+
+            slot:
+                slot.value,
+
+            workerPreference:
+                document.querySelector(
+                    'input[name="workerPreference"]:checked'
+                ).value,
+
+            payment:
+                payment.value,
+
+            notes:
+                document
+                    .getElementById(
+                        "notes"
+                    )
+                    .value
+                    .trim(),
+
+            rate:
+                200
+
+        };
+
+
+        console.log(
+            "Booking Data:",
+            bookingData
+        );
+
+
+        /*
+         * Temporary booking ID.
+         * Firebase will generate the real ID.
+         */
+
+        const bookingId =
+            "AEA-" +
+            String(
+                Math.floor(
+                    Math.random() * 999
+                ) + 1
+            ).padStart(
+                3,
+                "0"
+            );
+
+
+        document
+            .getElementById(
+                "successBookingId"
+            )
+            .textContent =
+            bookingId;
+
+
+        bookingForm.style.display =
+            "none";
+
+
+        document
+            .getElementById(
+                "bookingSuccess"
+            )
+            .classList.add(
+                "show"
+            );
+
+    }
+);
+
+
+
+/* =========================================================
+   SUMMARY BUTTON
+========================================================= */
+
+document
+    .getElementById(
+        "summaryBookButton"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+            document
+                .getElementById(
+                    "bookingForm"
+                )
+                .scrollIntoView({
+                    behavior:
+                        "smooth",
+                    block:
+                        "start"
+                });
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>
