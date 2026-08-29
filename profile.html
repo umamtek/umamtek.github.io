@@ -1,974 +1,301 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <meta name="description"
-          content="Manage your UMAMTEK customer profile.">
-
-    <meta name="theme-color"
-          content="#f5c400">
-
-    <title>My Profile | UMAMTEK</title>
-
-    <link rel="stylesheet"
-          href="css/style.css">
-
-
-    <style>
-
-        /* =====================================================
-           PROFILE PAGE
-        ===================================================== */
-
-        .profile-page {
-
-            min-height:
-                calc(100vh - 76px);
-
-            background:
-                #fafafa;
-
-            padding:
-                55px 0 90px;
-
-        }
-
-
-        /* =====================================================
-           HEADER
-        ===================================================== */
-
-        .profile-header {
-
-            margin-bottom:
-                30px;
-
-        }
-
-
-        .profile-header small {
-
-            color:
-                var(--yellow-dark);
-
-            font-size:
-                10px;
-
-            font-weight:
-                950;
-
-            letter-spacing:
-                1.7px;
-
-        }
-
-
-        .profile-header h1 {
-
-            font-size:
-                clamp(
-                    32px,
-                    5vw,
-                    48px
-                );
-
-            letter-spacing:
-                -2px;
-
-            line-height:
-                1;
-
-            margin:
-                8px 0 10px;
-
-        }
-
-
-        .profile-header p {
-
-            color:
-                #777;
-
-            font-size:
-                13px;
-
-        }
-
-
-        /* =====================================================
-           PROFILE GRID
-        ===================================================== */
-
-        .profile-grid {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                280px 1fr;
-
-            gap:
-                20px;
-
-        }
-
-
-        /* =====================================================
-           PROFILE SIDEBAR
-        ===================================================== */
-
-        .profile-sidebar {
-
-            background:
-                #111;
-
-            color:
-                white;
-
-            border-radius:
-                15px;
-
-            padding:
-                28px;
-
-            height:
-                fit-content;
-
-        }
-
-
-        .profile-avatar {
-
-            width:
-                75px;
-
-            height:
-                75px;
-
-            border-radius:
-                50%;
-
-            background:
-                var(--yellow);
-
-            color:
-                #111;
-
-            display:
-                grid;
-
-            place-items:
-                center;
-
-            font-size:
-                25px;
-
-            font-weight:
-                950;
-
-            margin-bottom:
-                18px;
-
-        }
-
-
-        .profile-sidebar h2 {
-
-            font-size:
-                18px;
-
-            margin-bottom:
-                5px;
-
-        }
-
-
-        .profile-email {
-
-            color:
-                #999;
-
-            font-size:
-                10px;
-
-            word-break:
-                break-word;
-
-        }
-
-
-        .account-badge {
-
-            display:
-                inline-block;
-
-            margin-top:
-                20px;
-
-            padding:
-                6px 9px;
-
-            border-radius:
-                5px;
-
-            background:
-                #252525;
-
-            color:
-                var(--yellow);
-
-            font-size:
-                9px;
-
-            font-weight:
-                900;
-
-        }
-
-
-        .sidebar-links {
-
-            display:
-                grid;
-
-            gap:
-                7px;
-
-            margin-top:
-                30px;
-
-        }
-
-
-        .sidebar-links a,
-        .sidebar-links button {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            gap:
-                10px;
-
-            width:
-                100%;
-
-            padding:
-                11px;
-
-            border:
-                0;
-
-            border-radius:
-                7px;
-
-            background:
-                transparent;
-
-            color:
-                #aaa;
-
-            font-size:
-                10px;
-
-            font-weight:
-                800;
-
-            text-align:
-                left;
-
-            cursor:
-                pointer;
-
-        }
-
-
-        .sidebar-links a:hover,
-        .sidebar-links a.active,
-        .sidebar-links button:hover {
-
-            background:
-                #242424;
-
-            color:
-                white;
-
-        }
-
-
-        .sidebar-links .logout {
-
-            color:
-                #ff8585;
-
-            margin-top:
-                10px;
-
-        }
-
-
-        /* =====================================================
-           CONTENT
-        ===================================================== */
-
-        .profile-content {
-
-            display:
-                grid;
-
-            gap:
-                18px;
-
-        }
-
-
-        .profile-card {
-
-            background:
-                white;
-
-            border:
-                1px solid var(--border);
-
-            border-radius:
-                15px;
-
-            padding:
-                25px;
-
-        }
-
-
-        .profile-card-header {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                space-between;
-
-            gap:
-                15px;
-
-            margin-bottom:
-                22px;
-
-        }
-
-
-        .profile-card-header h2 {
-
-            font-size:
-                17px;
-
-        }
-
-
-        .profile-card-header p {
-
-            color:
-                #999;
-
-            font-size:
-                10px;
-
-            margin-top:
-                4px;
-
-        }
-
-
-        /* =====================================================
-           FORM
-        ===================================================== */
-
-        .profile-form {
-
-            display:
-                grid;
-
-            gap:
-                17px;
-
-        }
-
-
-        .profile-form-row {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                1fr 1fr;
-
-            gap:
-                15px;
-
-        }
-
-
-        .profile-field {
-
-            display:
-                flex;
-
-            flex-direction:
-                column;
-
-            gap:
-                7px;
-
-        }
-
-
-        .profile-field label {
-
-            font-size:
-                10px;
-
-            font-weight:
-                900;
-
-        }
-
-
-        .profile-field input {
-
-            width:
-                100%;
-
-            padding:
-                13px;
-
-            border:
-                1px solid var(--border);
-
-            border-radius:
-                8px;
-
-            outline:
-                none;
-
-            font-size:
-                12px;
-
-        }
-
-
-        .profile-field input:focus {
-
-            border-color:
-                var(--yellow-dark);
-
-            box-shadow:
-                0 0 0 3px
-                rgba(245,196,0,.10);
-
-        }
-
-
-        .profile-field input:disabled {
-
-            background:
-                #f6f6f6;
-
-            color:
-                #777;
-
-            cursor:
-                not-allowed;
-
-        }
-
-
-        .field-note {
-
-            color:
-                #999;
-
-            font-size:
-                9px;
-
-        }
-
-
-        .profile-actions {
-
-            display:
-                flex;
-
-            justify-content:
-                flex-end;
-
-            gap:
-                10px;
-
-            margin-top:
-                5px;
-
-        }
-
-
-        .profile-btn {
-
-            border:
-                1px solid var(--border);
-
-            background:
-                white;
-
-            padding:
-                11px 16px;
-
-            border-radius:
-                7px;
-
-            font-size:
-                10px;
-
-            font-weight:
-                900;
-
-            cursor:
-                pointer;
-
-        }
-
-
-        .profile-btn.primary {
-
-            background:
-                #111;
-
-            border-color:
-                #111;
-
-            color:
-                white;
-
-        }
-
-
-        /* =====================================================
-           ACCOUNT INFO
-        ===================================================== */
-
-        .account-info-grid {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                1fr 1fr;
-
-            gap:
-                1px;
-
-            background:
-                #eee;
-
-            border:
-                1px solid #eee;
-
-            border-radius:
-                10px;
-
-            overflow:
-                hidden;
-
-        }
-
-
-        .account-info {
-
-            background:
-                white;
-
-            padding:
-                17px;
-
-        }
-
-
-        .account-info-label {
-
-            color:
-                #999;
-
-            font-size:
-                9px;
-
-            font-weight:
-                800;
-
-            margin-bottom:
-                5px;
-
-        }
-
-
-        .account-info-value {
-
-            font-size:
-                12px;
-
-            font-weight:
-                850;
-
-            word-break:
-                break-word;
-
-        }
-
-
-        /* =====================================================
-           SECURITY
-        ===================================================== */
-
-        .security-item {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                space-between;
-
-            gap:
-                15px;
-
-            padding:
-                16px 0;
-
-            border-bottom:
-                1px solid #eee;
-
-        }
-
-
-        .security-item:last-child {
-
-            border-bottom:
-                0;
-
-            padding-bottom:
-                0;
-
-        }
-
-
-        .security-left {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            gap:
-                12px;
-
-        }
-
-
-        .security-icon {
-
-            width:
-                35px;
-
-            height:
-                35px;
-
-            display:
-                grid;
-
-            place-items:
-                center;
-
-            background:
-                var(--yellow-light);
-
-            border-radius:
-                8px;
-
-        }
-
-
-        .security-left strong {
-
-            display:
-                block;
-
-            font-size:
-                11px;
-
-            margin-bottom:
-                3px;
-
-        }
-
-
-        .security-left span {
-
-            display:
-                block;
-
-            color:
-                #999;
-
-            font-size:
-                9px;
-
-        }
-
-
-        .security-btn {
-
-            border:
-                1px solid var(--border);
-
-            background:
-                white;
-
-            border-radius:
-                6px;
-
-            padding:
-                8px 11px;
-
-            font-size:
-                9px;
-
-            font-weight:
-                900;
-
-            cursor:
-                pointer;
-
-            white-space:
-                nowrap;
-
-        }
-
-
-        /* =====================================================
-           MESSAGE
-        ===================================================== */
-
-        .profile-message {
-
-            display:
-                none;
-
-            padding:
-                11px 13px;
-
-            border-radius:
-                7px;
-
-            font-size:
-                10px;
-
-        }
-
-
-        .profile-message.show {
-
-            display:
-                block;
-
-        }
-
-
-        .profile-message.success {
-
-            background:
-                #edf9f0;
-
-            color:
-                #167238;
-
-        }
-
-
-        .profile-message.error {
-
-            background:
-                #fff0f0;
-
-            color:
-                #a00000;
-
-        }
-
-
-        /* =====================================================
-           MOBILE
-        ===================================================== */
-
-        @media (max-width: 800px) {
-
-            .profile-grid {
-
-                grid-template-columns:
-                    1fr;
-
-            }
-
-
-            .profile-sidebar {
-
-                display:
-                    grid;
-
-                grid-template-columns:
-                    auto 1fr;
-
-                column-gap:
-                    18px;
-
-                align-items:
-                    center;
-
-            }
-
-
-            .profile-avatar {
-
-                grid-row:
-                    span 3;
-
-                margin:
-                    0;
-
-            }
-
-
-            .account-badge {
-
-                margin-top:
-                    7px;
-
-            }
-
-
-            .sidebar-links {
-
-                grid-column:
-                    1 / -1;
-
-                display:
-                    flex;
-
-                flex-wrap:
-                    wrap;
-
-            }
-
-
-            .sidebar-links a,
-            .sidebar-links button {
-
-                width:
-                    auto;
-
-            }
-
-        }
-
-
-        @media (max-width: 600px) {
-
-            .profile-page {
-
-                padding:
-                    40px 0 70px;
-
-            }
-
-
-            .profile-card {
-
-                padding:
-                    20px;
-
-            }
-
-
-            .profile-form-row,
-            .account-info-grid {
-
-                grid-template-columns:
-                    1fr;
-
-            }
-
-
-            .profile-actions {
-
-                flex-direction:
-                    column;
-
-            }
-
-
-            .profile-btn {
-
-                width:
-                    100%;
-
-            }
-
-
-            .security-item {
-
-                align-items:
-                    flex-start;
-
-                flex-direction:
-                    column;
-
-            }
-
-        }
-
-    </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Profile | UMAMTEK</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+.profile-page{
+    min-height:calc(100vh - 76px);
+    background:#f7f7f7;
+    padding:45px 0 80px;
+}
+
+.profile-header{
+    margin-bottom:28px;
+}
+
+.profile-header small{
+    color:#b38c00;
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:1.5px;
+}
+
+.profile-header h1{
+    font-size:clamp(30px,5vw,44px);
+    margin:8px 0;
+    letter-spacing:-2px;
+}
+
+.profile-header p{
+    color:#777;
+    font-size:12px;
+}
+
+.profile-layout{
+    display:grid;
+    grid-template-columns:300px 1fr;
+    gap:22px;
+    align-items:start;
+}
+
+/* LEFT CARD */
+
+.profile-card{
+    background:#111;
+    color:white;
+    border-radius:15px;
+    padding:25px;
+    text-align:center;
+}
+
+.profile-avatar{
+    width:75px;
+    height:75px;
+    border-radius:50%;
+    background:#f5c400;
+    color:#111;
+    display:grid;
+    place-items:center;
+    margin:0 auto 15px;
+    font-size:25px;
+    font-weight:950;
+}
+
+.profile-card h2{
+    font-size:18px;
+    margin-bottom:5px;
+}
+
+.profile-card p{
+    color:#aaa;
+    font-size:10px;
+}
+
+.user-id{
+    display:inline-block;
+    margin-top:15px;
+    padding:7px 12px;
+    background:#222;
+    color:#f5c400;
+    border-radius:6px;
+    font-size:9px;
+    font-weight:900;
+}
+
+/* MAIN */
+
+.profile-content{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.profile-section{
+    background:white;
+    border:1px solid #e4e4e4;
+    border-radius:14px;
+    padding:25px;
+}
+
+.section-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.section-number{
+    width:28px;
+    height:28px;
+    display:grid;
+    place-items:center;
+    background:#111;
+    color:#f5c400;
+    border-radius:7px;
+    font-size:10px;
+    font-weight:900;
+}
+
+.section-title h2{
+    font-size:15px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+.form-group label{
+    font-size:10px;
+    font-weight:900;
+}
+
+.form-control{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    background:#fff;
+    font-family:inherit;
+    font-size:11px;
+    outline:none;
+}
+
+.form-control:focus{
+    border-color:#f5c400;
+}
+
+.form-control:disabled{
+    background:#f5f5f5;
+    color:#777;
+    cursor:not-allowed;
+}
+
+.save-btn{
+    border:0;
+    background:#111;
+    color:#f5c400;
+    padding:12px 18px;
+    border-radius:7px;
+    font-size:10px;
+    font-weight:900;
+    cursor:pointer;
+    margin-top:17px;
+}
+
+.save-btn:hover{
+    transform:translateY(-1px);
+}
+
+.account-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:10px;
+}
+
+.action-btn{
+    text-decoration:none;
+    padding:14px;
+    border:1px solid #ddd;
+    border-radius:9px;
+    color:#111;
+    font-size:10px;
+    font-weight:900;
+    text-align:center;
+    background:white;
+}
+
+.action-btn:hover{
+    border-color:#111;
+}
+
+.logout-btn{
+    border:1px solid #111;
+    background:#111;
+    color:white;
+    cursor:pointer;
+}
+
+.logout-btn:hover{
+    background:#222;
+}
+
+.password-note{
+    margin-top:12px;
+    color:#888;
+    font-size:9px;
+    line-height:1.5;
+}
+
+.account-info{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.info-box{
+    padding:14px;
+    background:#fafafa;
+    border:1px solid #eee;
+    border-radius:8px;
+}
+
+.info-box span{
+    display:block;
+    color:#888;
+    font-size:8px;
+    margin-bottom:5px;
+}
+
+.info-box strong{
+    font-size:10px;
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+    .profile-layout{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .profile-page{
+        padding:30px 0 60px;
+    }
+
+    .profile-section{
+        padding:20px;
+    }
+
+    .form-grid,
+    .account-info{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+    .account-actions{
+        grid-template-columns:1fr;
+    }
+
+}
+</style>
 </head>
-
 
 <body>
 
-
-<!-- =====================================================
-     NAVBAR
-===================================================== -->
+<!-- NAVBAR -->
 
 <header class="navbar">
 
     <div class="container nav-inner">
 
-
-        <a href="index.html"
-           class="logo">
-
+        <a href="index.html" class="logo">
             UMAM<span>TEK</span>
-
         </a>
-
 
         <nav class="nav-links">
 
@@ -984,35 +311,14 @@
                 My Bookings
             </a>
 
-            <a href="index.html#about">
-                About
-            </a>
-
-            <a href="index.html#contact">
-                Contact
+            <a href="profile.html">
+                Profile
             </a>
 
         </nav>
 
-
-        <div class="nav-actions">
-
-            <a href="profile.html"
-               class="login-btn">
-
-                My Profile
-
-            </a>
-
-        </div>
-
-
-        <button
-            class="menu-btn"
-            id="menuBtn">
-
+        <button class="menu-btn" id="menuBtn">
             ☰
-
         </button>
 
     </div>
@@ -1020,471 +326,354 @@
 </header>
 
 
-
-<!-- =====================================================
-     MAIN
-===================================================== -->
+<!-- MAIN -->
 
 <main class="profile-page">
 
-    <div class="container">
+<div class="container">
+
+    <div class="profile-header">
+
+        <small>
+            CUSTOMER ACCOUNT
+        </small>
+
+        <h1>
+            My Profile
+        </h1>
+
+        <p>
+            Manage your UMAMTEK account and booking information.
+        </p>
+
+    </div>
 
 
-        <!-- HEADER -->
-
-        <div class="profile-header">
-
-            <small>
-                CUSTOMER ACCOUNT
-            </small>
+    <div class="profile-layout">
 
 
-            <h1>
-                My Profile
-            </h1>
+        <!-- LEFT PROFILE -->
 
+        <aside class="profile-card">
 
-            <p>
-                Manage your account information and
-                security settings.
+            <div class="profile-avatar" id="profileAvatar">
+                U
+            </div>
+
+            <h2 id="sideName">
+                UMAMTEK Customer
+            </h2>
+
+            <p id="sideEmail">
+                customer@email.com
             </p>
 
-        </div>
+            <div class="user-id" id="sideUserId">
+                USER ID: Loading...
+            </div>
+
+        </aside>
 
 
+        <!-- RIGHT -->
 
-        <!-- PROFILE GRID -->
-
-        <div class="profile-grid">
-
-
-            <!-- =================================================
-                 SIDEBAR
-            ================================================= -->
-
-            <aside class="profile-sidebar">
+        <div class="profile-content">
 
 
-                <div
-                    class="profile-avatar"
-                    id="profileAvatar">
+            <!-- PERSONAL INFORMATION -->
 
-                    U
+            <section class="profile-section">
+
+                <div class="section-title">
+
+                    <div class="section-number">
+                        01
+                    </div>
+
+                    <h2>
+                        Personal Information
+                    </h2>
 
                 </div>
 
 
-                <div>
+                <div class="form-grid">
 
-                    <h2 id="sidebarName">
-                        Customer
-                    </h2>
+                    <div class="form-group">
 
+                        <label for="name">
+                            Full Name
+                        </label>
 
-                    <div
-                        class="profile-email"
-                        id="sidebarEmail">
-
-                        Login to load your account
+                        <input
+                            type="text"
+                            id="name"
+                            class="form-control"
+                            placeholder="Your full name">
 
                     </div>
 
 
-                    <span class="account-badge">
+                    <div class="form-group">
 
-                        CUSTOMER ACCOUNT
+                        <label for="email">
+                            Email Address
+                        </label>
 
-                    </span>
+                        <input
+                            type="email"
+                            id="email"
+                            class="form-control"
+                            disabled>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="mobile">
+                            Mobile Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="mobile"
+                            class="form-control"
+                            maxlength="10"
+                            placeholder="10-digit mobile number">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="userId">
+                            User ID
+                        </label>
+
+                        <input
+                            type="text"
+                            id="userId"
+                            class="form-control"
+                            disabled>
+
+                    </div>
 
                 </div>
 
 
-                <div class="sidebar-links">
+                <button
+                    class="save-btn"
+                    id="saveProfile">
 
+                    Save Changes
+
+                </button>
+
+            </section>
+
+
+            <!-- ACCOUNT INFORMATION -->
+
+            <section class="profile-section">
+
+                <div class="section-title">
+
+                    <div class="section-number">
+                        02
+                    </div>
+
+                    <h2>
+                        Account Information
+                    </h2>
+
+                </div>
+
+
+                <div class="account-info">
+
+                    <div class="info-box">
+
+                        <span>
+                            Account Status
+                        </span>
+
+                        <strong id="accountStatus">
+                            Active
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <span>
+                            Account Created
+                        </span>
+
+                        <strong id="createdDate">
+                            Loading...
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <span>
+                            Authentication
+                        </span>
+
+                        <strong>
+                            Email / OTP
+                        </strong>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <span>
+                            CAPTCHA
+                        </span>
+
+                        <strong>
+                            Not Required
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- PASSWORD -->
+
+            <section class="profile-section">
+
+                <div class="section-title">
+
+                    <div class="section-number">
+                        03
+                    </div>
+
+                    <h2>
+                        Change Password
+                    </h2>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label for="newPassword">
+                            New Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="newPassword"
+                            class="form-control"
+                            placeholder="Enter new password">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="confirmPassword">
+                            Confirm Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            class="form-control"
+                            placeholder="Confirm new password">
+
+                    </div>
+
+                </div>
+
+
+                <p class="password-note">
+
+                    Keep your password safe. UMAMTEK will not ask
+                    you to share your password with anyone.
+
+                </p>
+
+
+                <button
+                    class="save-btn"
+                    id="changePassword">
+
+                    Update Password
+
+                </button>
+
+            </section>
+
+
+            <!-- QUICK ACTIONS -->
+
+            <section class="profile-section">
+
+                <div class="section-title">
+
+                    <div class="section-number">
+                        04
+                    </div>
+
+                    <h2>
+                        Quick Actions
+                    </h2>
+
+                </div>
+
+
+                <div class="account-actions">
 
                     <a
-                        href="profile.html"
-                        class="active">
+                        href="booking.html"
+                        class="action-btn">
 
-                        👤 Profile
+                        ⚡ Book a Service
 
                     </a>
 
 
-                    <a href="my-bookings.html">
+                    <a
+                        href="my-bookings.html"
+                        class="action-btn">
 
                         📋 My Bookings
 
                     </a>
 
 
-                    <a href="services.html">
+                    <a
+                        href="https://wa.me/917544813882"
+                        target="_blank"
+                        class="action-btn">
 
-                        🛠️ Book a Service
+                        💬 WhatsApp Support
 
                     </a>
 
 
                     <button
-                        class="logout"
+                        class="action-btn logout-btn"
                         id="logoutBtn">
 
-                        ↪ Logout
+                        Logout
 
                     </button>
 
-
                 </div>
-
-            </aside>
-
-
-
-            <!-- =================================================
-                 CONTENT
-            ================================================= -->
-
-            <section class="profile-content">
-
-
-                <!-- =================================================
-                     PERSONAL INFORMATION
-                ================================================= -->
-
-                <div class="profile-card">
-
-
-                    <div class="profile-card-header">
-
-                        <div>
-
-                            <h2>
-                                Personal Information
-                            </h2>
-
-                            <p>
-                                Your basic customer details.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <form
-                        class="profile-form"
-                        id="profileForm">
-
-
-                        <div class="profile-form-row">
-
-
-                            <div class="profile-field">
-
-                                <label for="name">
-
-                                    Full Name
-
-                                </label>
-
-
-                                <input
-                                    type="text"
-                                    id="name"
-                                    placeholder="Your full name"
-                                    autocomplete="name">
-
-                            </div>
-
-
-                            <div class="profile-field">
-
-                                <label for="mobile">
-
-                                    Mobile Number
-
-                                </label>
-
-
-                                <input
-                                    type="tel"
-                                    id="mobile"
-                                    maxlength="10"
-                                    placeholder="10-digit mobile number"
-                                    autocomplete="tel">
-
-                            </div>
-
-                        </div>
-
-
-
-                        <div class="profile-field">
-
-                            <label for="email">
-
-                                Email Address
-
-                            </label>
-
-
-                            <input
-                                type="email"
-                                id="email"
-                                placeholder="Your email address"
-                                disabled>
-
-
-                            <span class="field-note">
-
-                                Your email is connected to your
-                                UMAMTEK account and cannot be
-                                changed here.
-
-                            </span>
-
-                        </div>
-
-
-
-                        <div
-                            class="profile-message"
-                            id="profileMessage">
-                        </div>
-
-
-
-                        <div class="profile-actions">
-
-                            <button
-                                type="button"
-                                class="profile-btn"
-                                id="cancelBtn">
-
-                                Cancel
-
-                            </button>
-
-
-                            <button
-                                type="submit"
-                                class="profile-btn primary">
-
-                                Save Changes
-
-                            </button>
-
-                        </div>
-
-
-                    </form>
-
-                </div>
-
-
-
-                <!-- =================================================
-                     ACCOUNT INFORMATION
-                ================================================= -->
-
-                <div class="profile-card">
-
-
-                    <div class="profile-card-header">
-
-                        <div>
-
-                            <h2>
-                                Account Information
-                            </h2>
-
-                            <p>
-                                Details generated by UMAMTEK.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="account-info-grid">
-
-
-                        <div class="account-info">
-
-                            <div class="account-info-label">
-                                USER ID
-                            </div>
-
-                            <div
-                                class="account-info-value"
-                                id="userId">
-
-                                —
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="account-info">
-
-                            <div class="account-info-label">
-                                ACCOUNT TYPE
-                            </div>
-
-                            <div class="account-info-value">
-
-                                CUSTOMER
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="account-info">
-
-                            <div class="account-info-label">
-                                ACCOUNT CREATED
-                            </div>
-
-                            <div
-                                class="account-info-value"
-                                id="accountCreated">
-
-                                —
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="account-info">
-
-                            <div class="account-info-label">
-                                ACCOUNT STATUS
-                            </div>
-
-                            <div
-                                class="account-info-value">
-
-                                Active
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- =================================================
-                     SECURITY
-                ================================================= -->
-
-                <div class="profile-card">
-
-
-                    <div class="profile-card-header">
-
-                        <div>
-
-                            <h2>
-                                Account Security
-                            </h2>
-
-                            <p>
-                                Manage your password and
-                                verification.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <div class="security-item">
-
-
-                        <div class="security-left">
-
-
-                            <div class="security-icon">
-                                🔐
-                            </div>
-
-
-                            <div>
-
-                                <strong>
-                                    Password
-                                </strong>
-
-                                <span>
-                                    Your password is securely
-                                    managed by Firebase.
-                                </span>
-
-                            </div>
-
-                        </div>
-
-
-                        <button
-                            class="security-btn"
-                            id="changePasswordBtn">
-
-                            Change Password
-
-                        </button>
-
-                    </div>
-
-
-
-                    <div class="security-item">
-
-
-                        <div class="security-left">
-
-
-                            <div class="security-icon">
-                                ✉️
-                            </div>
-
-
-                            <div>
-
-                                <strong>
-                                    Email Verification
-                                </strong>
-
-                                <span id="emailVerificationStatus">
-                                    Verification status will
-                                    appear here.
-                                </span>
-
-                            </div>
-
-                        </div>
-
-
-                        <button
-                            class="security-btn"
-                            id="verifyEmailBtn">
-
-                            Verify Email
-
-                        </button>
-
-                    </div>
-
-                </div>
-
 
             </section>
 
@@ -1492,13 +681,12 @@
 
     </div>
 
+</div>
+
 </main>
 
 
-
-<!-- =====================================================
-     WHATSAPP
-===================================================== -->
+<!-- WHATSAPP -->
 
 <a
     href="https://wa.me/917544813882"
@@ -1511,240 +699,271 @@
 </a>
 
 
-
-<!-- =====================================================
-     GLOBAL JS
-===================================================== -->
-
 <script src="js/script.js"></script>
-
 
 
 <script>
 
-/*
- * =========================================================
- * PROFILE FRONTEND
- * =========================================================
- *
- * Firebase Authentication + Firestore will be connected
- * in the authentication phase.
- *
- * IMPORTANT:
- * Password is never stored in this page.
- */
+/* =========================================================
+   TEMPORARY CUSTOMER PROFILE
+   Firebase will replace this section.
+========================================================= */
 
+const customer = {
 
-/* =====================================================
-   MOBILE VALIDATION
-===================================================== */
+    name:
+        localStorage.getItem("umamtek_name")
+        || "UMAMTEK Customer",
 
-const mobileInput =
-    document.getElementById(
-        "mobile"
-    );
+    email:
+        localStorage.getItem("umamtek_email")
+        || "customer@email.com",
 
+    mobile:
+        localStorage.getItem("umamtek_mobile")
+        || "",
 
-mobileInput.addEventListener(
-    "input",
-    function () {
+    userId:
+        localStorage.getItem("umamtek_user_id")
+        || "UMT-CUSTOMER-001",
 
-        this.value =
-            this.value
-                .replace(
-                    /\D/g,
-                    ""
-                )
-                .slice(
-                    0,
-                    10
-                );
+    created:
+        localStorage.getItem("umamtek_created")
+        || new Date().toLocaleDateString("en-IN")
 
-    }
-);
+};
 
 
 
-/* =====================================================
-   PROFILE FORM
-===================================================== */
+/* =========================================================
+   LOAD PROFILE
+========================================================= */
 
-const profileForm =
-    document.getElementById(
-        "profileForm"
-    );
+function loadProfile(){
 
+    document.getElementById("name").value =
+        customer.name;
 
-profileForm.addEventListener(
-    "submit",
-    function(event) {
+    document.getElementById("email").value =
+        customer.email;
 
-        event.preventDefault();
+    document.getElementById("mobile").value =
+        customer.mobile;
 
+    document.getElementById("userId").value =
+        customer.userId;
 
-        const name =
-            document
-                .getElementById(
-                    "name"
-                )
-                .value
-                .trim();
+    document.getElementById("sideName").textContent =
+        customer.name;
 
+    document.getElementById("sideEmail").textContent =
+        customer.email;
 
-        const mobile =
-            document
-                .getElementById(
-                    "mobile"
-                )
-                .value
-                .trim();
+    document.getElementById("sideUserId").textContent =
+        "USER ID: " + customer.userId;
 
+    document.getElementById("createdDate").textContent =
+        customer.created;
 
-        if (name.length < 2) {
+    const firstLetter =
+        customer.name
+            .trim()
+            .charAt(0)
+            .toUpperCase();
 
-            showMessage(
-                "Please enter your full name.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        if (
-            mobile.length !== 10
-        ) {
-
-            showMessage(
-                "Please enter a valid 10-digit mobile number.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        /*
-         * Firebase Firestore update
-         * will be connected here.
-         */
-
-        showMessage(
-            "Your profile is ready to be connected with Firebase.",
-            "success"
-        );
-
-    }
-);
-
-
-
-/* =====================================================
-   MESSAGE
-===================================================== */
-
-function showMessage(
-    message,
-    type
-) {
-
-    const box =
-        document.getElementById(
-            "profileMessage"
-        );
-
-
-    box.textContent =
-        message;
-
-
-    box.className =
-        "profile-message show " +
-        type;
+    document.getElementById("profileAvatar").textContent =
+        firstLetter || "U";
 
 }
 
 
+loadProfile();
 
-/* =====================================================
-   CANCEL
-===================================================== */
+
+
+/* =========================================================
+   SAVE PROFILE
+========================================================= */
 
 document
-    .getElementById(
-        "cancelBtn"
-    )
+    .getElementById("saveProfile")
     .addEventListener(
         "click",
-        function() {
+        function(){
 
-            location.reload();
+            const name =
+                document
+                    .getElementById("name")
+                    .value
+                    .trim();
+
+            const mobile =
+                document
+                    .getElementById("mobile")
+                    .value
+                    .trim();
+
+
+            if(!name){
+
+                alert(
+                    "Please enter your name."
+                );
+
+                return;
+
+            }
+
+
+            if(
+                mobile &&
+                !/^[0-9]{10}$/.test(mobile)
+            ){
+
+                alert(
+                    "Please enter a valid 10-digit mobile number."
+                );
+
+                return;
+
+            }
+
+
+            localStorage.setItem(
+                "umamtek_name",
+                name
+            );
+
+
+            localStorage.setItem(
+                "umamtek_mobile",
+                mobile
+            );
+
+
+            customer.name =
+                name;
+
+            customer.mobile =
+                mobile;
+
+
+            loadProfile();
+
+
+            alert(
+                "Profile updated successfully."
+            );
 
         }
     );
 
 
 
-/* =====================================================
+/* =========================================================
    PASSWORD
-===================================================== */
+========================================================= */
 
 document
-    .getElementById(
-        "changePasswordBtn"
-    )
+    .getElementById("changePassword")
     .addEventListener(
         "click",
-        function() {
+        function(){
+
+            const password =
+                document
+                    .getElementById("newPassword")
+                    .value;
+
+            const confirm =
+                document
+                    .getElementById("confirmPassword")
+                    .value;
+
+
+            if(password.length < 6){
+
+                alert(
+                    "Password must contain at least 6 characters."
+                );
+
+                return;
+
+            }
+
+
+            if(password !== confirm){
+
+                alert(
+                    "Passwords do not match."
+                );
+
+                return;
+
+            }
+
+
+            /*
+             * IMPORTANT:
+             *
+             * Password will NOT be stored in localStorage.
+             *
+             * Firebase Authentication will securely
+             * handle password changes.
+             */
+
 
             alert(
-                "Password reset will be handled securely through Firebase."
+                "Password change will be completed through Firebase Authentication."
             );
+
+
+            document
+                .getElementById("newPassword")
+                .value = "";
+
+            document
+                .getElementById("confirmPassword")
+                .value = "";
 
         }
     );
 
 
 
-/* =====================================================
-   EMAIL VERIFICATION
-===================================================== */
-
-document
-    .getElementById(
-        "verifyEmailBtn"
-    )
-    .addEventListener(
-        "click",
-        function() {
-
-            alert(
-                "Email verification will be connected with Firebase."
-            );
-
-        }
-    );
-
-
-
-/* =====================================================
+/* =========================================================
    LOGOUT
-===================================================== */
+========================================================= */
 
 document
-    .getElementById(
-        "logoutBtn"
-    )
+    .getElementById("logoutBtn")
     .addEventListener(
         "click",
-        function() {
+        function(){
+
+            const confirmLogout =
+                confirm(
+                    "Are you sure you want to logout?"
+                );
+
+
+            if(!confirmLogout){
+
+                return;
+
+            }
+
 
             /*
              * Firebase signOut()
-             * will be connected here.
+             * will be added here.
              */
+
+
+            localStorage.removeItem(
+                "umamtek_logged_in"
+            );
+
 
             window.location.href =
                 "login.html";
@@ -1752,9 +971,43 @@ document
         }
     );
 
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+const menuBtn =
+    document.getElementById(
+        "menuBtn"
+    );
+
+
+if(menuBtn){
+
+    menuBtn.addEventListener(
+        "click",
+        function(){
+
+            const nav =
+                document.querySelector(
+                    ".nav-links"
+                );
+
+            if(nav){
+
+                nav.classList.toggle(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+}
+
 </script>
 
-
 </body>
-
 </html>
