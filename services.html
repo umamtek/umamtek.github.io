@@ -798,4 +798,619 @@
 
                         <label for="notes">
                             Anything else we should know?
-                     
+                        </label>
+
+                        <textarea id="notes"
+                                  placeholder="Optional"></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <button type="button"
+                        class="primary-btn continue-booking"
+                        onclick="continueBooking()">
+
+                    Continue Booking →
+
+                </button>
+
+
+                <p class="login-note">
+                    You will need a UMAMTEK account
+                    before confirming your booking.
+                    <a href="signup.html">Create Account</a>
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 RIGHT — SUMMARY
+            ================================================= -->
+
+            <aside class="summary-card">
+
+                <h3>
+                    Booking Summary
+                </h3>
+
+
+                <div class="summary-row">
+
+                    <span>Service</span>
+
+                    <span id="summaryService">
+                        Not selected
+                    </span>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>Work</span>
+
+                    <span id="summaryWork">
+                        Not selected
+                    </span>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>Date</span>
+
+                    <span id="summaryDate">
+                        Not selected
+                    </span>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>Time</span>
+
+                    <span id="summaryTime">
+                        Not selected
+                    </span>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>Worker</span>
+
+                    <span id="summaryWorker">
+                        Not selected
+                    </span>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>Service Rate</span>
+
+                    <span>
+                        ₹200 / hour
+                    </span>
+
+                </div>
+
+
+                <div class="summary-total">
+
+                    <strong>
+                        Base Rate
+                    </strong>
+
+                    <strong>
+                        ₹200
+                    </strong>
+
+                </div>
+
+
+                <div class="rate-note">
+
+                    <strong>₹200/hour</strong>
+
+                    <br>
+
+                    Final payable amount may depend on
+                    actual working hours and applicable
+                    travel/service charges.
+
+                </div>
+
+
+                <button type="button"
+                        class="primary-btn continue-booking"
+                        onclick="continueBooking()">
+
+                    Continue →
+
+                </button>
+
+            </aside>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="container footer-inner">
+
+        <div>
+
+            <div class="logo footer-logo">
+                <span>UMA</span>MTEK
+            </div>
+
+            <p>
+                Trusted services at your doorstep.
+            </p>
+
+        </div>
+
+        <div class="footer-links">
+
+            <a href="services.html">Services</a>
+
+            <a href="index.html#how-it-works">
+                How It Works
+            </a>
+
+            <a href="index.html#about">
+                About
+            </a>
+
+            <a href="index.html#contact">
+                Contact
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="copyright">
+        © 2026 UMAMTEK. All rights reserved.
+    </div>
+
+</footer>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    /* -----------------------------------------------------
+       READ SERVICE FROM URL
+    ----------------------------------------------------- */
+
+    const params =
+        new URLSearchParams(window.location.search);
+
+    const urlService =
+        params.get("service");
+
+    const service =
+        document.getElementById("service");
+
+    if (urlService && service) {
+
+        const options =
+            Array.from(service.options);
+
+        const matchingOption =
+            options.find(
+                option =>
+                    option.value.toLowerCase() ===
+                    urlService.toLowerCase()
+            );
+
+        if (matchingOption) {
+
+            service.value =
+                matchingOption.value;
+
+            updateSummary();
+
+        }
+
+    }
+
+
+    /* -----------------------------------------------------
+       SERVICE
+    ----------------------------------------------------- */
+
+    service.addEventListener("change", updateSummary);
+
+
+    /* -----------------------------------------------------
+       WORK OPTIONS
+    ----------------------------------------------------- */
+
+    const workOptions =
+        document.querySelectorAll(".work-option");
+
+    workOptions.forEach(option => {
+
+        option.addEventListener("click", function () {
+
+            workOptions.forEach(item => {
+                item.classList.remove("active");
+            });
+
+            this.classList.add("active");
+
+            const work =
+                this.querySelector("strong").textContent;
+
+            document.getElementById("summaryWork")
+                .textContent = work;
+
+
+            const otherField =
+                document.getElementById("otherWorkField");
+
+            if (work === "Other") {
+
+                otherField.style.display = "block";
+
+            } else {
+
+                otherField.style.display = "none";
+
+            }
+
+        });
+
+    });
+
+
+    /* -----------------------------------------------------
+       WORKER OPTIONS
+    ----------------------------------------------------- */
+
+    const workerOptions =
+        document.querySelectorAll(".worker-option");
+
+    workerOptions.forEach(option => {
+
+        option.addEventListener("click", function () {
+
+            workerOptions.forEach(item => {
+                item.classList.remove("active");
+            });
+
+            this.classList.add("active");
+
+            const worker =
+                this.querySelector("strong").textContent;
+
+            document.getElementById("summaryWorker")
+                .textContent = worker;
+
+        });
+
+    });
+
+
+    /* -----------------------------------------------------
+       DATE
+    ----------------------------------------------------- */
+
+    const dateInput =
+        document.getElementById("bookingDate");
+
+    if (dateInput) {
+
+        const today =
+            new Date().toISOString().split("T")[0];
+
+        dateInput.min = today;
+
+        dateInput.addEventListener(
+            "change",
+            updateSummary
+        );
+
+    }
+
+
+    /* -----------------------------------------------------
+       TIME
+    ----------------------------------------------------- */
+
+    const timeInput =
+        document.getElementById("bookingTime");
+
+    if (timeInput) {
+
+        timeInput.addEventListener(
+            "change",
+            updateSummary
+        );
+
+    }
+
+
+    /* -----------------------------------------------------
+       LOCATION
+    ----------------------------------------------------- */
+
+    const locationBtn =
+        document.getElementById("locationBtn");
+
+    if (locationBtn) {
+
+        locationBtn.addEventListener("click", function () {
+
+            if (!navigator.geolocation) {
+
+                alert(
+                    "Location services are not supported by your browser."
+                );
+
+                return;
+            }
+
+            locationBtn.textContent =
+                "Getting location...";
+
+
+            navigator.geolocation.getCurrentPosition(
+
+                function (position) {
+
+                    const lat =
+                        position.coords.latitude;
+
+                    const lng =
+                        position.coords.longitude;
+
+                    locationBtn.textContent =
+                        "✓ Location Captured";
+
+                    locationBtn.dataset.lat =
+                        lat;
+
+                    locationBtn.dataset.lng =
+                        lng;
+
+                },
+
+                function () {
+
+                    locationBtn.textContent =
+                        "Use My Location";
+
+                    alert(
+                        "Unable to get your location. Please allow location permission."
+                    );
+
+                }
+
+            );
+
+        });
+
+    }
+
+
+});
+
+
+/* =========================================================
+   UPDATE SUMMARY
+========================================================= */
+
+function updateSummary() {
+
+    const service =
+        document.getElementById("service");
+
+    const summaryService =
+        document.getElementById("summaryService");
+
+    const date =
+        document.getElementById("bookingDate");
+
+    const time =
+        document.getElementById("bookingTime");
+
+    const summaryDate =
+        document.getElementById("summaryDate");
+
+    const summaryTime =
+        document.getElementById("summaryTime");
+
+
+    if (service.value) {
+
+        summaryService.textContent =
+            service.value;
+
+    } else {
+
+        summaryService.textContent =
+            "Not selected";
+
+    }
+
+
+    if (date.value) {
+
+        summaryDate.textContent =
+            date.value;
+
+    } else {
+
+        summaryDate.textContent =
+            "Not selected";
+
+    }
+
+
+    if (time.value) {
+
+        summaryTime.textContent =
+            time.value;
+
+    } else {
+
+        summaryTime.textContent =
+            "Not selected";
+
+    }
+
+}
+
+
+/* =========================================================
+   CONTINUE BOOKING
+========================================================= */
+
+function continueBooking() {
+
+    const service =
+        document.getElementById("service").value;
+
+    const date =
+        document.getElementById("bookingDate").value;
+
+    const time =
+        document.getElementById("bookingTime").value;
+
+    const address =
+        document.getElementById("address").value.trim();
+
+
+    if (!service) {
+
+        alert("Please select a service.");
+
+        return;
+
+    }
+
+
+    const activeWork =
+        document.querySelector(".work-option.active");
+
+
+    if (!activeWork) {
+
+        alert("Please select the type of work.");
+
+        return;
+
+    }
+
+
+    const work =
+        activeWork.querySelector("strong")
+            .textContent;
+
+
+    if (work === "Other") {
+
+        const otherWork =
+            document.getElementById("otherWork")
+                .value.trim();
+
+        if (!otherWork) {
+
+            alert(
+                "Please specify what work you need."
+            );
+
+            return;
+
+        }
+
+    }
+
+
+    if (!date) {
+
+        alert("Please select a date.");
+
+        return;
+
+    }
+
+
+    if (!time) {
+
+        alert("Please select a time slot.");
+
+        return;
+
+    }
+
+
+    if (!address) {
+
+        alert("Please enter your service address.");
+
+        return;
+
+    }
+
+
+    const worker =
+        document.querySelector(".worker-option.active");
+
+
+    if (!worker) {
+
+        alert(
+            "Please choose your worker preference."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Temporary Phase-1 behaviour.
+
+       In the Firebase phase this button will:
+       1. Check customer authentication
+       2. Load customer profile
+       3. Check service radius
+       4. Check worker availability
+       5. Calculate final price
+       6. Create booking ID
+       7. Open payment selection
+    */
+
+    alert(
+        "Booking details completed! Firebase booking system will be connected in the next phase."
+    );
+
+}
+
+</script>
+
+</body>
+</html>
