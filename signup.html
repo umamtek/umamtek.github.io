@@ -1,161 +1,1012 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Create your UMAMTEK customer account and book trusted professionals.">
+
+    <meta name="theme-color"
+          content="#f5c400">
 
     <title>Create Account | UMAMTEK</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet"
+          href="css/style.css">
+
 
     <style>
 
-        .auth-page {
-            min-height: calc(100vh - 78px);
-            background: #fafafa;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 50px 20px;
+        /* =====================================================
+           SIGNUP PAGE
+        ===================================================== */
+
+        .signup-page {
+
+            min-height:
+                calc(100vh - 76px);
+
+            padding:
+                55px 20px 80px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #fafafa,
+                    #fffbea
+                );
+
         }
 
-        .auth-card {
-            width: min(500px, 100%);
-            background: #ffffff;
-            border: 1px solid #eeeeee;
-            border-radius: 18px;
-            padding: 35px;
-            box-shadow: 0 18px 50px rgba(0,0,0,0.08);
+
+        .signup-container {
+
+            width:
+                min(
+                    100%,
+                    1080px
+                );
+
+            margin:
+                0 auto;
+
         }
 
-        .auth-logo {
-            text-align: center;
-            font-size: 27px;
-            font-weight: 900;
-            margin-bottom: 25px;
+
+        .signup-card {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                0.85fr 1.15fr;
+
+            background:
+                white;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                20px;
+
+            overflow:
+                hidden;
+
+            box-shadow:
+                0 25px 70px
+                rgba(0,0,0,.09);
+
         }
 
-        .auth-logo span {
-            color: #f5c400;
+
+        /* =====================================================
+           LEFT PANEL
+        ===================================================== */
+
+        .signup-info {
+
+            position:
+                relative;
+
+            overflow:
+                hidden;
+
+            background:
+                #111;
+
+            color:
+                white;
+
+            padding:
+                50px;
+
         }
 
-        .auth-card h1 {
-            text-align: center;
-            font-size: 30px;
-            margin-bottom: 8px;
+
+        .signup-info::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                380px;
+
+            height:
+                380px;
+
+            border:
+                1px solid
+                rgba(245,196,0,.25);
+
+            border-radius:
+                50%;
+
+            right:
+                -190px;
+
+            top:
+                20px;
+
         }
 
-        .auth-subtitle {
-            text-align: center;
-            color: #777777;
-            font-size: 14px;
-            margin-bottom: 28px;
+
+        .signup-info-logo {
+
+            position:
+                relative;
+
+            z-index:
+                2;
+
+            font-size:
+                26px;
+
+            font-weight:
+                950;
+
+            letter-spacing:
+                -1px;
+
+            margin-bottom:
+                70px;
+
         }
 
-        .auth-field {
-            margin-bottom: 17px;
+
+        .signup-info-logo span {
+
+            color:
+                var(--yellow);
+
         }
 
-        .auth-field label {
-            display: block;
-            font-size: 13px;
-            font-weight: 800;
-            margin-bottom: 7px;
+
+        .signup-info-content {
+
+            position:
+                relative;
+
+            z-index:
+                2;
+
         }
 
-        .auth-field input,
-        .auth-field select {
-            width: 100%;
-            padding: 14px;
-            border: 1px solid #dddddd;
-            border-radius: 8px;
-            outline: none;
-            background: #ffffff;
+
+        .signup-info-content small {
+
+            color:
+                var(--yellow);
+
+            font-size:
+                10px;
+
+            font-weight:
+                950;
+
+            letter-spacing:
+                1.7px;
+
         }
 
-        .auth-field input:focus,
-        .auth-field select:focus {
-            border-color: #f5c400;
+
+        .signup-info-content h1 {
+
+            font-size:
+                clamp(
+                    35px,
+                    4vw,
+                    50px
+                );
+
+            line-height:
+                1.04;
+
+            letter-spacing:
+                -2px;
+
+            margin:
+                12px 0 18px;
+
         }
 
-        .mobile-input {
-            display: grid;
-            grid-template-columns: 65px 1fr;
-            gap: 8px;
+
+        .signup-info-content p {
+
+            color:
+                #aaa;
+
+            font-size:
+                13px;
+
+            line-height:
+                1.8;
+
+            max-width:
+                370px;
+
         }
+
+
+        .signup-benefits {
+
+            position:
+                relative;
+
+            z-index:
+                2;
+
+            margin-top:
+                45px;
+
+            display:
+                grid;
+
+            gap:
+                15px;
+
+        }
+
+
+        .signup-benefit {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                12px;
+
+            font-size:
+                12px;
+
+            color:
+                #bbb;
+
+        }
+
+
+        .benefit-icon {
+
+            flex-shrink:
+                0;
+
+            width:
+                30px;
+
+            height:
+                30px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            background:
+                #242424;
+
+            border-radius:
+                7px;
+
+            color:
+                var(--yellow);
+
+            font-weight:
+                900;
+
+        }
+
+
+        /* =====================================================
+           FORM PANEL
+        ===================================================== */
+
+        .signup-form-panel {
+
+            padding:
+                50px;
+
+        }
+
+
+        .signup-heading {
+
+            margin-bottom:
+                30px;
+
+        }
+
+
+        .signup-heading small {
+
+            color:
+                var(--yellow-dark);
+
+            font-size:
+                10px;
+
+            font-weight:
+                950;
+
+            letter-spacing:
+                1.5px;
+
+        }
+
+
+        .signup-heading h2 {
+
+            font-size:
+                34px;
+
+            letter-spacing:
+                -1.5px;
+
+            margin:
+                7px 0;
+
+        }
+
+
+        .signup-heading p {
+
+            color:
+                #777;
+
+            font-size:
+                13px;
+
+        }
+
+
+        /* =====================================================
+           FORM
+        ===================================================== */
+
+        .signup-form {
+
+            display:
+                grid;
+
+            gap:
+                17px;
+
+        }
+
+
+        .form-row {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:
+                14px;
+
+        }
+
+
+        .signup-field {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                7px;
+
+        }
+
+
+        .signup-field label {
+
+            font-size:
+                11px;
+
+            font-weight:
+                900;
+
+        }
+
+
+        .signup-field input {
+
+            width:
+                100%;
+
+            padding:
+                14px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                8px;
+
+            outline:
+                none;
+
+            background:
+                white;
+
+        }
+
+
+        .signup-field input:focus {
+
+            border-color:
+                var(--yellow-dark);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(245,196,0,.10);
+
+        }
+
+
+        .input-hint {
+
+            color:
+                #999;
+
+            font-size:
+                10px;
+
+        }
+
+
+        /* =====================================================
+           MOBILE NUMBER
+        ===================================================== */
+
+        .mobile-wrapper {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                65px 1fr;
+
+            gap:
+                8px;
+
+        }
+
 
         .country-code {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f5f5f5;
-            border: 1px solid #dddddd;
-            border-radius: 8px;
-            font-weight: 800;
-            font-size: 13px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            background:
+                #f6f6f6;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                8px;
+
+            font-size:
+                12px;
+
+            font-weight:
+                800;
+
         }
 
-        .password-help {
-            color: #888888;
-            font-size: 11px;
-            margin-top: 5px;
+
+        /* =====================================================
+           PASSWORD
+        ===================================================== */
+
+        .password-wrapper {
+
+            position:
+                relative;
+
         }
+
+
+        .password-wrapper input {
+
+            padding-right:
+                45px;
+
+        }
+
+
+        .password-toggle {
+
+            position:
+                absolute;
+
+            right:
+                12px;
+
+            top:
+                50%;
+
+            transform:
+                translateY(-50%);
+
+            border:
+                0;
+
+            background:
+                transparent;
+
+            cursor:
+                pointer;
+
+        }
+
+
+        /* =====================================================
+           PASSWORD STRENGTH
+        ===================================================== */
+
+        .password-strength {
+
+            display:
+                none;
+
+            height:
+                4px;
+
+            background:
+                #eee;
+
+            border-radius:
+                20px;
+
+            overflow:
+                hidden;
+
+            margin-top:
+                2px;
+
+        }
+
+
+        .password-strength.show {
+
+            display:
+                block;
+
+        }
+
+
+        .password-strength-bar {
+
+            width:
+                0%;
+
+            height:
+                100%;
+
+            background:
+                var(--yellow);
+
+            transition:
+                .2s;
+
+        }
+
+
+        .password-text {
+
+            color:
+                #888;
+
+            font-size:
+                10px;
+
+        }
+
+
+        /* =====================================================
+           TERMS
+        ===================================================== */
 
         .terms {
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            margin: 18px 0;
-            font-size: 11px;
-            color: #666666;
+
+            display:
+                flex;
+
+            align-items:
+                flex-start;
+
+            gap:
+                8px;
+
+            font-size:
+                10px;
+
+            color:
+                #777;
+
+            line-height:
+                1.5;
+
         }
+
 
         .terms input {
-            margin-top: 3px;
+
+            margin-top:
+                2px;
+
+            accent-color:
+                var(--yellow-dark);
+
         }
+
 
         .terms a {
-            color: #111111;
-            font-weight: 800;
+
+            color:
+                #111;
+
+            font-weight:
+                800;
+
         }
 
-        .auth-btn {
-            width: 100%;
+
+        /* =====================================================
+           OTP SECTION
+        ===================================================== */
+
+        .otp-section {
+
+            display:
+                none;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                10px;
+
+            padding:
+                18px;
+
+            background:
+                #fffdf0;
+
         }
+
+
+        .otp-section.show {
+
+            display:
+                block;
+
+        }
+
+
+        .otp-section h3 {
+
+            font-size:
+                14px;
+
+            margin-bottom:
+                5px;
+
+        }
+
+
+        .otp-section p {
+
+            color:
+                #777;
+
+            font-size:
+                11px;
+
+            line-height:
+                1.5;
+
+            margin-bottom:
+                13px;
+
+        }
+
+
+        .otp-input {
+
+            width:
+                100%;
+
+            padding:
+                13px;
+
+            text-align:
+                center;
+
+            font-size:
+                18px;
+
+            letter-spacing:
+                6px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                8px;
+
+        }
+
+
+        .otp-actions {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            margin-top:
+                10px;
+
+        }
+
+
+        .resend-otp {
+
+            border:
+                0;
+
+            background:
+                transparent;
+
+            cursor:
+                pointer;
+
+            font-size:
+                10px;
+
+            font-weight:
+                900;
+
+        }
+
+
+        /* =====================================================
+           MESSAGE
+        ===================================================== */
+
+        .signup-message {
+
+            display:
+                none;
+
+            padding:
+                11px 13px;
+
+            border-radius:
+                7px;
+
+            font-size:
+                11px;
+
+            line-height:
+                1.5;
+
+        }
+
+
+        .signup-message.show {
+
+            display:
+                block;
+
+        }
+
+
+        .signup-message.error {
+
+            background:
+                #fff0f0;
+
+            color:
+                #a00000;
+
+        }
+
+
+        .signup-message.success {
+
+            background:
+                #f0fff4;
+
+            color:
+                #08752c;
+
+        }
+
+
+        /* =====================================================
+           SUBMIT
+        ===================================================== */
+
+        .signup-submit {
+
+            width:
+                100%;
+
+            padding:
+                15px;
+
+            border:
+                0;
+
+            border-radius:
+                8px;
+
+            background:
+                var(--black);
+
+            color:
+                white;
+
+            font-weight:
+                950;
+
+            cursor:
+                pointer;
+
+            transition:
+                .2s;
+
+        }
+
+
+        .signup-submit:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 12px 30px
+                rgba(0,0,0,.15);
+
+        }
+
 
         .login-link {
-            text-align: center;
-            font-size: 13px;
-            color: #666666;
-            margin-top: 22px;
+
+            text-align:
+                center;
+
+            color:
+                #777;
+
+            font-size:
+                12px;
+
+            margin-top:
+                23px;
+
         }
+
 
         .login-link a {
-            color: #111111;
-            font-weight: 900;
+
+            color:
+                #111;
+
+            font-weight:
+                900;
+
         }
 
-        .back-home {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            font-size: 12px;
-            color: #777777;
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 850px) {
+
+            .signup-card {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .signup-info {
+
+                padding:
+                    35px;
+
+            }
+
+
+            .signup-info-logo {
+
+                margin-bottom:
+                    45px;
+
+            }
+
+
+            .signup-form-panel {
+
+                padding:
+                    35px;
+
+            }
+
         }
 
-        .auth-message {
-            display: none;
-            margin-bottom: 18px;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 12px;
-        }
 
         @media (max-width: 600px) {
 
-            .auth-card {
-                padding: 25px 20px;
+            .signup-page {
+
+                padding:
+                    25px 14px 60px;
+
+            }
+
+
+            .signup-info {
+
+                padding:
+                    28px;
+
+            }
+
+
+            .signup-form-panel {
+
+                padding:
+                    28px 22px;
+
+            }
+
+
+            .form-row {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .signup-heading h2 {
+
+                font-size:
+                    29px;
+
             }
 
         }
@@ -168,41 +1019,66 @@
 <body>
 
 
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
 <header class="navbar">
 
     <div class="container nav-inner">
 
-        <a href="index.html" class="logo">
-            <span>UMA</span>MTEK
+
+        <a href="index.html"
+           class="logo">
+
+            UMAM<span>TEK</span>
+
         </a>
+
 
         <nav class="nav-links">
 
-            <a href="index.html">Home</a>
-            <a href="services.html">Services</a>
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="services.html">
+                Services
+            </a>
+
             <a href="index.html#how-it-works">
                 How It Works
             </a>
+
             <a href="index.html#about">
                 About
             </a>
+
             <a href="index.html#contact">
                 Contact
             </a>
 
         </nav>
 
+
         <div class="nav-actions">
 
             <a href="login.html"
                class="login-btn">
+
                 Login
+
             </a>
 
         </div>
 
-        <button class="menu-btn" id="menuBtn">
+
+        <button
+            class="menu-btn"
+            id="menuBtn">
+
             ☰
+
         </button>
 
     </div>
@@ -210,281 +1086,980 @@
 </header>
 
 
-<main class="auth-page">
 
-    <div class="auth-card">
+<!-- =====================================================
+     SIGNUP
+===================================================== -->
 
-        <div class="auth-logo">
-            <span>UMA</span>MTEK
-        </div>
+<main class="signup-page">
 
-        <h1>Create Account</h1>
-
-        <p class="auth-subtitle">
-            Create your UMAMTEK customer account.
-        </p>
+    <div class="signup-container">
 
 
-        <div id="authMessage"
-             class="auth-message">
-        </div>
+        <div class="signup-card">
 
 
-        <form id="signupForm">
+            <!-- =================================================
+                 INFO
+            ================================================= -->
+
+            <section class="signup-info">
 
 
-            <!-- NAME -->
+                <div class="signup-info-logo">
 
-            <div class="auth-field">
+                    UMAM<span>TEK</span>
 
-                <label for="name">
-                    Full Name
-                </label>
-
-                <input
-                    type="text"
-                    id="name"
-                    placeholder="Enter your full name"
-                    required
-                >
-
-            </div>
+                </div>
 
 
-            <!-- EMAIL -->
+                <div class="signup-info-content">
 
-            <div class="auth-field">
-
-                <label for="email">
-                    Email Address
-                </label>
-
-                <input
-                    type="email"
-                    id="email"
-                    placeholder="you@example.com"
-                    required
-                >
-
-            </div>
+                    <small>
+                        JOIN UMAMTEK
+                    </small>
 
 
-            <!-- MOBILE -->
+                    <h1>
 
-            <div class="auth-field">
+                        Everything you need,
+                        one account.
 
-                <label for="mobile">
-                    Mobile Number
-                </label>
+                    </h1>
 
-                <div class="mobile-input">
 
-                    <div class="country-code">
-                        +91
+                    <p>
+
+                        Create your UMAMTEK customer
+                        account and book trusted
+                        professionals whenever you
+                        need them.
+
+                    </p>
+
+                </div>
+
+
+                <div class="signup-benefits">
+
+
+                    <div class="signup-benefit">
+
+                        <div class="benefit-icon">
+                            ✓
+                        </div>
+
+                        Quick and simple booking
+
                     </div>
 
-                    <input
-                        type="tel"
-                        id="mobile"
-                        placeholder="10-digit mobile number"
-                        maxlength="10"
-                        pattern="[0-9]{10}"
-                        required
-                    >
+
+                    <div class="signup-benefit">
+
+                        <div class="benefit-icon">
+                            ✓
+                        </div>
+
+                        Keep all bookings in one place
+
+                    </div>
+
+
+                    <div class="signup-benefit">
+
+                        <div class="benefit-icon">
+                            ✓
+                        </div>
+
+                        Secure account management
+
+                    </div>
+
 
                 </div>
 
-            </div>
+            </section>
 
 
-            <!-- PASSWORD -->
 
-            <div class="auth-field">
+            <!-- =================================================
+                 FORM
+            ================================================= -->
 
-                <label for="password">
-                    Create Password
-                </label>
+            <section class="signup-form-panel">
 
-                <input
-                    type="password"
-                    id="password"
-                    placeholder="Create a strong password"
-                    minlength="6"
-                    required
-                >
 
-                <div class="password-help">
-                    Use at least 6 characters.
+                <div class="signup-heading">
+
+                    <small>
+                        CUSTOMER REGISTRATION
+                    </small>
+
+
+                    <h2>
+                        Create your account.
+                    </h2>
+
+
+                    <p>
+                        Enter your details to get started.
+                    </p>
+
                 </div>
 
-            </div>
 
 
-            <!-- CONFIRM PASSWORD -->
-
-            <div class="auth-field">
-
-                <label for="confirmPassword">
-                    Confirm Password
-                </label>
-
-                <input
-                    type="password"
-                    id="confirmPassword"
-                    placeholder="Re-enter your password"
-                    minlength="6"
-                    required
-                >
-
-            </div>
+                <form
+                    class="signup-form"
+                    id="signupForm">
 
 
-            <!-- TERMS -->
+                    <!-- NAME -->
 
-            <label class="terms">
+                    <div class="signup-field">
 
-                <input
-                    type="checkbox"
-                    id="terms"
-                    required
-                >
+                        <label for="fullName">
 
-                <span>
-                    I agree to UMAMTEK's
-                    <a href="#">
-                        Terms & Conditions
+                            Full Name
+
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="fullName"
+                            name="fullName"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- EMAIL -->
+
+                    <div class="signup-field">
+
+                        <label for="email">
+
+                            Email Address
+
+                        </label>
+
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email address"
+                            autocomplete="email"
+                            required>
+
+
+                        <span class="input-hint">
+
+                            Your account will be linked to this email.
+
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- MOBILE -->
+
+                    <div class="signup-field">
+
+                        <label for="mobile">
+
+                            Mobile Number
+
+                        </label>
+
+
+                        <div class="mobile-wrapper">
+
+                            <div class="country-code">
+                                +91
+                            </div>
+
+
+                            <input
+                                type="tel"
+                                id="mobile"
+                                name="mobile"
+                                placeholder="10-digit mobile number"
+                                maxlength="10"
+                                inputmode="numeric"
+                                autocomplete="tel"
+                                required>
+
+                        </div>
+
+
+                        <span class="input-hint">
+
+                            Used for contacting you regarding your bookings.
+
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- PASSWORD ROW -->
+
+                    <div class="form-row">
+
+
+                        <div class="signup-field">
+
+                            <label for="password">
+
+                                Create Password
+
+                            </label>
+
+
+                            <div class="password-wrapper">
+
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    placeholder="Create password"
+                                    autocomplete="new-password"
+                                    required>
+
+
+                                <button
+                                    type="button"
+                                    class="password-toggle"
+                                    id="passwordToggle">
+
+                                    👁
+
+                                </button>
+
+                            </div>
+
+
+                            <div
+                                class="password-strength"
+                                id="passwordStrength">
+
+                                <div
+                                    class="password-strength-bar"
+                                    id="passwordStrengthBar">
+                                </div>
+
+                            </div>
+
+
+                            <span
+                                class="password-text"
+                                id="passwordText">
+
+                                Use at least 8 characters.
+
+                            </span>
+
+                        </div>
+
+
+
+                        <div class="signup-field">
+
+                            <label for="confirmPassword">
+
+                                Confirm Password
+
+                            </label>
+
+
+                            <div class="password-wrapper">
+
+                                <input
+                                    type="password"
+                                    id="confirmPassword"
+                                    name="confirmPassword"
+                                    placeholder="Confirm password"
+                                    autocomplete="new-password"
+                                    required>
+
+
+                                <button
+                                    type="button"
+                                    class="password-toggle"
+                                    id="confirmPasswordToggle">
+
+                                    👁
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         OTP
+                    ================================================= -->
+
+                    <div
+                        class="otp-section"
+                        id="otpSection">
+
+
+                        <h3>
+                            Verify your account
+                        </h3>
+
+
+                        <p>
+
+                            A verification OTP will be
+                            sent to your registered email
+                            when Firebase is connected.
+
+                        </p>
+
+
+                        <input
+                            type="text"
+                            class="otp-input"
+                            id="otp"
+                            maxlength="6"
+                            inputmode="numeric"
+                            placeholder="000000">
+
+
+                        <div class="otp-actions">
+
+                            <span
+                                style="
+                                font-size:10px;
+                                color:#888;
+                                ">
+
+                                OTP expires after a limited time.
+
+                            </span>
+
+
+                            <button
+                                type="button"
+                                class="resend-otp"
+                                id="resendOtp">
+
+                                Resend OTP
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- MESSAGE -->
+
+                    <div
+                        class="signup-message"
+                        id="signupMessage">
+                    </div>
+
+
+
+                    <!-- TERMS -->
+
+                    <label class="terms">
+
+                        <input
+                            type="checkbox"
+                            id="terms"
+                            required>
+
+
+                        <span>
+
+                            I agree to UMAMTEK's
+                            <a href="#">
+                                Terms & Conditions
+                            </a>
+                            and
+                            <a href="#">
+                                Privacy Policy
+                            </a>.
+
+                        </span>
+
+                    </label>
+
+
+
+                    <!-- SUBMIT -->
+
+                    <button
+                        type="submit"
+                        class="signup-submit">
+
+                        Create Account →
+
+                    </button>
+
+
+                </form>
+
+
+
+                <div class="login-link">
+
+                    Already have an account?
+
+                    <a href="login.html">
+
+                        Login
+
                     </a>
-                    and
-                    <a href="#">
-                        Privacy Policy
-                    </a>.
-                </span>
 
-            </label>
+                </div>
 
+            </section>
 
-            <button
-                type="submit"
-                class="primary-btn auth-btn">
-
-                Create Account →
-
-            </button>
-
-        </form>
-
-
-        <p class="login-link">
-
-            Already have an account?
-
-            <a href="login.html">
-                Login
-            </a>
-
-        </p>
-
-
-        <a href="index.html"
-           class="back-home">
-
-            ← Back to UMAMTEK
-
-        </a>
+        </div>
 
     </div>
 
 </main>
 
 
+
+<!-- =====================================================
+     WHATSAPP
+===================================================== -->
+
+<a
+    href="https://wa.me/917544813882"
+    target="_blank"
+    class="whatsapp-float"
+    aria-label="WhatsApp UMAMTEK">
+
+    💬
+
+</a>
+
+
+
+<!-- =====================================================
+     GLOBAL JS
+===================================================== -->
+
+<script src="js/script.js"></script>
+
+
+
 <script>
 
-document.getElementById("signupForm")
-    .addEventListener("submit", function(event) {
 
-        event.preventDefault();
+/* =====================================================
+   PASSWORD TOGGLE
+===================================================== */
 
+function setupPasswordToggle(
+    inputId,
+    buttonId
+) {
 
-        const name =
-            document.getElementById("name").value.trim();
-
-        const email =
-            document.getElementById("email").value.trim();
-
-        const mobile =
-            document.getElementById("mobile").value.trim();
-
-        const password =
-            document.getElementById("password").value;
-
-        const confirmPassword =
-            document.getElementById("confirmPassword").value;
-
-
-        if (mobile.length !== 10) {
-
-            showMessage(
-                "Please enter a valid 10-digit mobile number."
-            );
-
-            return;
-
-        }
-
-
-        if (password !== confirmPassword) {
-
-            showMessage(
-                "Passwords do not match."
-            );
-
-            return;
-
-        }
-
-
-        /*
-           Firebase will be connected here.
-
-           Future flow:
-
-           Name
-              ↓
-           Email
-              ↓
-           Mobile
-              ↓
-           Verification
-              ↓
-           Password
-              ↓
-           Firebase Account
-              ↓
-           Customer User ID
-              ↓
-           Customer Profile
-        */
-
-
-        showMessage(
-            "Account system will be connected with Firebase in the next phase."
+    const input =
+        document.getElementById(
+            inputId
         );
 
-    });
+
+    const button =
+        document.getElementById(
+            buttonId
+        );
 
 
-function showMessage(message) {
+    button.addEventListener(
+        "click",
+        function () {
 
-    const box =
-        document.getElementById("authMessage");
+            if (
+                input.type ===
+                "password"
+            ) {
 
-    box.textContent = message;
-    box.style.display = "block";
+                input.type =
+                    "text";
+
+                this.textContent =
+                    "🙈";
+
+            } else {
+
+                input.type =
+                    "password";
+
+                this.textContent =
+                    "👁";
+
+            }
+
+        }
+    );
 
 }
+
+
+setupPasswordToggle(
+    "password",
+    "passwordToggle"
+);
+
+
+setupPasswordToggle(
+    "confirmPassword",
+    "confirmPasswordToggle"
+);
+
+
+
+/* =====================================================
+   PASSWORD STRENGTH
+===================================================== */
+
+const passwordInput =
+    document.getElementById(
+        "password"
+    );
+
+
+const strengthBox =
+    document.getElementById(
+        "passwordStrength"
+    );
+
+
+const strengthBar =
+    document.getElementById(
+        "passwordStrengthBar"
+    );
+
+
+const passwordText =
+    document.getElementById(
+        "passwordText"
+    );
+
+
+passwordInput.addEventListener(
+    "input",
+    function () {
+
+        const value =
+            this.value;
+
+
+        if (!value) {
+
+            strengthBox.classList.remove(
+                "show"
+            );
+
+            passwordText.textContent =
+                "Use at least 8 characters.";
+
+            return;
+
+        }
+
+
+        strengthBox.classList.add(
+            "show"
+        );
+
+
+        let score = 0;
+
+
+        if (value.length >= 8)
+            score++;
+
+
+        if (/[A-Z]/.test(value))
+            score++;
+
+
+        if (/[0-9]/.test(value))
+            score++;
+
+
+        if (/[^A-Za-z0-9]/.test(value))
+            score++;
+
+
+        const widths = [
+            "25%",
+            "45%",
+            "70%",
+            "100%"
+        ];
+
+
+        strengthBar.style.width =
+            widths[
+                Math.max(
+                    0,
+                    score - 1
+                )
+            ] || "25%";
+
+
+        if (score <= 1) {
+
+            passwordText.textContent =
+                "Weak password.";
+
+        } else if (score === 2) {
+
+            passwordText.textContent =
+                "Fair password.";
+
+        } else if (score === 3) {
+
+            passwordText.textContent =
+                "Good password.";
+
+        } else {
+
+            passwordText.textContent =
+                "Strong password.";
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   MOBILE NUMBER
+===================================================== */
+
+const mobile =
+    document.getElementById(
+        "mobile"
+    );
+
+
+mobile.addEventListener(
+    "input",
+    function () {
+
+        this.value =
+            this.value
+                .replace(
+                    /\D/g,
+                    ""
+                )
+                .slice(
+                    0,
+                    10
+                );
+
+    }
+);
+
+
+
+/* =====================================================
+   OTP INPUT
+===================================================== */
+
+const otp =
+    document.getElementById(
+        "otp"
+    );
+
+
+otp.addEventListener(
+    "input",
+    function () {
+
+        this.value =
+            this.value
+                .replace(
+                    /\D/g,
+                    ""
+                )
+                .slice(
+                    0,
+                    6
+                );
+
+    }
+);
+
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+function showSignupMessage(
+    message,
+    type
+) {
+
+    const box =
+        document.getElementById(
+            "signupMessage"
+        );
+
+
+    box.textContent =
+        message;
+
+
+    box.className =
+        "signup-message show " +
+        type;
+
+}
+
+
+
+/* =====================================================
+   SIGNUP FORM
+===================================================== */
+
+document
+    .getElementById("signupForm")
+    .addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            const name =
+                document
+                    .getElementById(
+                        "fullName"
+                    )
+                    .value
+                    .trim();
+
+
+            const email =
+                document
+                    .getElementById(
+                        "email"
+                    )
+                    .value
+                    .trim();
+
+
+            const mobileNumber =
+                document
+                    .getElementById(
+                        "mobile"
+                    )
+                    .value
+                    .trim();
+
+
+            const password =
+                document
+                    .getElementById(
+                        "password"
+                    )
+                    .value;
+
+
+            const confirmPassword =
+                document
+                    .getElementById(
+                        "confirmPassword"
+                    )
+                    .value;
+
+
+            const terms =
+                document
+                    .getElementById(
+                        "terms"
+                    )
+                    .checked;
+
+
+            /* NAME */
+
+            if (name.length < 2) {
+
+                showSignupMessage(
+                    "Please enter your full name.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            /* EMAIL */
+
+            if (
+                !email.includes("@")
+            ) {
+
+                showSignupMessage(
+                    "Please enter a valid email address.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            /* MOBILE */
+
+            if (
+                mobileNumber.length !==
+                10
+            ) {
+
+                showSignupMessage(
+                    "Please enter a valid 10-digit mobile number.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            /* PASSWORD */
+
+            if (
+                password.length < 8
+            ) {
+
+                showSignupMessage(
+                    "Password must contain at least 8 characters.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            /* PASSWORD MATCH */
+
+            if (
+                password !==
+                confirmPassword
+            ) {
+
+                showSignupMessage(
+                    "Passwords do not match.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            /* TERMS */
+
+            if (!terms) {
+
+                showSignupMessage(
+                    "Please accept the Terms & Conditions and Privacy Policy.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            /*
+             * TEMPORARY FRONTEND FLOW
+             *
+             * Firebase Authentication will
+             * replace this section.
+             *
+             * Password is NOT stored in
+             * localStorage.
+             */
+
+
+            document
+                .getElementById(
+                    "otpSection"
+                )
+                .classList.add(
+                    "show"
+                );
+
+
+            showSignupMessage(
+                "Your details are valid. Firebase email verification will be connected next.",
+                "success"
+            );
+
+
+            document
+                .getElementById(
+                    "otpSection"
+                )
+                .scrollIntoView({
+                    behavior:
+                        "smooth",
+                    block:
+                        "center"
+                });
+
+        }
+    );
+
+
+
+/* =====================================================
+   RESEND OTP
+===================================================== */
+
+document
+    .getElementById(
+        "resendOtp"
+    )
+    .addEventListener(
+        "click",
+        function () {
+
+            showSignupMessage(
+                "OTP resend will be handled by Firebase.",
+                "success"
+            );
+
+        }
+    );
 
 </script>
 
 
 </body>
+
 </html>
