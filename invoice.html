@@ -1,0 +1,2014 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="UMAMTEK GST Invoice">
+
+    <title>Invoice | UMAMTEK</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+
+    <style>
+
+        /* =====================================================
+           INVOICE PAGE
+        ===================================================== */
+
+        .invoice-page {
+
+            min-height:
+                calc(100vh - 76px);
+
+            background:
+                #f3f3f3;
+
+            padding:
+                45px 0 80px;
+
+        }
+
+
+        .invoice-wrapper {
+
+            max-width:
+                900px;
+
+            margin:
+                auto;
+
+        }
+
+
+        /* =====================================================
+           TOP ACTIONS
+        ===================================================== */
+
+        .invoice-actions {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            margin-bottom:
+                18px;
+
+        }
+
+
+        .back-btn {
+
+            color:
+                #555;
+
+            font-size:
+                11px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .print-btn {
+
+            border:
+                0;
+
+            background:
+                #111;
+
+            color:
+                white;
+
+            padding:
+                11px 17px;
+
+            border-radius:
+                7px;
+
+            font-size:
+                10px;
+
+            font-weight:
+                900;
+
+            cursor:
+                pointer;
+
+        }
+
+
+        /* =====================================================
+           INVOICE
+        ===================================================== */
+
+        .invoice {
+
+            background:
+                white;
+
+            border:
+                1px solid #ddd;
+
+            box-shadow:
+                0 15px 50px
+                rgba(0,0,0,.08);
+
+        }
+
+
+        /* =====================================================
+           INVOICE HEADER
+        ===================================================== */
+
+        .invoice-header {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            gap:
+                30px;
+
+            padding:
+                32px;
+
+            border-bottom:
+                3px solid #111;
+
+        }
+
+
+        .invoice-brand {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                8px;
+
+        }
+
+
+        .invoice-logo {
+
+            font-size:
+                30px;
+
+            font-weight:
+                1000;
+
+            letter-spacing:
+                -1.5px;
+
+            color:
+                #111;
+
+        }
+
+
+        .invoice-logo span {
+
+            color:
+                #e4b400;
+
+        }
+
+
+        .invoice-business-info {
+
+            color:
+                #666;
+
+            font-size:
+                10px;
+
+            line-height:
+                1.7;
+
+        }
+
+
+        .invoice-business-info strong {
+
+            color:
+                #111;
+
+        }
+
+
+        .invoice-title {
+
+            text-align:
+                right;
+
+        }
+
+
+        .invoice-title h1 {
+
+            font-size:
+                30px;
+
+            letter-spacing:
+                2px;
+
+            margin-bottom:
+                8px;
+
+        }
+
+
+        .invoice-title p {
+
+            color:
+                #777;
+
+            font-size:
+                10px;
+
+        }
+
+
+        /* =====================================================
+           INVOICE META
+        ===================================================== */
+
+        .invoice-meta {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:
+                20px;
+
+            padding:
+                25px 32px;
+
+            border-bottom:
+                1px solid #ddd;
+
+        }
+
+
+        .meta-box {
+
+            display:
+                grid;
+
+            gap:
+                8px;
+
+        }
+
+
+        .meta-title {
+
+            color:
+                #999;
+
+            font-size:
+                9px;
+
+            font-weight:
+                900;
+
+            letter-spacing:
+                .8px;
+
+        }
+
+
+        .meta-row {
+
+            display:
+                flex;
+
+            gap:
+                10px;
+
+            font-size:
+                11px;
+
+        }
+
+
+        .meta-row strong {
+
+            min-width:
+                110px;
+
+        }
+
+
+        /* =====================================================
+           CUSTOMER / SERVICE
+        ===================================================== */
+
+        .customer-section {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:
+                20px;
+
+            padding:
+                25px 32px;
+
+            border-bottom:
+                1px solid #ddd;
+
+        }
+
+
+        .customer-box {
+
+            padding:
+                16px;
+
+            background:
+                #fafafa;
+
+            border:
+                1px solid #eee;
+
+            border-radius:
+                8px;
+
+        }
+
+
+        .customer-box h3 {
+
+            font-size:
+                10px;
+
+            letter-spacing:
+                .7px;
+
+            margin-bottom:
+                12px;
+
+        }
+
+
+        .customer-box p {
+
+            color:
+                #555;
+
+            font-size:
+                10px;
+
+            line-height:
+                1.7;
+
+        }
+
+
+        /* =====================================================
+           TABLE
+        ===================================================== */
+
+        .invoice-table-wrapper {
+
+            padding:
+                25px 32px 0;
+
+            overflow-x:
+                auto;
+
+        }
+
+
+        .invoice-table {
+
+            width:
+                100%;
+
+            border-collapse:
+                collapse;
+
+            min-width:
+                700px;
+
+        }
+
+
+        .invoice-table th {
+
+            background:
+                #111;
+
+            color:
+                white;
+
+            padding:
+                12px 9px;
+
+            font-size:
+                9px;
+
+            text-align:
+                left;
+
+            white-space:
+                nowrap;
+
+        }
+
+
+        .invoice-table th:first-child {
+
+            text-align:
+                center;
+
+        }
+
+
+        .invoice-table td {
+
+            padding:
+                14px 9px;
+
+            border-bottom:
+                1px solid #ddd;
+
+            font-size:
+                10px;
+
+            vertical-align:
+                top;
+
+        }
+
+
+        .invoice-table td:first-child {
+
+            text-align:
+                center;
+
+        }
+
+
+        .invoice-table .number {
+
+            text-align:
+                right;
+
+        }
+
+
+        .invoice-table .empty-row td {
+
+            height:
+                45px;
+
+        }
+
+
+        /* =====================================================
+           TOTAL SECTION
+        ===================================================== */
+
+        .invoice-summary {
+
+            display:
+                flex;
+
+            justify-content:
+                flex-end;
+
+            padding:
+                22px 32px;
+
+        }
+
+
+        .summary-box {
+
+            width:
+                330px;
+
+        }
+
+
+        .summary-row {
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            padding:
+                7px 0;
+
+            color:
+                #555;
+
+            font-size:
+                10px;
+
+        }
+
+
+        .summary-row strong {
+
+            color:
+                #111;
+
+        }
+
+
+        .summary-row.gst {
+
+            font-size:
+                9px;
+
+        }
+
+
+        .summary-row.grand-total {
+
+            border-top:
+                2px solid #111;
+
+            margin-top:
+                8px;
+
+            padding-top:
+                13px;
+
+            font-size:
+                16px;
+
+            font-weight:
+                950;
+
+        }
+
+
+        /* =====================================================
+           PAYMENT STATUS
+        ===================================================== */
+
+        .payment-section {
+
+            padding:
+                0 32px 25px;
+
+        }
+
+
+        .payment-box {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            padding:
+                14px 16px;
+
+            border:
+                1px solid #eee;
+
+            background:
+                #fafafa;
+
+            border-radius:
+                8px;
+
+        }
+
+
+        .payment-box strong {
+
+            font-size:
+                10px;
+
+        }
+
+
+        .payment-status {
+
+            padding:
+                6px 10px;
+
+            border-radius:
+                5px;
+
+            background:
+                #fff3b5;
+
+            color:
+                #725800;
+
+            font-size:
+                9px;
+
+            font-weight:
+                950;
+
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .invoice-footer {
+
+            border-top:
+                1px solid #ddd;
+
+            padding:
+                25px 32px;
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            gap:
+                30px;
+
+        }
+
+
+        .terms {
+
+            max-width:
+                550px;
+
+        }
+
+
+        .terms h4 {
+
+            font-size:
+                10px;
+
+            margin-bottom:
+                7px;
+
+        }
+
+
+        .terms p {
+
+            color:
+                #777;
+
+            font-size:
+                9px;
+
+            line-height:
+                1.6;
+
+        }
+
+
+        .generated-by {
+
+            text-align:
+                right;
+
+            color:
+                #aaa;
+
+            font-size:
+                8px;
+
+            white-space:
+                nowrap;
+
+        }
+
+
+        /* =====================================================
+           LOADING
+        ===================================================== */
+
+        .invoice-loading {
+
+            text-align:
+                center;
+
+            padding:
+                80px 20px;
+
+            color:
+                #777;
+
+            font-size:
+                12px;
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 650px) {
+
+            .invoice-page {
+
+                padding:
+                    25px 0 50px;
+
+            }
+
+
+            .invoice-header {
+
+                flex-direction:
+                    column;
+
+                padding:
+                    24px;
+
+            }
+
+
+            .invoice-title {
+
+                text-align:
+                    left;
+
+            }
+
+
+            .invoice-meta,
+            .customer-section {
+
+                grid-template-columns:
+                    1fr;
+
+                padding:
+                    20px 24px;
+
+            }
+
+
+            .invoice-table-wrapper {
+
+                padding:
+                    20px 24px 0;
+
+            }
+
+
+            .invoice-summary {
+
+                padding:
+                    20px 24px;
+
+            }
+
+
+            .summary-box {
+
+                width:
+                    100%;
+
+            }
+
+
+            .payment-section {
+
+                padding:
+                    0 24px 20px;
+
+            }
+
+
+            .invoice-footer {
+
+                flex-direction:
+                    column;
+
+                padding:
+                    20px 24px;
+
+            }
+
+
+            .generated-by {
+
+                text-align:
+                    left;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           PRINT
+        ===================================================== */
+
+        @media print {
+
+            body {
+
+                background:
+                    white;
+
+            }
+
+
+            .navbar,
+            .invoice-actions,
+            .whatsapp-float {
+
+                display:
+                    none !important;
+
+            }
+
+
+            .invoice-page {
+
+                padding:
+                    0;
+
+                background:
+                    white;
+
+            }
+
+
+            .invoice {
+
+                border:
+                    0;
+
+                box-shadow:
+                    none;
+
+            }
+
+
+            .invoice-wrapper {
+
+                max-width:
+                    none;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="navbar">
+
+    <div class="container nav-inner">
+
+        <a href="index.html"
+           class="logo">
+
+            UMAM<span>TEK</span>
+
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="services.html">
+                Services
+            </a>
+
+            <a href="my-bookings.html">
+                My Bookings
+            </a>
+
+            <a href="profile.html">
+                Profile
+            </a>
+
+        </nav>
+
+
+        <button
+            class="menu-btn"
+            id="menuBtn">
+
+            ☰
+
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="invoice-page">
+
+    <div class="invoice-wrapper">
+
+
+        <!-- ACTIONS -->
+
+        <div class="invoice-actions">
+
+            <a href="my-bookings.html"
+               class="back-btn">
+
+                ← Back to My Bookings
+
+            </a>
+
+
+            <button
+                class="print-btn"
+                onclick="window.print()">
+
+                🖨 Print / Save PDF
+
+            </button>
+
+        </div>
+
+
+
+        <!-- =================================================
+             INVOICE
+        ================================================= -->
+
+        <div class="invoice">
+
+
+            <!-- =================================================
+                 HEADER
+            ================================================= -->
+
+            <div class="invoice-header">
+
+
+                <div class="invoice-brand">
+
+
+                    <div class="invoice-logo">
+
+                        UMAM<span>TEK</span>
+
+                    </div>
+
+
+                    <div class="invoice-business-info">
+
+                        <strong>
+                            UMAMTEK
+                        </strong>
+
+                        <br>
+
+                        Electrical & Home Service Platform
+
+                        <br>
+
+                        GSTIN:
+                        <strong>
+                            10ALFPU2679B1ZB
+                        </strong>
+
+                        <br>
+
+                        Bihar, India
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="invoice-title">
+
+                    <h1>
+                        TAX INVOICE
+                    </h1>
+
+
+                    <p>
+                        Original for Recipient
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 INVOICE META
+            ================================================= -->
+
+            <div class="invoice-meta">
+
+
+                <div class="meta-box">
+
+                    <div class="meta-title">
+                        INVOICE DETAILS
+                    </div>
+
+
+                    <div class="meta-row">
+
+                        <strong>
+                            Invoice No.
+                        </strong>
+
+                        <span id="invoiceNumber">
+                            UM-INV-001
+                        </span>
+
+                    </div>
+
+
+                    <div class="meta-row">
+
+                        <strong>
+                            Invoice Date
+                        </strong>
+
+                        <span id="invoiceDate">
+                            —
+                        </span>
+
+                    </div>
+
+
+                    <div class="meta-row">
+
+                        <strong>
+                            Booking ID
+                        </strong>
+
+                        <span id="bookingId">
+                            —
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="meta-box">
+
+                    <div class="meta-title">
+                        SERVICE DETAILS
+                    </div>
+
+
+                    <div class="meta-row">
+
+                        <strong>
+                            Service
+                        </strong>
+
+                        <span id="serviceName">
+                            —
+                        </span>
+
+                    </div>
+
+
+                    <div class="meta-row">
+
+                        <strong>
+                            Scheduled
+                        </strong>
+
+                        <span id="scheduledDate">
+                            —
+                        </span>
+
+                    </div>
+
+
+                    <div class="meta-row">
+
+                        <strong>
+                            Payment
+                        </strong>
+
+                        <span id="paymentMode">
+                            —
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 CUSTOMER + WORKER
+            ================================================= -->
+
+            <div class="customer-section">
+
+
+                <div class="customer-box">
+
+                    <h3>
+                        BILL TO
+                    </h3>
+
+
+                    <p>
+
+                        <strong id="customerName">
+                            Customer
+                        </strong>
+
+                        <br>
+
+                        Email:
+                        <span id="customerEmail">
+                            —
+                        </span>
+
+                        <br>
+
+                        Mobile:
+                        <span id="customerMobile">
+                            —
+                        </span>
+
+                        <br>
+
+                        Address:
+                        <span id="customerAddress">
+                            —
+                        </span>
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="customer-box">
+
+                    <h3>
+                        SERVICE PROVIDER / WORKER
+                    </h3>
+
+
+                    <p>
+
+                        <strong id="workerName">
+                            Assigned Worker
+                        </strong>
+
+                        <br>
+
+                        Field:
+                        <span id="workerField">
+                            —
+                        </span>
+
+                        <br>
+
+                        Distance:
+                        <span id="serviceDistance">
+                            —
+                        </span>
+
+                        <br>
+
+                        Contact:
+                        <span id="workerMobile">
+                            —
+                        </span>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 GST TABLE
+            ================================================= -->
+
+            <div class="invoice-table-wrapper">
+
+
+                <table class="invoice-table">
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                SL No.
+                            </th>
+
+                            <th>
+                                Description
+                            </th>
+
+                            <th>
+                                HSN/SAC Code
+                            </th>
+
+                            <th>
+                                Qty
+                            </th>
+
+                            <th>
+                                Rate
+                            </th>
+
+                            <th>
+                                GST Rate
+                            </th>
+
+                            <th>
+                                Amount
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="invoiceItems">
+
+
+                        <tr>
+
+                            <td>
+                                1
+                            </td>
+
+                            <td id="itemDescription">
+                                Service
+                            </td>
+
+                            <td id="itemHSN">
+                                —
+                            </td>
+
+                            <td id="itemQty">
+                                1
+                            </td>
+
+                            <td class="number"
+                                id="itemRate">
+
+                                ₹200.00
+
+                            </td>
+
+                            <td id="itemGST">
+                                —
+                            </td>
+
+                            <td class="number"
+                                id="itemAmount">
+
+                                ₹200.00
+
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+
+                </table>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 SUMMARY
+            ================================================= -->
+
+            <div class="invoice-summary">
+
+
+                <div class="summary-box">
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Taxable Amount
+                        </span>
+
+                        <strong id="taxableAmount">
+                            ₹200.00
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row gst">
+
+                        <span>
+                            CGST
+                        </span>
+
+                        <strong id="cgstAmount">
+                            ₹0.00
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row gst">
+
+                        <span>
+                            SGST
+                        </span>
+
+                        <strong id="sgstAmount">
+                            ₹0.00
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Total GST
+                        </span>
+
+                        <strong id="totalGST">
+                            ₹0.00
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row grand-total">
+
+                        <span>
+                            Grand Total
+                        </span>
+
+                        <strong id="grandTotal">
+                            ₹200.00
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PAYMENT
+            ================================================= -->
+
+            <div class="payment-section">
+
+
+                <div class="payment-box">
+
+
+                    <strong>
+                        PAYMENT STATUS
+                    </strong>
+
+
+                    <span
+                        class="payment-status"
+                        id="paymentStatus">
+
+                        PENDING
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 FOOTER
+            ================================================= -->
+
+            <div class="invoice-footer">
+
+
+                <div class="terms">
+
+                    <h4>
+                        Terms & Notes
+                    </h4>
+
+
+                    <p>
+
+                        This invoice is generated against
+                        the corresponding UMAMTEK service
+                        booking. Please retain this invoice
+                        for your records.
+
+                        <br>
+
+                        For any billing or service-related
+                        assistance, contact UMAMTEK through
+                        WhatsApp.
+
+                    </p>
+
+                </div>
+
+
+                <div class="generated-by">
+
+                    Generated by UMAMTEK
+
+                    <br>
+
+                    GSTIN:
+                    10ALFPU2679B1ZB
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</main>
+
+
+
+<!-- =====================================================
+     WHATSAPP
+===================================================== -->
+
+<a
+    href="https://wa.me/917544813882"
+    target="_blank"
+    class="whatsapp-float"
+    aria-label="WhatsApp UMAMTEK">
+
+    💬
+
+</a>
+
+
+
+<script src="js/script.js"></script>
+
+
+<script>
+
+/* =========================================================
+   INVOICE ENGINE
+   =========================================================
+
+   Later Firebase will supply the actual booking object.
+
+   Example:
+
+   booking = {
+
+       id: "AEA-01",
+       customerName: "...",
+       customerEmail: "...",
+       customerMobile: "...",
+       address: "...",
+
+       service: "Electrician",
+       work: "Fan Installation",
+
+       date: "...",
+       time: "...",
+
+       workerName: "...",
+       workerField: "Electrician",
+       workerMobile: "...",
+
+       distance: "8.4 km",
+
+       paymentMode: "Razorpay",
+       paymentStatus: "Paid",
+
+       items: [
+
+           {
+               description: "Fan Installation",
+               hsn: "9987",
+               qty: 1,
+               rate: 200,
+               gstRate: 18
+           }
+
+       ]
+
+   };
+
+========================================================= */
+
+
+
+/* =====================================================
+   FORMAT CURRENCY
+===================================================== */
+
+function formatINR(amount) {
+
+    return "₹" +
+        Number(amount || 0)
+            .toLocaleString(
+                "en-IN",
+                {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }
+            );
+
+}
+
+
+
+/* =====================================================
+   CALCULATE GST
+===================================================== */
+
+function calculateGST(
+    taxableAmount,
+    gstRate
+) {
+
+    const gst =
+        taxableAmount *
+        (gstRate / 100);
+
+
+    const cgst =
+        gst / 2;
+
+
+    const sgst =
+        gst / 2;
+
+
+    return {
+
+        gst: gst,
+
+        cgst: cgst,
+
+        sgst: sgst,
+
+        total: taxableAmount + gst
+
+    };
+
+}
+
+
+
+/* =====================================================
+   LOAD INVOICE
+===================================================== */
+
+function loadInvoice(
+    booking
+) {
+
+    if (!booking) {
+
+        return;
+
+    }
+
+
+    document
+        .getElementById("bookingId")
+        .textContent =
+        booking.id || "—";
+
+
+    document
+        .getElementById("serviceName")
+        .textContent =
+        booking.service || "—";
+
+
+    document
+        .getElementById("scheduledDate")
+        .textContent =
+        booking.date
+            ? `${booking.date} ${booking.time || ""}`
+            : "—";
+
+
+    document
+        .getElementById("paymentMode")
+        .textContent =
+        booking.paymentMode || "—";
+
+
+    document
+        .getElementById("customerName")
+        .textContent =
+        booking.customerName || "Customer";
+
+
+    document
+        .getElementById("customerEmail")
+        .textContent =
+        booking.customerEmail || "—";
+
+
+    document
+        .getElementById("customerMobile")
+        .textContent =
+        booking.customerMobile || "—";
+
+
+    document
+        .getElementById("customerAddress")
+        .textContent =
+        booking.address || "—";
+
+
+    document
+        .getElementById("workerName")
+        .textContent =
+        booking.workerName ||
+        "Not Assigned";
+
+
+    document
+        .getElementById("workerField")
+        .textContent =
+        booking.workerField || "—";
+
+
+    document
+        .getElementById("workerMobile")
+        .textContent =
+        booking.workerMobile || "—";
+
+
+    document
+        .getElementById("serviceDistance")
+        .textContent =
+        booking.distance || "—";
+
+
+    document
+        .getElementById("paymentStatus")
+        .textContent =
+        (
+            booking.paymentStatus ||
+            "PENDING"
+        ).toUpperCase();
+
+
+    /*
+     * Invoice items
+     */
+
+    if (
+        booking.items &&
+        booking.items.length
+    ) {
+
+        const tbody =
+            document.getElementById(
+                "invoiceItems"
+            );
+
+
+        tbody.innerHTML = "";
+
+
+        let taxableTotal = 0;
+
+        let totalGST = 0;
+
+
+        booking.items.forEach(
+            function(item, index) {
+
+
+                const qty =
+                    Number(
+                        item.qty || 1
+                    );
+
+
+                const rate =
+                    Number(
+                        item.rate || 0
+                    );
+
+
+                const amount =
+                    qty * rate;
+
+
+                const gstRate =
+                    Number(
+                        item.gstRate || 0
+                    );
+
+
+                const gst =
+                    amount *
+                    gstRate /
+                    100;
+
+
+                taxableTotal +=
+                    amount;
+
+
+                totalGST +=
+                    gst;
+
+
+                const row =
+                    document.createElement(
+                        "tr"
+                    );
+
+
+                row.innerHTML = `
+
+                    <td>
+                        ${index + 1}
+                    </td>
+
+                    <td>
+                        ${item.description || "Service"}
+                    </td>
+
+                    <td>
+                        ${item.hsn || "—"}
+                    </td>
+
+                    <td>
+                        ${qty}
+                    </td>
+
+                    <td class="number">
+                        ${formatINR(rate)}
+                    </td>
+
+                    <td>
+                        ${gstRate}%
+                    </td>
+
+                    <td class="number">
+                        ${formatINR(amount)}
+                    </td>
+
+                `;
+
+
+                tbody.appendChild(
+                    row
+                );
+
+            }
+        );
+
+
+        const cgst =
+            totalGST / 2;
+
+
+        const sgst =
+            totalGST / 2;
+
+
+        document
+            .getElementById(
+                "taxableAmount"
+            )
+            .textContent =
+            formatINR(
+                taxableTotal
+            );
+
+
+        document
+            .getElementById(
+                "cgstAmount"
+            )
+            .textContent =
+            formatINR(
+                cgst
+            );
+
+
+        document
+            .getElementById(
+                "sgstAmount"
+            )
+            .textContent =
+            formatINR(
+                sgst
+            );
+
+
+        document
+            .getElementById(
+                "totalGST"
+            )
+            .textContent =
+            formatINR(
+                totalGST
+            );
+
+
+        document
+            .getElementById(
+                "grandTotal"
+            )
+            .textContent =
+            formatINR(
+                taxableTotal +
+                totalGST
+            );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   DEFAULT INVOICE DATE
+===================================================== */
+
+const today =
+    new Date();
+
+
+document
+    .getElementById(
+        "invoiceDate"
+    )
+    .textContent =
+    today.toLocaleDateString(
+        "en-IN"
+    );
+
+
+
+/* =====================================================
+   DEMO DATA
+   REMOVE WHEN FIREBASE IS CONNECTED
+===================================================== */
+
+/*
+const demoBooking = {
+
+    id: "AEA-01",
+
+    customerName: "Customer Name",
+
+    customerEmail:
+        "customer@email.com",
+
+    customerMobile:
+        "9876543210",
+
+    address:
+        "Bhagalpur, Bihar",
+
+    service:
+        "Electrician",
+
+    date:
+        "30 August 2026",
+
+    time:
+        "10:00 AM",
+
+    workerName:
+        "Assigned Worker",
+
+    workerField:
+        "Electrician",
+
+    workerMobile:
+        "9876543210",
+
+    distance:
+        "5.2 km",
+
+    paymentMode:
+        "Razorpay",
+
+    paymentStatus:
+        "Paid",
+
+    items: [
+
+        {
+
+            description:
+                "Electrician Service",
+
+            hsn:
+                "9987",
+
+            qty:
+                1,
+
+            rate:
+                200,
+
+            gstRate:
+                18
+
+        }
+
+    ]
+
+};
+
+loadInvoice(demoBooking);
+*/
+
+</script>
+
+
+</body>
+
+</html>
