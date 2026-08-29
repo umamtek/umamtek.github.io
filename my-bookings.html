@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="View and manage your UMAMTEK bookings.">
+
+    <meta name="theme-color"
+          content="#f5c400">
+
+    <title>My Bookings | UMAMTEK</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+
+    <style>
+
+        /* =====================================================
+           PAGE
+        ===================================================== */
+
+        .bookings-page {
+
+            min-height:
+                calc(100vh - 76px);
+
+            background:
+                #fafafa;
+
+            padding:
+                55px 0 90px;
+
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .bookings-header {
+
+            display:
+                flex;
+
+            align-items:
+                flex-end;
+
+            justify-content:
+                space-between;
+
+            gap:
+                25px;
+
+            margin-bottom:
+                35px;
+
+        }
+
+
+        .bookings-header small {
+
+            color:
+                var(--yellow-dark);
+
+            font-size:
+                10px;
+
+            font-weight:
+                950;
+
+            letter-spacing:
+                1.7px;
+
+        }
+
+
+        .bookings-header h1 {
+
+            font-size:
+                clamp(
+                    32px,
+                    5vw,
+                    48px
+                );
+
+            letter-spacing:
+                -2px;
+
+            line-height:
+                1;
+
+            margin:
+                8px 0 10px;
+
+        }
+
+
+        .bookings-header p {
+
+            color:
+                #777;
+
+            font-size:
+                13px;
+
+        }
+
+
+        /* =====================================================
+           NEW BOOKING
+        ===================================================== */
+
+        .new-booking-btn {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            background:
+                var(--yellow);
+
+            color:
+                #111;
+
+            padding:
+                13px 19px;
+
+            border-radius:
+                8px;
+
+            font-size:
+                12px;
+
+            font-weight:
+                950;
+
+            white-space:
+                nowrap;
+
+            transition:
+                .2s;
+
+        }
+
+
+        .new-booking-btn:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(0,0,0,.12);
+
+        }
+
+
+        /* =====================================================
+           TABS
+        ===================================================== */
+
+        .booking-tabs {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                4px;
+
+            background:
+                white;
+
+            border:
+                1px solid var(--border);
+
+            padding:
+                5px;
+
+            border-radius:
+                10px;
+
+            margin-bottom:
+                22px;
+
+            overflow-x:
+                auto;
+
+        }
+
+
+        .booking-tab {
+
+            border:
+                0;
+
+            background:
+                transparent;
+
+            padding:
+                11px 18px;
+
+            border-radius:
+                7px;
+
+            font-size:
+                11px;
+
+            font-weight:
+                900;
+
+            color:
+                #777;
+
+            cursor:
+                pointer;
+
+            white-space:
+                nowrap;
+
+        }
+
+
+        .booking-tab.active {
+
+            background:
+                #111;
+
+            color:
+                var(--yellow);
+
+        }
+
+
+        /* =====================================================
+           BOOKINGS AREA
+        ===================================================== */
+
+        .booking-list {
+
+            display:
+                grid;
+
+            gap:
+                15px;
+
+        }
+
+
+        .booking-card {
+
+            background:
+                white;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                14px;
+
+            overflow:
+                hidden;
+
+            transition:
+                .2s;
+
+        }
+
+
+        .booking-card:hover {
+
+            box-shadow:
+                0 12px 35px
+                rgba(0,0,0,.07);
+
+        }
+
+
+        .booking-card-main {
+
+            padding:
+                22px;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                auto 1fr auto;
+
+            align-items:
+                center;
+
+            gap:
+                18px;
+
+        }
+
+
+        /* =====================================================
+           ICON
+        ===================================================== */
+
+        .booking-icon {
+
+            width:
+                54px;
+
+            height:
+                54px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            border-radius:
+                11px;
+
+            background:
+                var(--yellow-light);
+
+            font-size:
+                24px;
+
+        }
+
+
+        /* =====================================================
+           DETAILS
+        ===================================================== */
+
+        .booking-info h3 {
+
+            font-size:
+                16px;
+
+            margin-bottom:
+                4px;
+
+        }
+
+
+        .booking-id {
+
+            color:
+                #999;
+
+            font-size:
+                10px;
+
+            margin-bottom:
+                8px;
+
+        }
+
+
+        .booking-meta {
+
+            display:
+                flex;
+
+            flex-wrap:
+                wrap;
+
+            gap:
+                8px 18px;
+
+            color:
+                #777;
+
+            font-size:
+                10px;
+
+        }
+
+
+        .booking-meta span {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                4px;
+
+        }
+
+
+        /* =====================================================
+           STATUS
+        ===================================================== */
+
+        .booking-status-area {
+
+            text-align:
+                right;
+
+        }
+
+
+        .status {
+
+            display:
+                inline-block;
+
+            padding:
+                6px 9px;
+
+            border-radius:
+                5px;
+
+            font-size:
+                9px;
+
+            font-weight:
+                950;
+
+            letter-spacing:
+                .4px;
+
+        }
+
+
+        .status.pending {
+
+            background:
+                #fff7d6;
+
+            color:
+                #886900;
+
+        }
+
+
+        .status.confirmed {
+
+            background:
+                #edf8ff;
+
+            color:
+                #17617d;
+
+        }
+
+
+        .status.completed {
+
+            background:
+                #edf9f0;
+
+            color:
+                #167238;
+
+        }
+
+
+        .status.cancelled {
+
+            background:
+                #fff0f0;
+
+            color:
+                #a00000;
+
+        }
+
+
+        .booking-price {
+
+            font-size:
+                18px;
+
+            font-weight:
+                950;
+
+            margin-top:
+                8px;
+
+        }
+
+
+        .booking-price small {
+
+            color:
+                #888;
+
+            font-size:
+                9px;
+
+            font-weight:
+                500;
+
+        }
+
+
+        /* =====================================================
+           CARD FOOTER
+        ===================================================== */
+
+        .booking-card-footer {
+
+            border-top:
+                1px solid #eee;
+
+            padding:
+                13px 22px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                15px;
+
+        }
+
+
+        .worker-preview {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                9px;
+
+        }
+
+
+        .worker-avatar {
+
+            width:
+                30px;
+
+            height:
+                30px;
+
+            border-radius:
+                50%;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            background:
+                #111;
+
+            color:
+                var(--yellow);
+
+            font-size:
+                10px;
+
+            font-weight:
+                900;
+
+        }
+
+
+        .worker-preview-text {
+
+            display:
+                grid;
+
+        }
+
+
+        .worker-preview-text strong {
+
+            font-size:
+                10px;
+
+        }
+
+
+        .worker-preview-text span {
+
+            color:
+                #999;
+
+            font-size:
+                9px;
+
+        }
+
+
+        .view-booking {
+
+            border:
+                1px solid var(--border);
+
+            background:
+                white;
+
+            border-radius:
+                7px;
+
+            padding:
+                8px 12px;
+
+            font-size:
+                10px;
+
+            font-weight:
+                900;
+
+            cursor:
+                pointer;
+
+            transition:
+                .2s;
+
+        }
+
+
+        .view-booking:hover {
+
+            border-color:
+                #111;
+
+        }
+
+
+        /* =====================================================
+           EMPTY STATE
+        ===================================================== */
+
+        .empty-state {
+
+            display:
+                none;
+
+            background:
+                white;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                15px;
+
+            padding:
+                70px 25px;
+
+            text-align:
+                center;
+
+        }
+
+
+        .empty-state.show {
+
+            display:
+                block;
+
+        }
+
+
+        .empty-icon {
+
+            width:
+                65px;
+
+            height:
+                65px;
+
+            margin:
+                0 auto 18px;
+
+            display:
+                grid;
+
+            place-items:
+                center;
+
+            background:
+                var(--yellow-light);
+
+            border-radius:
+                15px;
+
+            font-size:
+                28px;
+
+        }
+
+
+        .empty-state h2 {
+
+            font-size:
+                21px;
+
+            margin-bottom:
+                7px;
+
+        }
+
+
+        .empty-state p {
+
+            color:
+                #777;
+
+            font-size:
+                12px;
+
+            margin-bottom:
+                20px;
+
+        }
+
+
+        /* =====================================================
+           LOGIN NOTICE
+        ===================================================== */
+
+        .login-notice {
+
+            display:
+                none;
+
+            background:
+                #111;
+
+            color:
+                white;
+
+            border-radius:
+                12px;
+
+            padding:
+                20px;
+
+            margin-bottom:
+                22px;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            gap:
+                20px;
+
+        }
+
+
+        .login-notice.show {
+
+            display:
+                flex;
+
+        }
+
+
+        .login-notice-text strong {
+
+            display:
+                block;
+
+            font-size:
+                13px;
+
+            margin-bottom:
+                4px;
+
+        }
+
+
+        .login-notice-text span {
+
+            color:
+                #aaa;
+
+            font-size:
+                10px;
+
+        }
+
+
+        .login-notice a {
+
+            background:
+                var(--yellow);
+
+            color:
+                #111;
+
+            padding:
+                9px 14px;
+
+            border-radius:
+                6px;
+
+            font-size:
+                10px;
+
+            font-weight:
+                900;
+
+            white-space:
+                nowrap;
+
+        }
+
+
+        /* =====================================================
+           DETAIL MODAL
+        ===================================================== */
+
+        .booking-modal {
+
+            position:
+                fixed;
+
+            inset:
+                0;
+
+            z-index:
+                5000;
+
+            background:
+                rgba(0,0,0,.55);
+
+            display:
+                none;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            padding:
+                20px;
+
+        }
+
+
+        .booking-modal.show {
+
+            display:
+                flex;
+
+        }
+
+
+        .modal-box {
+
+            width:
+                min(
+                    100%,
+                    620px
+                );
+
+            max-height:
+                90vh;
+
+            overflow-y:
+                auto;
+
+            background:
+                white;
+
+            border-radius:
+                15px;
+
+            box-shadow:
+                0 30px 80px
+                rgba(0,0,0,.25);
+
+        }
+
+
+        .modal-header {
+
+            padding:
+                22px;
+
+            background:
+                #111;
+
+            color:
+                white;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+        }
+
+
+        .modal-header h2 {
+
+            font-size:
+                19px;
+
+        }
+
+
+        .modal-close {
+
+            width:
+                32px;
+
+            height:
+                32px;
+
+            border:
+                0;
+
+            border-radius:
+                50%;
+
+            background:
+                #292929;
+
+            color:
+                white;
+
+            cursor:
+                pointer;
+
+            font-size:
+                17px;
+
+        }
+
+
+        .modal-body {
+
+            padding:
+                24px;
+
+        }
+
+
+        .detail-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            border:
+                1px solid #eee;
+
+            border-radius:
+                10px;
+
+            overflow:
+                hidden;
+
+        }
+
+
+        .detail-item {
+
+            padding:
+                15px;
+
+            border-bottom:
+                1px solid #eee;
+
+        }
+
+
+        .detail-item:nth-child(odd) {
+
+            border-right:
+                1px solid #eee;
+
+        }
+
+
+        .detail-item.full {
+
+            grid-column:
+                1 / -1;
+
+            border-right:
+                0;
+
+        }
+
+
+        .detail-label {
+
+            color:
+                #999;
+
+            font-size:
+                9px;
+
+            font-weight:
+                800;
+
+            margin-bottom:
+                4px;
+
+        }
+
+
+        .detail-value {
+
+            font-size:
+                12px;
+
+            font-weight:
+                800;
+
+        }
+
+
+        .modal-actions {
+
+            display:
+                flex;
+
+            gap:
+                10px;
+
+            margin-top:
+                20px;
+
+        }
+
+
+        .modal-action {
+
+            flex:
+                1;
+
+            padding:
+                12px;
+
+            border-radius:
+                8px;
+
+            border:
+                1px solid var(--border);
+
+            background:
+                white;
+
+            cursor:
+                pointer;
+
+            font-size:
+                10px;
+
+            font-weight:
+                900;
+
+        }
+
+
+        .modal-action.primary {
+
+            background:
+                var(--yellow);
+
+            border-color:
+                var(--yellow);
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 700px) {
+
+            .bookings-page {
+
+                padding:
+                    40px 0 70px;
+
+            }
+
+
+            .bookings-header {
+
+                align-items:
+                    flex-start;
+
+                flex-direction:
+                    column;
+
+            }
+
+
+            .new-booking-btn {
+
+                width:
+                    100%;
+
+            }
+
+
+            .booking-card-main {
+
+                grid-template-columns:
+                    auto 1fr;
+
+            }
+
+
+            .booking-status-area {
+
+                grid-column:
+                    2;
+
+                text-align:
+                    left;
+
+            }
+
+
+            .booking-card-footer {
+
+                align-items:
+                    flex-start;
+
+                flex-direction:
+                    column;
+
+            }
+
+
+            .login-notice {
+
+                align-items:
+                    flex-start;
+
+                flex-direction:
+                    column;
+
+            }
+
+
+            .login-notice a {
+
+                width:
+                    100%;
+
+                text-align:
+                    center;
+
+            }
+
+
+            .detail-grid {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
+
+            .detail-item,
+            .detail-item:nth-child(odd) {
+
+                border-right:
+                    0;
+
+            }
+
+
+            .detail-item.full {
+
+                grid-column:
+                    auto;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="navbar">
+
+    <div class="container nav-inner">
+
+
+        <a href="index.html"
+           class="logo">
+
+            UMAM<span>TEK</span>
+
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="services.html">
+                Services
+            </a>
+
+            <a href="my-bookings.html">
+                My Bookings
+            </a>
+
+            <a href="index.html#about">
+                About
+            </a>
+
+            <a href="index.html#contact">
+                Contact
+            </a>
+
+        </nav>
+
+
+        <div class="nav-actions">
+
+            <a href="login.html"
+               class="login-btn">
+
+                Login
+
+            </a>
+
+
+            <a href="signup.html"
+               class="primary-btn small-btn">
+
+                Sign Up
+
+            </a>
+
+        </div>
+
+
+        <button
+            class="menu-btn"
+            id="menuBtn">
+
+            ☰
+
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="bookings-page">
+
+    <div class="container">
+
+
+        <!-- =================================================
+             HEADER
+        ================================================= -->
+
+        <div class="bookings-header">
+
+            <div>
+
+                <small>
+                    CUSTOMER DASHBOARD
+                </small>
+
+
+                <h1>
+                    My Bookings
+                </h1>
+
+
+                <p>
+                    Manage your UMAMTEK service bookings
+                    in one place.
+                </p>
+
+            </div>
+
+
+            <a
+                href="services.html"
+                class="new-booking-btn">
+
+                + Book a Service
+
+            </a>
+
+        </div>
+
+
+
+        <!-- =================================================
+             LOGIN NOTICE
+        ================================================= -->
+
+        <div
+            class="login-notice"
+            id="loginNotice">
+
+
+            <div class="login-notice-text">
+
+                <strong>
+                    Login to see your bookings
+                </strong>
+
+                <span>
+                    Your booking history will appear
+                    here after signing in.
+                </span>
+
+            </div>
+
+
+            <a href="login.html">
+
+                Login Now →
+
+            </a>
+
+        </div>
+
+
+
+        <!-- =================================================
+             TABS
+        ================================================= -->
+
+        <div class="booking-tabs">
+
+
+            <button
+                class="booking-tab active"
+                data-filter="all">
+
+                All
+
+            </button>
+
+
+            <button
+                class="booking-tab"
+                data-filter="active">
+
+                Active
+
+            </button>
+
+
+            <button
+                class="booking-tab"
+                data-filter="completed">
+
+                Completed
+
+            </button>
+
+
+            <button
+                class="booking-tab"
+                data-filter="cancelled">
+
+                Cancelled
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             BOOKING LIST
+        ================================================= -->
+
+        <div
+            class="booking-list"
+            id="bookingList">
+
+
+            <!--
+                REAL BOOKINGS WILL BE LOADED
+                FROM FIREBASE HERE.
+            -->
+
+        </div>
+
+
+
+        <!-- =================================================
+             EMPTY STATE
+        ================================================= -->
+
+        <div
+            class="empty-state show"
+            id="emptyState">
+
+
+            <div class="empty-icon">
+                📋
+            </div>
+
+
+            <h2>
+                No bookings yet
+            </h2>
+
+
+            <p>
+                Your service bookings will appear
+                here once you make your first booking.
+            </p>
+
+
+            <a
+                href="services.html"
+                class="primary-btn">
+
+                Book Your First Service
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+
+<!-- =====================================================
+     BOOKING DETAIL MODAL
+===================================================== -->
+
+<div
+    class="booking-modal"
+    id="bookingModal">
+
+
+    <div class="modal-box">
+
+
+        <div class="modal-header">
+
+            <h2>
+                Booking Details
+            </h2>
+
+
+            <button
+                class="modal-close"
+                id="modalClose">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <div
+            class="modal-body"
+            id="modalBody">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     WHATSAPP
+===================================================== -->
+
+<a
+    href="https://wa.me/917544813882"
+    target="_blank"
+    class="whatsapp-float"
+    aria-label="WhatsApp UMAMTEK">
+
+    💬
+
+</a>
+
+
+
+<!-- =====================================================
+     GLOBAL JS
+===================================================== -->
+
+<script src="js/script.js"></script>
+
+
+
+<script>
+
+/*
+ * =========================================================
+ * CUSTOMER BOOKINGS FRONTEND
+ * =========================================================
+ *
+ * Firebase will later provide:
+ *
+ * - Customer authentication
+ * - Booking collection
+ * - Booking status
+ * - Assigned worker
+ * - Date/time
+ * - Amount
+ * - Invoice
+ *
+ * No fake booking is created here.
+ */
+
+
+/* =====================================================
+   TABS
+===================================================== */
+
+const bookingTabs =
+    document.querySelectorAll(
+        ".booking-tab"
+    );
+
+
+bookingTabs.forEach(
+    function(tab) {
+
+        tab.addEventListener(
+            "click",
+            function() {
+
+                bookingTabs.forEach(
+                    function(item) {
+
+                        item.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+                this.classList.add(
+                    "active"
+                );
+
+
+                const filter =
+                    this.dataset.filter;
+
+
+                /*
+                 * Firebase filtering
+                 * will be connected later.
+                 */
+
+
+                console.log(
+                    "Booking filter:",
+                    filter
+                );
+
+            }
+        );
+
+    }
+);
+
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+const bookingModal =
+    document.getElementById(
+        "bookingModal"
+    );
+
+
+const modalClose =
+    document.getElementById(
+        "modalClose"
+    );
+
+
+modalClose.addEventListener(
+    "click",
+    function() {
+
+        bookingModal.classList.remove(
+            "show"
+        );
+
+    }
+);
+
+
+bookingModal.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            event.target ===
+            bookingModal
+        ) {
+
+            bookingModal.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   FUTURE BOOKING DETAIL FUNCTION
+===================================================== */
+
+function openBookingDetails(
+    booking
+) {
+
+    const modalBody =
+        document.getElementById(
+            "modalBody"
+        );
+
+
+    /*
+     * This function is ready for
+     * Firebase booking data.
+     */
+
+    modalBody.innerHTML = `
+
+        <div class="detail-grid">
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    BOOKING ID
+                </div>
+
+                <div class="detail-value">
+                    ${booking.id || "—"}
+                </div>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    STATUS
+                </div>
+
+                <div class="detail-value">
+                    ${booking.status || "—"}
+                </div>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    SERVICE
+                </div>
+
+                <div class="detail-value">
+                    ${booking.service || "—"}
+                </div>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    WORK
+                </div>
+
+                <div class="detail-value">
+                    ${booking.work || "—"}
+                </div>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    DATE
+                </div>
+
+                <div class="detail-value">
+                    ${booking.date || "—"}
+                </div>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    TIME
+                </div>
+
+                <div class="detail-value">
+                    ${booking.time || "—"}
+                </div>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    WORKER
+                </div>
+
+                <div class="detail-value">
+                    ${booking.worker || "Not assigned yet"}
+                </div>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    PAYMENT
+                </div>
+
+                <div class="detail-value">
+                    ${booking.payment || "—"}
+                </div>
+
+            </div>
+
+
+            <div class="detail-item">
+
+                <div class="detail-label">
+                    TOTAL
+                </div>
+
+                <div class="detail-value">
+                    ₹${booking.total || "0"}
+                </div>
+
+            </div>
+
+
+            <div class="detail-item full">
+
+                <div class="detail-label">
+                    SERVICE ADDRESS
+                </div>
+
+                <div class="detail-value">
+                    ${booking.address || "—"}
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button
+                class="modal-action"
+                onclick="closeBookingModal()">
+
+                Close
+
+            </button>
+
+
+            <button
+                class="modal-action primary"
+                onclick="contactUMAMTEK()">
+
+                Contact UMAMTEK
+
+            </button>
+
+        </div>
+
+    `;
+
+
+    bookingModal.classList.add(
+        "show"
+    );
+
+}
+
+
+
+function closeBookingModal() {
+
+    bookingModal.classList.remove(
+        "show"
+    );
+
+}
+
+
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+function contactUMAMTEK() {
+
+    window.open(
+        "https://wa.me/917544813882?text=" +
+        encodeURIComponent(
+            "Hello UMAMTEK, I need help regarding my booking."
+        ),
+        "_blank"
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>
