@@ -9,586 +9,466 @@
           content="width=device-width, initial-scale=1.0">
 
     <meta name="description"
-          content="Login or create your UMAMTEK customer account.">
+          content="UMAMTEK Customer Login and Registration">
 
     <meta name="theme-color"
           content="#f5c400">
 
     <title>Login | UMAMTEK</title>
 
-    <link rel="stylesheet"
-          href="css/style.css">
-
 
     <style>
 
-        /* =====================================================
-           LOGIN PAGE
-        ===================================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-        .auth-page {
 
-            min-height:
-                calc(100vh - 76px);
+        body {
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
 
-            background:
-                #f7f7f7;
+            background: #f7f7f7;
 
-            padding:
-                45px 20px 80px;
+            color: #111;
 
-            display:
-                flex;
+            min-height: 100vh;
+        }
 
-            align-items:
-                center;
 
-            justify-content:
-                center;
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+
+            height: 72px;
+
+            background: #111;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 7%;
 
         }
 
 
-        .auth-wrapper {
+        .logo {
 
-            width:
-                100%;
+            text-decoration: none;
 
-            max-width:
-                1050px;
+            font-size: 25px;
 
-            display:
-                grid;
+            font-weight: 900;
+
+            letter-spacing: -1px;
+
+            color: white;
+
+        }
+
+
+        .logo span {
+
+            color: #f5c400;
+
+        }
+
+
+        .home-btn {
+
+            text-decoration: none;
+
+            color: #111;
+
+            background: #f5c400;
+
+            padding: 10px 17px;
+
+            border-radius: 7px;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .page {
+
+            min-height:
+                calc(100vh - 72px);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 35px 15px;
+
+        }
+
+
+        .auth-container {
+
+            width: 100%;
+
+            max-width: 950px;
+
+            display: grid;
 
             grid-template-columns:
                 1fr 1fr;
 
-            background:
-                white;
+            background: white;
 
-            border:
-                1px solid #e4e4e4;
+            border-radius: 18px;
 
-            border-radius:
-                18px;
+            overflow: hidden;
 
-            overflow:
-                hidden;
+            box-shadow:
+                0 15px 50px
+                rgba(0,0,0,.10);
 
         }
 
 
-        /* =====================================================
-           LEFT BRAND PANEL
-        ===================================================== */
+        /* =========================
+           LEFT SIDE
+        ========================= */
 
-        .auth-brand {
+        .brand-panel {
 
-            background:
-                #111;
+            background: #111;
 
-            color:
-                white;
+            color: white;
 
-            padding:
-                45px;
+            padding: 50px 40px;
 
-            position:
-                relative;
+            display: flex;
 
-            min-height:
-                570px;
+            flex-direction: column;
 
-            display:
-                flex;
-
-            flex-direction:
-                column;
-
-            justify-content:
-                space-between;
+            justify-content: center;
 
         }
 
 
-        .auth-brand-logo {
+        .brand-small {
 
-            font-size:
-                27px;
+            color: #f5c400;
 
-            font-weight:
-                950;
+            font-size: 10px;
 
-            letter-spacing:
-                -1.5px;
+            font-weight: 800;
 
-        }
+            letter-spacing: 2px;
 
-
-        .auth-brand-logo span {
-
-            color:
-                #f5c400;
+            margin-bottom: 15px;
 
         }
 
 
-        .auth-brand small {
+        .brand-panel h1 {
 
-            display:
-                block;
+            font-size: 45px;
 
-            color:
-                #f5c400;
+            line-height: 1;
 
-            font-size:
-                9px;
+            letter-spacing: -2px;
 
-            font-weight:
-                900;
-
-            letter-spacing:
-                2px;
-
-            margin-top:
-                55px;
+            margin-bottom: 20px;
 
         }
 
 
-        .auth-brand h1 {
+        .brand-panel p {
 
-            font-size:
-                clamp(
-                    32px,
-                    5vw,
-                    48px
-                );
+            color: #aaa;
 
-            line-height:
-                .98;
+            font-size: 13px;
 
-            letter-spacing:
-                -2.5px;
+            line-height: 1.7;
 
-            margin:
-                10px 0 15px;
+            max-width: 350px;
 
         }
 
 
-        .auth-brand p {
+        .features {
 
-            max-width:
-                390px;
+            margin-top: 35px;
 
-            color:
-                #aaa;
+            display: grid;
 
-            font-size:
-                11px;
-
-            line-height:
-                1.7;
+            gap: 14px;
 
         }
 
 
-        .brand-features {
+        .feature {
 
-            display:
-                grid;
+            display: flex;
 
-            gap:
-                11px;
+            align-items: center;
 
-            margin-top:
-                35px;
+            gap: 12px;
 
-        }
+            color: #ddd;
 
-
-        .brand-feature {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            gap:
-                10px;
-
-            color:
-                #ddd;
-
-            font-size:
-                10px;
+            font-size: 12px;
 
         }
 
 
         .feature-icon {
 
-            width:
-                25px;
+            width: 30px;
 
-            height:
-                25px;
+            height: 30px;
 
-            display:
-                grid;
+            display: flex;
 
-            place-items:
-                center;
+            align-items: center;
 
-            background:
-                #222;
+            justify-content: center;
 
-            border-radius:
-                6px;
+            border-radius: 7px;
 
-            color:
-                #f5c400;
+            background: #222;
+
+            color: #f5c400;
+
+            font-weight: 900;
 
         }
 
 
-        .brand-bottom {
+        /* =========================
+           FORM SIDE
+        ========================= */
 
-            color:
-                #666;
+        .form-panel {
 
-            font-size:
-                8px;
-
-        }
-
-
-        /* =====================================================
-           RIGHT AUTH PANEL
-        ===================================================== */
-
-        .auth-form-panel {
-
-            padding:
-                42px;
+            padding: 40px;
 
         }
 
 
-        .auth-heading {
+        .heading small {
 
-            margin-bottom:
-                25px;
+            color: #b18b00;
 
-        }
+            font-size: 9px;
 
+            font-weight: 900;
 
-        .auth-heading small {
-
-            color:
-                #b38c00;
-
-            font-size:
-                9px;
-
-            font-weight:
-                900;
-
-            letter-spacing:
-                1.5px;
+            letter-spacing: 1.5px;
 
         }
 
 
-        .auth-heading h2 {
+        .heading h2 {
 
-            font-size:
-                26px;
+            font-size: 27px;
 
-            letter-spacing:
-                -1px;
+            margin-top: 7px;
 
-            margin:
-                7px 0;
+            margin-bottom: 7px;
 
         }
 
 
-        .auth-heading p {
+        .heading p {
 
-            color:
-                #888;
+            color: #888;
 
-            font-size:
-                10px;
+            font-size: 11px;
 
-            line-height:
-                1.5;
+            line-height: 1.5;
+
+            margin-bottom: 25px;
 
         }
 
 
-        /* =====================================================
-           AUTH TABS
-        ===================================================== */
+        /* =========================
+           TABS
+        ========================= */
 
-        .auth-tabs {
+        .tabs {
 
-            display:
-                grid;
+            display: grid;
 
             grid-template-columns:
                 1fr 1fr;
 
-            background:
-                #f4f4f4;
+            gap: 4px;
 
-            padding:
-                4px;
+            background: #f2f2f2;
 
-            border-radius:
-                8px;
+            padding: 4px;
 
-            margin-bottom:
-                23px;
+            border-radius: 8px;
+
+            margin-bottom: 25px;
 
         }
 
 
-        .auth-tab {
+        .tab {
 
-            border:
-                0;
+            border: none;
 
-            background:
-                transparent;
+            padding: 11px;
 
-            padding:
-                10px;
+            background: transparent;
 
-            border-radius:
-                6px;
+            border-radius: 6px;
 
-            cursor:
-                pointer;
+            cursor: pointer;
 
-            font-family:
-                inherit;
+            font-size: 11px;
 
-            font-size:
-                10px;
-
-            font-weight:
-                900;
-
-            color:
-                #777;
+            font-weight: 800;
 
         }
 
 
-        .auth-tab.active {
+        .tab.active {
 
-            background:
-                #111;
+            background: #111;
 
-            color:
-                #f5c400;
+            color: #f5c400;
 
         }
 
 
-        /* =====================================================
-           FORM
-        ===================================================== */
+        /* =========================
+           FORMS
+        ========================= */
 
-        .auth-form {
+        .form {
 
-            display:
-                none;
-
-        }
-
-
-        .auth-form.active {
-
-            display:
-                block;
+            display: none;
 
         }
 
 
-        .form-group {
+        .form.active {
 
-            display:
-                flex;
-
-            flex-direction:
-                column;
-
-            gap:
-                7px;
-
-            margin-bottom:
-                15px;
+            display: block;
 
         }
 
 
-        .form-group label {
+        .group {
 
-            font-size:
-                9px;
+            margin-bottom: 15px;
 
-            font-weight:
-                900;
+        }
+
+
+        .group label {
+
+            display: block;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            margin-bottom: 7px;
 
         }
 
 
         .required {
 
-            color:
-                #d00000;
+            color: #d00000;
 
         }
 
 
-        .input-wrapper {
+        .input {
 
-            position:
-                relative;
+            width: 100%;
 
-        }
+            height: 45px;
 
+            border: 1px solid #ddd;
 
-        .form-control {
+            border-radius: 8px;
 
-            width:
-                100%;
+            padding: 0 13px;
 
-            padding:
-                13px;
+            outline: none;
 
-            border:
-                1px solid #ddd;
+            font-size: 12px;
 
-            border-radius:
-                8px;
-
-            background:
-                white;
-
-            font-family:
-                inherit;
-
-            font-size:
-                11px;
-
-            outline:
-                none;
-
-            transition:
-                .2s;
-
-            box-sizing:
-                border-box;
+            background: white;
 
         }
 
 
-        .form-control:focus {
+        .input:focus {
 
-            border-color:
-                #f5c400;
+            border-color: #f5c400;
 
             box-shadow:
                 0 0 0 3px
-                rgba(
-                    245,
-                    196,
-                    0,
-                    .12
-                );
+                rgba(245,196,0,.12);
 
         }
 
 
-        .password-toggle {
+        .phone {
 
-            position:
-                absolute;
-
-            right:
-                12px;
-
-            top:
-                50%;
-
-            transform:
-                translateY(-50%);
-
-            border:
-                0;
-
-            background:
-                transparent;
-
-            cursor:
-                pointer;
-
-            font-size:
-                13px;
+            display: flex;
 
         }
 
 
-        .phone-input {
+        .country {
 
-            display:
-                flex;
+            width: 55px;
 
-        }
+            height: 45px;
 
+            display: flex;
 
-        .country-code {
+            align-items: center;
 
-            width:
-                53px;
+            justify-content: center;
 
-            flex-shrink:
-                0;
+            background: #f4f4f4;
 
-            display:
-                grid;
+            border: 1px solid #ddd;
 
-            place-items:
-                center;
+            border-right: none;
 
-            border:
-                1px solid #ddd;
+            border-radius: 8px 0 0 8px;
 
-            border-right:
-                0;
+            font-size: 11px;
 
-            border-radius:
-                8px 0 0 8px;
-
-            background:
-                #f7f7f7;
-
-            font-size:
-                10px;
-
-            font-weight:
-                900;
+            font-weight: 800;
 
         }
 
 
-        .phone-input .form-control {
+        .phone .input {
 
             border-radius:
                 0 8px 8px 0;
@@ -596,505 +476,327 @@
         }
 
 
-        .help-text {
+        .password-box {
 
-            color:
-                #999;
-
-            font-size:
-                8px;
-
-            line-height:
-                1.5;
+            position: relative;
 
         }
 
 
-        /* =====================================================
-           OTP
-        ===================================================== */
+        .password-box .input {
 
-        .otp-section {
-
-            display:
-                none;
+            padding-right: 45px;
 
         }
 
 
-        .otp-section.show {
+        .show-password {
 
-            display:
-                block;
+            position: absolute;
 
-        }
+            right: 12px;
 
+            top: 50%;
 
-        .otp-boxes {
+            transform: translateY(-50%);
 
-            display:
-                grid;
+            border: none;
 
-            grid-template-columns:
-                repeat(
-                    6,
-                    1fr
-                );
+            background: transparent;
 
-            gap:
-                7px;
+            cursor: pointer;
 
-            margin:
-                10px 0 15px;
+            font-size: 15px;
 
         }
 
 
-        .otp-box {
+        /* =========================
+           BUTTON
+        ========================= */
 
-            width:
-                100%;
+        .btn {
 
-            height:
-                42px;
+            width: 100%;
 
-            text-align:
-                center;
+            height: 46px;
 
-            border:
-                1px solid #ddd;
+            border: none;
 
-            border-radius:
-                7px;
+            border-radius: 8px;
 
-            font-size:
-                15px;
+            background: #f5c400;
 
-            font-weight:
-                900;
+            color: #111;
 
-            outline:
-                none;
+            font-size: 11px;
 
-        }
+            font-weight: 900;
 
+            cursor: pointer;
 
-        .otp-box:focus {
-
-            border-color:
-                #f5c400;
+            transition: .2s;
 
         }
 
 
-        .resend-row {
+        .btn:hover {
 
-            display:
-                flex;
-
-            justify-content:
-                space-between;
-
-            align-items:
-                center;
-
-            margin-bottom:
-                15px;
+            transform: translateY(-1px);
 
         }
 
 
-        .resend-row span {
+        .btn:disabled {
 
-            color:
-                #999;
+            opacity: .6;
 
-            font-size:
-                8px;
+            cursor: not-allowed;
 
-        }
-
-
-        .resend-btn {
-
-            border:
-                0;
-
-            background:
-                transparent;
-
-            color:
-                #111;
-
-            font-size:
-                9px;
-
-            font-weight:
-                900;
-
-            cursor:
-                pointer;
+            transform: none;
 
         }
 
 
-        /* =====================================================
-           BUTTONS
-        ===================================================== */
+        .message {
 
-        .auth-btn {
+            display: none;
 
-            width:
-                100%;
+            padding: 11px;
 
-            border:
-                0;
+            border-radius: 7px;
 
-            background:
-                #f5c400;
+            margin-bottom: 15px;
 
-            color:
-                #111;
+            font-size: 10px;
 
-            padding:
-                14px;
-
-            border-radius:
-                8px;
-
-            font-family:
-                inherit;
-
-            font-size:
-                10px;
-
-            font-weight:
-                950;
-
-            cursor:
-                pointer;
-
-            transition:
-                .2s;
+            line-height: 1.5;
 
         }
 
 
-        .auth-btn:hover {
+        .message.show {
 
-            transform:
-                translateY(-1px);
-
-        }
-
-
-        .auth-btn.dark {
-
-            background:
-                #111;
-
-            color:
-                #f5c400;
+            display: block;
 
         }
 
 
-        .auth-btn:disabled {
+        .message.error {
 
-            opacity:
-                .5;
+            background: #ffe9e9;
 
-            cursor:
-                not-allowed;
+            color: #a00000;
 
-            transform:
-                none;
+            border: 1px solid #ffcaca;
 
         }
 
 
-        /* =====================================================
-           DIVIDER
-        ===================================================== */
+        .message.success {
 
-        .divider {
+            background: #ecfbea;
 
-            display:
-                flex;
+            color: #167000;
 
-            align-items:
-                center;
-
-            gap:
-                10px;
-
-            margin:
-                20px 0;
-
-            color:
-                #aaa;
-
-            font-size:
-                8px;
+            border: 1px solid #c9edc0;
 
         }
 
 
-        .divider::before,
-        .divider::after {
+        .info {
 
-            content:
-                "";
+            background: #fff9dc;
 
-            height:
-                1px;
+            border: 1px solid #ead789;
 
-            flex:
-                1;
+            color: #705c00;
 
-            background:
-                #eee;
+            padding: 11px;
 
-        }
+            border-radius: 7px;
 
+            font-size: 9px;
 
-        /* =====================================================
-           ACCOUNT INFO
-        ===================================================== */
+            line-height: 1.5;
 
-        .account-note {
-
-            padding:
-                11px;
-
-            background:
-                #fff9db;
-
-            border:
-                1px solid #ead78a;
-
-            border-radius:
-                7px;
-
-            margin-bottom:
-                17px;
-
-            color:
-                #6c5900;
-
-            font-size:
-                8px;
-
-            line-height:
-                1.5;
+            margin-bottom: 16px;
 
         }
 
 
-        .account-note strong {
+        .footer-note {
 
-            display:
-                block;
+            text-align: center;
 
-            margin-bottom:
-                3px;
+            margin-top: 18px;
+
+            color: #999;
+
+            font-size: 9px;
+
+            line-height: 1.5;
 
         }
 
 
-        /* =====================================================
+        /* =========================
            SUCCESS
-        ===================================================== */
+        ========================= */
 
-        .auth-success {
+        .success-screen {
 
-            display:
-                none;
+            display: none;
 
-            text-align:
-                center;
-
-            padding:
-                30px 0;
+            text-align: center;
 
         }
 
 
-        .auth-success.show {
+        .success-screen.show {
 
-            display:
-                block;
-
-        }
-
-
-        .success-circle {
-
-            width:
-                62px;
-
-            height:
-                62px;
-
-            display:
-                grid;
-
-            place-items:
-                center;
-
-            margin:
-                0 auto 15px;
-
-            background:
-                #fff4bf;
-
-            border-radius:
-                50%;
-
-            font-size:
-                25px;
+            display: block;
 
         }
 
 
-        .auth-success h3 {
+        .success-icon {
 
-            font-size:
-                20px;
+            width: 65px;
 
-            margin-bottom:
-                7px;
+            height: 65px;
 
-        }
+            border-radius: 50%;
 
+            background: #fff3b8;
 
-        .auth-success p {
+            display: flex;
 
-            color:
-                #777;
+            align-items: center;
 
-            font-size:
-                10px;
+            justify-content: center;
 
-            line-height:
-                1.6;
+            margin: 0 auto 18px;
+
+            font-size: 27px;
 
         }
 
 
-        .generated-id {
+        .success-screen h2 {
 
-            display:
-                inline-block;
+            font-size: 24px;
 
-            background:
-                #111;
-
-            color:
-                #f5c400;
-
-            padding:
-                9px 14px;
-
-            border-radius:
-                6px;
-
-            font-size:
-                10px;
-
-            font-weight:
-                900;
-
-            margin:
-                15px 0;
+            margin-bottom: 10px;
 
         }
 
 
-        /* =====================================================
-           RESPONSIVE
-        ===================================================== */
+        .success-screen p {
 
-        @media(max-width:800px){
+            color: #777;
 
-            .auth-wrapper {
+            font-size: 11px;
 
-                grid-template-columns:
-                    1fr;
+            line-height: 1.6;
 
-                max-width:
-                    550px;
+            margin-bottom: 15px;
+
+        }
+
+
+        .user-id {
+
+            display: inline-block;
+
+            padding: 11px 16px;
+
+            border-radius: 7px;
+
+            background: #111;
+
+            color: #f5c400;
+
+            font-size: 12px;
+
+            font-weight: 900;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media(max-width: 750px) {
+
+            .auth-container {
+
+                grid-template-columns: 1fr;
+
+                max-width: 520px;
 
             }
 
 
-            .auth-brand {
+            .brand-panel {
 
-                min-height:
-                    auto;
-
-                padding:
-                    30px;
+                padding: 30px;
 
             }
 
 
-            .auth-brand small {
+            .brand-panel h1 {
 
-                margin-top:
-                    30px;
+                font-size: 35px;
 
             }
 
 
-            .brand-bottom {
+            .features {
 
-                margin-top:
-                    30px;
+                margin-top: 25px;
+
+            }
+
+
+            .form-panel {
+
+                padding: 30px 22px;
 
             }
 
         }
 
 
-        @media(max-width:500px){
+        @media(max-width: 450px) {
 
-            .auth-page {
+            .navbar {
 
-                padding:
-                    20px 12px 50px;
-
-            }
-
-
-            .auth-brand {
-
-                padding:
-                    25px;
+                padding: 0 20px;
 
             }
 
 
-            .auth-brand h1 {
+            .page {
 
-                font-size:
-                    35px;
-
-            }
-
-
-            .auth-form-panel {
-
-                padding:
-                    25px 20px;
+                padding: 20px 10px;
 
             }
 
 
-            .otp-boxes {
+            .brand-panel {
 
-                gap:
-                    5px;
+                padding: 25px;
+
+            }
+
+
+            .form-panel {
+
+                padding: 25px 18px;
 
             }
 
@@ -1108,515 +810,260 @@
 <body>
 
 
-<!-- =====================================================
+<!-- =========================
      NAVBAR
-===================================================== -->
+========================= -->
 
 <header class="navbar">
 
-    <div class="container nav-inner">
+    <a href="index.html"
+       class="logo">
 
-        <a href="index.html"
-           class="logo">
+        UMAM<span>TEK</span>
 
-            UMAM<span>TEK</span>
-
-        </a>
+    </a>
 
 
-        <nav class="nav-links">
+    <a href="index.html"
+       class="home-btn">
 
-            <a href="index.html">
-                Home
-            </a>
+        Home
 
-            <a href="services.html">
-                Services
-            </a>
-
-            <a href="about.html">
-                About
-            </a>
-
-            <a href="contact.html">
-                Contact
-            </a>
-
-        </nav>
-
-
-        <button
-            class="menu-btn"
-            id="menuBtn">
-
-            ☰
-
-        </button>
-
-    </div>
+    </a>
 
 </header>
 
 
 
-<!-- =====================================================
-     AUTH PAGE
-===================================================== -->
+<!-- =========================
+     PAGE
+========================= -->
 
-<main class="auth-page">
-
-
-<div class="auth-wrapper">
+<main class="page">
 
 
-    <!-- =================================================
-         BRAND
-    ================================================= -->
-
-    <section class="auth-brand">
+    <div class="auth-container">
 
 
-        <div>
+        <!-- =====================
+             BRAND
+        ====================== -->
+
+        <section class="brand-panel">
 
 
-            <div class="auth-brand-logo">
+            <div>
 
-                UMAM<span>TEK</span>
-
-            </div>
-
-
-            <small>
-                YOUR SERVICE. OUR RESPONSIBILITY.
-            </small>
-
-
-            <h1>
-                Services<br>
-                made simple.
-            </h1>
-
-
-            <p>
-
-                Book trusted professionals for your
-                everyday service needs — quickly,
-                transparently and conveniently.
-
-            </p>
-
-
-            <div class="brand-features">
-
-
-                <div class="brand-feature">
-
-                    <span class="feature-icon">
-                        ✓
-                    </span>
-
-                    Verified service professionals
-
+                <div class="brand-small">
+                    UMAMTEK CUSTOMER PORTAL
                 </div>
 
 
-                <div class="brand-feature">
+                <h1>
+                    Your service.<br>
+                    Made simple.
+                </h1>
 
-                    <span class="feature-icon">
-                        ⚡
-                    </span>
-
-                    Fast booking
-
-                </div>
-
-
-                <div class="brand-feature">
-
-                    <span class="feature-icon">
-                        ₹
-                    </span>
-
-                    Transparent pricing
-
-                </div>
-
-
-                <div class="brand-feature">
-
-                    <span class="feature-icon">
-                        🔒
-                    </span>
-
-                    Secure account
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="brand-bottom">
-
-            © 2026 UMAMTEK. All rights reserved.
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =================================================
-         AUTH FORM
-    ================================================= -->
-
-    <section class="auth-form-panel">
-
-
-        <div
-            id="authContent">
-
-
-            <div class="auth-heading">
-
-                <small>
-                    CUSTOMER PORTAL
-                </small>
-
-                <h2>
-                    Welcome to UMAMTEK
-                </h2>
 
                 <p>
-                    Login to your account or create
-                    a new customer account.
+
+                    Book trusted professionals
+                    for your everyday service needs
+                    with UMAMTEK.
+
                 </p>
 
-            </div>
+
+                <div class="features">
 
 
+                    <div class="feature">
 
-            <!-- =========================================
-                 TABS
-            ========================================== -->
+                        <span class="feature-icon">
+                            ✓
+                        </span>
 
-            <div class="auth-tabs">
+                        Trusted professionals
 
-                <button
-                    class="auth-tab active"
-                    id="loginTab">
-
-                    Login
-
-                </button>
+                    </div>
 
 
-                <button
-                    class="auth-tab"
-                    id="signupTab">
+                    <div class="feature">
 
-                    Create Account
+                        <span class="feature-icon">
+                            ⚡
+                        </span>
 
-                </button>
+                        Easy service booking
 
-            </div>
-
-
-
-            <!-- =========================================
-                 LOGIN FORM
-            ========================================== -->
-
-            <form
-                class="auth-form active"
-                id="loginForm">
+                    </div>
 
 
-                <div class="account-note">
+                    <div class="feature">
 
-                    <strong>
-                        🔐 Secure Login
-                    </strong>
+                        <span class="feature-icon">
+                            ₹
+                        </span>
 
-                    Login with your registered
-                    email and password.
+                        Transparent pricing
 
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="loginEmail">
-
-                        Email Address
-                        <span class="required">*</span>
-
-                    </label>
+                    </div>
 
 
-                    <input
-                        type="email"
-                        id="loginEmail"
-                        class="form-control"
-                        placeholder="Enter your email"
-                        autocomplete="email"
-                        required>
+                    <div class="feature">
 
-                </div>
+                        <span class="feature-icon">
+                            🔒
+                        </span>
 
-
-                <div class="form-group">
-
-                    <label for="loginPassword">
-
-                        Password
-                        <span class="required">*</span>
-
-                    </label>
-
-
-                    <div class="input-wrapper">
-
-                        <input
-                            type="password"
-                            id="loginPassword"
-                            class="form-control"
-                            placeholder="Enter your password"
-                            autocomplete="current-password"
-                            required>
-
-
-                        <button
-                            type="button"
-                            class="password-toggle"
-                            data-target="loginPassword">
-
-                            👁
-
-                        </button>
+                        Secure account
 
                     </div>
 
                 </div>
 
+            </div>
 
-                <button
-                    type="submit"
-                    class="auth-btn">
-
-                    Login →
-
-                </button>
-
-
-                <div class="divider">
-                    OR
-                </div>
-
-
-                <button
-                    type="button"
-                    class="auth-btn dark"
-                    id="loginOtpButton">
-
-                    Login with Email OTP
-
-                </button>
-
-
-                <p
-                    class="help-text"
-                    style="margin-top:12px;text-align:center;">
-
-                    Forgot your password?
-                    Firebase password recovery will
-                    be available after authentication setup.
-
-                </p>
-
-            </form>
+        </section>
 
 
 
-            <!-- =========================================
-                 SIGNUP FORM
-            ========================================== -->
+        <!-- =====================
+             FORM PANEL
+        ====================== -->
 
-            <form
-                class="auth-form"
-                id="signupForm">
+        <section class="form-panel">
 
 
-                <div class="account-note">
+            <!-- ==================
+                 AUTH CONTENT
+            =================== -->
 
-                    <strong>
-                        ✨ New Customer?
-                    </strong>
+            <div id="authContent">
 
-                    Create your UMAMTEK account using
-                    your email and mobile number.
+
+                <div class="heading">
+
+                    <small>
+                        CUSTOMER ACCOUNT
+                    </small>
+
+
+                    <h2>
+                        Welcome to UMAMTEK
+                    </h2>
+
+
+                    <p>
+                        Login to continue or create
+                        your free customer account.
+                    </p>
 
                 </div>
 
 
-                <div class="form-group">
 
-                    <label for="signupName">
-
-                        Full Name
-                        <span class="required">*</span>
-
-                    </label>
-
-
-                    <input
-                        type="text"
-                        id="signupName"
-                        class="form-control"
-                        placeholder="Enter your full name"
-                        autocomplete="name"
-                        required>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="signupEmail">
-
-                        Email Address
-                        <span class="required">*</span>
-
-                    </label>
-
-
-                    <input
-                        type="email"
-                        id="signupEmail"
-                        class="form-control"
-                        placeholder="Enter your email"
-                        autocomplete="email"
-                        required>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="signupMobile">
-
-                        Mobile Number
-                        <span class="required">*</span>
-
-                    </label>
-
-
-                    <div class="phone-input">
-
-                        <div class="country-code">
-                            +91
-                        </div>
-
-
-                        <input
-                            type="tel"
-                            id="signupMobile"
-                            class="form-control"
-                            placeholder="10-digit mobile number"
-                            maxlength="10"
-                            autocomplete="tel"
-                            required>
-
-                    </div>
-
-                </div>
-
-
-                <button
-                    type="button"
-                    class="auth-btn"
-                    id="sendOtpButton">
-
-                    Send OTP →
-
-                </button>
-
-
-
-                <!-- OTP -->
+                <!-- ==================
+                     MESSAGE
+                =================== -->
 
                 <div
-                    class="otp-section"
-                    id="otpSection">
+                    id="message"
+                    class="message">
+
+                </div>
 
 
-                    <div
-                        style="margin-top:20px;"
-                        class="form-group">
+
+                <!-- ==================
+                     TABS
+                =================== -->
+
+                <div class="tabs">
+
+
+                    <button
+                        type="button"
+                        id="loginTab"
+                        class="tab active">
+
+                        Login
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        id="signupTab"
+                        class="tab">
+
+                        Create Account
+
+                    </button>
+
+
+                </div>
+
+
+
+                <!-- ==================
+                     LOGIN FORM
+                =================== -->
+
+                <form
+                    id="loginForm"
+                    class="form active">
+
+
+                    <div class="group">
 
                         <label>
 
-                            Enter OTP
+                            Email Address
                             <span class="required">*</span>
 
                         </label>
 
 
-                        <div class="otp-boxes">
+                        <input
+                            id="loginEmail"
+                            class="input"
+                            type="email"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required>
+
+                    </div>
 
 
-                            <input
-                                class="otp-box"
-                                maxlength="1"
-                                inputmode="numeric">
+
+                    <div class="group">
+
+                        <label>
+
+                            Password
+                            <span class="required">*</span>
+
+                        </label>
 
 
-                            <input
-                                class="otp-box"
-                                maxlength="1"
-                                inputmode="numeric">
-
-
-                            <input
-                                class="otp-box"
-                                maxlength="1"
-                                inputmode="numeric">
-
-
-                            <input
-                                class="otp-box"
-                                maxlength="1"
-                                inputmode="numeric">
-
+                        <div class="password-box">
 
                             <input
-                                class="otp-box"
-                                maxlength="1"
-                                inputmode="numeric">
-
-
-                            <input
-                                class="otp-box"
-                                maxlength="1"
-                                inputmode="numeric">
-
-                        </div>
-
-
-                        <div class="resend-row">
-
-                            <span id="otpMessage">
-                                OTP sent to your registered contact.
-                            </span>
+                                id="loginPassword"
+                                class="input"
+                                type="password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required>
 
 
                             <button
                                 type="button"
-                                class="resend-btn"
-                                id="resendOtp">
+                                class="show-password"
+                                data-target="loginPassword">
 
-                                Resend OTP
+                                👁
 
                             </button>
 
@@ -1625,28 +1072,149 @@
                     </div>
 
 
-                    <div class="form-group">
 
-                        <label for="signupPassword">
+                    <button
+                        id="loginButton"
+                        type="submit"
+                        class="btn">
 
-                            Create Password
+                        Login →
+
+                    </button>
+
+
+                    <div class="footer-note">
+
+                        Your account is securely
+                        authenticated by Firebase.
+
+                    </div>
+
+                </form>
+
+
+
+                <!-- ==================
+                     SIGNUP FORM
+                =================== -->
+
+                <form
+                    id="signupForm"
+                    class="form">
+
+
+                    <div class="info">
+
+                        Create your UMAMTEK customer
+                        account using your email and
+                        mobile number.
+
+                    </div>
+
+
+
+                    <div class="group">
+
+                        <label>
+
+                            Full Name
                             <span class="required">*</span>
 
                         </label>
 
 
-                        <div class="input-wrapper">
+                        <input
+                            id="signupName"
+                            class="input"
+                            type="text"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            required>
+
+                    </div>
+
+
+
+                    <div class="group">
+
+                        <label>
+
+                            Email Address
+                            <span class="required">*</span>
+
+                        </label>
+
+
+                        <input
+                            id="signupEmail"
+                            class="input"
+                            type="email"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required>
+
+                    </div>
+
+
+
+                    <div class="group">
+
+                        <label>
+
+                            Mobile Number
+                            <span class="required">*</span>
+
+                        </label>
+
+
+                        <div class="phone">
+
+                            <div class="country">
+                                +91
+                            </div>
+
 
                             <input
-                                type="password"
+                                id="signupMobile"
+                                class="input"
+                                type="tel"
+                                maxlength="10"
+                                inputmode="numeric"
+                                placeholder="10-digit mobile number"
+                                autocomplete="tel"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="group">
+
+                        <label>
+
+                            Password
+                            <span class="required">*</span>
+
+                        </label>
+
+
+                        <div class="password-box">
+
+                            <input
                                 id="signupPassword"
-                                class="form-control"
+                                class="input"
+                                type="password"
+                                minlength="6"
                                 placeholder="Minimum 6 characters"
-                                autocomplete="new-password">
+                                autocomplete="new-password"
+                                required>
+
 
                             <button
                                 type="button"
-                                class="password-toggle"
+                                class="show-password"
                                 data-target="signupPassword">
 
                                 👁
@@ -1658,9 +1226,10 @@
                     </div>
 
 
-                    <div class="form-group">
 
-                        <label for="confirmPassword">
+                    <div class="group">
+
+                        <label>
 
                             Confirm Password
                             <span class="required">*</span>
@@ -1668,18 +1237,21 @@
                         </label>
 
 
-                        <div class="input-wrapper">
+                        <div class="password-box">
 
                             <input
-                                type="password"
                                 id="confirmPassword"
-                                class="form-control"
+                                class="input"
+                                type="password"
+                                minlength="6"
                                 placeholder="Re-enter password"
-                                autocomplete="new-password">
+                                autocomplete="new-password"
+                                required>
+
 
                             <button
                                 type="button"
-                                class="password-toggle"
+                                class="show-password"
                                 data-target="confirmPassword">
 
                                 👁
@@ -1691,258 +1263,316 @@
                     </div>
 
 
-                    <button
-                        type="submit"
-                        class="auth-btn">
 
-                        Verify & Create Account →
+                    <button
+                        id="signupButton"
+                        type="submit"
+                        class="btn">
+
+                        Create Account →
 
                     </button>
 
 
-                </div>
+                    <div class="footer-note">
 
-            </form>
+                        A verification email will be
+                        sent to your registered email.
 
-        </div>
+                    </div>
 
-
-
-        <!-- =============================================
-             SUCCESS
-        ============================================== -->
-
-        <div
-            class="auth-success"
-            id="authSuccess">
+                </form>
 
 
-            <div class="success-circle">
-                ✓
             </div>
 
 
-            <h3>
-                Account Created!
-            </h3>
 
-
-            <p>
-
-                Welcome to UMAMTEK.
-                Your customer account has been
-                successfully prepared.
-
-            </p>
-
+            <!-- ==================
+                 SUCCESS SCREEN
+            =================== -->
 
             <div
-                class="generated-id"
-                id="generatedId">
+                id="successScreen"
+                class="success-screen">
 
-                UMT-CUSTOMER-001
+
+                <div class="success-icon">
+
+                    ✓
+
+                </div>
+
+
+                <h2>
+                    Account Created!
+                </h2>
+
+
+                <p>
+
+                    Welcome to UMAMTEK.
+
+                    Your customer account has
+                    been successfully created.
+
+                </p>
+
+
+                <div
+                    id="userId"
+                    class="user-id">
+
+                    UMT-C-000000
+
+                </div>
+
+
+                <p>
+
+                    We have also sent a verification
+                    email to your registered email
+                    address.
+
+                </p>
+
+
+                <button
+                    id="profileButton"
+                    class="btn">
+
+                    Continue to Profile →
+
+                </button>
 
             </div>
 
 
-            <p>
+        </section>
 
-                Save your User ID for your records.
-
-            </p>
-
-
-            <button
-                class="auth-btn"
-                id="goToProfile">
-
-                Continue to Profile →
-
-            </button>
-
-        </div>
-
-
-    </section>
-
-</div>
+    </div>
 
 </main>
 
 
 
-<!-- WHATSAPP -->
+<!-- =====================================================
+     FIREBASE + AUTHENTICATION
+===================================================== -->
 
-<a
-    href="https://wa.me/917544813882"
-    target="_blank"
-    class="whatsapp-float"
-    aria-label="WhatsApp UMAMTEK">
+<script type="module">
 
-    💬
-
-</a>
+    /* ================================================
+       IMPORT FIREBASE
+    ================================================= */
 
 
+    import {
 
-<script src="js/script.js"></script>
+        auth,
+        db
 
-
-<script>
-
-/* =========================================================
-   UMAMTEK AUTH FRONTEND
-   Firebase Authentication will replace the temporary
-   simulation sections below.
-========================================================= */
+    } from "./js/firebase-config.js";
 
 
-/* =========================================================
-   TABS
-========================================================= */
+    import {
 
-const loginTab =
-    document.getElementById("loginTab");
+        createUserWithEmailAndPassword,
 
-const signupTab =
-    document.getElementById("signupTab");
+        signInWithEmailAndPassword,
 
-const loginForm =
-    document.getElementById("loginForm");
+        sendEmailVerification,
 
-const signupForm =
-    document.getElementById("signupForm");
+        updateProfile
+
+    } from
+    "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 
-loginTab.addEventListener(
-    "click",
-    function(){
+    import {
 
-        loginTab.classList.add("active");
+        doc,
+        setDoc,
+        serverTimestamp
 
-        signupTab.classList.remove("active");
+    } from
+    "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-        loginForm.classList.add("active");
 
-        signupForm.classList.remove("active");
+
+    /* ================================================
+       ELEMENTS
+    ================================================= */
+
+
+    const loginTab =
+        document.getElementById("loginTab");
+
+
+    const signupTab =
+        document.getElementById("signupTab");
+
+
+    const loginForm =
+        document.getElementById("loginForm");
+
+
+    const signupForm =
+        document.getElementById("signupForm");
+
+
+    const message =
+        document.getElementById("message");
+
+
+    const authContent =
+        document.getElementById("authContent");
+
+
+    const successScreen =
+        document.getElementById("successScreen");
+
+
+    const userIdBox =
+        document.getElementById("userId");
+
+
+    const profileButton =
+        document.getElementById("profileButton");
+
+
+
+    /* ================================================
+       MESSAGE FUNCTION
+    ================================================= */
+
+
+    function showMessage(
+        text,
+        type = "error"
+    ) {
+
+        message.textContent =
+            text;
+
+        message.className =
+            "message show " + type;
 
     }
-);
 
 
-signupTab.addEventListener(
-    "click",
-    function(){
+    function clearMessage() {
 
-        signupTab.classList.add("active");
+        message.textContent = "";
 
-        loginTab.classList.remove("active");
-
-        signupForm.classList.add("active");
-
-        loginForm.classList.remove("active");
+        message.className =
+            "message";
 
     }
-);
 
 
 
-/* =========================================================
-   MOBILE NUMBER
-========================================================= */
+    /* ================================================
+       TABS
+    ================================================= */
 
-const signupMobile =
-    document.getElementById(
-        "signupMobile"
+
+    loginTab.addEventListener(
+        "click",
+        function() {
+
+            clearMessage();
+
+            loginTab.classList.add("active");
+
+            signupTab.classList.remove("active");
+
+            loginForm.classList.add("active");
+
+            signupForm.classList.remove("active");
+
+        }
     );
 
 
-signupMobile.addEventListener(
-    "input",
-    function(){
+    signupTab.addEventListener(
+        "click",
+        function() {
 
-        this.value =
-            this.value
-                .replace(
-                    /\D/g,
-                    ""
-                )
-                .slice(
-                    0,
-                    10
-                );
+            clearMessage();
 
-    }
-);
+            signupTab.classList.add("active");
 
+            loginTab.classList.remove("active");
 
+            signupForm.classList.add("active");
 
-/* =========================================================
-   PASSWORD SHOW / HIDE
-========================================================= */
-
-document
-    .querySelectorAll(
-        ".password-toggle"
-    )
-    .forEach(
-        function(button){
-
-            button.addEventListener(
-                "click",
-                function(){
-
-                    const input =
-                        document.getElementById(
-                            this.dataset.target
-                        );
-
-
-                    if(
-                        input.type ===
-                        "password"
-                    ){
-
-                        input.type =
-                            "text";
-
-                        this.textContent =
-                            "🙈";
-
-                    }else{
-
-                        input.type =
-                            "password";
-
-                        this.textContent =
-                            "👁";
-
-                    }
-
-                }
-            );
+            loginForm.classList.remove("active");
 
         }
     );
 
 
 
-/* =========================================================
-   OTP BOXES
-========================================================= */
-
-const otpBoxes =
-    document.querySelectorAll(
-        ".otp-box"
-    );
+    /* ================================================
+       PASSWORD SHOW / HIDE
+    ================================================= */
 
 
-otpBoxes.forEach(
-    function(box, index){
+    document
+        .querySelectorAll(".show-password")
+        .forEach(
+            function(button) {
 
-        box.addEventListener(
+                button.addEventListener(
+                    "click",
+                    function() {
+
+                        const input =
+                            document.getElementById(
+                                this.dataset.target
+                            );
+
+
+                        if(
+                            input.type ===
+                            "password"
+                        ) {
+
+                            input.type =
+                                "text";
+
+                            this.textContent =
+                                "🙈";
+
+                        } else {
+
+                            input.type =
+                                "password";
+
+                            this.textContent =
+                                "👁";
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+
+    /* ================================================
+       MOBILE NUMBER
+    ================================================= */
+
+
+    document
+        .getElementById("signupMobile")
+        .addEventListener(
             "input",
-            function(){
+            function() {
 
                 this.value =
                     this.value
@@ -1952,476 +1582,395 @@ otpBoxes.forEach(
                         )
                         .slice(
                             0,
-                            1
+                            10
                         );
 
-
-                if(
-                    this.value &&
-                    index <
-                    otpBoxes.length - 1
-                ){
-
-                    otpBoxes[
-                        index + 1
-                    ].focus();
-
-                }
-
             }
         );
 
 
-        box.addEventListener(
-            "keydown",
-            function(event){
 
-                if(
-                    event.key ===
-                    "Backspace" &&
-                    !this.value &&
-                    index > 0
-                ){
+    /* ================================================
+       USER ID GENERATOR
+    ================================================= */
 
-                    otpBoxes[
-                        index - 1
-                    ].focus();
 
-                }
+    function generateUserId() {
 
-            }
-        );
-
-    }
-);
-
-
-
-/* =========================================================
-   SEND OTP
-========================================================= */
-
-const sendOtpButton =
-    document.getElementById(
-        "sendOtpButton"
-    );
-
-
-const otpSection =
-    document.getElementById(
-        "otpSection"
-    );
-
-
-sendOtpButton.addEventListener(
-    "click",
-    function(){
-
-        const name =
-            document
-                .getElementById(
-                    "signupName"
-                )
-                .value
-                .trim();
-
-
-        const email =
-            document
-                .getElementById(
-                    "signupEmail"
-                )
-                .value
-                .trim();
-
-
-        const mobile =
-            signupMobile.value
-                .trim();
-
-
-        if(!name){
-
-            alert(
-                "Please enter your full name."
-            );
-
-            return;
-
-        }
-
-
-        if(
-            !email ||
-            !/^\S+@\S+\.\S+$/.test(email)
-        ){
-
-            alert(
-                "Please enter a valid email address."
-            );
-
-            return;
-
-        }
-
-
-        if(
-            !/^[0-9]{10}$/.test(
-                mobile
-            )
-        ){
-
-            alert(
-                "Please enter a valid 10-digit mobile number."
-            );
-
-            return;
-
-        }
-
-
-        /*
-         * IMPORTANT:
-         *
-         * REAL OTP WILL BE SENT BY FIREBASE
-         * AFTER FIREBASE AUTHENTICATION IS CONNECTED.
-         *
-         * This frontend only opens the OTP section.
-         */
-
-
-        otpSection.classList.add(
-            "show"
-        );
-
-
-        sendOtpButton.textContent =
-            "OTP Sent ✓";
-
-
-        sendOtpButton.disabled =
-            true;
-
-
-        otpBoxes[0].focus();
-
-    }
-);
-
-
-
-/* =========================================================
-   RESEND OTP
-========================================================= */
-
-document
-    .getElementById(
-        "resendOtp"
-    )
-    .addEventListener(
-        "click",
-        function(){
-
-            /*
-             * Firebase OTP resend
-             * will be connected here.
-             */
-
-            alert(
-                "OTP resend will be handled by Firebase after authentication is connected."
-            );
-
-        }
-    );
-
-
-
-/* =========================================================
-   CREATE ACCOUNT
-========================================================= */
-
-signupForm.addEventListener(
-    "submit",
-    function(event){
-
-        event.preventDefault();
-
-
-        const password =
-            document
-                .getElementById(
-                    "signupPassword"
-                )
-                .value;
-
-
-        const confirmPassword =
-            document
-                .getElementById(
-                    "confirmPassword"
-                )
-                .value;
-
-
-        let otp = "";
-
-
-        otpBoxes.forEach(
-            function(box){
-
-                otp +=
-                    box.value;
-
-            }
-        );
-
-
-        if(
-            otp.length !== 6
-        ){
-
-            alert(
-                "Please enter the 6-digit OTP."
-            );
-
-            return;
-
-        }
-
-
-        if(
-            password.length < 6
-        ){
-
-            alert(
-                "Password must contain at least 6 characters."
-            );
-
-            return;
-
-        }
-
-
-        if(
-            password !==
-            confirmPassword
-        ){
-
-            alert(
-                "Passwords do not match."
-            );
-
-            return;
-
-        }
-
-
-        /*
-         * REAL FIREBASE ACCOUNT CREATION
-         * WILL HAPPEN HERE.
-         *
-         * We will create:
-         *
-         * Name
-         * Email
-         * Mobile
-         * User ID
-         * Password
-         * Account Created
-         * Booking History
-         */
-
-
-        const userId =
-            "UMT-CUSTOMER-" +
+        const random =
             Math.floor(
                 100000 +
-                Math.random() *
-                900000
+                Math.random() * 900000
             );
 
 
-        localStorage.setItem(
-            "umamtek_name",
-            document
-                .getElementById(
-                    "signupName"
-                )
-                .value
-                .trim()
-        );
-
-
-        localStorage.setItem(
-            "umamtek_email",
-            document
-                .getElementById(
-                    "signupEmail"
-                )
-                .value
-                .trim()
-        );
-
-
-        localStorage.setItem(
-            "umamtek_mobile",
-            signupMobile.value
-        );
-
-
-        localStorage.setItem(
-            "umamtek_user_id",
-            userId
-        );
-
-
-        localStorage.setItem(
-            "umamtek_created",
-            new Date()
-                .toLocaleDateString(
-                    "en-IN"
-                )
-        );
-
-
-        localStorage.setItem(
-            "umamtek_logged_in",
-            "true"
-        );
-
-
-        document
-            .getElementById(
-                "generatedId"
-            )
-            .textContent =
-            userId;
-
-
-        document
-            .getElementById(
-                "authContent"
-            )
-            .style.display =
-            "none";
-
-
-        document
-            .getElementById(
-                "authSuccess"
-            )
-            .classList.add(
-                "show"
-            );
+        return "UMT-C-" + random;
 
     }
-);
 
 
 
-/* =========================================================
-   LOGIN
-========================================================= */
-
-loginForm.addEventListener(
-    "submit",
-    function(event){
-
-        event.preventDefault();
+    /* ================================================
+       FIREBASE ERROR MESSAGE
+    ================================================= */
 
 
-        const email =
-            document
-                .getElementById(
-                    "loginEmail"
-                )
-                .value
-                .trim();
+    function firebaseError(
+        error
+    ) {
+
+        switch(
+            error.code
+        ) {
+
+            case
+            "auth/email-already-in-use":
+
+                return
+                    "This email is already registered. Please login instead.";
 
 
-        const password =
-            document
-                .getElementById(
-                    "loginPassword"
-                )
-                .value;
+            case
+            "auth/invalid-email":
+
+                return
+                    "Please enter a valid email address.";
 
 
-        if(!email){
+            case
+            "auth/weak-password":
 
-            alert(
-                "Please enter your email."
-            );
-
-            return;
-
-        }
+                return
+                    "Password must contain at least 6 characters.";
 
 
-        if(!password){
+            case
+            "auth/invalid-credential":
 
-            alert(
-                "Please enter your password."
-            );
-
-            return;
-
-        }
+                return
+                    "Incorrect email or password.";
 
 
-        /*
-         * REAL FIREBASE:
-         *
-         * signInWithEmailAndPassword()
-         *
-         * will be connected here.
-         */
+            case
+            "auth/user-not-found":
+
+                return
+                    "No account found with this email.";
 
 
-        const savedEmail =
-            localStorage.getItem(
-                "umamtek_email"
-            );
+            case
+            "auth/wrong-password":
+
+                return
+                    "Incorrect password.";
 
 
-        if(
-            savedEmail &&
-            email === savedEmail
-        ){
+            case
+            "auth/too-many-requests":
 
-            localStorage.setItem(
-                "umamtek_logged_in",
-                "true"
-            );
+                return
+                    "Too many attempts. Please try again later.";
 
 
-            window.location.href =
-                "profile.html";
+            default:
 
-        }else{
-
-            alert(
-                "Account not found. Please create your account first."
-            );
+                return
+                    error.message ||
+                    "Something went wrong. Please try again.";
 
         }
 
     }
-);
 
 
 
-/* =========================================================
-   EMAIL OTP LOGIN
-========================================================= */
+    /* ================================================
+       CUSTOMER REGISTRATION
+    ================================================= */
 
-document
-    .getElementById(
-        "loginOtpButton"
-    )
-    .addEventListener(
-        "click",
-        function(){
+
+    signupForm.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            clearMessage();
+
+
+            const name =
+                document
+                    .getElementById(
+                        "signupName"
+                    )
+                    .value
+                    .trim();
+
+
+            const email =
+                document
+                    .getElementById(
+                        "signupEmail"
+                    )
+                    .value
+                    .trim();
+
+
+            const mobile =
+                document
+                    .getElementById(
+                        "signupMobile"
+                    )
+                    .value
+                    .trim();
+
+
+            const password =
+                document
+                    .getElementById(
+                        "signupPassword"
+                    )
+                    .value;
+
+
+            const confirmPassword =
+                document
+                    .getElementById(
+                        "confirmPassword"
+                    )
+                    .value;
+
+
+            /* VALIDATION */
+
+
+            if(
+                name.length < 2
+            ) {
+
+                showMessage(
+                    "Please enter your full name."
+                );
+
+                return;
+
+            }
+
+
+            if(
+                !/^[0-9]{10}$/.test(
+                    mobile
+                )
+            ) {
+
+                showMessage(
+                    "Please enter a valid 10-digit mobile number."
+                );
+
+                return;
+
+            }
+
+
+            if(
+                password.length < 6
+            ) {
+
+                showMessage(
+                    "Password must contain at least 6 characters."
+                );
+
+                return;
+
+            }
+
+
+            if(
+                password !==
+                confirmPassword
+            ) {
+
+                showMessage(
+                    "Passwords do not match."
+                );
+
+                return;
+
+            }
+
+
+
+            /* BUTTON */
+
+
+            const signupButton =
+                document.getElementById(
+                    "signupButton"
+                );
+
+
+            signupButton.disabled =
+                true;
+
+
+            signupButton.textContent =
+                "Creating Account...";
+
+
+            try {
+
+
+                /* CREATE FIREBASE USER */
+
+
+                const credential =
+                    await createUserWithEmailAndPassword(
+                        auth,
+                        email,
+                        password
+                    );
+
+
+                const user =
+                    credential.user;
+
+
+
+                /* UPDATE NAME */
+
+
+                await updateProfile(
+                    user,
+                    {
+                        displayName:
+                            name
+                    }
+                );
+
+
+
+                /* GENERATE USER ID */
+
+
+                const userId =
+                    generateUserId();
+
+
+
+                /* SAVE CUSTOMER PROFILE */
+
+
+                await setDoc(
+                    doc(
+                        db,
+                        "customers",
+                        user.uid
+                    ),
+                    {
+
+                        uid:
+                            user.uid,
+
+                        userId:
+                            userId,
+
+                        name:
+                            name,
+
+                        email:
+                            email,
+
+                        mobile:
+                            mobile,
+
+                        accountType:
+                            "customer",
+
+                        accountStatus:
+                            "active",
+
+                        accountCreated:
+                            serverTimestamp(),
+
+                        bookingHistory:
+                            [],
+
+                        bookingCount:
+                            0
+
+                    }
+                );
+
+
+
+                /* EMAIL VERIFICATION */
+
+
+                await sendEmailVerification(
+                    user
+                );
+
+
+
+                /* SHOW SUCCESS */
+
+
+                userIdBox.textContent =
+                    userId;
+
+
+                authContent.style.display =
+                    "none";
+
+
+                successScreen.classList.add(
+                    "show"
+                );
+
+
+            } catch(error) {
+
+
+                console.error(
+                    "Registration error:",
+                    error
+                );
+
+
+                showMessage(
+                    firebaseError(error)
+                );
+
+
+                signupButton.disabled =
+                    false;
+
+
+                signupButton.textContent =
+                    "Create Account →";
+
+            }
+
+        }
+    );
+
+
+
+    /* ================================================
+       CUSTOMER LOGIN
+    ================================================= */
+
+
+    loginForm.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            clearMessage();
+
 
             const email =
                 document
@@ -2432,40 +1981,92 @@ document
                     .trim();
 
 
-            if(
-                !email ||
-                !/^\S+@\S+\.\S+$/.test(email)
-            ){
+            const password =
+                document
+                    .getElementById(
+                        "loginPassword"
+                    )
+                    .value;
 
-                alert(
-                    "Please enter a valid email address first."
+
+            const loginButton =
+                document.getElementById(
+                    "loginButton"
                 );
 
-                return;
+
+            loginButton.disabled =
+                true;
+
+
+            loginButton.textContent =
+                "Logging in...";
+
+
+            try {
+
+
+                const credential =
+                    await signInWithEmailAndPassword(
+                        auth,
+                        email,
+                        password
+                    );
+
+
+                const user =
+                    credential.user;
+
+
+
+                /*
+                 * Login successful.
+                 *
+                 * We can later enforce email
+                 * verification here if desired.
+                 */
+
+
+                window.location.href =
+                    "profile.html";
+
+
+            } catch(error) {
+
+
+                console.error(
+                    "Login error:",
+                    error
+                );
+
+
+                showMessage(
+                    firebaseError(error)
+                );
+
+
+                loginButton.disabled =
+                    false;
+
+
+                loginButton.textContent =
+                    "Login →";
 
             }
-
-
-            alert(
-                "Email OTP login will be connected through Firebase Authentication."
-            );
 
         }
     );
 
 
 
-/* =========================================================
-   GO TO PROFILE
-========================================================= */
+    /* ================================================
+       PROFILE BUTTON
+    ================================================= */
 
-document
-    .getElementById(
-        "goToProfile"
-    )
-    .addEventListener(
+
+    profileButton.addEventListener(
         "click",
-        function(){
+        function() {
 
             window.location.href =
                 "profile.html";
@@ -2473,44 +2074,8 @@ document
         }
     );
 
-
-
-/* =========================================================
-   MOBILE NAV
-========================================================= */
-
-const menuBtn =
-    document.getElementById(
-        "menuBtn"
-    );
-
-
-if(menuBtn){
-
-    menuBtn.addEventListener(
-        "click",
-        function(){
-
-            const nav =
-                document.querySelector(
-                    ".nav-links"
-                );
-
-
-            if(nav){
-
-                nav.classList.toggle(
-                    "active"
-                );
-
-            }
-
-        }
-    );
-
-}
-
 </script>
+
 
 </body>
 
