@@ -1,2097 +1,1752 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Login / Signup | UMAMTEK</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-    }
-
-    body{
-      font-family:"Poppins",sans-serif;
-      background:#fff;
-      color:#111;
-      min-height:100vh;
-    }
-
-    a{
-      color:inherit;
-      text-decoration:none;
-    }
-
-    /* HEADER */
-
-    header{
-      width:100%;
-      height:76px;
-      border-bottom:1px solid #eee;
-      background:#fff;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:0 6%;
-      position:relative;
-      z-index:10;
-    }
-
-    .logo{
-      display:flex;
-      align-items:center;
-    }
-
-    .logo img{
-      width:145px;
-      height:auto;
-      object-fit:contain;
-    }
-
-    .back-home{
-      font-size:14px;
-      font-weight:600;
-      padding:10px 18px;
-      border:1.5px solid #111;
-      border-radius:12px;
-      transition:.2s;
-    }
-
-    .back-home:hover{
-      background:#111;
-      color:#fff;
-    }
-
-    /* MAIN */
-
-    main{
-      min-height:calc(100vh - 76px);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:45px 20px;
-      background:
-        radial-gradient(circle at top right,rgba(255,210,0,.14),transparent 35%),
-        #fff;
-    }
-
-    .auth-wrapper{
-      width:100%;
-      max-width:1050px;
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      background:#fff;
-      border:1px solid #e8e8e8;
-      border-radius:28px;
-      overflow:hidden;
-      box-shadow:0 20px 60px rgba(0,0,0,.08);
-    }
-
-    /* LEFT */
-
-    .left-panel{
-      background:#111;
-      color:#fff;
-      padding:55px 48px;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .left-panel:after{
-      content:"";
-      width:260px;
-      height:260px;
-      border-radius:50%;
-      background:#ffd000;
-      position:absolute;
-      right:-130px;
-      bottom:-130px;
-      opacity:.95;
-    }
-
-    .brand-tag{
-      display:inline-flex;
-      width:max-content;
-      background:#ffd000;
-      color:#111;
-      padding:7px 14px;
-      border-radius:30px;
-      font-size:12px;
-      font-weight:800;
-      margin-bottom:22px;
-    }
-
-    .left-panel h1{
-      font-size:42px;
-      line-height:1.12;
-      margin-bottom:18px;
-      font-weight:800;
-    }
-
-    .left-panel h1 span{
-      color:#ffd000;
-    }
-
-    .left-panel p{
-      color:#ccc;
-      line-height:1.7;
-      font-size:15px;
-      max-width:430px;
-    }
-
-    .benefits{
-      margin-top:32px;
-      display:flex;
-      flex-direction:column;
-      gap:15px;
-    }
-
-    .benefit{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      font-size:14px;
-      color:#eee;
-    }
-
-    .benefit-icon{
-      width:32px;
-      height:32px;
-      border-radius:10px;
-      background:#ffd000;
-      color:#111;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:800;
-    }
-
-    /* RIGHT */
-
-    .right-panel{
-      padding:45px 48px;
-      background:#fff;
-    }
-
-    .tabs{
-      display:flex;
-      background:#f5f5f5;
-      border-radius:14px;
-      padding:4px;
-      margin-bottom:30px;
-    }
-
-    .tab{
-      width:50%;
-      border:0;
-      background:transparent;
-      padding:12px;
-      border-radius:11px;
-      font-family:inherit;
-      font-size:14px;
-      font-weight:700;
-      cursor:pointer;
-      color:#666;
-    }
-
-    .tab.active{
-      background:#ffd000;
-      color:#111;
-    }
-
-    .form-title{
-      font-size:27px;
-      font-weight:800;
-      margin-bottom:6px;
-    }
-
-    .form-subtitle{
-      color:#777;
-      font-size:13px;
-      margin-bottom:25px;
-    }
-
-    .form{
-      display:none;
-    }
-
-    .form.active{
-      display:block;
-    }
-
-    .field{
-      margin-bottom:17px;
-    }
-
-    .field label{
-      display:block;
-      font-size:12px;
-      font-weight:700;
-      margin-bottom:7px;
-      color:#333;
-    }
-
-    .input-wrap{
-      position:relative;
-    }
-
-    .input-wrap input{
-      width:100%;
-      height:48px;
-      border:1.5px solid #ddd;
-      border-radius:12px;
-      outline:none;
-      padding:0 14px;
-      font-family:inherit;
-      font-size:14px;
-      transition:.2s;
-      background:#fff;
-    }
-
-    .input-wrap input:focus{
-      border-color:#ffd000;
-      box-shadow:0 0 0 3px rgba(255,208,0,.16);
-    }
-
-    .phone-input{
-      display:flex;
-      gap:8px;
-    }
-
-    .country-code{
-      width:66px;
-      height:48px;
-      border:1.5px solid #ddd;
-      border-radius:12px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:700;
-      font-size:14px;
-      background:#fafafa;
-    }
-
-    .phone-input input{
-      flex:1;
-    }
-
-    /* OTP */
-
-    .otp-section{
-      display:none;
-      margin-top:20px;
-      padding:18px;
-      background:#fffbea;
-      border:1px solid #ffe477;
-      border-radius:16px;
-    }
-
-    .otp-section.show{
-      display:block;
-    }
-
-    .otp-title{
-      font-size:14px;
-      font-weight:800;
-      margin-bottom:5px;
-    }
-
-    .otp-info{
-      font-size:12px;
-      color:#666;
-      margin-bottom:13px;
-    }
-
-    .otp-input{
-      width:100%;
-      height:52px;
-      border:1.5px solid #ddd;
-      border-radius:12px;
-      text-align:center;
-      font-size:22px;
-      font-weight:800;
-      letter-spacing:8px;
-      outline:none;
-    }
-
-    .otp-input:focus{
-      border-color:#ffd000;
-    }
-
-    .otp-actions{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-top:10px;
-      font-size:12px;
-    }
-
-    .resend-btn{
-      border:0;
-      background:none;
-      font-family:inherit;
-      font-size:12px;
-      font-weight:700;
-      cursor:pointer;
-      text-decoration:underline;
-    }
-
-    .resend-btn:disabled{
-      color:#aaa;
-      cursor:not-allowed;
-      text-decoration:none;
-    }
-
-    /* BUTTONS */
-
-    .main-btn{
-      width:100%;
-      height:50px;
-      border:0;
-      border-radius:13px;
-      background:#ffd000;
-      color:#111;
-      font-family:inherit;
-      font-size:14px;
-      font-weight:800;
-      cursor:pointer;
-      transition:.2s;
-      margin-top:5px;
-    }
-
-    .main-btn:hover{
-      transform:translateY(-1px);
-      box-shadow:0 8px 20px rgba(255,208,0,.25);
-    }
-
-    .main-btn:disabled{
-      opacity:.6;
-      cursor:not-allowed;
-      transform:none;
-      box-shadow:none;
-    }
-
-    .secondary-btn{
-      width:100%;
-      height:48px;
-      border:1.5px solid #111;
-      border-radius:13px;
-      background:#fff;
-      color:#111;
-      font-family:inherit;
-      font-size:13px;
-      font-weight:700;
-      cursor:pointer;
-      margin-top:10px;
-    }
-
-    .message{
-      min-height:20px;
-      margin-top:13px;
-      text-align:center;
-      font-size:12px;
-      font-weight:600;
-    }
-
-    .success{
-      color:#16833b;
-    }
-
-    .error{
-      color:#d22;
-    }
-
-    .password-note{
-      font-size:10px;
-      color:#888;
-      margin-top:5px;
-      line-height:1.5;
-    }
-
-    .terms{
-      text-align:center;
-      font-size:10px;
-      color:#888;
-      margin-top:20px;
-      line-height:1.5;
-    }
-
-    /* INVISIBLE RECAPTCHA */
-
-    #recaptcha-container{
-      position:absolute;
-      width:1px;
-      height:1px;
-      overflow:hidden;
-      opacity:0;
-      pointer-events:none;
-    }
-
-    /* LOADER */
-
-    .loader{
-      display:inline-block;
-      width:15px;
-      height:15px;
-      border:2px solid rgba(0,0,0,.25);
-      border-top-color:#111;
-      border-radius:50%;
-      animation:spin .7s linear infinite;
-      vertical-align:middle;
-      margin-right:7px;
-    }
-
-    @keyframes spin{
-      to{
-        transform:rotate(360deg);
-      }
-    }
-
-    /* MOBILE */
-
-    @media(max-width:800px){
-
-      .auth-wrapper{
-        grid-template-columns:1fr;
-        max-width:560px;
-      }
-
-      .left-panel{
-        padding:35px 30px;
-      }
-
-      .left-panel h1{
-        font-size:32px;
-      }
-
-      .benefits{
-        margin-top:23px;
-      }
-
-      .right-panel{
-        padding:35px 28px;
-      }
-    }
-
-    @media(max-width:480px){
-
-      header{
-        height:68px;
-        padding:0 18px;
-      }
-
-      .logo img{
-        width:120px;
-      }
-
-      .back-home{
-        padding:8px 12px;
-        font-size:11px;
-      }
-
-      main{
-        padding:20px 12px;
-        min-height:calc(100vh - 68px);
-      }
-
-      .auth-wrapper{
-        border-radius:20px;
-      }
-
-      .left-panel{
-        padding:30px 24px;
-      }
-
-      .left-panel h1{
-        font-size:28px;
-      }
-
-      .left-panel p{
-        font-size:13px;
-      }
-
-      .right-panel{
-        padding:28px 20px;
-      }
-
-      .form-title{
-        font-size:24px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login / Signup | UMAMTEK</title>
+
+<link rel="icon" href="logo.png">
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#fff;
+  color:#111;
+  min-height:100vh;
+}
+
+.header{
+  height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-bottom:1px solid #eee;
+  background:#fff;
+}
+
+.header img{
+  width:145px;
+  max-height:55px;
+  object-fit:contain;
+}
+
+.container{
+  width:100%;
+  max-width:470px;
+  margin:35px auto;
+  padding:0 18px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid #e8e8e8;
+  border-radius:22px;
+  padding:28px;
+  box-shadow:0 10px 35px rgba(0,0,0,.08);
+}
+
+.logo-small{
+  text-align:center;
+  margin-bottom:15px;
+}
+
+.logo-small img{
+  width:100px;
+}
+
+h1{
+  text-align:center;
+  font-size:27px;
+  margin-bottom:8px;
+}
+
+.subtitle{
+  text-align:center;
+  color:#666;
+  font-size:14px;
+  margin-bottom:25px;
+}
+
+.tabs{
+  display:flex;
+  background:#f3f3f3;
+  border-radius:12px;
+  padding:4px;
+  margin-bottom:25px;
+}
+
+.tab{
+  flex:1;
+  border:0;
+  padding:12px;
+  border-radius:9px;
+  cursor:pointer;
+  background:transparent;
+  font-weight:700;
+}
+
+.tab.active{
+  background:#ffd400;
+}
+
+.section{
+  display:none;
+}
+
+.section.active{
+  display:block;
+}
+
+label{
+  display:block;
+  margin:14px 0 7px;
+  font-size:14px;
+  font-weight:700;
+}
+
+input{
+  width:100%;
+  padding:13px 14px;
+  border:1px solid #d7d7d7;
+  border-radius:10px;
+  outline:none;
+  font-size:15px;
+  background:#fff;
+}
+
+input:focus{
+  border-color:#111;
+}
+
+.password-box{
+  position:relative;
+}
+
+.password-box input{
+  padding-right:48px;
+}
+
+.password-toggle{
+  position:absolute;
+  right:12px;
+  top:50%;
+  transform:translateY(-50%);
+  border:0;
+  background:none;
+  cursor:pointer;
+  font-size:21px;
+  width:30px;
+  height:30px;
+}
+
+.password-toggle.hidden-eye::after{
+  content:"🙈";
+}
+
+.password-toggle.visible-eye::after{
+  content:"👁️";
+}
+
+.phone-box{
+  display:flex;
+  gap:8px;
+}
+
+.country{
+  width:70px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid #d7d7d7;
+  border-radius:10px;
+  font-weight:bold;
+  background:#f8f8f8;
+}
+
+.phone-box input{
+  flex:1;
+}
+
+.btn{
+  width:100%;
+  border:0;
+  padding:14px;
+  border-radius:11px;
+  margin-top:20px;
+  cursor:pointer;
+  font-size:15px;
+  font-weight:800;
+}
+
+.btn-primary{
+  background:#ffd400;
+  color:#111;
+}
+
+.btn-primary:hover{
+  background:#f1c600;
+}
+
+.btn-black{
+  background:#111;
+  color:#fff;
+}
+
+.btn:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
+.forgot{
+  text-align:right;
+  margin-top:10px;
+}
+
+.forgot button{
+  border:0;
+  background:none;
+  color:#555;
+  cursor:pointer;
+  font-size:13px;
+  text-decoration:underline;
+}
+
+.otp-box{
+  display:none;
+  margin-top:18px;
+  padding:16px;
+  background:#fffbea;
+  border:1px solid #f0d900;
+  border-radius:12px;
+}
+
+.otp-box.show{
+  display:block;
+}
+
+.otp-title{
+  font-weight:800;
+  margin-bottom:8px;
+}
+
+.timer{
+  text-align:center;
+  margin-top:8px;
+  color:#666;
+  font-size:13px;
+}
+
+.resend{
+  text-align:center;
+  margin-top:7px;
+}
+
+.resend button{
+  border:0;
+  background:none;
+  text-decoration:underline;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.recaptcha-wrap{
+  margin-top:18px;
+  overflow:hidden;
+}
+
+.message{
+  display:none;
+  padding:11px;
+  border-radius:9px;
+  margin-top:15px;
+  font-size:14px;
+}
+
+.message.show{
+  display:block;
+}
+
+.message.error{
+  background:#ffe8e8;
+  color:#a40000;
+}
+
+.message.success{
+  background:#e7ffe9;
+  color:#08751b;
+}
+
+.back-home{
+  text-align:center;
+  margin-top:20px;
+}
+
+.back-home a{
+  color:#111;
+  font-weight:bold;
+  text-decoration:none;
+}
+
+.footer{
+  text-align:center;
+  margin-top:25px;
+  font-size:12px;
+  color:#777;
+}
+
+@media(max-width:480px){
+  .card{
+    padding:21px;
+  }
+
+  h1{
+    font-size:24px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-<header>
-  <a href="index.html" class="logo">
-    <img src="logo.png" alt="UMAMTEK">
-  </a>
-
-  <a href="index.html" class="back-home">
-    ← Back Home
-  </a>
+<header class="header">
+  <img src="logo.png" alt="UMAMTEK">
 </header>
 
+<div class="container">
 
-<main>
+<div class="card">
 
-  <div class="auth-wrapper">
+<div class="logo-small">
+  <img src="logo.png" alt="UMAMTEK Logo">
+</div>
 
-    <!-- LEFT PANEL -->
+<h1>Welcome to UMAMTEK</h1>
 
-    <section class="left-panel">
+<p class="subtitle">
+  Book trusted professionals at your doorstep.
+</p>
 
-      <div class="brand-tag">
-        UMAMTEK ACCOUNT
-      </div>
+<div class="tabs">
 
-      <h1>
-        Your trusted<br>
-        <span>service partner.</span>
-      </h1>
+<button class="tab active" id="loginTab" onclick="showSection('login')">
+  Login
+</button>
 
-      <p>
-        Book electricians and other professionals,
-        manage your bookings and keep everything
-        connected with your UMAMTEK account.
-      </p>
+<button class="tab" id="signupTab" onclick="showSection('signup')">
+  Create Account
+</button>
 
-      <div class="benefits">
+</div>
 
-        <div class="benefit">
-          <div class="benefit-icon">✓</div>
-          Mobile OTP verified account
-        </div>
 
-        <div class="benefit">
-          <div class="benefit-icon">✓</div>
-          Easy service booking
-        </div>
+<!-- ================= LOGIN ================= -->
 
-        <div class="benefit">
-          <div class="benefit-icon">✓</div>
-          Track your booking history
-        </div>
+<div id="loginSection" class="section active">
 
-        <div class="benefit">
-          <div class="benefit-icon">✓</div>
-          Secure Firebase authentication
-        </div>
+<form id="loginForm">
 
-      </div>
+<label>Mobile Number or Email</label>
 
-    </section>
+<input
+  type="text"
+  id="loginIdentity"
+  placeholder="Enter mobile number or email"
+  autocomplete="username"
+  required
+>
 
+<label>Password</label>
 
-    <!-- RIGHT PANEL -->
+<div class="password-box">
 
-    <section class="right-panel">
+<input
+  type="password"
+  id="loginPassword"
+  placeholder="Enter password"
+  autocomplete="current-password"
+  required
+>
 
-      <div class="tabs">
+<button
+  type="button"
+  class="password-toggle hidden-eye"
+  onclick="togglePassword('loginPassword',this)"
+></button>
 
-        <button
-          type="button"
-          class="tab active"
-          id="loginTab"
-          onclick="showForm('login')">
-          Login
-        </button>
+</div>
 
-        <button
-          type="button"
-          class="tab"
-          id="signupTab"
-          onclick="showForm('signup')">
-          Create Account
-        </button>
+<div class="forgot">
+<button type="button" onclick="openForgotPassword()">
+  Forgot Password?
+</button>
+</div>
 
-      </div>
+<button class="btn btn-primary" type="submit">
+  Login
+</button>
 
+</form>
 
-      <!-- LOGIN FORM -->
+</div>
 
-      <div class="form active" id="loginForm">
 
-        <div class="form-title">
-          Welcome back 👋
-        </div>
+<!-- ================= SIGNUP ================= -->
 
-        <div class="form-subtitle">
-          Login using your registered mobile number.
-        </div>
+<div id="signupSection" class="section">
 
-        <div class="field">
+<form id="signupForm">
 
-          <label>Mobile Number</label>
+<label>Full Name</label>
 
-          <div class="phone-input">
+<input
+  type="text"
+  id="signupName"
+  placeholder="Enter your full name"
+  required
+>
 
-            <div class="country-code">
-              +91
-            </div>
+<label>Email Address</label>
 
-            <div class="input-wrap" style="flex:1;">
-              <input
-                type="tel"
-                id="loginPhone"
-                maxlength="10"
-                inputmode="numeric"
-                placeholder="Enter 10 digit mobile number">
-            </div>
+<input
+  type="email"
+  id="signupEmail"
+  placeholder="Enter your email"
+  autocomplete="email"
+  required
+>
 
-          </div>
+<label>Mobile Number</label>
 
-        </div>
+<div class="phone-box">
 
+<div class="country">+91</div>
 
-        <button
-          type="button"
-          class="main-btn"
-          id="loginSendOtpBtn"
-          onclick="sendLoginOTP()">
+<input
+  type="tel"
+  id="signupPhone"
+  placeholder="10 digit mobile number"
+  maxlength="10"
+  inputmode="numeric"
+  required
+>
 
-          Send OTP
+</div>
 
-        </button>
+<label>Password</label>
 
+<div class="password-box">
 
-        <div
-          class="otp-section"
-          id="loginOtpSection">
+<input
+  type="password"
+  id="signupPassword"
+  placeholder="Create password"
+  autocomplete="new-password"
+  required
+>
 
-          <div class="otp-title">
-            Enter OTP
-          </div>
+<button
+  type="button"
+  class="password-toggle hidden-eye"
+  onclick="togglePassword('signupPassword',this)"
+></button>
 
-          <div class="otp-info">
-            OTP has been sent to your mobile number.
-          </div>
+</div>
 
-          <input
-            type="tel"
-            id="loginOtp"
-            class="otp-input"
-            maxlength="6"
-            inputmode="numeric"
-            placeholder="••••••">
+<label>Confirm Password</label>
 
-          <div class="otp-actions">
+<div class="password-box">
 
-            <span id="loginTimer">
-              OTP expires soon
-            </span>
+<input
+  type="password"
+  id="signupConfirmPassword"
+  placeholder="Confirm password"
+  autocomplete="new-password"
+  required
+>
 
-            <button
-              type="button"
-              class="resend-btn"
-              id="loginResendBtn"
-              onclick="sendLoginOTP()"
-              disabled>
-              Resend OTP
-            </button>
+<button
+  type="button"
+  class="password-toggle hidden-eye"
+  onclick="togglePassword('signupConfirmPassword',this)"
+></button>
 
-          </div>
+</div>
 
-        </div>
+<!-- CAPTCHA -->
 
+<div class="recaptcha-wrap">
+  <div id="signup-recaptcha"></div>
+</div>
 
-        <button
-          type="button"
-          class="secondary-btn"
-          id="loginVerifyBtn"
-          style="display:none;"
-          onclick="verifyLoginOTP()">
+<button
+  class="btn btn-primary"
+  id="sendSignupOtpBtn"
+  type="submit"
+>
+  Verify Mobile & Create Account
+</button>
 
-          Verify OTP & Login
+</form>
 
-        </button>
 
+<!-- SIGNUP OTP -->
 
-        <div
-          id="loginMessage"
-          class="message">
-        </div>
+<div id="signupOtpBox" class="otp-box">
 
-      </div>
+<div class="otp-title">
+  📱 Enter Mobile OTP
+</div>
 
+<p style="font-size:13px;color:#666;">
+  A 6-digit OTP has been sent to your mobile number.
+</p>
 
-      <!-- SIGNUP FORM -->
+<label>OTP</label>
 
-      <div class="form" id="signupForm">
+<input
+  type="text"
+  id="signupOtp"
+  maxlength="6"
+  inputmode="numeric"
+  placeholder="Enter 6-digit OTP"
+>
 
-        <div class="form-title">
-          Create account 🚀
-        </div>
+<button
+  class="btn btn-black"
+  onclick="verifySignupOtp()"
+>
+  Verify OTP & Create Account
+</button>
 
-        <div class="form-subtitle">
-          Verify your mobile number to create your UMAMTEK account.
-        </div>
+<div class="timer" id="signupTimer"></div>
 
+</div>
 
-        <div class="field">
+</div>
 
-          <label>Full Name</label>
 
-          <div class="input-wrap">
+<!-- ================= FORGOT PASSWORD ================= -->
 
-            <input
-              type="text"
-              id="signupName"
-              placeholder="Enter your full name">
+<div id="forgotSection" class="section">
 
-          </div>
+<h2 style="font-size:21px;margin-bottom:8px;">
+  Reset Password
+</h2>
 
-        </div>
+<p style="font-size:14px;color:#666;margin-bottom:18px;">
+  Enter your registered mobile number. We will verify it with OTP.
+</p>
 
+<label>Registered Mobile Number</label>
 
-        <div class="field">
+<div class="phone-box">
 
-          <label>Email Address</label>
+<div class="country">+91</div>
 
-          <div class="input-wrap">
+<input
+  type="tel"
+  id="forgotPhone"
+  maxlength="10"
+  inputmode="numeric"
+  placeholder="10 digit mobile number"
+>
 
-            <input
-              type="email"
-              id="signupEmail"
-              placeholder="Enter your email">
+</div>
 
-          </div>
+<div class="recaptcha-wrap">
+  <div id="forgot-recaptcha"></div>
+</div>
 
-        </div>
+<button
+  class="btn btn-primary"
+  onclick="sendForgotOtp()"
+>
+  Send OTP
+</button>
 
 
-        <div class="field">
+<div id="forgotOtpBox" class="otp-box">
 
-          <label>Mobile Number</label>
+<label>Enter OTP</label>
 
-          <div class="phone-input">
+<input
+  type="text"
+  id="forgotOtp"
+  maxlength="6"
+  inputmode="numeric"
+  placeholder="6-digit OTP"
+>
 
-            <div class="country-code">
-              +91
-            </div>
+<label>New Password</label>
 
-            <div class="input-wrap" style="flex:1;">
+<div class="password-box">
 
-              <input
-                type="tel"
-                id="signupPhone"
-                maxlength="10"
-                inputmode="numeric"
-                placeholder="Enter 10 digit mobile number">
+<input
+  type="password"
+  id="newPassword"
+  placeholder="Create new password"
+>
 
-            </div>
+<button
+  type="button"
+  class="password-toggle hidden-eye"
+  onclick="togglePassword('newPassword',this)"
+></button>
 
-          </div>
+</div>
 
-        </div>
+<label>Confirm New Password</label>
 
+<div class="password-box">
 
-        <div class="field">
+<input
+  type="password"
+  id="confirmNewPassword"
+  placeholder="Confirm new password"
+>
 
-          <label>Password</label>
+<button
+  type="button"
+  class="password-toggle hidden-eye"
+  onclick="togglePassword('confirmNewPassword',this)"
+></button>
 
-          <div class="input-wrap">
+</div>
 
-            <input
-              type="password"
-              id="signupPassword"
-              placeholder="Create a password">
+<button
+  class="btn btn-black"
+  onclick="resetPassword()"
+>
+  Verify OTP & Reset Password
+</button>
 
-          </div>
+</div>
 
-          <div class="password-note">
-            Minimum 6 characters. Use uppercase and special characters if required by Firebase.
-          </div>
+<div class="back-home">
+<button
+  onclick="showSection('login')"
+  style="border:0;background:none;cursor:pointer;font-weight:bold;"
+>
+  ← Back to Login
+</button>
+</div>
 
-        </div>
+</div>
 
 
-        <div class="field">
+<div id="message" class="message"></div>
 
-          <label>Confirm Password</label>
+</div>
 
-          <div class="input-wrap">
+<div class="footer">
+  © UMAMTEK — Your Project, Our Priority
+</div>
 
-            <input
-              type="password"
-              id="signupConfirmPassword"
-              placeholder="Confirm your password">
+</div>
 
-          </div>
-
-        </div>
-
-
-        <button
-          type="button"
-          class="main-btn"
-          id="signupSendOtpBtn"
-          onclick="sendSignupOTP()">
-
-          Verify Mobile / Send OTP
-
-        </button>
-
-
-        <div
-          class="otp-section"
-          id="signupOtpSection">
-
-          <div class="otp-title">
-            Verify your mobile
-          </div>
-
-          <div class="otp-info">
-            Enter the 6-digit OTP sent to your mobile number.
-          </div>
-
-          <input
-            type="tel"
-            id="signupOtp"
-            class="otp-input"
-            maxlength="6"
-            inputmode="numeric"
-            placeholder="••••••">
-
-          <div class="otp-actions">
-
-            <span id="signupTimer">
-              OTP expires soon
-            </span>
-
-            <button
-              type="button"
-              class="resend-btn"
-              id="signupResendBtn"
-              onclick="sendSignupOTP()"
-              disabled>
-
-              Resend OTP
-
-            </button>
-
-          </div>
-
-        </div>
-
-
-        <button
-          type="button"
-          class="secondary-btn"
-          id="signupVerifyBtn"
-          style="display:none;"
-          onclick="verifySignupOTP()">
-
-          Verify OTP & Create Account
-
-        </button>
-
-
-        <div
-          id="signupMessage"
-          class="message">
-        </div>
-
-
-        <div class="terms">
-          By creating an account, you agree to UMAMTEK's
-          Terms & Conditions and Privacy Policy.
-        </div>
-
-      </div>
-
-    </section>
-
-  </div>
-
-</main>
-
-
-<!-- INVISIBLE RECAPTCHA -->
-
-<div id="recaptcha-container"></div>
-
-
-<!-- FIREBASE -->
 
 <script type="module">
 
-  import { initializeApp } from
-  "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
 
-  import {
-    getAuth,
-    RecaptchaVerifier,
-    signInWithPhoneNumber,
-    signOut
-  } from
-  "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+import {
+  getAuth,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  updatePassword,
+  signOut
+}
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
 
-  import {
-    getFirestore,
-    doc,
-    getDoc,
-    setDoc,
-    serverTimestamp
-  } from
-  "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
-
-
-  /* ==========================================
-     UMAMTEK FIREBASE CONFIG
-  ========================================== */
-
-  const firebaseConfig = {
-
-    apiKey:
-      "AIzaSyCU-5U3KL85H7LRsHg9ck-KXo9RuTKqd68",
-
-    authDomain:
-      "umamtek-2cc57.firebaseapp.com",
-
-    projectId:
-      "umamtek-2cc57",
-
-    storageBucket:
-      "umamtek-2cc57.firebasestorage.app",
-
-    messagingSenderId:
-      "868603171659",
-
-    appId:
-      "1:868603171659:web:087f9df552ed09f354cece",
-
-    measurementId:
-      "G-KFYVWYS2TL"
-
-  };
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+  serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
 
-  const app = initializeApp(firebaseConfig);
+/* ==========================================
+   FIREBASE
+========================================== */
 
-  const auth = getAuth(app);
+const firebaseConfig = {
 
-  const db = getFirestore(app);
+  apiKey:
+  "AIzaSyCU-5U3KL85H7LRsHg9ck-KXo9RuTKqd68",
+
+  authDomain:
+  "umamtek-2cc57.firebaseapp.com",
+
+  projectId:
+  "umamtek-2cc57",
+
+  storageBucket:
+  "umamtek-2cc57.firebasestorage.app",
+
+  messagingSenderId:
+  "868603171659",
+
+  appId:
+  "1:868603171659:web:087f9df552ed09f354cece",
+
+  measurementId:
+  "G-KFYVWYS2TL"
+};
 
 
-  /* ==========================================
-     GLOBAL VARIABLES
-  ========================================== */
+const app = initializeApp(firebaseConfig);
 
-  let recaptchaVerifier = null;
+const auth = getAuth(app);
 
-  let loginConfirmationResult = null;
-
-  let signupConfirmationResult = null;
-
-  let loginTimerInterval = null;
-
-  let signupTimerInterval = null;
+const db = getFirestore(app);
 
 
-  /* ==========================================
-     PHONE HELPERS
-  ========================================== */
+/* ==========================================
+   GLOBAL VARIABLES
+========================================== */
 
-  function cleanPhone(phone){
+let signupConfirmationResult = null;
+let forgotConfirmationResult = null;
 
-    return String(phone || "")
-      .replace(/\D/g,"");
+let signupRecaptcha = null;
+let forgotRecaptcha = null;
+
+let signupTimerInterval = null;
+let forgotTimerInterval = null;
+
+
+/* ==========================================
+   HELPERS
+========================================== */
+
+function cleanPhone(phone){
+
+  return String(phone || "")
+    .replace(/\D/g,"")
+    .slice(-10);
+
+}
+
+
+function formatIndianPhone(phone){
+
+  const clean = cleanPhone(phone);
+
+  if(clean.length !== 10){
+    throw new Error("Please enter a valid 10 digit mobile number.");
+  }
+
+  return "+91" + clean;
+
+}
+
+
+function showMessage(text,type="error"){
+
+  const box = document.getElementById("message");
+
+  box.textContent = text;
+
+  box.className =
+    "message show " + type;
+
+}
+
+
+function clearMessage(){
+
+  const box = document.getElementById("message");
+
+  box.className = "message";
+
+  box.textContent = "";
+
+}
+
+
+/* ==========================================
+   PASSWORD SHOW / HIDE
+========================================== */
+
+window.togglePassword = function(id,button){
+
+  const input = document.getElementById(id);
+
+  if(input.type === "password"){
+
+    input.type = "text";
+
+    button.classList.remove("hidden-eye");
+
+    button.classList.add("visible-eye");
+
+  }else{
+
+    input.type = "password";
+
+    button.classList.remove("visible-eye");
+
+    button.classList.add("hidden-eye");
 
   }
 
-
-  function formatPhone(phone){
-
-    const clean = cleanPhone(phone);
-
-    if(clean.length === 10){
-
-      return "+91" + clean;
-
-    }
-
-    if(clean.length === 12 && clean.startsWith("91")){
-
-      return "+" + clean;
-
-    }
-
-    return "";
-
-  }
+};
 
 
-  /* ==========================================
-     MESSAGE
-  ========================================== */
+/* ==========================================
+   SECTIONS
+========================================== */
 
-  function message(id,text,type=""){
+window.showSection = function(section){
 
-    const element =
-      document.getElementById(id);
+  clearMessage();
 
-    element.textContent = text;
+  document.querySelectorAll(".section")
+    .forEach(x => x.classList.remove("active"));
 
-    element.className =
-      "message " + type;
+  document.querySelectorAll(".tab")
+    .forEach(x => x.classList.remove("active"));
+
+  if(section === "login"){
+
+    document
+      .getElementById("loginSection")
+      .classList.add("active");
+
+    document
+      .getElementById("loginTab")
+      .classList.add("active");
 
   }
 
+  if(section === "signup"){
 
-  /* ==========================================
-     INVISIBLE RECAPTCHA
-  ========================================== */
+    document
+      .getElementById("signupSection")
+      .classList.add("active");
 
-  async function setupRecaptcha(){
+    document
+      .getElementById("signupTab")
+      .classList.add("active");
 
-    if(recaptchaVerifier){
+  }
 
-      try{
+  if(section === "forgot"){
 
-        recaptchaVerifier.clear();
+    document
+      .getElementById("forgotSection")
+      .classList.add("active");
 
-      }catch(e){}
+  }
 
-      recaptchaVerifier = null;
-
-    }
+};
 
 
-    recaptchaVerifier =
-      new RecaptchaVerifier(
+/* ==========================================
+   CAPTCHA
+========================================== */
+
+function createSignupRecaptcha(){
+
+  if(signupRecaptcha){
+
+    try{
+      signupRecaptcha.clear();
+    }catch(e){}
+
+  }
+
+  signupRecaptcha =
+    new RecaptchaVerifier(
+      auth,
+      "signup-recaptcha",
+      {
+        size:"normal"
+      }
+    );
+
+  return signupRecaptcha;
+
+}
+
+
+function createForgotRecaptcha(){
+
+  if(forgotRecaptcha){
+
+    try{
+      forgotRecaptcha.clear();
+    }catch(e){}
+
+  }
+
+  forgotRecaptcha =
+    new RecaptchaVerifier(
+      auth,
+      "forgot-recaptcha",
+      {
+        size:"normal"
+      }
+    );
+
+  return forgotRecaptcha;
+
+}
+
+
+/* ==========================================
+   SIGNUP — SEND OTP
+========================================== */
+
+document
+.getElementById("signupForm")
+.addEventListener("submit",async function(e){
+
+  e.preventDefault();
+
+  clearMessage();
+
+  const name =
+    document.getElementById("signupName")
+    .value.trim();
+
+  const email =
+    document.getElementById("signupEmail")
+    .value.trim()
+    .toLowerCase();
+
+  const phone =
+    cleanPhone(
+      document.getElementById("signupPhone")
+      .value
+    );
+
+  const password =
+    document.getElementById("signupPassword")
+    .value;
+
+  const confirmPassword =
+    document.getElementById("signupConfirmPassword")
+    .value;
+
+
+  if(!name || !email || !phone ||
+     !password || !confirmPassword){
+
+    showMessage("Please fill all signup details.");
+
+    return;
+  }
+
+
+  if(phone.length !== 10){
+
+    showMessage("Please enter a valid 10 digit mobile number.");
+
+    return;
+  }
+
+
+  if(password.length < 6){
+
+    showMessage(
+      "Password must contain at least 6 characters."
+    );
+
+    return;
+  }
+
+
+  if(password !== confirmPassword){
+
+    showMessage("Passwords do not match.");
+
+    return;
+  }
+
+
+  const btn =
+    document.getElementById("sendSignupOtpBtn");
+
+  btn.disabled = true;
+
+  btn.textContent = "Sending OTP...";
+
+
+  try{
+
+    /* Check email first */
+
+    try{
+
+      /*
+       We don't create the account yet.
+       Firebase will reject duplicate email
+       when account creation happens.
+      */
+
+    }catch(e){}
+
+
+    const verifier =
+      createSignupRecaptcha();
+
+    signupConfirmationResult =
+      await signInWithPhoneNumber(
         auth,
-        "recaptcha-container",
-        {
-          size:"invisible"
-        }
+        formatIndianPhone(phone),
+        verifier
       );
 
-    await recaptchaVerifier.render();
+
+    sessionStorage.setItem(
+      "umamtekSignupName",
+      name
+    );
+
+    sessionStorage.setItem(
+      "umamtekSignupEmail",
+      email
+    );
+
+    sessionStorage.setItem(
+      "umamtekSignupPhone",
+      phone
+    );
+
+    sessionStorage.setItem(
+      "umamtekSignupPassword",
+      password
+    );
+
+
+    document
+      .getElementById("signupOtpBox")
+      .classList.add("show");
+
+
+    showMessage(
+      "OTP sent successfully to your mobile.",
+      "success"
+    );
+
+    startTimer(
+      "signupTimer",
+      60
+    );
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showMessage(
+      firebaseError(error)
+    );
+
+    btn.disabled = false;
+
+    btn.textContent =
+      "Verify Mobile & Create Account";
 
   }
 
+});
 
-  /* ==========================================
-     CUSTOMER ID
-  ========================================== */
 
-  function generateCustomerID(){
+/* ==========================================
+   SIGNUP — VERIFY OTP
+========================================== */
 
-    const random =
-      Math.floor(
-        100000 +
-        Math.random() * 900000
-      );
+window.verifySignupOtp = async function(){
 
-    return "UMT-CUSTOMER-" + random;
+  clearMessage();
 
+  const otp =
+    document.getElementById("signupOtp")
+    .value.trim();
+
+  if(!otp || otp.length !== 6){
+
+    showMessage("Enter the 6 digit OTP.");
+
+    return;
+  }
+
+  if(!signupConfirmationResult){
+
+    showMessage("Please request OTP first.");
+
+    return;
   }
 
 
-  /* ==========================================
-     START TIMER
-  ========================================== */
+  try{
 
-  function startTimer(
-    timerId,
-    resendId,
-    seconds
-  ){
-
-    const timer =
-      document.getElementById(timerId);
-
-    const resend =
-      document.getElementById(resendId);
-
-    resend.disabled = true;
-
-    let remaining = seconds;
-
-    timer.textContent =
-      "Resend in " + remaining + "s";
+    showMessage(
+      "Verifying OTP...",
+      "success"
+    );
 
 
-    const interval =
-      setInterval(() => {
+    /*
+      Phone OTP verifies the mobile.
+      We then create the customer's
+      email/password Firebase account.
+    */
 
-        remaining--;
-
-        if(remaining <= 0){
-
-          clearInterval(interval);
-
-          timer.textContent =
-            "You can request a new OTP";
-
-          resend.disabled = false;
-
-          return;
-
-        }
-
-        timer.textContent =
-          "Resend in " + remaining + "s";
-
-      },1000);
-
-    return interval;
-
-  }
+    await signupConfirmationResult.confirm(otp);
 
 
-  /* ==========================================
-     SIGNUP OTP
-  ========================================== */
+    /*
+      The OTP sign-in creates a temporary
+      phone-auth user.
 
-  window.sendSignupOTP = async function(){
+      We sign that user out and create the
+      permanent email/password account.
+    */
+
+    await signOut(auth);
+
 
     const name =
-      document.getElementById("signupName")
-      .value.trim();
+      sessionStorage.getItem(
+        "umamtekSignupName"
+      );
 
     const email =
-      document.getElementById("signupEmail")
-      .value.trim();
+      sessionStorage.getItem(
+        "umamtekSignupEmail"
+      );
 
     const phone =
-      document.getElementById("signupPhone")
-      .value.trim();
+      sessionStorage.getItem(
+        "umamtekSignupPhone"
+      );
 
     const password =
-      document.getElementById("signupPassword")
-      .value;
-
-    const confirmPassword =
-      document.getElementById("signupConfirmPassword")
-      .value;
-
-
-    const clean =
-      cleanPhone(phone);
-
-
-    if(!name){
-
-      message(
-        "signupMessage",
-        "Please enter your full name.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    if(!email){
-
-      message(
-        "signupMessage",
-        "Please enter your email address.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    if(clean.length !== 10){
-
-      message(
-        "signupMessage",
-        "Please enter a valid 10-digit mobile number.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    if(password.length < 6){
-
-      message(
-        "signupMessage",
-        "Password must be at least 6 characters.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    if(password !== confirmPassword){
-
-      message(
-        "signupMessage",
-        "Passwords do not match.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    const button =
-      document.getElementById(
-        "signupSendOtpBtn"
-      );
-
-    button.disabled = true;
-
-    button.innerHTML =
-      '<span class="loader"></span>Sending OTP...';
-
-
-    try{
-
-      await setupRecaptcha();
-
-
-      const phoneNumber =
-        formatPhone(phone);
-
-
-      signupConfirmationResult =
-        await signInWithPhoneNumber(
-          auth,
-          phoneNumber,
-          recaptchaVerifier
-        );
-
-
-      document
-        .getElementById("signupOtpSection")
-        .classList.add("show");
-
-
-      document
-        .getElementById("signupVerifyBtn")
-        .style.display = "block";
-
-
-      message(
-        "signupMessage",
-        "OTP sent successfully to +91 " + clean,
-        "success"
+      sessionStorage.getItem(
+        "umamtekSignupPassword"
       );
 
 
-      if(signupTimerInterval){
+    /*
+      Create permanent email/password account.
+    */
 
-        clearInterval(signupTimerInterval);
+    const credential =
+      await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+
+    const user =
+      credential.user;
+
+
+    const customerId =
+      "UMT-CUSTOMER-" +
+      user.uid
+      .replace(/[^a-zA-Z0-9]/g,"")
+      .slice(0,8)
+      .toUpperCase();
+
+
+    await setDoc(
+      doc(db,"users",user.uid),
+      {
+
+        uid:user.uid,
+
+        customerId:customerId,
+
+        name:name,
+
+        email:email,
+
+        phone:phone,
+
+        role:"customer",
+
+        phoneVerified:true,
+
+        accountStatus:"active",
+
+        createdAt:serverTimestamp(),
+
+        updatedAt:serverTimestamp()
 
       }
+    );
 
 
-      signupTimerInterval =
-        startTimer(
-          "signupTimer",
-          "signupResendBtn",
-          60
-        );
+    localStorage.setItem(
+      "umamtekLoggedIn",
+      "true"
+    );
 
+    localStorage.setItem(
+      "umamtekUser",
+      name
+    );
 
-    }catch(error){
+    localStorage.setItem(
+      "umamtekPhone",
+      phone
+    );
 
-      console.error(error);
+    localStorage.setItem(
+      "umamtekRole",
+      "customer"
+    );
 
-      message(
-        "signupMessage",
-        getFirebaseError(error),
-        "error"
-      );
 
+    sessionStorage.clear();
 
-      if(recaptchaVerifier){
 
-        try{
+    alert(
+      "🎉 UMAMTEK account created successfully!"
+    );
 
-          recaptchaVerifier.clear();
 
-        }catch(e){}
+    window.location.href =
+      "profile.html";
 
-        recaptchaVerifier = null;
 
-      }
+  }catch(error){
 
-    }finally{
+    console.error(error);
 
-      button.disabled = false;
-
-      button.textContent =
-        "Verify Mobile / Send OTP";
-
-    }
-
-  };
-
-
-  /* ==========================================
-     VERIFY SIGNUP OTP
-  ========================================== */
-
-  window.verifySignupOTP = async function(){
-
-    const otp =
-      document.getElementById("signupOtp")
-      .value.trim();
-
-
-    if(!signupConfirmationResult){
-
-      message(
-        "signupMessage",
-        "Please request OTP first.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    if(otp.length !== 6){
-
-      message(
-        "signupMessage",
-        "Please enter the 6-digit OTP.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    const button =
-      document.getElementById(
-        "signupVerifyBtn"
-      );
-
-    button.disabled = true;
-
-    button.innerHTML =
-      '<span class="loader"></span>Verifying...';
-
-
-    try{
-
-      const result =
-        await signupConfirmationResult.confirm(otp);
-
-
-      const user =
-        result.user;
-
-
-      const name =
-        document.getElementById("signupName")
-        .value.trim();
-
-      const email =
-        document.getElementById("signupEmail")
-        .value.trim();
-
-      const phone =
-        cleanPhone(
-          document.getElementById("signupPhone")
-          .value
-        );
-
-
-      const userRef =
-        doc(
-          db,
-          "users",
-          user.uid
-        );
-
-
-      const existing =
-        await getDoc(userRef);
-
-
-      if(existing.exists()){
-
-        message(
-          "signupMessage",
-          "Account already exists. Please login.",
-          "error"
-        );
-
-        await signOut(auth);
-
-        setTimeout(() => {
-
-          showForm("login");
-
-        },1200);
-
-        return;
-
-      }
-
-
-      const customerId =
-        generateCustomerID();
-
-
-      await setDoc(
-        userRef,
-        {
-
-          uid: user.uid,
-
-          name: name,
-
-          email: email,
-
-          phone: phone,
-
-          userId: customerId,
-
-          role: "customer",
-
-          accountType: "customer",
-
-          phoneVerified: true,
-
-          createdAt: serverTimestamp(),
-
-          accountCreated:
-            new Date().toISOString()
-
-        }
-      );
-
-
-      /* LOCAL SESSION DATA */
-
-      localStorage.setItem(
-        "umamtekLoggedIn",
-        "true"
-      );
-
-      localStorage.setItem(
-        "umamtekUser",
-        name
-      );
-
-      localStorage.setItem(
-        "umamtekPhone",
-        phone
-      );
-
-      localStorage.setItem(
-        "umamtekEmail",
-        email
-      );
-
-      localStorage.setItem(
-        "umamtekUserId",
-        customerId
-      );
-
-      localStorage.setItem(
-        "umamtekRole",
-        "customer"
-      );
-
-
-      message(
-        "signupMessage",
-        "Account created successfully! Redirecting...",
-        "success"
-      );
-
-
-      setTimeout(() => {
-
-        window.location.href =
-          "profile.html";
-
-      },1000);
-
-
-    }catch(error){
-
-      console.error(error);
-
-      message(
-        "signupMessage",
-        getFirebaseError(error),
-        "error"
-      );
-
-    }finally{
-
-      button.disabled = false;
-
-      button.textContent =
-        "Verify OTP & Create Account";
-
-    }
-
-  };
-
-
-  /* ==========================================
-     LOGIN OTP
-  ========================================== */
-
-  window.sendLoginOTP = async function(){
-
-    const phone =
-      document.getElementById("loginPhone")
-      .value.trim();
-
-
-    const clean =
-      cleanPhone(phone);
-
-
-    if(clean.length !== 10){
-
-      message(
-        "loginMessage",
-        "Please enter a valid 10-digit mobile number.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    const button =
-      document.getElementById(
-        "loginSendOtpBtn"
-      );
-
-    button.disabled = true;
-
-    button.innerHTML =
-      '<span class="loader"></span>Sending OTP...';
-
-
-    try{
-
-      await setupRecaptcha();
-
-
-      const phoneNumber =
-        formatPhone(phone);
-
-
-      loginConfirmationResult =
-        await signInWithPhoneNumber(
-          auth,
-          phoneNumber,
-          recaptchaVerifier
-        );
-
-
-      document
-        .getElementById("loginOtpSection")
-        .classList.add("show");
-
-
-      document
-        .getElementById("loginVerifyBtn")
-        .style.display = "block";
-
-
-      message(
-        "loginMessage",
-        "OTP sent successfully to +91 " + clean,
-        "success"
-      );
-
-
-      if(loginTimerInterval){
-
-        clearInterval(loginTimerInterval);
-
-      }
-
-
-      loginTimerInterval =
-        startTimer(
-          "loginTimer",
-          "loginResendBtn",
-          60
-        );
-
-
-    }catch(error){
-
-      console.error(error);
-
-      message(
-        "loginMessage",
-        getFirebaseError(error),
-        "error"
-      );
-
-
-      if(recaptchaVerifier){
-
-        try{
-
-          recaptchaVerifier.clear();
-
-        }catch(e){}
-
-        recaptchaVerifier = null;
-
-      }
-
-    }finally{
-
-      button.disabled = false;
-
-      button.textContent =
-        "Send OTP";
-
-    }
-
-  };
-
-
-  /* ==========================================
-     VERIFY LOGIN OTP
-  ========================================== */
-
-  window.verifyLoginOTP = async function(){
-
-    const otp =
-      document.getElementById("loginOtp")
-      .value.trim();
-
-
-    if(!loginConfirmationResult){
-
-      message(
-        "loginMessage",
-        "Please request OTP first.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    if(otp.length !== 6){
-
-      message(
-        "loginMessage",
-        "Please enter the 6-digit OTP.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    const button =
-      document.getElementById(
-        "loginVerifyBtn"
-      );
-
-    button.disabled = true;
-
-    button.innerHTML =
-      '<span class="loader"></span>Verifying...';
-
-
-    try{
-
-      const result =
-        await loginConfirmationResult.confirm(otp);
-
-
-      const user =
-        result.user;
-
-
-      const userRef =
-        doc(
-          db,
-          "users",
-          user.uid
-        );
-
-
-      const userSnap =
-        await getDoc(userRef);
-
-
-      let userData = {};
-
-
-      if(userSnap.exists()){
-
-        userData =
-          userSnap.data();
-
-      }else{
-
-        /*
-          If the Firebase phone account exists
-          but Firestore profile does not exist,
-          create a basic customer profile.
-        */
-
-        const customerId =
-          generateCustomerID();
-
-
-        userData = {
-
-          uid:user.uid,
-
-          phone:cleanPhone(
-            document.getElementById(
-              "loginPhone"
-            ).value
-          ),
-
-          userId:customerId,
-
-          role:"customer"
-
-        };
-
-
-        await setDoc(
-          userRef,
-          {
-
-            ...userData,
-
-            phoneVerified:true,
-
-            createdAt:
-              serverTimestamp()
-
-          }
-        );
-
-      }
-
-
-      /* LOCAL SESSION */
-
-      localStorage.setItem(
-        "umamtekLoggedIn",
-        "true"
-      );
-
-      localStorage.setItem(
-        "umamtekUser",
-        userData.name || "UMAMTEK Customer"
-      );
-
-      localStorage.setItem(
-        "umamtekPhone",
-        userData.phone ||
-        cleanPhone(
-          document.getElementById(
-            "loginPhone"
-          ).value
-        )
-      );
-
-      localStorage.setItem(
-        "umamtekEmail",
-        userData.email || ""
-      );
-
-      localStorage.setItem(
-        "umamtekUserId",
-        userData.userId || ""
-      );
-
-      localStorage.setItem(
-        "umamtekRole",
-        userData.role || "customer"
-      );
-
-
-      message(
-        "loginMessage",
-        "Login successful! Redirecting...",
-        "success"
-      );
-
-
-      setTimeout(() => {
-
-        window.location.href =
-          "profile.html";
-
-      },800);
-
-
-    }catch(error){
-
-      console.error(error);
-
-      message(
-        "loginMessage",
-        getFirebaseError(error),
-        "error"
-      );
-
-    }finally{
-
-      button.disabled = false;
-
-      button.textContent =
-        "Verify OTP & Login";
-
-    }
-
-  };
-
-
-  /* ==========================================
-     FIREBASE ERROR TRANSLATOR
-  ========================================== */
-
-  function getFirebaseError(error){
-
-    const code =
-      error?.code || "";
-
-
-    if(code === "auth/invalid-phone-number"){
-
-      return "Invalid mobile number.";
-
-    }
-
-
-    if(code === "auth/too-many-requests"){
-
-      return "Too many OTP requests. Please try again later.";
-
-    }
-
-
-    if(code === "auth/quota-exceeded"){
-
-      return "OTP limit reached. Please try again later.";
-
-    }
-
-
-    if(code === "auth/captcha-check-failed"){
-
-      return "Security verification failed. Please refresh and try again.";
-
-    }
-
-
-    if(code === "auth/invalid-verification-code"){
-
-      return "Invalid OTP. Please check and try again.";
-
-    }
-
-
-    if(code === "auth/code-expired"){
-
-      return "OTP expired. Please request a new OTP.";
-
-    }
-
-
-    if(code === "auth/session-expired"){
-
-      return "OTP session expired. Please request a new OTP.";
-
-    }
-
-
-    if(code === "auth/network-request-failed"){
-
-      return "Network error. Please check your internet connection.";
-
-    }
-
-
-    if(code === "auth/operation-not-allowed"){
-
-      return "Phone authentication is not enabled in Firebase.";
-
-    }
-
-
-    if(code === "auth/missing-phone-number"){
-
-      return "Please enter your mobile number.";
-
-    }
-
-
-    if(code === "auth/billing-not-enabled"){
-
-      return "Firebase Phone Authentication requires the required billing configuration.";
-
-    }
-
-
-    if(error?.message){
-
-      return error.message;
-
-    }
-
-
-    return "Something went wrong. Please try again.";
+    showMessage(
+      firebaseError(error)
+    );
 
   }
 
-
-  /* ==========================================
-     FORM SWITCH
-  ========================================== */
-
-  window.showForm = function(type){
-
-    const loginForm =
-      document.getElementById(
-        "loginForm"
-      );
-
-    const signupForm =
-      document.getElementById(
-        "signupForm"
-      );
-
-    const loginTab =
-      document.getElementById(
-        "loginTab"
-      );
-
-    const signupTab =
-      document.getElementById(
-        "signupTab"
-      );
+};
 
 
-    if(type === "login"){
+/* ==========================================
+   LOGIN
+========================================== */
 
-      loginForm.classList.add("active");
+document
+.getElementById("loginForm")
+.addEventListener("submit",async function(e){
 
-      signupForm.classList.remove("active");
+  e.preventDefault();
 
-      loginTab.classList.add("active");
+  clearMessage();
 
-      signupTab.classList.remove("active");
+  const identity =
+    document.getElementById("loginIdentity")
+    .value.trim();
 
-    }else{
+  const password =
+    document.getElementById("loginPassword")
+    .value;
 
-      signupForm.classList.add("active");
 
-      loginForm.classList.remove("active");
+  if(!identity || !password){
 
-      signupTab.classList.add("active");
+    showMessage(
+      "Please enter your mobile/email and password."
+    );
 
-      loginTab.classList.remove("active");
+    return;
+  }
+
+
+  try{
+
+    let email = identity;
+
+
+    /*
+      Email login
+    */
+
+    if(!identity.includes("@")){
+
+      /*
+        Mobile login requires a controlled
+        phone -> email lookup.
+      */
+
+      const phone =
+        cleanPhone(identity);
+
+
+      if(phone.length !== 10){
+
+        showMessage(
+          "Please enter a valid mobile number or email."
+        );
+
+        return;
+      }
+
+
+      const q =
+        query(
+          collection(db,"phoneIndex"),
+          where("phone","==",phone)
+        );
+
+
+      const snapshot =
+        await getDocs(q);
+
+
+      if(snapshot.empty){
+
+        showMessage(
+          "Account not found. Please signup first."
+        );
+
+        return;
+      }
+
+
+      email =
+        snapshot.docs[0].data().email;
 
     }
 
-  };
+
+    const credential =
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
 
-  /* ==========================================
-     ONLY NUMBERS
-  ========================================== */
+    const user =
+      credential.user;
 
-  document
-    .getElementById("loginPhone")
-    .addEventListener(
-      "input",
-      function(){
 
-        this.value =
-          this.value
-            .replace(/\D/g,"")
-            .slice(0,10);
+    const profileSnap =
+      await getDoc(
+        doc(db,"users",user.uid)
+      );
 
-      }
+
+    if(!profileSnap.exists()){
+
+      showMessage(
+        "Customer profile not found."
+      );
+
+      await signOut(auth);
+
+      return;
+    }
+
+
+    const profile =
+      profileSnap.data();
+
+
+    localStorage.setItem(
+      "umamtekLoggedIn",
+      "true"
+    );
+
+    localStorage.setItem(
+      "umamtekUser",
+      profile.name || "Customer"
+    );
+
+    localStorage.setItem(
+      "umamtekPhone",
+      profile.phone || ""
+    );
+
+    localStorage.setItem(
+      "umamtekRole",
+      "customer"
     );
 
 
-  document
-    .getElementById("signupPhone")
-    .addEventListener(
-      "input",
-      function(){
+    window.location.href =
+      "profile.html";
 
-        this.value =
-          this.value
-            .replace(/\D/g,"")
-            .slice(0,10);
 
-      }
+  }catch(error){
+
+    console.error(error);
+
+    showMessage(
+      firebaseError(error)
+    );
+
+  }
+
+});
+
+
+/* ==========================================
+   FORGOT PASSWORD
+========================================== */
+
+window.openForgotPassword = function(){
+
+  clearMessage();
+
+  showSection("forgot");
+
+};
+
+
+window.sendForgotOtp = async function(){
+
+  clearMessage();
+
+  const phone =
+    cleanPhone(
+      document.getElementById("forgotPhone")
+      .value
     );
 
 
-  document
-    .getElementById("loginOtp")
-    .addEventListener(
-      "input",
-      function(){
+  if(phone.length !== 10){
 
-        this.value =
-          this.value
-            .replace(/\D/g,"")
-            .slice(0,6);
+    showMessage(
+      "Enter your registered 10 digit mobile number."
+    );
 
-      }
+    return;
+  }
+
+
+  try{
+
+    /*
+      First check whether phone exists.
+    */
+
+    const q =
+      query(
+        collection(db,"phoneIndex"),
+        where("phone","==",phone)
+      );
+
+
+    const snapshot =
+      await getDocs(q);
+
+
+    if(snapshot.empty){
+
+      showMessage(
+        "No UMAMTEK account is registered with this number."
+      );
+
+      return;
+    }
+
+
+    const verifier =
+      createForgotRecaptcha();
+
+
+    forgotConfirmationResult =
+      await signInWithPhoneNumber(
+        auth,
+        formatIndianPhone(phone),
+        verifier
+      );
+
+
+    document
+      .getElementById("forgotOtpBox")
+      .classList.add("show");
+
+
+    showMessage(
+      "OTP sent successfully.",
+      "success"
     );
 
 
-  document
-    .getElementById("signupOtp")
-    .addEventListener(
-      "input",
-      function(){
-
-        this.value =
-          this.value
-            .replace(/\D/g,"")
-            .slice(0,6);
-
-      }
+    startTimer(
+      "forgotTimer",
+      60
     );
 
 
-  console.log(
-    "UMAMTEK Mobile OTP Authentication Loaded"
+  }catch(error){
+
+    console.error(error);
+
+    showMessage(
+      firebaseError(error)
+    );
+
+  }
+
+};
+
+
+/* ==========================================
+   RESET PASSWORD
+========================================== */
+
+window.resetPassword = async function(){
+
+  clearMessage();
+
+  const otp =
+    document.getElementById("forgotOtp")
+    .value.trim();
+
+  const newPassword =
+    document.getElementById("newPassword")
+    .value;
+
+  const confirmPassword =
+    document.getElementById("confirmNewPassword")
+    .value;
+
+
+  if(!otp || otp.length !== 6){
+
+    showMessage("Enter the 6 digit OTP.");
+
+    return;
+  }
+
+
+  if(newPassword.length < 6){
+
+    showMessage(
+      "New password must contain at least 6 characters."
+    );
+
+    return;
+  }
+
+
+  if(newPassword !== confirmPassword){
+
+    showMessage(
+      "New passwords do not match."
+    );
+
+    return;
+  }
+
+
+  if(!forgotConfirmationResult){
+
+    showMessage(
+      "Please request OTP first."
+    );
+
+    return;
+  }
+
+
+  try{
+
+    showMessage(
+      "Verifying OTP...",
+      "success"
+    );
+
+
+    const result =
+      await forgotConfirmationResult.confirm(otp);
+
+
+    /*
+      OTP authentication gives us
+      authenticated access to the
+      phone account.
+
+      Password reset is then performed
+      on the authenticated account.
+    */
+
+    await updatePassword(
+      result.user,
+      newPassword
+    );
+
+
+    await signOut(auth);
+
+
+    alert(
+      "✅ Password changed successfully. Please login with your new password."
+    );
+
+
+    document.getElementById("forgotOtpBox")
+      .classList.remove("show");
+
+
+    document.getElementById("forgotPhone")
+      .value = "";
+
+    document.getElementById("forgotOtp")
+      .value = "";
+
+    document.getElementById("newPassword")
+      .value = "";
+
+    document.getElementById("confirmNewPassword")
+      .value = "";
+
+
+    showSection("login");
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showMessage(
+      firebaseError(error)
+    );
+
+  }
+
+};
+
+
+/* ==========================================
+   TIMER
+========================================== */
+
+function startTimer(elementId,seconds){
+
+  const element =
+    document.getElementById(elementId);
+
+  if(!element) return;
+
+
+  clearInterval(
+    elementId === "signupTimer"
+      ? signupTimerInterval
+      : forgotTimerInterval
   );
+
+
+  let remaining = seconds;
+
+
+  element.textContent =
+    "Resend OTP available in " +
+    remaining +
+    " seconds";
+
+
+  const interval =
+    setInterval(function(){
+
+      remaining--;
+
+      if(remaining <= 0){
+
+        clearInterval(interval);
+
+        element.textContent =
+          "You can request a new OTP.";
+
+        return;
+      }
+
+
+      element.textContent =
+        "Resend OTP available in " +
+        remaining +
+        " seconds";
+
+    },1000);
+
+
+  if(elementId === "signupTimer")
+    signupTimerInterval = interval;
+
+  else
+    forgotTimerInterval = interval;
+
+}
+
+
+/* ==========================================
+   FIREBASE ERROR TRANSLATION
+========================================== */
+
+function firebaseError(error){
+
+  switch(error.code){
+
+    case "auth/email-already-in-use":
+      return "This email is already registered. Please login.";
+
+    case "auth/invalid-email":
+      return "Please enter a valid email address.";
+
+    case "auth/weak-password":
+      return "Password is too weak.";
+
+    case "auth/invalid-credential":
+      return "Wrong mobile/email or password.";
+
+    case "auth/wrong-password":
+      return "Wrong password.";
+
+    case "auth/user-not-found":
+      return "Account not found.";
+
+    case "auth/invalid-verification-code":
+      return "Incorrect OTP.";
+
+    case "auth/code-expired":
+      return "OTP has expired. Please request a new OTP.";
+
+    case "auth/too-many-requests":
+      return "Too many attempts. Please try again later.";
+
+    case "auth/quota-exceeded":
+      return "SMS limit reached. Please try again later.";
+
+    case "auth/network-request-failed":
+      return "Internet connection problem.";
+
+    case "auth/requires-recent-login":
+      return "Please login again before changing your password.";
+
+    default:
+      return error.message ||
+        "Something went wrong. Please try again.";
+
+  }
+
+}
 
 </script>
 
