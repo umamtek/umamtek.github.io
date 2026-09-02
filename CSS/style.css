@@ -585,3 +585,37 @@ footer {
     }
 
 }
+
+.location-card{
+background:#fffbea;
+border:1px solid #f0d400;
+border-radius:15px;
+padding:20px;
+margin:20px 0;
+}
+
+.location-card h3{
+margin-bottom:7px;
+}
+
+.location-card p{
+font-size:13px;
+color:#666;
+margin-bottom:15px;
+}
+
+.location-btn{
+width:100%;
+border:0;
+background:#ffd400;
+padding:14px;
+border-radius:10px;
+font-weight:800;
+cursor:pointer;
+}
+
+#locationStatus{
+margin-top:12px;
+font-size:14px;
+font-weight:bold;
+}
