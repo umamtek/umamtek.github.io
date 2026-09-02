@@ -1,1011 +1,816 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>My Profile | UMAMTEK</title>
 
-<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="logo.png">
 
 <style>
-.profile-page{
-    min-height:calc(100vh - 76px);
-    background:#f7f7f7;
-    padding:45px 0 80px;
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
-.profile-header{
-    margin-bottom:28px;
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:#fff;
+color:#111;
 }
 
-.profile-header small{
-    color:#b38c00;
-    font-size:10px;
-    font-weight:900;
-    letter-spacing:1.5px;
+header{
+height:72px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 7%;
+border-bottom:1px solid #eee;
 }
 
-.profile-header h1{
-    font-size:clamp(30px,5vw,44px);
-    margin:8px 0;
-    letter-spacing:-2px;
+header img{
+width:130px;
+max-height:55px;
+object-fit:contain;
 }
 
-.profile-header p{
-    color:#777;
-    font-size:12px;
+.logout{
+border:0;
+background:#111;
+color:#fff;
+padding:10px 18px;
+border-radius:9px;
+cursor:pointer;
+font-weight:bold;
 }
 
-.profile-layout{
-    display:grid;
-    grid-template-columns:300px 1fr;
-    gap:22px;
-    align-items:start;
+.container{
+max-width:900px;
+margin:35px auto;
+padding:0 18px;
 }
 
-/* LEFT CARD */
-
-.profile-card{
-    background:#111;
-    color:white;
-    border-radius:15px;
-    padding:25px;
-    text-align:center;
+.welcome{
+background:#ffd400;
+border-radius:20px;
+padding:25px;
+margin-bottom:20px;
 }
 
-.profile-avatar{
-    width:75px;
-    height:75px;
-    border-radius:50%;
-    background:#f5c400;
-    color:#111;
-    display:grid;
-    place-items:center;
-    margin:0 auto 15px;
-    font-size:25px;
-    font-weight:950;
+.welcome h1{
+font-size:28px;
+margin-bottom:7px;
 }
 
-.profile-card h2{
-    font-size:18px;
-    margin-bottom:5px;
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
 }
 
-.profile-card p{
-    color:#aaa;
-    font-size:10px;
+.card{
+background:#fff;
+border:1px solid #e5e5e5;
+border-radius:18px;
+padding:24px;
+box-shadow:0 8px 25px rgba(0,0,0,.06);
 }
 
-.user-id{
-    display:inline-block;
-    margin-top:15px;
-    padding:7px 12px;
-    background:#222;
-    color:#f5c400;
-    border-radius:6px;
-    font-size:9px;
-    font-weight:900;
+.card h2{
+font-size:20px;
+margin-bottom:18px;
 }
 
-/* MAIN */
-
-.profile-content{
-    display:flex;
-    flex-direction:column;
-    gap:18px;
+.row{
+padding:12px 0;
+border-bottom:1px solid #eee;
 }
 
-.profile-section{
-    background:white;
-    border:1px solid #e4e4e4;
-    border-radius:14px;
-    padding:25px;
+.row:last-child{
+border-bottom:0;
 }
 
-.section-title{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-bottom:20px;
+.label{
+font-size:12px;
+color:#777;
+margin-bottom:4px;
 }
 
-.section-number{
-    width:28px;
-    height:28px;
-    display:grid;
-    place-items:center;
-    background:#111;
-    color:#f5c400;
-    border-radius:7px;
-    font-size:10px;
-    font-weight:900;
+.value{
+font-size:15px;
+font-weight:bold;
+word-break:break-word;
 }
 
-.section-title h2{
-    font-size:15px;
+input{
+width:100%;
+padding:12px;
+border:1px solid #ddd;
+border-radius:9px;
+margin-top:7px;
+outline:none;
 }
 
-.form-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
+.password-box{
+position:relative;
 }
 
-.form-group{
-    display:flex;
-    flex-direction:column;
-    gap:7px;
+.password-box input{
+padding-right:45px;
 }
 
-.form-group.full{
-    grid-column:1/-1;
+.toggle{
+position:absolute;
+right:10px;
+top:50%;
+transform:translateY(-35%);
+border:0;
+background:none;
+font-size:20px;
+cursor:pointer;
 }
 
-.form-group label{
-    font-size:10px;
-    font-weight:900;
+.btn{
+width:100%;
+padding:13px;
+border:0;
+border-radius:10px;
+margin-top:15px;
+cursor:pointer;
+font-weight:bold;
 }
 
-.form-control{
-    width:100%;
-    padding:12px;
-    border:1px solid #ddd;
-    border-radius:8px;
-    background:#fff;
-    font-family:inherit;
-    font-size:11px;
-    outline:none;
+.yellow{
+background:#ffd400;
 }
 
-.form-control:focus{
-    border-color:#f5c400;
+.black{
+background:#111;
+color:#fff;
 }
 
-.form-control:disabled{
-    background:#f5f5f5;
-    color:#777;
-    cursor:not-allowed;
+.status{
+margin-top:12px;
+padding:10px;
+border-radius:8px;
+font-size:13px;
+display:none;
 }
 
-.save-btn{
-    border:0;
-    background:#111;
-    color:#f5c400;
-    padding:12px 18px;
-    border-radius:7px;
-    font-size:10px;
-    font-weight:900;
-    cursor:pointer;
-    margin-top:17px;
+.status.show{
+display:block;
 }
 
-.save-btn:hover{
-    transform:translateY(-1px);
+.success{
+background:#e7ffe9;
+color:#08751b;
 }
 
-.account-actions{
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr;
-    gap:10px;
+.error{
+background:#ffe8e8;
+color:#a40000;
 }
 
-.action-btn{
-    text-decoration:none;
-    padding:14px;
-    border:1px solid #ddd;
-    border-radius:9px;
-    color:#111;
-    font-size:10px;
-    font-weight:900;
-    text-align:center;
-    background:white;
+@media(max-width:700px){
+
+.grid{
+grid-template-columns:1fr;
 }
 
-.action-btn:hover{
-    border-color:#111;
+header{
+padding:0 18px;
 }
-
-.logout-btn{
-    border:1px solid #111;
-    background:#111;
-    color:white;
-    cursor:pointer;
-}
-
-.logout-btn:hover{
-    background:#222;
-}
-
-.password-note{
-    margin-top:12px;
-    color:#888;
-    font-size:9px;
-    line-height:1.5;
-}
-
-.account-info{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-}
-
-.info-box{
-    padding:14px;
-    background:#fafafa;
-    border:1px solid #eee;
-    border-radius:8px;
-}
-
-.info-box span{
-    display:block;
-    color:#888;
-    font-size:8px;
-    margin-bottom:5px;
-}
-
-.info-box strong{
-    font-size:10px;
-}
-
-/* MOBILE */
-
-@media(max-width:800px){
-
-    .profile-layout{
-        grid-template-columns:1fr;
-    }
 
 }
 
-@media(max-width:600px){
-
-    .profile-page{
-        padding:30px 0 60px;
-    }
-
-    .profile-section{
-        padding:20px;
-    }
-
-    .form-grid,
-    .account-info{
-        grid-template-columns:1fr;
-    }
-
-    .form-group.full{
-        grid-column:auto;
-    }
-
-    .account-actions{
-        grid-template-columns:1fr;
-    }
-
-}
 </style>
+
 </head>
 
 <body>
 
-<!-- NAVBAR -->
+<header>
 
-<header class="navbar">
+<img src="logo.png" alt="UMAMTEK">
 
-    <div class="container nav-inner">
-
-        <a href="index.html" class="logo">
-            UMAM<span>TEK</span>
-        </a>
-
-        <nav class="nav-links">
-
-            <a href="index.html">
-                Home
-            </a>
-
-            <a href="services.html">
-                Services
-            </a>
-
-            <a href="my-bookings.html">
-                My Bookings
-            </a>
-
-            <a href="profile.html">
-                Profile
-            </a>
-
-        </nav>
-
-        <button class="menu-btn" id="menuBtn">
-            ☰
-        </button>
-
-    </div>
+<button class="logout" onclick="logoutUser()">
+Logout
+</button>
 
 </header>
 
 
-<!-- MAIN -->
-
-<main class="profile-page">
-
 <div class="container">
 
-    <div class="profile-header">
-
-        <small>
-            CUSTOMER ACCOUNT
-        </small>
-
-        <h1>
-            My Profile
-        </h1>
-
-        <p>
-            Manage your UMAMTEK account and booking information.
-        </p>
-
-    </div>
-
-
-    <div class="profile-layout">
-
-
-        <!-- LEFT PROFILE -->
-
-        <aside class="profile-card">
-
-            <div class="profile-avatar" id="profileAvatar">
-                U
-            </div>
-
-            <h2 id="sideName">
-                UMAMTEK Customer
-            </h2>
-
-            <p id="sideEmail">
-                customer@email.com
-            </p>
-
-            <div class="user-id" id="sideUserId">
-                USER ID: Loading...
-            </div>
-
-        </aside>
-
-
-        <!-- RIGHT -->
-
-        <div class="profile-content">
-
-
-            <!-- PERSONAL INFORMATION -->
-
-            <section class="profile-section">
-
-                <div class="section-title">
-
-                    <div class="section-number">
-                        01
-                    </div>
-
-                    <h2>
-                        Personal Information
-                    </h2>
-
-                </div>
-
-
-                <div class="form-grid">
-
-                    <div class="form-group">
-
-                        <label for="name">
-                            Full Name
-                        </label>
-
-                        <input
-                            type="text"
-                            id="name"
-                            class="form-control"
-                            placeholder="Your full name">
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label for="email">
-                            Email Address
-                        </label>
-
-                        <input
-                            type="email"
-                            id="email"
-                            class="form-control"
-                            disabled>
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label for="mobile">
-                            Mobile Number
-                        </label>
-
-                        <input
-                            type="tel"
-                            id="mobile"
-                            class="form-control"
-                            maxlength="10"
-                            placeholder="10-digit mobile number">
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label for="userId">
-                            User ID
-                        </label>
-
-                        <input
-                            type="text"
-                            id="userId"
-                            class="form-control"
-                            disabled>
-
-                    </div>
-
-                </div>
-
-
-                <button
-                    class="save-btn"
-                    id="saveProfile">
-
-                    Save Changes
-
-                </button>
-
-            </section>
-
-
-            <!-- ACCOUNT INFORMATION -->
-
-            <section class="profile-section">
-
-                <div class="section-title">
-
-                    <div class="section-number">
-                        02
-                    </div>
-
-                    <h2>
-                        Account Information
-                    </h2>
-
-                </div>
-
-
-                <div class="account-info">
-
-                    <div class="info-box">
-
-                        <span>
-                            Account Status
-                        </span>
-
-                        <strong id="accountStatus">
-                            Active
-                        </strong>
-
-                    </div>
-
-
-                    <div class="info-box">
-
-                        <span>
-                            Account Created
-                        </span>
-
-                        <strong id="createdDate">
-                            Loading...
-                        </strong>
-
-                    </div>
-
-
-                    <div class="info-box">
-
-                        <span>
-                            Authentication
-                        </span>
-
-                        <strong>
-                            Email / OTP
-                        </strong>
-
-                    </div>
-
-
-                    <div class="info-box">
-
-                        <span>
-                            CAPTCHA
-                        </span>
-
-                        <strong>
-                            Not Required
-                        </strong>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-
-            <!-- PASSWORD -->
-
-            <section class="profile-section">
-
-                <div class="section-title">
-
-                    <div class="section-number">
-                        03
-                    </div>
-
-                    <h2>
-                        Change Password
-                    </h2>
-
-                </div>
-
-
-                <div class="form-grid">
-
-                    <div class="form-group">
-
-                        <label for="newPassword">
-                            New Password
-                        </label>
-
-                        <input
-                            type="password"
-                            id="newPassword"
-                            class="form-control"
-                            placeholder="Enter new password">
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label for="confirmPassword">
-                            Confirm Password
-                        </label>
-
-                        <input
-                            type="password"
-                            id="confirmPassword"
-                            class="form-control"
-                            placeholder="Confirm new password">
-
-                    </div>
-
-                </div>
-
-
-                <p class="password-note">
-
-                    Keep your password safe. UMAMTEK will not ask
-                    you to share your password with anyone.
-
-                </p>
-
-
-                <button
-                    class="save-btn"
-                    id="changePassword">
-
-                    Update Password
-
-                </button>
-
-            </section>
-
-
-            <!-- QUICK ACTIONS -->
-
-            <section class="profile-section">
-
-                <div class="section-title">
-
-                    <div class="section-number">
-                        04
-                    </div>
-
-                    <h2>
-                        Quick Actions
-                    </h2>
-
-                </div>
-
-
-                <div class="account-actions">
-
-                    <a
-                        href="booking.html"
-                        class="action-btn">
-
-                        ⚡ Book a Service
-
-                    </a>
-
-
-                    <a
-                        href="my-bookings.html"
-                        class="action-btn">
-
-                        📋 My Bookings
-
-                    </a>
-
-
-                    <a
-                        href="https://wa.me/917544813882"
-                        target="_blank"
-                        class="action-btn">
-
-                        💬 WhatsApp Support
-
-                    </a>
-
-
-                    <button
-                        class="action-btn logout-btn"
-                        id="logoutBtn">
-
-                        Logout
-
-                    </button>
-
-                </div>
-
-            </section>
-
-        </div>
-
-    </div>
+<div class="welcome">
+
+<h1 id="welcomeName">
+Welcome to UMAMTEK
+</h1>
+
+<p>
+Manage your customer account and services.
+</p>
 
 </div>
 
-</main>
+
+<div class="grid">
 
 
-<!-- WHATSAPP -->
+<!-- PROFILE -->
 
-<a
-    href="https://wa.me/917544813882"
-    target="_blank"
-    class="whatsapp-float"
-    aria-label="WhatsApp UMAMTEK">
+<div class="card">
 
-    💬
+<h2>👤 My Account</h2>
 
-</a>
+<div class="row">
+
+<div class="label">
+Customer ID
+</div>
+
+<div class="value" id="customerId">
+Loading...
+</div>
+
+</div>
 
 
-<script src="js/script.js"></script>
+<div class="row">
+
+<div class="label">
+Full Name
+</div>
+
+<div class="value" id="customerName">
+Loading...
+</div>
+
+</div>
 
 
-<script>
+<div class="row">
 
-/* =========================================================
-   TEMPORARY CUSTOMER PROFILE
-   Firebase will replace this section.
-========================================================= */
+<div class="label">
+Email
+</div>
 
-const customer = {
+<div class="value" id="customerEmail">
+Loading...
+</div>
 
-    name:
-        localStorage.getItem("umamtek_name")
-        || "UMAMTEK Customer",
+</div>
 
-    email:
-        localStorage.getItem("umamtek_email")
-        || "customer@email.com",
 
-    mobile:
-        localStorage.getItem("umamtek_mobile")
-        || "",
+<div class="row">
 
-    userId:
-        localStorage.getItem("umamtek_user_id")
-        || "UMT-CUSTOMER-001",
+<div class="label">
+Mobile Number
+</div>
 
-    created:
-        localStorage.getItem("umamtek_created")
-        || new Date().toLocaleDateString("en-IN")
+<div class="value" id="customerPhone">
+Loading...
+</div>
+
+</div>
+
+
+<div class="row">
+
+<div class="label">
+Account Status
+</div>
+
+<div class="value" id="accountStatus">
+Loading...
+</div>
+
+</div>
+
+</div>
+
+
+<!-- CHANGE PASSWORD -->
+
+<div class="card">
+
+<h2>🔐 Change Password</h2>
+
+<p style="font-size:13px;color:#666;margin-bottom:15px;">
+You can change your password anytime.
+</p>
+
+
+<label>
+Current Password
+</label>
+
+<div class="password-box">
+
+<input
+type="password"
+id="currentPassword"
+placeholder="Current password"
+>
+
+<button
+class="toggle"
+onclick="togglePassword('currentPassword',this)"
+>
+🙈
+</button>
+
+</div>
+
+
+<label style="display:block;margin-top:14px;">
+New Password
+</label>
+
+<div class="password-box">
+
+<input
+type="password"
+id="changeNewPassword"
+placeholder="New password"
+>
+
+<button
+class="toggle"
+onclick="togglePassword('changeNewPassword',this)"
+>
+🙈
+</button>
+
+</div>
+
+
+<label style="display:block;margin-top:14px;">
+Confirm New Password
+</label>
+
+<div class="password-box">
+
+<input
+type="password"
+id="changeConfirmPassword"
+placeholder="Confirm new password"
+>
+
+<button
+class="toggle"
+onclick="togglePassword('changeConfirmPassword',this)"
+>
+🙈
+</button>
+
+</div>
+
+
+<button
+class="btn yellow"
+onclick="changeCustomerPassword()"
+>
+Change Password
+</button>
+
+
+<div id="passwordStatus" class="status"></div>
+
+</div>
+
+
+<!-- QUICK ACTIONS -->
+
+<div class="card">
+
+<h2>⚡ Quick Actions</h2>
+
+<button
+class="btn yellow"
+onclick="location.href='services.html'"
+>
+Book a Service
+</button>
+
+<button
+class="btn black"
+onclick="location.href='index.html'"
+>
+Go to Home
+</button>
+
+</div>
+
+
+<!-- SUPPORT -->
+
+<div class="card">
+
+<h2>💬 UMAMTEK Support</h2>
+
+<p style="font-size:14px;color:#666;line-height:1.6;">
+Need help with your account or booking?
+Contact UMAMTEK support on WhatsApp.
+</p>
+
+<button
+class="btn yellow"
+onclick="window.open('https://wa.me/917544813882','_blank')"
+>
+WhatsApp Support
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script type="module">
+
+import {
+initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+
+
+import {
+getAuth,
+onAuthStateChanged,
+signInWithEmailAndPassword,
+updatePassword,
+signOut
+}
+from
+"https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+
+
+import {
+getFirestore,
+doc,
+getDoc
+}
+from
+"https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+apiKey:
+"AIzaSyCU-5U3KL85H7LRsHg9ck-KXo9RuTKqd68",
+
+authDomain:
+"umamtek-2cc57.firebaseapp.com",
+
+projectId:
+"umamtek-2cc57",
+
+storageBucket:
+"umamtek-2cc57.firebasestorage.app",
+
+messagingSenderId:
+"868603171659",
+
+appId:
+"1:868603171659:web:087f9df552ed09f354cece",
+
+measurementId:
+"G-KFYVWYS2TL"
 
 };
 
 
+const app =
+initializeApp(firebaseConfig);
 
-/* =========================================================
-   LOAD PROFILE
-========================================================= */
+const auth =
+getAuth(app);
 
-function loadProfile(){
+const db =
+getFirestore(app);
 
-    document.getElementById("name").value =
-        customer.name;
 
-    document.getElementById("email").value =
-        customer.email;
+/* =========================
+   PASSWORD TOGGLE
+========================= */
 
-    document.getElementById("mobile").value =
-        customer.mobile;
+window.togglePassword =
+function(id,button){
 
-    document.getElementById("userId").value =
-        customer.userId;
+const input =
+document.getElementById(id);
 
-    document.getElementById("sideName").textContent =
-        customer.name;
+if(input.type === "password"){
 
-    document.getElementById("sideEmail").textContent =
-        customer.email;
+input.type = "text";
 
-    document.getElementById("sideUserId").textContent =
-        "USER ID: " + customer.userId;
+button.textContent = "👁️";
 
-    document.getElementById("createdDate").textContent =
-        customer.created;
+}else{
 
-    const firstLetter =
-        customer.name
-            .trim()
-            .charAt(0)
-            .toUpperCase();
+input.type = "password";
 
-    document.getElementById("profileAvatar").textContent =
-        firstLetter || "U";
+button.textContent = "🙈";
+
+}
+
+};
+
+
+/* =========================
+   LOAD CUSTOMER
+========================= */
+
+onAuthStateChanged(
+auth,
+async function(user){
+
+if(!user){
+
+window.location.href =
+"login.html";
+
+return;
+}
+
+
+try{
+
+const snap =
+await getDoc(
+doc(db,"users",user.uid)
+);
+
+
+if(!snap.exists()){
+
+alert(
+"Customer profile not found."
+);
+
+await signOut(auth);
+
+window.location.href =
+"login.html";
+
+return;
 
 }
 
 
-loadProfile();
+const data =
+snap.data();
 
 
-
-/* =========================================================
-   SAVE PROFILE
-========================================================= */
-
-document
-    .getElementById("saveProfile")
-    .addEventListener(
-        "click",
-        function(){
-
-            const name =
-                document
-                    .getElementById("name")
-                    .value
-                    .trim();
-
-            const mobile =
-                document
-                    .getElementById("mobile")
-                    .value
-                    .trim();
+document.getElementById(
+"welcomeName"
+).textContent =
+"Welcome, " +
+(data.name || "Customer");
 
 
-            if(!name){
-
-                alert(
-                    "Please enter your name."
-                );
-
-                return;
-
-            }
+document.getElementById(
+"customerId"
+).textContent =
+data.customerId || "Not assigned";
 
 
-            if(
-                mobile &&
-                !/^[0-9]{10}$/.test(mobile)
-            ){
-
-                alert(
-                    "Please enter a valid 10-digit mobile number."
-                );
-
-                return;
-
-            }
+document.getElementById(
+"customerName"
+).textContent =
+data.name || "-";
 
 
-            localStorage.setItem(
-                "umamtek_name",
-                name
-            );
+document.getElementById(
+"customerEmail"
+).textContent =
+data.email || user.email || "-";
 
 
-            localStorage.setItem(
-                "umamtek_mobile",
-                mobile
-            );
+document.getElementById(
+"customerPhone"
+).textContent =
+data.phone
+? "+91 " + data.phone
+: "-";
 
 
-            customer.name =
-                name;
-
-            customer.mobile =
-                mobile;
-
-
-            loadProfile();
+document.getElementById(
+"accountStatus"
+).textContent =
+data.accountStatus || "Active";
 
 
-            alert(
-                "Profile updated successfully."
-            );
+}catch(error){
 
-        }
-    );
+console.error(error);
 
+alert(
+"Unable to load your profile."
+);
 
+}
 
-/* =========================================================
-   PASSWORD
-========================================================= */
-
-document
-    .getElementById("changePassword")
-    .addEventListener(
-        "click",
-        function(){
-
-            const password =
-                document
-                    .getElementById("newPassword")
-                    .value;
-
-            const confirm =
-                document
-                    .getElementById("confirmPassword")
-                    .value;
+});
 
 
-            if(password.length < 6){
+/* =========================
+   CHANGE PASSWORD
+========================= */
 
-                alert(
-                    "Password must contain at least 6 characters."
-                );
+window.changeCustomerPassword =
+async function(){
 
-                return;
+const currentPassword =
+document.getElementById(
+"currentPassword"
+).value;
 
-            }
+const newPassword =
+document.getElementById(
+"changeNewPassword"
+).value;
 
-
-            if(password !== confirm){
-
-                alert(
-                    "Passwords do not match."
-                );
-
-                return;
-
-            }
-
-
-            /*
-             * IMPORTANT:
-             *
-             * Password will NOT be stored in localStorage.
-             *
-             * Firebase Authentication will securely
-             * handle password changes.
-             */
+const confirmPassword =
+document.getElementById(
+"changeConfirmPassword"
+).value;
 
 
-            alert(
-                "Password change will be completed through Firebase Authentication."
-            );
+const status =
+document.getElementById(
+"passwordStatus"
+);
 
 
-            document
-                .getElementById("newPassword")
-                .value = "";
-
-            document
-                .getElementById("confirmPassword")
-                .value = "";
-
-        }
-    );
+status.className =
+"status show";
 
 
+if(!currentPassword ||
+   !newPassword ||
+   !confirmPassword){
 
-/* =========================================================
+status.classList.add("error");
+
+status.textContent =
+"Please fill all password fields.";
+
+return;
+
+}
+
+
+if(newPassword.length < 6){
+
+status.classList.add("error");
+
+status.textContent =
+"New password must contain at least 6 characters.";
+
+return;
+
+}
+
+
+if(newPassword !== confirmPassword){
+
+status.classList.add("error");
+
+status.textContent =
+"New passwords do not match.";
+
+return;
+
+}
+
+
+const user =
+auth.currentUser;
+
+
+if(!user){
+
+window.location.href =
+"login.html";
+
+return;
+
+}
+
+
+try{
+
+/*
+ Re-authenticate using the
+ current password first.
+*/
+
+await signInWithEmailAndPassword(
+auth,
+user.email,
+currentPassword
+);
+
+
+/*
+ Update Firebase password.
+*/
+
+await updatePassword(
+auth,
+newPassword
+);
+
+
+status.classList.add("success");
+
+status.textContent =
+"Password changed successfully.";
+
+
+document.getElementById(
+"currentPassword"
+).value = "";
+
+document.getElementById(
+"changeNewPassword"
+).value = "";
+
+document.getElementById(
+"changeConfirmPassword"
+).value = "";
+
+
+}catch(error){
+
+console.error(error);
+
+status.classList.add("error");
+
+
+if(error.code ===
+"auth/invalid-credential"){
+
+status.textContent =
+"Current password is incorrect.";
+
+}else{
+
+status.textContent =
+error.message ||
+"Unable to change password.";
+
+}
+
+}
+
+};
+
+
+/* =========================
    LOGOUT
-========================================================= */
+========================= */
 
-document
-    .getElementById("logoutBtn")
-    .addEventListener(
-        "click",
-        function(){
+window.logoutUser =
+async function(){
 
-            const confirmLogout =
-                confirm(
-                    "Are you sure you want to logout?"
-                );
+try{
+
+await signOut(auth);
+
+}catch(e){}
 
 
-            if(!confirmLogout){
+localStorage.removeItem(
+"umamtekLoggedIn"
+);
 
-                return;
+localStorage.removeItem(
+"umamtekUser"
+);
 
-            }
+localStorage.removeItem(
+"umamtekPhone"
+);
 
-
-            /*
-             * Firebase signOut()
-             * will be added here.
-             */
-
-
-            localStorage.removeItem(
-                "umamtek_logged_in"
-            );
-
-
-            window.location.href =
-                "login.html";
-
-        }
-    );
+localStorage.removeItem(
+"umamtekRole"
+);
 
 
+window.location.href =
+"login.html";
 
-/* =========================================================
-   MOBILE MENU
-========================================================= */
-
-const menuBtn =
-    document.getElementById(
-        "menuBtn"
-    );
-
-
-if(menuBtn){
-
-    menuBtn.addEventListener(
-        "click",
-        function(){
-
-            const nav =
-                document.querySelector(
-                    ".nav-links"
-                );
-
-            if(nav){
-
-                nav.classList.toggle(
-                    "active"
-                );
-
-            }
-
-        }
-    );
-
-}
+};
 
 </script>
 
